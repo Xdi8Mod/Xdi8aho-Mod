@@ -23,16 +23,16 @@ buildscript {
 plugins {
     id 'eclipse'
     id 'java'
-    id 'org.jetbrains.kotlin.jvm' version '1.6.20'
+    //id 'org.jetbrains.kotlin.jvm' version '1.6.20'
     id 'maven-publish'
 }
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 //apply plugin: 'kotlin-allopen'
 
-apply from : 'https://featurehouse.github.io/resources/18/06/953b4d/e2d196c3f97701c23ca7d34ce2ed2576a86fab019e7a2009b2b94d/kff-3.3.2.gradle'
+//apply from : 'https://featurehouse.github.io/resources/18/06/953b4d/e2d196c3f97701c23ca7d34ce2ed2576a86fab019e7a2009b2b94d/kff-3.3.2.gradle'
 
-version = '1.0'
+version = '1.0.0'
 group = 'org.featurehouse.mcfgmod' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'firefly8'
 
@@ -232,6 +232,8 @@ tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
 }
 
+/*
 compileKotlin {
     kotlinOptions.jvmTarget = "17"
 }
+*/
