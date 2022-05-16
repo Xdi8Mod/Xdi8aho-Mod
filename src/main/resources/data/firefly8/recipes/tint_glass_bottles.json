@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " o ",
+    "o7o",
+    " o "
+  ],
+  "key": {
+    "o": {
+      "item": "minecraft:amethyst_shard"
+    },
+    "7": {
+      "item": "minecraft:glass_bottle"
+    }
+  },
+  "result": {
+    "item": "firefly8:tinted_glass_bottle",
+    "count": 2
+  }
+}

@@ -5,6 +5,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 
 public class TintedHoneyBottleItem extends HoneyBottleItem {
 
@@ -13,7 +14,7 @@ public class TintedHoneyBottleItem extends HoneyBottleItem {
     }
 
     @Override
-    public ItemStack finishUsingItem(ItemStack pStack, Level pLevel, LivingEntity pEntityLiving) {
+    public @NotNull ItemStack finishUsingItem(@NotNull ItemStack pStack, @NotNull Level pLevel, @NotNull LivingEntity pEntityLiving) {
         var ret = super.finishUsingItem(pStack, pLevel, pEntityLiving);
         if (ret.is(Items.GLASS_BOTTLE)) {
             return new ItemStack(FireflyItems.TINTED_GLASS_BOTTLE.get(), ret.getCount(), 

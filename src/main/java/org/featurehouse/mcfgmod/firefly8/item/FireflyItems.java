@@ -6,6 +6,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import org.jetbrains.annotations.NotNull;
 
 public final class FireflyItems {
     public static final DeferredRegister<Item> REGISTRY =
@@ -13,13 +14,14 @@ public final class FireflyItems {
     private FireflyItems() {}
 
     public static final CreativeModeTab TAB = new CreativeModeTab("firefly8") {
-        public ItemStack makeIcon() {
+        public @NotNull ItemStack makeIcon() {
             return ItemStack.EMPTY;
         }
     };
 
-    public static final RegistryObject<Item> TINTED_GLASS_BOTTLE, TINTED_POTION,
-        TINTED_HONEY_BOTTLE;
+    public static final RegistryObject<Item> TINTED_GLASS_BOTTLE,
+            TINTED_POTION,
+            TINTED_HONEY_BOTTLE;
 
     static {
         TINTED_GLASS_BOTTLE = REGISTRY.register("tinted_glass_bottle", () ->
@@ -27,6 +29,6 @@ public final class FireflyItems {
         TINTED_POTION = REGISTRY.register("tinted_potion", () ->
             new TintedPotionItem(new Item.Properties().tab(TAB)));
         TINTED_HONEY_BOTTLE = REGISTRY.register("tinted_honey_bottle", () ->
-            new TintedHoneyBottleItem(new Item.Properties().tab(TAB))));
+            new TintedHoneyBottleItem(new Item.Properties().tab(TAB)));
     }
 }
