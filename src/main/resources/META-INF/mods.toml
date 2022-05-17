@@ -35,9 +35,7 @@ authors="teddyxlandlee" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''
 Firefly, carry light,
-
 In the night, blink his eye,
-
 Just to make his future bright. 
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.

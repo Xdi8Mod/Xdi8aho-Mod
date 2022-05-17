@@ -15,13 +15,15 @@ public final class FireflyItems {
 
     public static final CreativeModeTab TAB = new CreativeModeTab("firefly8") {
         public @NotNull ItemStack makeIcon() {
-            return ItemStack.EMPTY;
+            return ItemStack.EMPTY; // TODO
         }
     };
 
     public static final RegistryObject<Item> TINTED_GLASS_BOTTLE,
             TINTED_POTION,
-            TINTED_HONEY_BOTTLE;
+            TINTED_HONEY_BOTTLE,
+            TINTED_SPLASH_POTION,
+            TINTED_LINGERING_POTION;
 
     static {
         TINTED_GLASS_BOTTLE = REGISTRY.register("tinted_glass_bottle", () ->
@@ -30,5 +32,9 @@ public final class FireflyItems {
             new TintedPotionItem(new Item.Properties().tab(TAB)));
         TINTED_HONEY_BOTTLE = REGISTRY.register("tinted_honey_bottle", () ->
             new TintedHoneyBottleItem(new Item.Properties().tab(TAB)));
+        TINTED_SPLASH_POTION = REGISTRY.register("tinted_splash_potion", () ->
+            new TintedSplashPotionItem(new Item.Properties().tab(TAB)));
+        TINTED_LINGERING_POTION = REGISTRY.register("tinted_lingering_potion", () ->
+            new TintedLingeringPotionItem(new Item.Properties().tab(TAB)));
     }
 }
