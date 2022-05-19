@@ -24,4 +24,9 @@ public class TintedLingeringPotionItem extends LingeringPotionItem {
     public boolean isFoil(@NotNull ItemStack pStack) {
         return true;
     }
+
+    @Override
+    public @NotNull String getDescriptionId(@NotNull ItemStack pStack) {
+        return getDescriptionId();  // as default
+    }
 }

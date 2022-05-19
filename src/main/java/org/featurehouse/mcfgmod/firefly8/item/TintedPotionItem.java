@@ -30,4 +30,9 @@ public class TintedPotionItem extends PotionItem {
     public boolean isFoil(@NotNull ItemStack pStack) {
         return true;    // Water bottles can't be seen but weigh
     }
+
+    @Override
+    public @NotNull String getDescriptionId(@NotNull ItemStack pStack) {
+        return getDescriptionId();  // as default
+    }
 }

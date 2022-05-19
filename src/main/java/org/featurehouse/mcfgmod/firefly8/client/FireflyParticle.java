@@ -13,6 +13,11 @@ public class FireflyParticle extends TextureSheetParticle {
     }
 
     @Override
+    protected int getLightColor(float pPartialTick) {
+        return (int)(alpha * 15) << 4;
+    }
+
+    @Override
     public @NotNull ParticleRenderType getRenderType() {
         return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }
