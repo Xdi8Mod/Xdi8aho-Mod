@@ -16,10 +16,6 @@ import static org.featurehouse.mcfgmod.firefly8.item.FireflyItems.*;
  * <p>Item tint map used in {@link
  * org.featurehouse.mcfgmod.firefly8.item.potion.vanilla.TintedPotionBrewing
  * potions}.</p>
- *
- * @apiNote This is not used in {@link TintedGlassBottleItem#use},
- * {@link TintedGlassBottleItem#useOn}, {@link TintedHoneyBottleItem#finishUsingItem},
- * and {@link TintedPotionItem#finishUsingItem} now.
  */
 public final class ItemTinting {
     private static final Map<ItemLike, ItemLike> TINT_MAP = new HashMap<>(fireflyTintMap());
@@ -34,6 +30,7 @@ public final class ItemTinting {
 
     /** @return the previous item bound to the un-tinted one, or null. */
     @Nullable
+    @SuppressWarnings("unused")
     public static ItemLike register(ItemLike from, ItemLike to) {
         return TINT_MAP.put(from, to);
     }
@@ -42,5 +39,9 @@ public final class ItemTinting {
         ItemLike itemLike = TINT_MAP.get(stack.getItem());
         if (itemLike == null) return stack.copy();
         return new ItemStack(itemLike, stack.getCount(), stack.getTag());
+    }
+
+    public static boolean shouldTint(ItemStack stack) {
+        return TINT_MAP.containsKey(stack.getItem());
     }
 }

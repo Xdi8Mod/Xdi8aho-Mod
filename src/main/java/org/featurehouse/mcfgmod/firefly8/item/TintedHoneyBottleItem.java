@@ -22,5 +22,10 @@ public class TintedHoneyBottleItem extends HoneyBottleItem {
         }
         return ret;
     }
-    
+
+    @Override
+    public boolean isFoil(@NotNull ItemStack pStack) {
+        return true;    // players cannot differ tinted honey bottles
+                        // from potions.
+    }
 }

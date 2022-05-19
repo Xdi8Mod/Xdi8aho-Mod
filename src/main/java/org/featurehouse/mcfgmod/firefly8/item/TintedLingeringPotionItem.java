@@ -19,4 +19,9 @@ public class TintedLingeringPotionItem extends LingeringPotionItem {
     public void appendHoverText(@NotNull ItemStack pStack, @Nullable Level pLevel, @NotNull List<Component> pTooltip, @NotNull TooltipFlag pFlag) {
         // NO-OP: YOU CANNOT SEE ANYTHING INSIDE
     }
+
+    @Override
+    public boolean isFoil(@NotNull ItemStack pStack) {
+        return true;
+    }
 }

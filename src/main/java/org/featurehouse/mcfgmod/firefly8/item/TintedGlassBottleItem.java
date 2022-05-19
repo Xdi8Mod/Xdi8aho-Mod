@@ -12,7 +12,6 @@ import net.minecraft.world.entity.animal.Bee;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BottleItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BeehiveBlock;
@@ -22,6 +21,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
+import org.featurehouse.mcfgmod.firefly8.item.potion.ItemTinting;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
@@ -37,12 +37,13 @@ public class TintedGlassBottleItem extends BottleItem {
     public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level pLevel, @NotNull Player pPlayer, @NotNull InteractionHand pHand) {
         var ret = super.use(pLevel, pPlayer, pHand);
         ItemStack stack = ret.getObject();
-        if (stack.is(Items.POTION)) {
-            return new InteractionResultHolder<>(ret.getResult(),
-                    new ItemStack(FireflyItems.TINTED_POTION.get(), stack.getCount(), stack.getTag()));
+        if (ItemTinting.shouldTint(stack)) {
+            return new InteractionResultHolder<>(ret.getResult(), ItemTinting.tint(stack));
         }
         return ret;
     }
+
+    /* HONEY START */
 
     @Override
     public @NotNull InteractionResult useOn(UseOnContext pContext) {
@@ -119,6 +120,7 @@ public class TintedGlassBottleItem extends BottleItem {
                 }
             }
         }
-
     }
+
+    /* HONEY END */
 }
