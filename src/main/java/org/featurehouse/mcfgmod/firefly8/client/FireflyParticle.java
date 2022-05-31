@@ -26,7 +26,7 @@ public class FireflyParticle extends TextureSheetParticle {
     /** @see CampfireSmokeParticle#tick()  */
     @Override
     public void tick() {
-        if (this.age <= 20) {
+        if (this.age++ <= 20) {
             this.setAlpha(this.age * 0.05F);
         } else if (this.age >= this.getLifetime() - 20) {
             this.alpha -= 0.05F;
