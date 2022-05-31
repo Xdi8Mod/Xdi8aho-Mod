@@ -11,16 +11,23 @@ import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
+import net.minecraft.world.entity.ai.util.AirAndWaterRandomPos;
+import net.minecraft.world.entity.ai.util.HoverRandomPos;
 import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.phys.Vec3;
 import org.featurehouse.mcfgmod.firefly8.particle.FireflyParticles;
 import org.jetbrains.annotations.NotNull;
+
+import javax.annotation.Nullable;
 
 /**
  * @see net.minecraft.world.entity.animal.Bee
@@ -29,7 +36,6 @@ import org.jetbrains.annotations.NotNull;
 public class FireflyEntity extends PathfinderMob implements FlyingAnimal {
     //private static final EntityDataAccessor<Byte> DATA_LUMINANCE
     //        = SynchedEntityData.defineId(FireflyEntity.class, EntityDataSerializers.BYTE);
-    private int tickTime;
 
     protected FireflyEntity(EntityType<FireflyEntity> entityType, Level level) {
         super(entityType, level);
@@ -81,8 +87,15 @@ public class FireflyEntity extends PathfinderMob implements FlyingAnimal {
     }
 
     @Override
+    protected void registerGoals() {
+        this.goalSelector.addGoal(2, new AbstractFollowPlayerGoal.Randomly(this));
+        this.goalSelector.addGoal(3, new Wandering());
+        this.goalSelector.addGoal(4, new FloatGoal(this));
+    }
+
+    @Override
     protected void customServerAiStep() {
-        //TODO
+        super.customServerAiStep();
     }
 
     @Override
@@ -131,5 +144,49 @@ public class FireflyEntity extends PathfinderMob implements FlyingAnimal {
 
     protected void jumpInLiquid(@NotNull TagKey<Fluid> pFluidTag) {
         this.setDeltaMovement(this.getDeltaMovement().add(0.0D, 0.01D, 0.0D));
+    }
+
+    class Wandering extends Goal {
+
+        /**
+         * Returns whether execution should begin. You can also read and cache any state necessary for execution in this
+         * method as well.
+         */
+        public boolean canUse() {
+            return FireflyEntity.this.navigation.isDone() && FireflyEntity.this.random.nextInt(10) == 0;
+        }
+
+        /**
+         * Returns whether an in-progress EntityAIBase should continue executing
+         */
+        public boolean canContinueToUse() {
+            return FireflyEntity.this.navigation.isInProgress();
+        }
+
+        /**
+         * Execute a one shot task or start executing a continuous task
+         */
+        public void start() {
+            Vec3 vec3 = this.findPos();
+            if (vec3 != null) {
+                FireflyEntity.this.navigation.moveTo(
+                        FireflyEntity.this.navigation.createPath(new BlockPos(vec3), 1),
+                        0.3D);
+            }
+
+        }
+
+        @Nullable
+        private Vec3 findPos() {
+            Vec3 vec3 = FireflyEntity.this.getViewVector(0.0F);
+            Vec3 vec32 = HoverRandomPos.getPos(
+                    FireflyEntity.this, 8, 7,
+                    vec3.x, vec3.z,
+                    ((float)Math.PI / 2F), 3, 1);
+            return vec32 != null ? vec32 :
+                    AirAndWaterRandomPos.getPos(
+                            FireflyEntity.this, 8, 4, -2,
+                            vec3.x, vec3.z, (float)Math.PI / 2F);
+        }
     }
 }
