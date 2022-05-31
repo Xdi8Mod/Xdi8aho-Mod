@@ -1,4 +1,4 @@
-package org.featurehouse.mcfgmod.firefly8.client;
+package top.xdi8.mod.firefly8.client;
 
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.CampfireSmokeParticle;

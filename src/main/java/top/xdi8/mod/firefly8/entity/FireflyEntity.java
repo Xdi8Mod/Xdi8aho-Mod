@@ -1,4 +1,4 @@
-package org.featurehouse.mcfgmod.firefly8.entity;
+package top.xdi8.mod.firefly8.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -24,7 +24,7 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.Vec3;
-import org.featurehouse.mcfgmod.firefly8.particle.FireflyParticles;
+import top.xdi8.mod.firefly8.particle.FireflyParticles;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;

@@ -1,4 +1,4 @@
-package org.featurehouse.mcfgmod.firefly8.entity;
+package top.xdi8.mod.firefly8.entity;
 
 import com.mojang.logging.LogUtils;
 import net.minecraft.world.entity.EntityType;

@@ -1,4 +1,4 @@
-package org.featurehouse.mcfgmod.firefly8.particle;
+package top.xdi8.mod.firefly8.particle;
 
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;

@@ -1,18 +1,24 @@
-package org.featurehouse.mcfgmod.firefly8.item;
+package top.xdi8.mod.firefly8.item;
 
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.SplashPotionItem;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
+import top.xdi8.mod.firefly8.item.potion.ItemTinting;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class TintedSplashPotionItem extends SplashPotionItem {
-    public TintedSplashPotionItem(Properties properties) {
-        super(properties);
+public class TintedPotionItem extends PotionItem {
+
+    public TintedPotionItem(Properties p_42979_) {
+        super(p_42979_);
+    }
+    
+    @Override
+    public @NotNull ItemStack finishUsingItem(@NotNull ItemStack pStack, @NotNull Level pLevel, @NotNull LivingEntity pEntityLiving) {
+        return ItemTinting.tint(pStack);
     }
 
     @Override
@@ -22,7 +28,7 @@ public class TintedSplashPotionItem extends SplashPotionItem {
 
     @Override
     public boolean isFoil(@NotNull ItemStack pStack) {
-        return true;
+        return true;    // Water bottles can't be seen but weigh
     }
 
     @Override

@@ -1,12 +1,12 @@
-package org.featurehouse.mcfgmod.firefly8;
+package top.xdi8.mod.firefly8;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
-import org.featurehouse.mcfgmod.firefly8.client.FireflyParticle;
-import org.featurehouse.mcfgmod.firefly8.entity.FireflyEntityTypes;
-import org.featurehouse.mcfgmod.firefly8.particle.FireflyParticles;
+import top.xdi8.mod.firefly8.client.FireflyParticle;
+import top.xdi8.mod.firefly8.entity.FireflyEntityTypes;
+import top.xdi8.mod.firefly8.particle.FireflyParticles;
 
 public class FireflyClientSetup implements Runnable {
     @Override

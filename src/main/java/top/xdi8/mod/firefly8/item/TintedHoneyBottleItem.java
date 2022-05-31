@@ -1,4 +1,4 @@
-package org.featurehouse.mcfgmod.firefly8.item;
+package top.xdi8.mod.firefly8.item;
 
 import net.minecraft.world.item.HoneyBottleItem;
 import net.minecraft.world.entity.LivingEntity;

@@ -1,4 +1,4 @@
-package org.featurehouse.mcfgmod.firefly8.item;
+package top.xdi8.mod.firefly8.item;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;

@@ -1,4 +1,4 @@
-package org.featurehouse.mcfgmod.firefly8.item;
+package top.xdi8.mod.firefly8.item;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
@@ -21,7 +21,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
-import org.featurehouse.mcfgmod.firefly8.item.potion.ItemTinting;
+import top.xdi8.mod.firefly8.item.potion.ItemTinting;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
