@@ -11,6 +11,7 @@ import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.FlyingMoveControl;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
@@ -39,6 +40,7 @@ public class FireflyEntity extends PathfinderMob implements FlyingAnimal {
 
     protected FireflyEntity(EntityType<FireflyEntity> entityType, Level level) {
         super(entityType, level);
+        this.moveControl = new FlyingMoveControl(this, 20, false);
     }
 
     public static AttributeSupplier.Builder createAttributes() {
