@@ -90,7 +90,7 @@ public class FireflyEntity extends PathfinderMob implements FlyingAnimal {
     protected void registerGoals() {
         this.goalSelector.addGoal(2, new AbstractFollowPlayerGoal.Randomly(this));
         this.goalSelector.addGoal(3, new Wandering());
-        this.goalSelector.addGoal(4, new FloatGoal(this));
+        this.goalSelector.addGoal(3, new FloatGoal(this));
     }
 
     @Override
