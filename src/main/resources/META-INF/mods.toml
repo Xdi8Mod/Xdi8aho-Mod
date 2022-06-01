@@ -4,7 +4,7 @@ license="GPL-3.0"
 #issueTrackerURL="https://change.me.to.your.issue.tracker.example.invalid/" #optional
 
 [[mods]]
-modId="xdi8aho"
+modId="xdi8"
 version="${file.jarVersion}"
 displayName="Xdi8 Aho"  #?
 credits="""
