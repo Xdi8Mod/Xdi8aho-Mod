@@ -42,7 +42,7 @@ In the night, blink his eye,
 Just to make his future bright.'''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 
-[[dependencies.xdi8aho]] #optional
+[[dependencies.xdi8]] #optional
     # the modid of the dependency
     modId="forge" #mandatory
     # Does this dependency have to exist - if not, ordering below must be specified
@@ -54,7 +54,7 @@ Just to make his future bright.'''
     # Side this dependency is applied on - BOTH, CLIENT or SERVER
     side="BOTH"
 # Here's another dependency
-[[dependencies.xdi8aho]]
+[[dependencies.xdi8]]
     modId="minecraft"
     mandatory=true
 # This version range declares a minimum of the current minecraft version up to but not including the next major version
