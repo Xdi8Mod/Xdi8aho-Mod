@@ -13,6 +13,15 @@ authors="Xdi8Mod,teddyxlandlee,QWERTY770"
 description="Xdi8 Aho Mod"  #...
 
 [[mods]]
+modId="xdi8-fonts"
+version="${file.jarVersion}"
+displayName="Xdi8 Aho Fonts"
+credits="""
+Thanks to Shidinn community for insipiration and a lot more"""
+authors="Xdi8Mod,teddyxlandlee,QWERTY770"
+description="Xdi8 Aho Language Fonts support"
+
+[[mods]]
 modId="firefly8"
 version="${file.jarVersion}"
 displayName="Firefly"
