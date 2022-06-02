@@ -1,0 +1,12 @@
+{
+  "minVersion": "0.8",
+  "compatibilityLevel": "JAVA_8",
+  "required": true,
+  "package": "top.xdi8.mod.fonts.asm.fake",
+
+  "client": [
+    "Wrapper"
+  ],
+
+  "plugin": "top.xdi8.mod.fonts.asm.AsmPlugin"
+}
