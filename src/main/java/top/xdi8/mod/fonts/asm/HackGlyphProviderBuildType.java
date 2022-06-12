@@ -13,7 +13,7 @@ final class HackGlyphProviderBuildType implements Consumer<ClassNode> {
     private static final String $values = "m_169108_";
     private static final String valuesDesc = "()[Lnet/minecraft/client/gui/font/providers/GlyphProviderBuilderType;";
     private static final String clazzDesc = 'L' + clazz + ';';
-    private static final String initDesc = "(Ljava/lang/String;ILjava/lang/String;Ljava/util/function/Function;)";
+    private static final String initDesc = "(Ljava/lang/String;ILjava/lang/String;Ljava/util/function/Function;)V";
     private static final String factoryView = "top/xdi8/mod/fonts/asm/FactoryView";
     private static final String getFactory = "()Ljava/util/function/Function;";
 
@@ -76,10 +76,11 @@ final class HackGlyphProviderBuildType implements Consumer<ClassNode> {
             il.add(new TypeInsnNode(Opcodes.NEW, clazz));
             il.add(new InsnNode(Opcodes.DUP));
             // (Ljava/lang/String;ILjava/lang/String;Ljava/util/function/Function;)
-            il.add(new LdcInsnNode(Xdi8FontsMod.PROVIDER_NAME));
-            il.add(new LdcInsnNode(thisId));
             il.add(new LdcInsnNode("asm-gen$xdi8-fonts$TTF_NT"));
-            il.add(new MethodInsnNode(Opcodes.INVOKESTATIC, factoryView, "getFactory", getFactory));
+            il.add(new LdcInsnNode(thisId));
+            il.add(new LdcInsnNode(Xdi8FontsMod.PROVIDER_NAME));
+            //il.add(new MethodInsnNode(Opcodes.INVOKESTATIC, factoryView, "getFactory", getFactory));
+            il.add(new FieldInsnNode(Opcodes.GETSTATIC, factoryView, "FACTORY", "Ljava/util/function/Function;"));
             il.add(new MethodInsnNode(Opcodes.INVOKESPECIAL, clazz, "<init>", initDesc));
             il.add(new FieldInsnNode(Opcodes.PUTSTATIC, clazz, "asm-gen$xdi8-fonts$TTF_NT", clazzDesc));
         }
