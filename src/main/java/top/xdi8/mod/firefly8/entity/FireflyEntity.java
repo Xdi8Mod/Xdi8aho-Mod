@@ -5,10 +5,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobType;
-import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
@@ -23,10 +20,12 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.RandomSource;
+import net.minecraft.world.level.levelgen.XoroshiroRandomSource;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.Vec3;
-import top.xdi8.mod.firefly8.particle.FireflyParticles;
 import org.jetbrains.annotations.NotNull;
+import top.xdi8.mod.firefly8.particle.FireflyParticles;
 
 import javax.annotation.Nullable;
 
@@ -35,13 +34,20 @@ import javax.annotation.Nullable;
  * @see net.minecraft.world.entity.ambient.Bat
  */
 public class FireflyEntity extends PathfinderMob implements FlyingAnimal {
-    //private static final EntityDataAccessor<Byte> DATA_LUMINANCE
-    //        = SynchedEntityData.defineId(FireflyEntity.class, EntityDataSerializers.BYTE);
+    // lighting
+    private final RandomSource randomSource = new XoroshiroRandomSource(this.random.nextLong(), this.random.nextLong());
+    private int lightTime;
+    /* NBT */
+    private boolean isNaturalGen = true;    // kept true for compatibility
 
     protected FireflyEntity(EntityType<FireflyEntity> entityType, Level level) {
         super(entityType, level);
         this.moveControl = new FlyingMoveControl(this, 20, false);
     }
+
+    public void setNaturalGen(boolean naturalGen) { isNaturalGen = naturalGen; }
+
+    public boolean isNaturalGen() { return isNaturalGen; }
 
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes()
@@ -72,20 +78,51 @@ public class FireflyEntity extends PathfinderMob implements FlyingAnimal {
     public void addAdditionalSaveData(@NotNull CompoundTag pCompound) {
         super.addAdditionalSaveData(pCompound);
         //pCompound.put("Luminance", luminance)
+        pCompound.putBoolean("NaturalGen", isNaturalGen());
     }
 
     @Override
     public void readAdditionalSaveData(@NotNull CompoundTag pCompound) {
         super.readAdditionalSaveData(pCompound);
+        this.setNaturalGen(pCompound.getBoolean("NaturalGen"));
     }
 
     @Override
     public void tick() {
         super.tick();
-        if (this.level.getGameTime() % 128 == 0) {  // TODO: random tick + non-dup check
-            this.level.addParticle(FireflyParticles.FIREFLY.get(), this.getX(), this.getY(), this.getZ(),
-                    0, 0, 0);
+        if (this.getLevel().isClientSide()){
+            if (this.lightTime-- <= 0 && this.randomSource.nextInt(8) == 0) {
+                this.lightTime = 100;
+                this.level.addParticle(FireflyParticles.FIREFLY.get(), this.getX(), this.getY(), this.getZ(),
+                        0, 0, 0);
+            }
+        } else {
+            if (this.shouldVanish()) {
+                this.remove(RemovalReason.DISCARDED);
+            }
         }
+    }
+
+    /**
+     * Returns true if this entity should push and be pushed by other entities when colliding.
+     */
+    public boolean isPushable() {
+        return false;
+    }
+
+    protected void doPush(@NotNull Entity pEntity) {}
+
+    protected void pushEntities() {}
+
+    private boolean shouldVanish() {
+        if (this.level.isDay() && !this.isNaturalGen) {
+            float brightness = this.getBrightness();
+            BlockPos blockpos = new BlockPos(this.getX(), this.getEyeY(), this.getZ());
+            return brightness > 0.5F &&
+                    this.randomSource.nextFloat() * 15.0F < (brightness - 0.4F) &&
+                    this.level.canSeeSky(blockpos);
+        }
+        return false;
     }
 
     @Override
