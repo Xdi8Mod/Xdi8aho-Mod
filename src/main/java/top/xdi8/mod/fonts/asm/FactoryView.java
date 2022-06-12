@@ -14,9 +14,8 @@ import java.util.function.Function;
  * generation}.
  */
 @SuppressWarnings("unused")
+@Deprecated
 public interface FactoryView {
-     @Contract(pure = true)
-     static @NotNull Function<JsonObject, GlyphProviderBuilder> getFactory() {
-          return TrueTypeExtendedGlyphProviderBuilder::fromJson;
-     }
+     Function<JsonObject, GlyphProviderBuilder> FACTORY
+             = TrueTypeExtendedGlyphProviderBuilder::fromJson;
 }
