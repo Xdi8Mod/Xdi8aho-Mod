@@ -1,12 +1,16 @@
 package top.xdi8.mod.firefly8.item;
 
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
+import top.xdi8.mod.firefly8.entity.FireflyEntityTypes;
+import top.xdi8.mod.firefly8.item.technical.CustomSpawnEggItem;
 
 public final class FireflyItems {
     public static final DeferredRegister<Item> REGISTRY =
@@ -37,4 +41,6 @@ public final class FireflyItems {
         TINTED_LINGERING_POTION = REGISTRY.register("tinted_lingering_potion", () ->
             new TintedLingeringPotionItem(new Item.Properties().tab(TAB)));
     }
+    public static final RegistryObject<ForgeSpawnEggItem> FIREFLY_SPAWN_EGG = REGISTRY.register("firefly_spawn_egg", () ->
+            new ForgeSpawnEggItem(FireflyEntityTypes.FIREFLY, 0x000000, 0xffffff, new Item.Properties().tab(TAB)));
 }
