@@ -37,7 +37,7 @@ public sealed abstract class AbstractFollowPlayerGoal extends Goal {
     @Override
     public boolean canUse() {
         var followed = whomToFollow();
-        if (followed == null) return false;
+        if (followed == null || followed.isSpectator() || followed.isInvisible()) return false;
         following = followed;
         return true;
     }
