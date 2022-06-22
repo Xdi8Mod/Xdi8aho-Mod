@@ -1,0 +1,11 @@
+{
+  "item.firefly8.tinted_glass_bottle": "遮光玻璃瓶",
+  "item.firefly8.tinted_potion": "神秘药水",
+  "item.firefly8.tinted_honey_bottle": "神秘药水",
+  "item.firefly8.tinted_splash_potion": "喷溅型神秘药水",
+  "item.firefly8.tinted_lingering_potion": "滞留型神秘药水",
+  "item.firefly8.firefly_spawn_egg": "萤火虫刷怪蛋",
+
+  "itemGroup.firefly8": "Firefly",
+  "entity.firefly8.firefly": "Firefly"
+}
