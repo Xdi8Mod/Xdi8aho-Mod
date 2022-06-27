@@ -18,7 +18,7 @@ public class TintedPotionItem extends PotionItem {
     
     @Override
     public @NotNull ItemStack finishUsingItem(@NotNull ItemStack pStack, @NotNull Level pLevel, @NotNull LivingEntity pEntityLiving) {
-        return ItemTinting.tint(pStack);
+        return ItemTinting.tint(super.finishUsingItem(pStack, pLevel, pEntityLiving));
     }
 
     @Override
