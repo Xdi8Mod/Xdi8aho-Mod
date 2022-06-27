@@ -1,8 +1,8 @@
-package top.xdi8.mod.firefly8.item;
+package top.xdi8.mod.firefly8.item.tint;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.LingeringPotionItem;
+import net.minecraft.world.item.SplashPotionItem;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
@@ -10,8 +10,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class TintedLingeringPotionItem extends LingeringPotionItem {
-    public TintedLingeringPotionItem(Properties properties) {
+public class TintedSplashPotionItem extends SplashPotionItem {
+    public TintedSplashPotionItem(Properties properties) {
         super(properties);
     }
 
