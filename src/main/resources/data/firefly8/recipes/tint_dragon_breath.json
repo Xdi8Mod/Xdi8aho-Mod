@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [{
+    "item": "minecraft:dragon_breath"
+  }, {
+    "item": "minecraft:amethyst_shard"
+  }, {
+    "item": "minecraft:amethyst_shard"
+  }],
+  "result": {
+    "item": "firefly8:tinted_dragon_breath",
+    "count": 1
+  }
+}
