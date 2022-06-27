@@ -1,5 +1,8 @@
 package top.xdi8.mod.firefly8.item.tint;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
+import com.google.common.collect.ImmutableBiMap;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -17,10 +20,10 @@ import java.util.Map;
  * potions}.</p>
  */
 public final class ItemTinting {
-    private static final Map<ItemLike, ItemLike> TINT_MAP = new HashMap<>(fireflyTintMap());
+    private static final BiMap<ItemLike, ItemLike> TINT_MAP = HashBiMap.create(fireflyTintMap());
 
-    private static Map<ItemLike, ItemLike> fireflyTintMap() {
-        return ImmutableMap.of(
+    private static BiMap<ItemLike, ItemLike> fireflyTintMap() {
+        return ImmutableBiMap.of(
                 Items.POTION, FireflyItems.TINTED_POTION::get,
                 Items.LINGERING_POTION, FireflyItems.TINTED_LINGERING_POTION::get,
                 Items.SPLASH_POTION, FireflyItems.TINTED_SPLASH_POTION::get,
@@ -37,6 +40,12 @@ public final class ItemTinting {
 
     public static ItemStack tint(ItemStack stack) {
         ItemLike itemLike = TINT_MAP.get(stack.getItem());
+        if (itemLike == null) return stack.copy();
+        return new ItemStack(itemLike, stack.getCount(), stack.getTag());
+    }
+
+    public static ItemStack unTint(ItemStack stack) {
+        ItemLike itemLike = TINT_MAP.inverse().get(stack.getItem());
         if (itemLike == null) return stack.copy();
         return new ItemStack(itemLike, stack.getCount(), stack.getTag());
     }

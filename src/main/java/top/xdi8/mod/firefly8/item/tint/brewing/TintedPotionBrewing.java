@@ -3,6 +3,9 @@ package top.xdi8.mod.firefly8.item.tint.brewing;
 import com.mojang.logging.LogUtils;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.alchemy.PotionBrewing;
+import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.common.brewing.IBrewingRecipe;
 import net.minecraftforge.common.brewing.VanillaBrewingRecipe;
@@ -10,6 +13,7 @@ import net.minecraftforge.registries.RegistryObject;
 import top.xdi8.mod.firefly8.item.FireflyItems;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
+import top.xdi8.mod.firefly8.item.tint.ItemTinting;
 
 import java.util.Set;
 
@@ -41,10 +45,10 @@ public class TintedPotionBrewing extends VanillaBrewingRecipe
 
     @Override
     public @NotNull ItemStack getOutput(@NotNull ItemStack input, @NotNull ItemStack ingredient) {
-        ItemStack sup = super.getOutput(input, ingredient);
-        LOGGER.debug("Brewing output[sup]: {}, input: {}, ing: {}", sup, input, ingredient);
-        //return ItemTinting.tint(sup);
-        return sup;
+        var unTint = ItemTinting.unTint(input);
+        ItemStack sup = super.getOutput(unTint, ingredient);
+        LOGGER.debug("Brewing output[sup]: {}, input: {}, un: {} ing: {}", sup, input, unTint, ingredient);
+        return ItemTinting.tint(sup);
     }
 
     private static final Logger LOGGER = LogUtils.getLogger();
