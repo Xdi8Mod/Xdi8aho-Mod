@@ -3,16 +3,12 @@ package top.xdi8.mod.firefly8.item.tint;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableBiMap;
-import com.google.common.collect.ImmutableMap;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.Nullable;
 import top.xdi8.mod.firefly8.item.FireflyItems;
 import top.xdi8.mod.firefly8.item.tint.brewing.TintedPotionBrewing;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * <p>Item tint map used in {@link
