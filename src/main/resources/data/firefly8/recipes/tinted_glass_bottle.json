@@ -4,6 +4,7 @@
     "# #",
     " # "
   ],
+  "group": "firefly8:tinted_glass_bottles",
   "key": {
     "#": {
       "item": "minecraft:tinted_glass"
