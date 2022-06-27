@@ -10,6 +10,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
 import top.xdi8.mod.firefly8.entity.FireflyEntityTypes;
+import top.xdi8.mod.firefly8.item.tint.*;
 
 public final class FireflyItems {
     public static final DeferredRegister<Item> REGISTRY = DeferredRegister.create(ForgeRegistries.ITEMS, "firefly8");
