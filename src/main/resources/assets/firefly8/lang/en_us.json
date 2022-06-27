@@ -5,7 +5,9 @@
   "item.firefly8.tinted_splash_potion": "Splash Potion of Mystery",
   "item.firefly8.tinted_lingering_potion": "Lingering Potion of Mystery",
   "item.firefly8.firefly_spawn_egg": "Firefly Spawn Egg",
+  "item.firefly8.xdi8aho": "Xdi8 Aho",
+  "item.firefly.tinted_dragon_breath": "Potion of Mystery",
 
-  "itemGroup.firefly8": "Firefly",
+  "itemGroup.firefly8": "Xdi8 Aho",
   "entity.firefly8.firefly": "Firefly"
 }
