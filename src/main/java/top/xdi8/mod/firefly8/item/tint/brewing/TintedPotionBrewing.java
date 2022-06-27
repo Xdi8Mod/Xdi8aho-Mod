@@ -1,4 +1,4 @@
-package top.xdi8.mod.firefly8.item.potion.vanilla;
+package top.xdi8.mod.firefly8.item.tint.brewing;
 
 import com.mojang.logging.LogUtils;
 import net.minecraft.world.item.Item;
@@ -8,7 +8,6 @@ import net.minecraftforge.common.brewing.IBrewingRecipe;
 import net.minecraftforge.common.brewing.VanillaBrewingRecipe;
 import net.minecraftforge.registries.RegistryObject;
 import top.xdi8.mod.firefly8.item.FireflyItems;
-import top.xdi8.mod.firefly8.item.potion.ItemTinting;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 
