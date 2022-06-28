@@ -74,6 +74,21 @@ public sealed abstract class AbstractFollowPlayerGoal extends Goal {
         }
     }
 
+    static final class FollowOwner extends AbstractFollowPlayerGoal {
+        public FollowOwner(FireflyEntity self, double speedModifier) {
+            super(self, speedModifier);
+        }
+
+        public FollowOwner(FireflyEntity self) {
+            super(self, 0.6D);
+        }
+
+        @Override
+        protected @Nullable LivingEntity whomToFollow() {
+            return self.getOwner();
+        }
+    }
+
     static final class Randomly extends AbstractFollowPlayerGoal {
         Randomly(FireflyEntity self, double speedModifier) {
             super(self, speedModifier);
@@ -91,6 +106,4 @@ public sealed abstract class AbstractFollowPlayerGoal extends Goal {
                     .findFirst().orElse(null);
         }
     }
-
-    // TODO: following the specific player
 }
