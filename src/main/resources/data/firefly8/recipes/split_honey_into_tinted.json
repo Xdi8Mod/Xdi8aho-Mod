@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:honey_block"
+    },
+    {
+      "item": "firefly8:tinted_glass_bottle"
+    },
+    {
+      "item": "firefly8:tinted_glass_bottle"
+    },
+    {
+      "item": "firefly8:tinted_glass_bottle"
+    },
+    {
+      "item": "firefly8:tinted_glass_bottle"
+    }
+  ],
+  "group": "firefly8:tinted_honey_bottles",
+  "result": {
+    "item": "firefly8:tinted_honey_bottle",
+    "count": 4
+  }
+}
