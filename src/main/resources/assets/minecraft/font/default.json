@@ -2,7 +2,7 @@
   "providers":[
     {
       "type":"bitmap",
-      "file":"xdi8_fonts:font/I8fairfax2.png",
+      "file":"xdi8_fonts:font/i8fairfax2.png",
       "height":12,
       "ascent":12,
       "chars":[
@@ -11,7 +11,7 @@
     },
     {
       "type":"bitmap",
-      "file":"xdi8_fonts:font/I8fairfax1.png",
+      "file":"xdi8_fonts:font/i8fairfax1.png",
       "height":12,
       "ascent":12,
       "chars":[
