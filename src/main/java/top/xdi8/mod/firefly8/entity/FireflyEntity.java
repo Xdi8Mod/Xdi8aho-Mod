@@ -64,7 +64,6 @@ public class FireflyEntity extends PathfinderMob implements FlyingAnimal, Ownabl
 
     public void setInBottleTime(long time) {
         inBottleTime = time;
-        // TODO
     }
 
     public long getInBottleTime() {
@@ -73,7 +72,6 @@ public class FireflyEntity extends PathfinderMob implements FlyingAnimal, Ownabl
 
     public void setOutOfBottleTime(long time) {
         outOfBottleTime = time;
-        // TODO
     }
 
     public long getOutOfBottleTime() {

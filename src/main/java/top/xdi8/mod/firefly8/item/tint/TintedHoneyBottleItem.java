@@ -14,7 +14,6 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
 public class TintedHoneyBottleItem extends Item {
-
     public TintedHoneyBottleItem(Properties p_41346_) {
         super(p_41346_);
     }
