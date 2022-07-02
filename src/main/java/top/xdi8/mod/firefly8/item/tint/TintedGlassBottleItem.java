@@ -1,6 +1,8 @@
 package top.xdi8.mod.firefly8.item.tint;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -8,6 +10,8 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Bee;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BottleItem;
@@ -21,19 +25,18 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
-import top.xdi8.mod.firefly8.item.FireflyItems;
-import top.xdi8.mod.firefly8.item.tint.ItemTinting;
 import org.jetbrains.annotations.NotNull;
+import top.xdi8.mod.firefly8.entity.FireflyEntity;
+import top.xdi8.mod.firefly8.item.FireflyItems;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
 public class TintedGlassBottleItem extends BottleItem {
-
     public TintedGlassBottleItem(Properties p_40648_) {
         super(p_40648_);
     }
-    
+
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level pLevel, @NotNull Player pPlayer, @NotNull InteractionHand pHand) {
         var ret = super.use(pLevel, pPlayer, pHand);
@@ -63,7 +66,7 @@ public class TintedGlassBottleItem extends BottleItem {
 
             stack.shrink(1);
             level.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.BOTTLE_FILL,
-                SoundSource.NEUTRAL, 1.0F, 1.0F);
+                    SoundSource.NEUTRAL, 1.0F, 1.0F);
             if (stack.isEmpty()) {
                 player.setItemInHand(hand, new ItemStack(FireflyItems.TINTED_HONEY_BOTTLE.get()));
             } else if (!player.getInventory().add(new ItemStack(FireflyItems.TINTED_HONEY_BOTTLE.get()))) {
@@ -115,7 +118,7 @@ public class TintedGlassBottleItem extends BottleItem {
             if (list1.isEmpty()) return; //Forge: Prevent Error when no players are around.
             int i = list1.size();
 
-            for(Bee bee : list) {
+            for (Bee bee : list) {
                 if (bee.getTarget() == null) {
                     bee.setTarget(list1.get(pLevel.random.nextInt(i)));
                 }
@@ -124,4 +127,34 @@ public class TintedGlassBottleItem extends BottleItem {
     }
 
     /* HONEY END */
+    /* FIREFLY BOTTLING START */
+
+    @Override
+    public @NotNull InteractionResult interactLivingEntity(@NotNull ItemStack pStack, @NotNull Player pPlayer, @NotNull LivingEntity pTarget, @NotNull InteractionHand pUsedHand) {
+        if (!(pTarget instanceof FireflyEntity firefly)){
+            return InteractionResult.PASS;
+        }
+        Level level = pPlayer.getLevel();
+        ItemStack stack = pPlayer.getItemInHand(pUsedHand);
+        stack.shrink(1);
+        level.playSound(pPlayer, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), SoundEvents.BOTTLE_FILL,
+                SoundSource.NEUTRAL, 1.0F, 1.0F);
+
+        firefly.setInBottleTime(level.getGameTime());
+        CompoundTag targetTags = new CompoundTag();
+        firefly.save(targetTags);
+        ItemStack resultStack = new ItemStack(FireflyItems.TINTED_FIREFLY_BOTTLE.get(), 1);
+        ListTag firefliesTag = new ListTag();
+        firefliesTag.add(targetTags);
+        resultStack.addTagElement("Fireflies", firefliesTag);
+        if (stack.isEmpty()) {
+            pPlayer.setItemInHand(pUsedHand, resultStack);
+        } else if (!pPlayer.getInventory().add(resultStack)) {
+            pPlayer.drop(resultStack, false);
+        }
+        firefly.remove(Entity.RemovalReason.DISCARDED);
+        return InteractionResult.SUCCESS;
+    }
+
+    /* FIREFLY BOTTLING END */
 }
