@@ -29,6 +29,7 @@ public final class FireflyItems {
             TINTED_SPLASH_POTION,
             TINTED_LINGERING_POTION,
             TINTED_DRAGON_BREATH,
+            TINTED_FIREFLY_BOTTLE,
             XDI8AHO_ICON,
             FIREFLY_SPAWN_EGG;
 
@@ -51,6 +52,8 @@ public final class FireflyItems {
                 new Item(defaultProp()
                         .craftRemainder(TINTED_GLASS_BOTTLE.get())
                         .rarity(Rarity.UNCOMMON)));
+        TINTED_FIREFLY_BOTTLE = REGISTRY.register("tinted_firefly_bottle", () ->
+                new TintedFireflyBottleItem(defaultProp()));
         XDI8AHO_ICON = REGISTRY.register("xdi8aho", () ->
                 new Item(new Item.Properties()));
         FIREFLY_SPAWN_EGG = REGISTRY.register("firefly_spawn_egg", () ->
