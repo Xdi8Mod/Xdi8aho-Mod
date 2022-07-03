@@ -6,6 +6,11 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 
 public class FireflyItemTags {
-    public static final TagKey<Item> TINTED_DRAGON_BREATH
-            = ItemTags.create(new ResourceLocation("firefly8", "tinted_dragon_breath"));
+    public static final TagKey<Item>
+            TINTED_DRAGON_BREATH = create("tinted_dragon_breath"),
+            TINTED_HONEY_BOTTLES = create("tinted_honey_bottles");
+
+    private static TagKey<Item> create(String path) {
+        return ItemTags.create(new ResourceLocation("firefly8", path));
+    }
 }
