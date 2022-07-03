@@ -33,6 +33,7 @@ import org.jetbrains.annotations.NotNull;
 import top.xdi8.mod.firefly8.particle.FireflyParticles;
 
 import javax.annotation.Nullable;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -45,6 +46,7 @@ public class FireflyEntity extends PathfinderMob implements FlyingAnimal, Ownabl
     private int lightTime;
     /* NBT */
     private boolean isNaturalGen = true;    // kept true for compatibility
+    // TODO more than 1 owner
     protected static final EntityDataAccessor<Optional<UUID>> DATA_OWNERUUID_ID = SynchedEntityData.defineId(FireflyEntity.class, EntityDataSerializers.OPTIONAL_UUID);
     private long inBottleTime;
     private long outOfBottleTime;
@@ -144,8 +146,9 @@ public class FireflyEntity extends PathfinderMob implements FlyingAnimal, Ownabl
         if (pCompound.hasUUID("Owner")) {
             uuid = pCompound.getUUID("Owner");
         } else {
-            String s = pCompound.getString("Owner");
-            uuid = OldUsersConverter.convertMobOwnerIfNecessary(this.getServer(), s);
+            String owner = pCompound.getString("Owner");
+            uuid = OldUsersConverter.convertMobOwnerIfNecessary(Objects.requireNonNull(this.getServer()),
+                    owner);
         }
 
         if (uuid != null) {
@@ -197,6 +200,7 @@ public class FireflyEntity extends PathfinderMob implements FlyingAnimal, Ownabl
     protected void registerGoals() {
         this.goalSelector.addGoal(2, new FleeSunGoal(this, 1.0));
         this.goalSelector.addGoal(4, new AbstractFollowPlayerGoal.FollowOwner(this));
+        this.goalSelector.addGoal(5, new AbstractFollowPlayerGoal.Randomly(this));
         this.goalSelector.addGoal(5, new Wandering());
         this.goalSelector.addGoal(5, new FloatGoal(this));
         // this.goalSelector.addGoal(2, new RestrictSunGoal(this));
