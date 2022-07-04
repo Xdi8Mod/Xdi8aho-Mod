@@ -1,27 +1,53 @@
 package top.xdi8.mod.firefly8.item.tint;
 
+import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ItemUtils;
-import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
+import top.xdi8.mod.firefly8.item.FireflyItems;
 
 public class TintedHoneyBottleItem extends Item {
     public TintedHoneyBottleItem(Properties p_41346_) {
         super(p_41346_);
     }
 
+    /**
+     * Overwriting it cuz mixins should be avoided.
+     * @see HoneyBottleItem#finishUsingItem(ItemStack, Level, LivingEntity)
+     */
     @Override
     public @NotNull ItemStack finishUsingItem(@NotNull ItemStack pStack, @NotNull Level pLevel, @NotNull LivingEntity pEntityLiving) {
-        var ret = super.finishUsingItem(pStack, pLevel, pEntityLiving);
-        return ItemTinting.tint(ret);
+        super.finishUsingItem(pStack, pLevel, pEntityLiving);
+        if (pEntityLiving instanceof ServerPlayer serverplayer) {
+            CriteriaTriggers.CONSUME_ITEM.trigger(serverplayer, pStack);
+            serverplayer.awardStat(Stats.ITEM_USED.get(this));
+        }
+
+        if (!pLevel.isClientSide) {
+            pEntityLiving.removeEffect(MobEffects.POISON);
+        }
+
+        if (pStack.isEmpty()) {
+            return new ItemStack(FireflyItems.TINTED_GLASS_BOTTLE.get());
+        } else {
+            if (pEntityLiving instanceof Player player && !((Player)pEntityLiving).getAbilities().instabuild) {
+                ItemStack itemstack = new ItemStack(FireflyItems.TINTED_GLASS_BOTTLE.get());
+                if (!player.getInventory().add(itemstack)) {
+                    player.drop(itemstack, false);
+                }
+            }
+
+            return pStack;
+        }
     }
 
     @Override
