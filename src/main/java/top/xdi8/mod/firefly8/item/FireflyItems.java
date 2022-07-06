@@ -4,7 +4,6 @@ import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Rarity;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -28,7 +27,6 @@ public final class FireflyItems {
             TINTED_HONEY_BOTTLE,
             TINTED_SPLASH_POTION,
             TINTED_LINGERING_POTION,
-            TINTED_DRAGON_BREATH,
             XDI8AHO_ICON,
             FIREFLY_SPAWN_EGG;
 
@@ -47,10 +45,6 @@ public final class FireflyItems {
             new TintedSplashPotionItem(defaultProp()));
         TINTED_LINGERING_POTION = REGISTRY.register("tinted_lingering_potion", () ->
             new TintedLingeringPotionItem(defaultProp()));
-        TINTED_DRAGON_BREATH = REGISTRY.register("tinted_dragon_breath", () ->
-                new Item(defaultProp()
-                        .craftRemainder(TINTED_GLASS_BOTTLE.get())
-                        .rarity(Rarity.UNCOMMON)));
         XDI8AHO_ICON = REGISTRY.register("xdi8aho", () ->
                 new Item(new Item.Properties()));
         FIREFLY_SPAWN_EGG = REGISTRY.register("firefly_spawn_egg", () ->
