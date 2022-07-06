@@ -5,9 +5,7 @@
   "item.firefly8.tinted_splash_potion": "喷溅型神秘药水",
   "item.firefly8.tinted_lingering_potion": "滞留型神秘药水",
   "item.firefly8.firefly_spawn_egg": "萤火虫刷怪蛋",
-  "item.firefly8.xdi8aho": "灯\uDB87\uDC30",
-  "item.firefly.tinted_dragon_breath": "神秘药水",
 
-  "itemGroup.firefly8": "灯\uDB87\uDC30",
-  "entity.firefly8.firefly": "萤火虫"
+  "itemGroup.firefly8": "Firefly",
+  "entity.firefly8.firefly": "Firefly"
 }
