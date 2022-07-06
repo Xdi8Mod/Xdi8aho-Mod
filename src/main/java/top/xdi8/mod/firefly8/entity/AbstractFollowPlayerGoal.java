@@ -80,7 +80,7 @@ public sealed abstract class AbstractFollowPlayerGoal extends Goal {
         }
 
         public FollowOwner(FireflyEntity self) {
-            this(self, 0.6D);
+            super(self, 0.6D);
         }
 
         @Override
@@ -102,7 +102,7 @@ public sealed abstract class AbstractFollowPlayerGoal extends Goal {
         protected @Nullable LivingEntity whomToFollow() {
             List<Player> list = self.getLevel().getEntitiesOfClass(Player.class,
                     self.getBoundingBox().inflate(16.0D, 16.0D, 16.0D));
-            return list.stream().filter(player -> player.distanceToSqr(self) < 16.0D)
+            return list.stream().filter(player -> player.distanceToSqr(self) < 9.0D)
                     .findFirst().orElse(null);
         }
     }
