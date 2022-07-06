@@ -8,7 +8,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import top.xdi8.mod.firefly8.entity.FireflyEntity;
 import top.xdi8.mod.firefly8.entity.FireflyEntityTypes;
 import top.xdi8.mod.firefly8.item.FireflyItems;
-import top.xdi8.mod.firefly8.item.tint.brewing.TintedPotionBrewing;
+import top.xdi8.mod.firefly8.item.potion.vanilla.TintedPotionBrewing;
 import top.xdi8.mod.firefly8.particle.FireflyParticles;
 
 @Mod("firefly8")

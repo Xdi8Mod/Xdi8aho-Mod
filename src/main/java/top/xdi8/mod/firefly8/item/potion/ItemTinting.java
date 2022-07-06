@@ -1,4 +1,4 @@
-package top.xdi8.mod.firefly8.item.tint;
+package top.xdi8.mod.firefly8.item.potion;
 
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.world.item.ItemStack;
@@ -6,7 +6,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.Nullable;
 import top.xdi8.mod.firefly8.item.FireflyItems;
-import top.xdi8.mod.firefly8.item.tint.brewing.TintedPotionBrewing;
+import top.xdi8.mod.firefly8.item.potion.vanilla.TintedPotionBrewing;
 
 import java.util.HashMap;
 import java.util.Map;
