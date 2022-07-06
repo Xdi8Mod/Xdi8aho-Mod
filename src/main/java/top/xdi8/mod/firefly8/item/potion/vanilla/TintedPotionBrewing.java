@@ -44,8 +44,7 @@ public class TintedPotionBrewing extends VanillaBrewingRecipe
     public @NotNull ItemStack getOutput(@NotNull ItemStack input, @NotNull ItemStack ingredient) {
         ItemStack sup = super.getOutput(input, ingredient);
         LOGGER.debug("Brewing output[sup]: {}, input: {}, ing: {}", sup, input, ingredient);
-        //return ItemTinting.tint(sup);
-        return sup;
+        return ItemTinting.tint(sup);   // TODO: is this necessary?
     }
 
     private static final Logger LOGGER = LogUtils.getLogger();
