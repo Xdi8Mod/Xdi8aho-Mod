@@ -9,6 +9,7 @@ import net.minecraft.stats.Stats;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Bee;
@@ -37,13 +38,13 @@ public class TintedGlassBottleItem extends BottleItem {
     }
 
     @Override
-    protected @NotNull ItemStack turnBottleIntoItem(final @NotNull ItemStack pBottleStack,
-                                                    final @NotNull Player pPlayer,
-                                                    @NotNull ItemStack pFilledBottleStack) {
-        if (ItemTinting.shouldTint(pFilledBottleStack)) {
-            pFilledBottleStack = ItemTinting.tint(pFilledBottleStack);
+    public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level pLevel, @NotNull Player pPlayer, @NotNull InteractionHand pHand) {
+        var ret = super.use(pLevel, pPlayer, pHand);
+        ItemStack stack = ret.getObject();
+        if (ItemTinting.shouldTint(stack)) {
+            return new InteractionResultHolder<>(ret.getResult(), ItemTinting.tint(stack));
         }
-        return super.turnBottleIntoItem(pBottleStack, pPlayer, pFilledBottleStack);
+        return ret;
     }
 
     /* HONEY START */
