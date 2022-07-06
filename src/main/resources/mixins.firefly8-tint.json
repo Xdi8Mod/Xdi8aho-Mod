@@ -1,0 +1,10 @@
+{
+  "minVersion": "0.8",
+  "compatibilityLevel": "JAVA_17",
+  "required": true,
+  "package": "top.xdi8.mod.firefly8.item.tint.mixin",
+  "mixins": [
+    "AddTintedDragonBreathMixin",
+    "AdvancementsMixin"
+  ]
+}
