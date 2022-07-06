@@ -2,18 +2,18 @@
   "providers":[
     {
       "type":"bitmap",
-      "file":"xdi8_fonts:font/xdi8hz.png",
-      "height":8,
-      "ascent": 7,
+      "file":"xdi8_fonts:font/i8fairfax2.png",
+      "height":12,
+      "ascent":12,
       "chars":[
-        "\uDB87\uDC30\uDB87\uDC31\uDB87\uDC32\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+        "\uDB87\uDC30\uDB87\uDC31\uDB87\uDC32\u0000\u0000\u0000\u0000\u0000"
       ]
     },
     {
       "type":"bitmap",
       "file":"xdi8_fonts:font/i8fairfax1.png",
       "height":12,
-      "ascent":10,
+      "ascent":12,
       "chars":[
         "\udb86\udf00\udb86\udf01\udb86\udf02\udb86\udf03\udb86\udf04\udb86\udf05\udb86\udf06\udb86\udf07\udb86\udf08\udb86\udf09\udb86\udf0a\udb86\udf0b\udb86\udf0c\udb86\udf0d\udb86\udf0e\udb86\udf0f",
         "\udb86\udf10\udb86\udf11\udb86\udf12\udb86\udf13\udb86\udf14\udb86\udf15\udb86\udf16\udb86\udf17\udb86\udf18\udb86\udf19\udb86\udf1a\udb86\udf1b\udb86\udf1c\udb86\udf1d\udb86\udf1e\udb86\udf1f",
