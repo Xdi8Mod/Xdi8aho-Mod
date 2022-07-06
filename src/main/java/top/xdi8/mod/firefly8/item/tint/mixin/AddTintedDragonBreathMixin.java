@@ -1,18 +1,24 @@
 package top.xdi8.mod.firefly8.item.tint.mixin;
 
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionBrewing;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import top.xdi8.mod.firefly8.item.FireflyItemTags;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import top.xdi8.mod.firefly8.item.FireflyItems;
 
 @Mixin(PotionBrewing.class)
 abstract class AddTintedDragonBreathMixin {
-    @Inject(at = @At("HEAD"), method = "isIngredient",
-    cancellable = true)
-    private static void hackIngredientPredicate(ItemStack pInput, CallbackInfoReturnable<Boolean> cir) {
-        if (pInput.is(FireflyItemTags.TINTED_DRAGON_BREATH)) cir.setReturnValue(true);
+    @Shadow
+    private static void addContainerRecipe(Item pFrom, Item pIngredient, Item pTo) {}
+
+    @Inject(at = @At("RETURN"), method = "bootStrap()V")
+    private static void add(CallbackInfo ci) {
+        addContainerRecipe(Items.SPLASH_POTION,
+                FireflyItems.TINTED_DRAGON_BREATH.get(),
+                Items.LINGERING_POTION);
     }
 }
