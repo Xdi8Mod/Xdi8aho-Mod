@@ -23,6 +23,9 @@ public class VanillaAdvancements {
     private static final ResourceLocation BALANCED_DIET = new ResourceLocation("husbandry/balanced_diet");
     private static final TagKey<Block> BEEHIVES_TAG = BlockTags.create(new ResourceLocation("beehives"));
 
+    private static final Map<ResourceLocation, TagKey<Item>> TO_ITEM = ImmutableMap.of(
+            SAFELY_HARVEST_MONEY, FireflyItemTags.TINTED_HONEY_BOTTLES,
+            DRAGON_BREATH, FireflyItemTags.TINTED_DRAGON_BREATH);
     private static final Map<ResourceLocation, UUID> TO_UUID = ImmutableMap.of(
             SAFELY_HARVEST_MONEY, UUID.fromString("b0ec73e8-c187-4f25-a83c-cc42263282b7"),
             DRAGON_BREATH, UUID.fromString("fe4d3782-e9b4-431a-a4bc-5b508852ef3c"),
