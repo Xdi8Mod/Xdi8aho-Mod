@@ -2,6 +2,6 @@
   "replace": false,
   "values": [
     "minecraft:honey_bottle",
-    "#firefly8:tinted_honey_bottles"
+    "firefly8:tinted_honey_bottle"
   ]
 }
