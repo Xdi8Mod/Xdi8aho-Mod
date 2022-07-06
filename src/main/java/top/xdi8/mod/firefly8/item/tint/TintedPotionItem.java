@@ -20,6 +20,7 @@ import top.xdi8.mod.firefly8.item.FireflyItems;
 import java.util.List;
 
 public class TintedPotionItem extends PotionItem {
+
     public TintedPotionItem(Properties p_42979_) {
         super(p_42979_);
     }
