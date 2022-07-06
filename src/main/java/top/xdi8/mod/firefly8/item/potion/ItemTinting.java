@@ -23,8 +23,7 @@ public final class ItemTinting {
         return ImmutableMap.of(
                 Items.POTION, FireflyItems.TINTED_POTION::get,
                 Items.LINGERING_POTION, FireflyItems.TINTED_LINGERING_POTION::get,
-                Items.SPLASH_POTION, FireflyItems.TINTED_SPLASH_POTION::get,
-                Items.HONEY_BOTTLE, FireflyItems.TINTED_HONEY_BOTTLE::get
+                Items.SPLASH_POTION, FireflyItems.TINTED_SPLASH_POTION::get
         );
     }
 
