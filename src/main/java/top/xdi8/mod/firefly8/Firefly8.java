@@ -1,6 +1,5 @@
 package top.xdi8.mod.firefly8;
 
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -23,7 +22,7 @@ public class Firefly8 {
         // Entity
         FireflyEntityTypes.REGISTRY.register(modBus());
         modBus().addListener(this::registerEntityAttributes);
-        forgeBus().addListener(FireflyMobBiomeGen::onBiomeLoading);
+        modBus().addListener(FireflyMobBiomeGen::onBiomeLoading);
 
         // Particle
         FireflyParticles.REGISTRY.register(modBus());
@@ -35,10 +34,6 @@ public class Firefly8 {
 
     private static IEventBus modBus() {
         return FMLJavaModLoadingContext.get().getModEventBus();
-    }
-
-    private static IEventBus forgeBus() {
-        return MinecraftForge.EVENT_BUS;
     }
 
     private void onClientSetup(FMLClientSetupEvent event) {
