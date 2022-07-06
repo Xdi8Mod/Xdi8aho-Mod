@@ -7,6 +7,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.crafting.conditions.ICondition;
 import org.apache.commons.lang3.mutable.Mutable;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -15,8 +16,7 @@ import top.xdi8.mod.firefly8.item.tint.advancement.AdvancementLoadingEvent;
 @Mixin(Advancement.Builder.class)
 abstract class AdvancementsMixin {
     @Inject(at = @At("RETURN"),
-            method = "fromJson(Lcom/google/gson/JsonObject;Lnet/minecraft/advancements/critereon/DeserializationContext;Lnet/minecraftforge/common/crafting/conditions/ICondition$IContext;)Lnet/minecraft/advancements/Advancement$Builder;",
-            remap = false   // Forge-added method
+            method = "fromJson(Lcom/google/gson/JsonObject;Lnet/minecraft/advancements/critereon/DeserializationContext;Lnet/minecraftforge/common/crafting/conditions/ICondition$IContext;)Lnet/minecraft/advancements/Advancement$Builder;"
     )
     private static void hackJson(JsonObject pJson, DeserializationContext pContext, ICondition.IContext context, CallbackInfoReturnable<Advancement.Builder> cir) {
         final Advancement.Builder builder = cir.getReturnValue();
