@@ -9,10 +9,8 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
-import net.minecraft.world.entity.ai.goal.FleeSunGoal;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.Goal;
-import net.minecraft.world.entity.ai.goal.RestrictSunGoal;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.util.AirAndWaterRandomPos;
@@ -47,13 +45,9 @@ public class FireflyEntity extends PathfinderMob implements FlyingAnimal {
         this.moveControl = new FlyingMoveControl(this, 20, false);
     }
 
-    public void setNaturalGen(boolean naturalGen) {
-        isNaturalGen = naturalGen;
-    }
+    public void setNaturalGen(boolean naturalGen) { isNaturalGen = naturalGen; }
 
-    public boolean isNaturalGen() {
-        return isNaturalGen;
-    }
+    public boolean isNaturalGen() { return isNaturalGen; }
 
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes()
@@ -93,27 +87,18 @@ public class FireflyEntity extends PathfinderMob implements FlyingAnimal {
         this.setNaturalGen(pCompound.getBoolean("NaturalGen"));
     }
 
-    private boolean shouldDamage() {
-        if (this.level.isDay() && !this.isNaturalGen) {
-            float brightness = this.getBrightness();
-            BlockPos blockpos = new BlockPos(this.getX(), this.getEyeY(), this.getZ());
-            return brightness > 0.5F && this.level.canSeeSky(blockpos);
-        }
-        return false;
-    }
-
     @Override
     public void tick() {
         super.tick();
-        if (this.getLevel().isClientSide()) {
+        if (this.getLevel().isClientSide()){
             if (this.lightTime-- <= 0 && this.randomSource.nextInt(8) == 0) {
                 this.lightTime = 100;
                 this.level.addParticle(FireflyParticles.FIREFLY.get(), this.getX(), this.getY(), this.getZ(),
                         0, 0, 0);
             }
         } else {
-            if (this.shouldDamage()) {
-                this.hurt(DamageSource.ON_FIRE, 0.5F);
+            if (this.shouldVanish()) {
+                this.remove(RemovalReason.DISCARDED);
             }
         }
     }
@@ -125,19 +110,26 @@ public class FireflyEntity extends PathfinderMob implements FlyingAnimal {
         return false;
     }
 
-    protected void doPush(@NotNull Entity pEntity) {
-    }
+    protected void doPush(@NotNull Entity pEntity) {}
 
-    protected void pushEntities() {
+    protected void pushEntities() {}
+
+    private boolean shouldVanish() {
+        if (this.level.isDay() && !this.isNaturalGen) {
+            float brightness = this.getBrightness();
+            BlockPos blockpos = new BlockPos(this.getX(), this.getEyeY(), this.getZ());
+            return brightness > 0.5F &&
+                    this.randomSource.nextFloat() * 15.0F < (brightness - 0.4F) &&
+                    this.level.canSeeSky(blockpos);
+        }
+        return false;
     }
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(4, new AbstractFollowPlayerGoal.Randomly(this));
-        this.goalSelector.addGoal(5, new Wandering());
-        this.goalSelector.addGoal(5, new FloatGoal(this));
-        this.goalSelector.addGoal(2, new RestrictSunGoal(this));
-        this.goalSelector.addGoal(3, new FleeSunGoal(this, 1.0));
+        this.goalSelector.addGoal(2, new AbstractFollowPlayerGoal.Randomly(this));
+        this.goalSelector.addGoal(3, new Wandering());
+        this.goalSelector.addGoal(3, new FloatGoal(this));
     }
 
     @Override
@@ -229,11 +221,11 @@ public class FireflyEntity extends PathfinderMob implements FlyingAnimal {
             Vec3 vec32 = HoverRandomPos.getPos(
                     FireflyEntity.this, 8, 7,
                     vec3.x, vec3.z,
-                    ((float) Math.PI / 2F), 3, 1);
+                    ((float)Math.PI / 2F), 3, 1);
             return vec32 != null ? vec32 :
                     AirAndWaterRandomPos.getPos(
                             FireflyEntity.this, 8, 4, -2,
-                            vec3.x, vec3.z, (float) Math.PI / 2F);
+                            vec3.x, vec3.z, (float)Math.PI / 2F);
         }
     }
 }
