@@ -3,13 +3,16 @@ package top.xdi8.mod.firefly8.item.tint.brewing;
 import com.mojang.logging.LogUtils;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.alchemy.PotionBrewing;
+import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.common.brewing.IBrewingRecipe;
 import net.minecraftforge.common.brewing.VanillaBrewingRecipe;
 import net.minecraftforge.registries.RegistryObject;
+import top.xdi8.mod.firefly8.item.FireflyItems;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
-import top.xdi8.mod.firefly8.item.FireflyItems;
 import top.xdi8.mod.firefly8.item.tint.ItemTinting;
 
 import java.util.Set;
@@ -28,7 +31,7 @@ public class TintedPotionBrewing extends VanillaBrewingRecipe
 
     private static final Set<RegistryObject<Item>> INGREDIENTS
             = Set.of(FireflyItems.TINTED_POTION, FireflyItems.TINTED_LINGERING_POTION,
-                FireflyItems.TINTED_SPLASH_POTION, FireflyItems.TINTED_GLASS_BOTTLE);
+                FireflyItems.TINTED_SPLASH_POTION);
 
     @Override
     public boolean isInput(@NotNull ItemStack input) {
