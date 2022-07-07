@@ -7,38 +7,9 @@ import net.minecraft.world.item.ItemStack;
 import static org.featurehouse.mcmod.spm.SPMMain.PEEL;
 
 public interface PeelInserter {
-    enum PeelActionResult {
-        INSERT,
-        SPAWN
-    }
-
-    static PeelActionResult insert(Player player) {
-        Inventory inventory = player.getInventory();
-        ItemStack eachStack;
-        int i;
-        for (i = 0; i < inventory.items.size(); ++i) {
-            eachStack = inventory.items.get(i);
-            if (eachStack.getItem().equals(PEEL) && eachStack.getCount() < PEEL.getMaxStackSize()) {
-                eachStack.grow(1);
-                return PeelActionResult.INSERT;
-            }
-        }
-        for (i = 0; i < inventory.items.size(); ++i) {
-            eachStack = inventory.items.get(i);
-            if (eachStack.equals(ItemStack.EMPTY)) {
-                inventory.items.set(i, new ItemStack(PEEL, 1));
-                return PeelActionResult.INSERT;
-            }
-        }
-
-        return PeelActionResult.SPAWN;
-    }
-
     static void run(Player player) {
-        if (insert(player).equals(PeelActionResult.SPAWN)) {
-            player.spawnAtLocation(PEEL);
-        } else {
-            player.getInventory().setChanged();
-        }
+        Inventory inventory = player.getInventory();
+        if (!inventory.add(new ItemStack(PEEL)))
+            player.drop(new ItemStack(PEEL), false);
     }
 }

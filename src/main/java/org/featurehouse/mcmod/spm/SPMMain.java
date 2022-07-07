@@ -1,10 +1,6 @@
 package org.featurehouse.mcmod.spm;
 
-import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.PackType;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.food.Foods;
 import net.minecraft.world.inventory.MenuType;
@@ -21,10 +17,7 @@ import org.featurehouse.mcmod.spm.blocks.entities.GrinderBlockEntity;
 import org.featurehouse.mcmod.spm.blocks.entities.MagicCubeBlockEntity;
 import org.featurehouse.mcmod.spm.blocks.plants.*;
 import org.featurehouse.mcmod.spm.items.*;
-import org.featurehouse.mcmod.spm.linkage.SPMLinkage;
-import org.featurehouse.mcmod.spm.loot.LootTables;
 import org.featurehouse.mcmod.spm.recipe.SeedUpdatingRecipe;
-import org.featurehouse.mcmod.spm.resource.magicalenchantment.MagicalEnchantmentLoader;
 import org.featurehouse.mcmod.spm.screen.GrinderScreenHandler;
 import org.featurehouse.mcmod.spm.screen.MagicCubeScreenHandler;
 import org.featurehouse.mcmod.spm.screen.SeedUpdaterScreenHandler;
@@ -33,6 +26,7 @@ import org.featurehouse.mcmod.spm.util.objsettings.BlockSettings;
 import org.featurehouse.mcmod.spm.util.objsettings.ItemSettings;
 import org.featurehouse.mcmod.spm.util.objsettings.Materials;
 import org.featurehouse.mcmod.spm.util.objsettings.sweetpotato.SweetPotatoType;
+import org.featurehouse.mcmod.spm.util.platform.api.ResourceUtil;
 import org.featurehouse.mcmod.spm.util.registries.AnimalIngredients;
 import org.featurehouse.mcmod.spm.util.registries.ComposterHelper;
 import org.featurehouse.mcmod.spm.util.tag.TagContainer;
@@ -44,17 +38,15 @@ import static org.featurehouse.mcmod.spm.util.objsettings.BlockSettings.*;
 import static org.featurehouse.mcmod.spm.util.registries.RegistryHelper.*;
 
 @StableApi
-public class SPMMain implements ModInitializer {
-	/** @deprecated will be removed */
-	@Deprecated(forRemoval = true)
-	@SuppressWarnings("all")
-	public static SPMMain INSTANCE;	//deprecated
-	public SPMMain() {
-		INSTANCE = this;
-	}
-	private static final Logger LOGGER = LoggerFactory.getLogger("Sweet Potato Mod");
+public class SPMMain {
+	private SPMMain() {}
+	private static final SPMMain INSTANCE = new SPMMain();
+	public static SPMMain getInstance() { return INSTANCE; }
 
-	public static final String MODID = "assets/sweet_potato";
+	private static final Logger LOGGER = LoggerFactory.getLogger("Sweet Potato Mod");
+	public static Logger getLogger() { return LOGGER; }
+
+	public static final String MODID = "sweet_potato";
 
 	// Items
 	public static final Item PEEL;
@@ -181,19 +173,12 @@ public class SPMMain implements ModInitializer {
 	public static final ResourceLocation SWEET_POTATO_EATEN;
 	public static final ResourceLocation INTERACT_WITH_MAGIC_CUBE;
 
-	@Override
+	//@Override
 	public void onInitialize() {
 		LOGGER.info("Successfully loaded Sweet Potato Mod!");
-		// Copyright
-		// Agents can write his or her name into this copyright as their agent identities.
-		System.out.printf("%s, by %s\nContributors:\n%s\n", "Sweet Potato Mod", "Pigeonia Featurehouse", "- Teddy Li (bilibili: teddyxlandlee)\n- Ray Chen (bilibili: 一颗水晶Rayawa)\n- Peter Yang (bilibili: 印度大米饭)");
-
-		FabricLoader.getInstance().getEntrypoints("assets/sweet_potato", SPMLinkage.class).forEach(SPMLinkage::init);
+		//FabricLoader.getInstance().getEntrypoints("sweet_potato", SPMLinkage.class).forEach(SPMLinkage::init);
 		ComposterHelper.register();
-
-		LootTables.init();
-		ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(new MagicalEnchantmentLoader());
-
+		ResourceUtil.loadResource();
 		// Fuel
 		AnimalIngredients.configureParrot();
 	}

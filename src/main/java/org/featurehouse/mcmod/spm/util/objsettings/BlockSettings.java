@@ -1,6 +1,5 @@
 package org.featurehouse.mcmod.spm.util.objsettings;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.BlockGetter;
@@ -19,7 +18,7 @@ import java.util.function.Supplier;
 
 public final class BlockSettings {
     public static BlockBehaviour.Properties functionalMinable(Material material, float hardness, float blastResistance) {
-        return FabricBlockSettings.of(material).destroyTime(hardness).explosionResistance(blastResistance).requiresCorrectToolForDrops();
+        return BlockBehaviour.Properties.of(material).destroyTime(hardness).explosionResistance(blastResistance).requiresCorrectToolForDrops();
     }
 
     public static EnchantedSaplings createEnchantedSapling(String id, Supplier<AbstractTreeGrower> saplingGeneratorSupplier) {
@@ -27,24 +26,24 @@ public final class BlockSettings {
     }
 
     public static FlowerPotBlock createPotted(String id, Block inside) {
-        return (FlowerPotBlock) RegistryHelper.block(id, new FlowerPotBlock(inside, FabricBlockSettings.of(Material.DECORATION)));
+        return (FlowerPotBlock) RegistryHelper.block(id, new FlowerPotBlock(inside, BlockBehaviour.Properties.of(Material.DECORATION)));
     }
 
-    public static FabricBlockSettings grassLike() { return FabricBlockSettings.copyOf(GRASS_LIKE); }
-    public static FabricBlockSettings grass() { return FabricBlockSettings.copyOf(GRASS); }
+    public static BlockBehaviour.Properties grassLike() { return GRASS_LIKE.get(); }
+    public static BlockBehaviour.Properties grass() { return GRASS.get(); }
 
-    private static final BlockBehaviour.Properties GRASS_LIKE;
-    private static final BlockBehaviour.Properties GRASS;
+    private static final java.util.function.Supplier<BlockBehaviour.Properties> GRASS_LIKE;
+    private static final java.util.function.Supplier<BlockBehaviour.Properties> GRASS;
 
     private BlockSettings() {}
 
     static {
-        GRASS_LIKE = FabricBlockSettings.of(Materials.MATERIAL_PLANT)
+        GRASS_LIKE = () -> BlockBehaviour.Properties.of(Materials.MATERIAL_PLANT)
                 .noCollission()
                 .randomTicks()
                 .instabreak()
                 .sound(SoundType.CROP);
-        GRASS = FabricBlockSettings.of(Materials.MATERIAL_PLANT)
+        GRASS = () -> BlockBehaviour.Properties.of(Materials.MATERIAL_PLANT)
                 .noCollission()
                 .randomTicks()
                 .instabreak()
@@ -57,7 +56,7 @@ public final class BlockSettings {
 
     public static LeavesBlock createLeaves(String id) {
         return (LeavesBlock) RegistryHelper.block(id,
-                new LeavesBlock(FabricBlockSettings.of(Material.LEAVES)
+                new LeavesBlock(BlockBehaviour.Properties.of(Material.LEAVES)
                         .strength(0.2F)
                         .randomTicks()
                         .sound(SoundType.GRASS)

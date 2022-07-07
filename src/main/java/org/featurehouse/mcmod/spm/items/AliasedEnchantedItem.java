@@ -1,8 +1,8 @@
 package org.featurehouse.mcmod.spm.items;
 
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemNameBlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
@@ -28,11 +28,11 @@ public class AliasedEnchantedItem extends ItemNameBlockItem {
 
     @ApiStatus.Internal
     public static AliasedEnchantedItem of(String id, Block original, CreativeModeTab itemGroup) {
-        return (AliasedEnchantedItem) RegistryHelper.item(id, new AliasedEnchantedItem(original, new FabricItemSettings().tab(itemGroup)));
+        return (AliasedEnchantedItem) RegistryHelper.item(id, new AliasedEnchantedItem(original, new Item.Properties().tab(itemGroup)));
     }
 
     @ApiStatus.Internal
     public static AliasedEnchantedItem ofMiscFood(String id, Block original, FoodProperties foodComponent) {
-        return (AliasedEnchantedItem) RegistryHelper.item(id, new AliasedEnchantedItem(original, new FabricItemSettings().tab(CreativeModeTab.TAB_MISC).food(foodComponent)));
+        return (AliasedEnchantedItem) RegistryHelper.item(id, new AliasedEnchantedItem(original, new Item.Properties().tab(CreativeModeTab.TAB_MISC).food(foodComponent)));
     }
 }

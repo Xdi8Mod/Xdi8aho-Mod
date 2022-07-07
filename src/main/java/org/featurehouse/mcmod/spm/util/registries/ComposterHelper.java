@@ -1,7 +1,7 @@
 package org.featurehouse.mcmod.spm.util.registries;
 
-import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.ComposterBlock;
 import org.featurehouse.mcmod.spm.SPMMain;
 import org.featurehouse.mcmod.spm.util.objsettings.sweetpotato.SweetPotatoComponent;
 import org.featurehouse.mcmod.spm.util.objsettings.sweetpotato.SweetPotatoStatus;
@@ -48,6 +48,6 @@ public final class ComposterHelper {
     }
 
     public static void registerCompostableItem(float levelIncreaseChance, ItemLike item) {
-        CompostingChanceRegistry.INSTANCE.add(item, levelIncreaseChance);
+        ComposterBlock.COMPOSTABLES.put(item, levelIncreaseChance);
     }
 }

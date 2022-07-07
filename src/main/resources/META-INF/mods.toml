@@ -42,6 +42,16 @@ In the night, blink his eye,
 Just to make his future bright.'''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 
+[[mods]]
+modId="sweet_potato"
+version="${file.jarVersion}}"
+displayName="Sweet Potato Reborn"
+credits="""
+See sweet_potato:credits.json for more info"""
+authors="Pigeonia Featurehouse"
+description='Combination of Agromagic'
+logoFile='assets/sweet_potato/icon.png'
+
 [[dependencies.xdi8]] #optional
     # the modid of the dependency
     modId="forge" #mandatory

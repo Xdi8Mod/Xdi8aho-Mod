@@ -43,7 +43,6 @@ public final class TreeFeatures {
     }
 
     private static <FC extends TreeConfiguration> Holder<ConfiguredFeature<?, ?>> register(String id, FC featureConfig) {
-        //return BuiltinRegistries.method_40360(BuiltinRegistries.CONFIGURED_FEATURE, RegistryHelper.id(id), configuredFeature);
         return BuiltinRegistries.register(BuiltinRegistries.CONFIGURED_FEATURE, RegistryHelper.id(id), new ConfiguredFeature<>(Feature.TREE, featureConfig));
     }
 
