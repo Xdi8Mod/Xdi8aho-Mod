@@ -46,7 +46,6 @@ public class TintedFireflyBottleItem extends Item {
         firefly.setInBottleTime(level.getGameTime());
         CompoundTag targetTags = new CompoundTag();
         firefly.save(targetTags);
-        // TODO: add targetTags to the ItemStack
         assert stack.getTag() != null;
         ListTag fireflyList = stack.getTag().getList("Fireflies", 9);
         fireflyList.add(targetTags);
@@ -63,7 +62,6 @@ public class TintedFireflyBottleItem extends Item {
 
     @Override
     public @NotNull InteractionResult useOn(@NotNull UseOnContext pContext) {
-        // TODO: release the fireflies in the bottle
         Level level = pContext.getLevel();
         BlockPos clickedPos = pContext.getClickedPos();
         Block usedOnBlock = level.getBlockState(clickedPos).getBlock();
