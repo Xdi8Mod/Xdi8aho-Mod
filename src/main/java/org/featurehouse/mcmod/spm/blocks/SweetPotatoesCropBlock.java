@@ -1,7 +1,5 @@
 package org.featurehouse.mcmod.spm.blocks;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.ItemLike;
@@ -12,6 +10,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.featurehouse.mcmod.spm.util.objsettings.sweetpotato.SweetPotatoType;
+import org.featurehouse.mcmod.spm.util.platform.api.ClientOnly;
 
 public class SweetPotatoesCropBlock extends CropBlock {
     private static final VoxelShape[] AGE_TO_SHAPE = new VoxelShape[]{
@@ -39,7 +38,7 @@ public class SweetPotatoesCropBlock extends CropBlock {
         return super.getBonemealAgeIncrease(world) / 3;
     }
 
-    @Environment(EnvType.CLIENT)
+    @ClientOnly
     protected ItemLike getBaseSeedId() {
         return sweetPotatoType.getRaw();
     }

@@ -1,7 +1,6 @@
 package org.featurehouse.mcmod.spm.resource.magicalenchantment;
 
 import com.google.gson.*;
-import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -11,6 +10,7 @@ import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import org.featurehouse.mcmod.spm.SPMMain;
+import org.featurehouse.mcmod.spm.util.platform.api.resource.KeyedReloadListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,7 +18,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class MagicalEnchantmentLoader extends SimpleJsonResourceReloadListener implements IdentifiableResourceReloadListener {
+public class MagicalEnchantmentLoader extends SimpleJsonResourceReloadListener implements KeyedReloadListener {
     protected static final ResourceLocation FABRIC_ID = new ResourceLocation(SPMMain.MODID, "magical_enchantments");
     private static final Gson GSON = new GsonBuilder().create();
     private static final Logger LOGGER = LoggerFactory.getLogger("MagicalEnchantmentLoader");
@@ -52,7 +52,7 @@ public class MagicalEnchantmentLoader extends SimpleJsonResourceReloadListener i
     }
 
     @Override
-    public ResourceLocation getFabricId() {
+    public ResourceLocation getId() {
         return FABRIC_ID;
     }
 

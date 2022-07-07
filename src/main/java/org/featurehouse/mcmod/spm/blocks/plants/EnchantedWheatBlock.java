@@ -1,13 +1,12 @@
 package org.featurehouse.mcmod.spm.blocks.plants;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import org.featurehouse.mcmod.spm.SPMMain;
+import org.featurehouse.mcmod.spm.util.platform.api.ClientOnly;
 import org.featurehouse.mcmod.spm.util.tick.RandomTickHelper;
 import org.jetbrains.annotations.NotNull;
 
@@ -18,7 +17,7 @@ public class EnchantedWheatBlock extends CropBlock {
         super(settings);
     }
 
-    @Environment(EnvType.CLIENT)
+    @ClientOnly
     @Override
     protected ItemLike getBaseSeedId() {
         return SPMMain.ENCHANTED_WHEAT_SEEDS;

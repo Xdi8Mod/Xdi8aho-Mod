@@ -1,2 +1,3 @@
 Shidinn Fonts in xdi8_fonts:i8fairfax*.png are from Fairfax (https://www.kreativekorp.com/software/fonts/fairfax.shtml).
 Fonts meta is generated with script (https://featurehouse.github.io/resources/9f/26/10c1dc/092e405bf7d64f8386951d72bc20ab82f5faaf0bb53c1760dc33a1/fonts-gen.py), licensed under GPLv3 or later.
+Part of code are from Sweet Potato Mod (https://github.com/Featurehouse/sweet_potato-source).

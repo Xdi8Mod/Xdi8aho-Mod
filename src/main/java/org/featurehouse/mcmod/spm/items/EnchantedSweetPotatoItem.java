@@ -1,9 +1,6 @@
 package org.featurehouse.mcmod.spm.items;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.util.NbtType;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -25,6 +22,7 @@ import org.featurehouse.mcmod.spm.util.effects.StatusEffectInstances;
 import org.featurehouse.mcmod.spm.util.inventory.PeelInserter;
 import org.featurehouse.mcmod.spm.util.objsettings.sweetpotato.SweetPotatoStatus;
 import org.featurehouse.mcmod.spm.util.objsettings.sweetpotato.SweetPotatoType;
+import org.featurehouse.mcmod.spm.util.platform.api.ClientOnly;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -69,13 +67,13 @@ public class EnchantedSweetPotatoItem extends EnchantedItem implements SweetPota
         Item item = stack.getItem();
         if (!(item instanceof EnchantedSweetPotatoItem)) return Optional.empty();
         CompoundTag compoundNbtElement = stack.getOrCreateTag();
-        if (!compoundNbtElement.contains("statusEffects", NbtType.LIST)) return Optional.empty();
-        ListTag statusEffects = compoundNbtElement.getList("statusEffects", NbtType.COMPOUND);
+        if (!compoundNbtElement.contains("statusEffects", 9 /*LIST*/)) return Optional.empty();
+        ListTag statusEffects = compoundNbtElement.getList("statusEffects", 10 /*COMPOUND*/);
 
         List<MobEffectInstance> effectInstances = new ObjectArrayList<>();
         for (Tag oneStatusEffect: statusEffects) {
             //if (NbtUtils.notCompoundTag(oneStatusEffect)) continue;
-            if (oneStatusEffect.getId() != NbtType.COMPOUND) continue;
+            if (oneStatusEffect.getId() != 10) continue;
             CompoundTag compoundNbtElement1 = (CompoundTag) oneStatusEffect;
             MobEffectInstance statusEffectInstance = StatusEffectInstances.readNbt(compoundNbtElement1);
             if (statusEffectInstance == null) continue;
@@ -104,7 +102,7 @@ public class EnchantedSweetPotatoItem extends EnchantedItem implements SweetPota
     }
 
     @Override
-    @Environment(EnvType.CLIENT)
+    @ClientOnly
     public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> tooltip, TooltipFlag context) {
         super.appendHoverText(stack, world, tooltip, context);
 
@@ -117,7 +115,7 @@ public class EnchantedSweetPotatoItem extends EnchantedItem implements SweetPota
             mainTip.append(new TranslatableComponent("effect.none").withStyle(ChatFormatting.ITALIC));
             return;
         }
-        if (!root.contains("displayIndex", NbtType.NUMBER)) {
+        if (!root.contains("displayIndex", 99)) {
             mainTip.append(new TextComponent("???").withStyle(ChatFormatting.ITALIC));
             return;
         }

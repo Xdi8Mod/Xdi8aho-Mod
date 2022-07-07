@@ -1,6 +1,5 @@
 package org.featurehouse.mcmod.spm.util.effects;
 
-import net.fabricmc.fabric.api.util.NbtType;
 import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -20,7 +19,7 @@ public class StatusEffectInstances {
      */
     @Nullable   // null: empty status
     public static MobEffectInstance readNbt(CompoundTag tag) {
-        if (!tag.contains("id", NbtType.STRING)) return null;
+        if (!tag.contains("id", 8 /*STRING*/)) return null;
         String raw = tag.getString("id");
         ResourceLocation id = new ResourceLocation(raw);
         if (!Registry.MOB_EFFECT.keySet().contains(id)) {

@@ -1,12 +1,15 @@
 package org.featurehouse.mcmod.spm.util.registries;
 
+import com.mojang.datafixers.types.Type;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
+import net.minecraft.Util;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.stats.StatFormatter;
 import net.minecraft.stats.Stats;
+import net.minecraft.util.datafix.fixes.References;
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
@@ -18,6 +21,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import org.featurehouse.mcmod.spm.SPMMain;
 import org.featurehouse.mcmod.spm.util.tag.TagContainer;
 import org.jetbrains.annotations.NotNull;
 
@@ -49,12 +53,14 @@ public interface RegistryHelper {
         return Registry.register(Registry.ITEM, id2, new BlockItem(block2, settings));
     }
 
-    static <E extends BlockEntity> BlockEntityType<E> blockEntity(String id, FabricBlockEntityTypeBuilder.Factory<E> supplier, Block... blocks) {
+    static <E extends BlockEntity> BlockEntityType<E> blockEntity(String id, BlockEntityType.BlockEntitySupplier<E> supplier, Block... blocks) {
         ResourceLocation id2 = id(id);
-        return Registry.register(Registry.BLOCK_ENTITY_TYPE, id2, FabricBlockEntityTypeBuilder.create(supplier, blocks).build(null));
+        Type<?> type = Util.fetchChoiceType(References.BLOCK_ENTITY, id2.toString());
+        if (type == null) SPMMain.getLogger().warn("Invalid type: {}", id);
+        return Registry.register(Registry.BLOCK_ENTITY_TYPE, id2, BlockEntityType.Builder.of(supplier, blocks)
+                .build(type));
     }
 
-    //@Environment(EnvType.CLIENT)
     static SoundEvent sound(String id) {
         ResourceLocation id2 = id(id);
         return Registry.register(Registry.SOUND_EVENT, id2, new SoundEvent(id2));
@@ -76,7 +82,7 @@ public interface RegistryHelper {
     }
 
     //@FabricApiRegistry
-    static <H extends AbstractContainerMenu> MenuType<H> simpleScreenHandler(String id, ScreenHandlerRegistry.SimpleClientHandlerFactory<H> factory) {
+    static <H extends AbstractContainerMenu> MenuType<H> simpleScreenHandler(String id, MenuType.MenuSupplier<H> factory) {
         ResourceLocation id2 = id(id);
         return ScreenHandlerRegistry.registerSimple(id2, factory);
     }

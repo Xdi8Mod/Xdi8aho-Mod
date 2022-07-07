@@ -1,21 +1,17 @@
 package org.featurehouse.mcmod.spm.client;
 
-import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.FoliageColor;
 import org.featurehouse.mcmod.spm.SPMMain;
-import org.featurehouse.mcmod.spm.linkage.SPMLinkageClient;
+import org.featurehouse.mcmod.spm.util.platform.api.ClientOnly;
 
-@Environment(EnvType.CLIENT)
-public class SPMClient implements ClientModInitializer {
-    @Override
+@ClientOnly
+public class SPMClient {
+    //@Override
     public void onInitializeClient() {
         /* Client Screens */
 
@@ -37,10 +33,6 @@ public class SPMClient implements ClientModInitializer {
         );
         ColorProviderRegistry.ITEM.register((stack, tintIndex) -> FoliageColor.getBirchColor(), SPMMain.ENCHANTED_BIRCH_LEAVES_ITEM);
         ColorProviderRegistry.ITEM.register((stack, tintIndex) -> FoliageColor.getEvergreenColor(), SPMMain.ENCHANTED_SPRUCE_LEAVES_ITEM);
-
-        /* Linkage */
-
-        FabricLoader.getInstance().getEntrypoints("sweet_potato.client", SPMLinkageClient.class).forEach(SPMLinkageClient::initClient);
 
         /* Rendering */
 
