@@ -6,13 +6,13 @@ import net.minecraft.advancements.critereon.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import top.xdi8.mod.firefly8.item.FireflyItemTags;
 
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.function.Supplier;
 
 @Mod.EventBusSubscriber(modid = "firefly8")
@@ -43,31 +43,46 @@ public class VanillaAdvancements {
                     new ItemPredicate[]{ItemPredicate.Builder.item()
                             .of(FireflyItemTags.TINTED_DRAGON_BREATH)
                             .build()}
-            ),
-            BALANCED_DIET, () -> new ConsumeItemTrigger.TriggerInstance(
-                    EntityPredicate.Composite.ANY,
-                    ItemPredicate.Builder.item()
-                            .of(FireflyItemTags.BALANCED_DIET)
-                            .build()
             )
     );
 
     @SubscribeEvent
     public static void patchTintedItem(AdvancementLoadingEvent event) {
         final ResourceLocation id = event.getId();
+        if (BALANCED_DIET.equals(id)) {
+            balancedDiet(event);
+            return;
+        }
         if (!TO_UUID.containsKey(id)) return;
-        String[][] reqOld = event.getRequirements(),
-                   reqNew = new String[reqOld.length + 1][];
-        System.arraycopy(reqOld, 0, reqNew, 1, reqOld.length);
-
+        String[][] req = event.getRequirements();
         ResourceLocation reqId = new ResourceLocation("firefly8",
                 TO_UUID.get(id).toString());
-        /*event.addCriterion(reqId, new ConsumeItemTrigger.TriggerInstance(EntityPredicate.Composite.ANY,
-                new ItemPredicate(TO_ITEM.get(id),
-                        null, MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY,
-                        EnchantmentPredicate.NONE, EnchantmentPredicate.NONE, null, NbtPredicate.ANY)));*/
         event.addCriterion(reqId, TO_TRIGGER.get(id).get());
-        reqNew[0] = new String[] {reqId.toString()};
-        event.setRequirements(reqNew);
+        String[] instance = req[0], newInstance = Arrays.copyOf(instance, instance.length+1);
+        newInstance[instance.length] = reqId.toString();
+        req[0] = newInstance;
+    }
+
+    /* BalancedDietHelper start */
+
+    private static void balancedDiet(AdvancementLoadingEvent event) {
+        String[][] requirements = event.getRequirements();
+
+        // 0: honey bottles
+        for (int i = 0; i < requirements.length; i++) {
+            String[] as = requirements[i];
+            if (Arrays.asList(as).contains("honey_bottle")) {
+                event.addCriterion(new ResourceLocation("firefly8:05f921ae-5f96-410d-bcce-bf20d57e5d1a"),
+                        consumeItemTrigger(FireflyItemTags.TINTED_HONEY_BOTTLES));
+                String[] nas = Arrays.copyOf(as, as.length + 1);
+                nas[as.length] = "firefly8:05f921ae-5f96-410d-bcce-bf20d57e5d1a";
+                requirements[i] = nas;
+            }
+        }
+    }
+
+    private static ConsumeItemTrigger.TriggerInstance consumeItemTrigger(TagKey<Item> tag) {
+        return new ConsumeItemTrigger.TriggerInstance(EntityPredicate.Composite.ANY,
+                ItemPredicate.Builder.item().of(tag).build());
     }
 }
