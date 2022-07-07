@@ -47,8 +47,7 @@ public class TintedFireflyBottleItem extends Item {
         CompoundTag targetTags = new CompoundTag();
         firefly.save(targetTags);
         // TODO: add targetTags to the ItemStack
-        assert stack.getTag() != null;
-        ListTag fireflyList = stack.getTag().getList("Fireflies", 9);
+        ListTag fireflyList = stack.getOrCreateTag().getList("Fireflies", 9);
         fireflyList.add(targetTags);
         if (stack.isEmpty()) {
             pPlayer.setItemInHand(pUsedHand, stack);
