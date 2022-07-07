@@ -1,0 +1,24 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "org.featurehouse.mcmod.spm.mixin",
+  "compatibilityLevel": "JAVA_16",
+  "mixins": [
+    "MixinAdvancementTask",
+    "acc.AdvancementTaskAccessor",
+    "acc.IngredientAccessor",
+    "acc.ParrotEntityAccessor",
+    "ingredient.ChickenEntityMixin",
+    "ingredient.PigEntityMixin",
+    "modinfo.LevelPropertiesMixin",
+    "modinfo.ServerPropertiesMixin"
+  ],
+  "client": [
+    "MixinWorldEventC",
+    "modinfo.CreditsScreenMixinC",
+    "modinfo.TitleScreenMixinC"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
