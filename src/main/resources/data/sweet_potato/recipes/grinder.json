@@ -7,10 +7,10 @@
   ],
   "key": {
     "I": {
-      "item": "minecraft:iron_ingot"
+      "tag": "forge:ingots/iron"
     },
     "#": {
-      "item": "minecraft:redstone"
+      "tag": "forge:dusts/redstone"
     },
     "_": {
       "item": "minecraft:smooth_stone_slab"
