@@ -21,7 +21,7 @@ import net.minecraft.world.level.levelgen.feature.treedecorators.LeaveVineDecora
 import net.minecraft.world.level.levelgen.feature.treedecorators.TrunkVineDecorator;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.*;
 import org.featurehouse.mcmod.spm.SPMMain;
-import org.featurehouse.mcmod.spm.util.registries.RegistryHelper;
+import org.featurehouse.mcmod.spm.platform.api.reg.PlatformRegister;
 
 import java.util.List;
 import java.util.OptionalInt;
@@ -43,7 +43,7 @@ public final class TreeFeatures {
     }
 
     private static <FC extends TreeConfiguration> Holder<ConfiguredFeature<?, ?>> register(String id, FC featureConfig) {
-        return BuiltinRegistries.register(BuiltinRegistries.CONFIGURED_FEATURE, RegistryHelper.id(id), new ConfiguredFeature<>(Feature.TREE, featureConfig));
+        return BuiltinRegistries.register(BuiltinRegistries.CONFIGURED_FEATURE, PlatformRegister.id(id), new ConfiguredFeature<>(Feature.TREE, featureConfig));
     }
 
     public static final Holder<ConfiguredFeature<?, ?>>
@@ -145,29 +145,29 @@ public final class TreeFeatures {
 
         static {
             OAK_LOG = Blocks.OAK_LOG.defaultBlockState();
-            ENCHANTED_OAK_LEAVES = SPMMain.ENCHANTED_OAK_LEAVES.defaultBlockState();
-            ENCHANTED_OAK_SAPLING = SPMMain.ENCHANTED_OAK_SAPLING.defaultBlockState();
+            ENCHANTED_OAK_LEAVES = SPMMain.ENCHANTED_OAK_LEAVES.get().defaultBlockState();
+            ENCHANTED_OAK_SAPLING = SPMMain.ENCHANTED_OAK_SAPLING.get().defaultBlockState();
 
             SPRUCE_LOG = Blocks.SPRUCE_LOG.defaultBlockState();
-            ENCHANTED_SPRUCE_LEAVES = SPMMain.ENCHANTED_SPRUCE_LEAVES.defaultBlockState();
-            ENCHANTED_SPRUCE_SAPLING = SPMMain.ENCHANTED_SPRUCE_SAPLING.defaultBlockState();
+            ENCHANTED_SPRUCE_LEAVES = SPMMain.ENCHANTED_SPRUCE_LEAVES.get().defaultBlockState();
+            ENCHANTED_SPRUCE_SAPLING = SPMMain.ENCHANTED_SPRUCE_SAPLING.get().defaultBlockState();
             PODZOL = Blocks.PODZOL.defaultBlockState();
 
             BIRCH_LOG = Blocks.BIRCH_LOG.defaultBlockState();
-            ENCHANTED_BIRCH_LEAVES = SPMMain.ENCHANTED_BIRCH_LEAVES.defaultBlockState();
-            ENCHANTED_BIRCH_SAPLING = SPMMain.ENCHANTED_BIRCH_SAPLING.defaultBlockState();
+            ENCHANTED_BIRCH_LEAVES = SPMMain.ENCHANTED_BIRCH_LEAVES.get().defaultBlockState();
+            ENCHANTED_BIRCH_SAPLING = SPMMain.ENCHANTED_BIRCH_SAPLING.get().defaultBlockState();
 
             JUNGLE_LOG = Blocks.JUNGLE_LOG.defaultBlockState();
-            ENCHANTED_JUNGLE_LEAVES = SPMMain.ENCHANTED_JUNGLE_LEAVES.defaultBlockState();
-            ENCHANTED_JUNGLE_SAPLING = SPMMain.ENCHANTED_JUNGLE_SAPLING.defaultBlockState();
+            ENCHANTED_JUNGLE_LEAVES = SPMMain.ENCHANTED_JUNGLE_LEAVES.get().defaultBlockState();
+            ENCHANTED_JUNGLE_SAPLING = SPMMain.ENCHANTED_JUNGLE_SAPLING.get().defaultBlockState();
 
             ACACIA_LOG = Blocks.ACACIA_LOG.defaultBlockState();
-            ENCHANTED_ACACIA_LEAVES = SPMMain.ENCHANTED_ACACIA_LEAVES.defaultBlockState();
-            ENCHANTED_ACACIA_SAPLING = SPMMain.ENCHANTED_ACACIA_SAPLING.defaultBlockState();
+            ENCHANTED_ACACIA_LEAVES = SPMMain.ENCHANTED_ACACIA_LEAVES.get().defaultBlockState();
+            ENCHANTED_ACACIA_SAPLING = SPMMain.ENCHANTED_ACACIA_SAPLING.get().defaultBlockState();
 
             DARK_OAK_LOG = Blocks.DARK_OAK_LOG.defaultBlockState();
-            ENCHANTED_DARK_OAK_LEAVES = SPMMain.ENCHANTED_DARK_OAK_LEAVES.defaultBlockState();
-            ENCHANTED_DARK_OAK_SAPLING = SPMMain.ENCHANTED_DARK_OAK_SAPLING.defaultBlockState();
+            ENCHANTED_DARK_OAK_LEAVES = SPMMain.ENCHANTED_DARK_OAK_LEAVES.get().defaultBlockState();
+            ENCHANTED_DARK_OAK_SAPLING = SPMMain.ENCHANTED_DARK_OAK_SAPLING.get().defaultBlockState();
         }
 
         public static final BeehiveDecorator MORE_BEEHIVES_TREES = new BeehiveDecorator(0.05F);

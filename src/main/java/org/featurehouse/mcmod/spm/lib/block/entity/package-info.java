@@ -9,4 +9,10 @@
  * @author YWsuoyi
  * @author teddyxlandlee
  */
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 package org.featurehouse.mcmod.spm.lib.block.entity;
+
+import com.mojang.logging.annotations.MethodsReturnNonnullByDefault;
+
+import javax.annotation.ParametersAreNonnullByDefault;

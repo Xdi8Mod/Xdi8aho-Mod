@@ -1,7 +1,7 @@
 package org.featurehouse.mcmod.spm.util.tag;
 
 import com.google.common.collect.Iterators;
-import net.minecraft.core.Holder;
+import org.featurehouse.mcmod.spm.platform.api.tag.TagContainer;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Iterator;
@@ -43,8 +43,7 @@ public sealed interface TagLike<T> extends Iterable<T> {
 
         @Override
         public Stream<T> stream() {
-            return tagContainer.entries().stream()
-                    .map(Holder::value);
+            return tagContainer.stream();
         }
 
     }

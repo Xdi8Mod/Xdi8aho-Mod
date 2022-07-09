@@ -13,7 +13,7 @@ import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.GsonHelper;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.featurehouse.mcmod.spm.util.registries.RegistryHelper;
+import org.featurehouse.mcmod.spm.platform.api.reg.PlatformRegister;
 import org.slf4j.Logger;
 
 import java.io.BufferedReader;
@@ -29,7 +29,7 @@ public record CreditsPrinter(Minecraft client,
                              IntSet centeredLines,
                              List<FormattedCharSequence> credits) {
     private static final Component SEPARATOR_LINE = new TextComponent("============").withStyle(ChatFormatting.WHITE);
-    private static final ResourceLocation SPM_FILE = RegistryHelper.id("credits.json");
+    private static final ResourceLocation SPM_FILE = PlatformRegister.id("credits.json");
     private static final Logger LOGGER = LogUtils.getLogger();
 
     public static void print(Minecraft client, IntConsumer creditsHeight,

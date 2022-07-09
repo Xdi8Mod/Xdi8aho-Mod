@@ -9,7 +9,7 @@ import static org.featurehouse.mcmod.spm.SPMMain.PEEL;
 public interface PeelInserter {
     static void run(Player player) {
         Inventory inventory = player.getInventory();
-        if (!inventory.add(new ItemStack(PEEL)))
-            player.drop(new ItemStack(PEEL), false);
+        if (!inventory.add(new ItemStack(PEEL.get())))
+            player.drop(new ItemStack(PEEL.get()), false);
     }
 }

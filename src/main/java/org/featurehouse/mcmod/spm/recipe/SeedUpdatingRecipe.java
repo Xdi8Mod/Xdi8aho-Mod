@@ -1,6 +1,7 @@
 package org.featurehouse.mcmod.spm.recipe;
 
 import com.google.gson.JsonObject;
+import com.mojang.logging.annotations.MethodsReturnNonnullByDefault;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -10,10 +11,14 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import org.featurehouse.mcmod.spm.SPMMain;
-import org.featurehouse.mcmod.spm.util.platform.api.ClientOnly;
-import org.featurehouse.mcmod.spm.util.platform.api.recipe.SimpleRecipeSerializer;
+import org.featurehouse.mcmod.spm.platform.api.ClientOnly;
+import org.featurehouse.mcmod.spm.platform.api.recipe.SimpleRecipeSerializer;
 import org.jetbrains.annotations.NotNull;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 public record SeedUpdatingRecipe(ResourceLocation id, Ingredient base,
                                  Ingredient addition,
                                  ItemStack result) implements Recipe<Container> {
@@ -47,7 +52,7 @@ public record SeedUpdatingRecipe(ResourceLocation id, Ingredient base,
     @ClientOnly
     @Deprecated
     public ItemStack getRecipeKindIcon() {
-        return new ItemStack(SPMMain.SEED_UPDATER);
+        return new ItemStack(SPMMain.SEED_UPDATER.get());
     }
 
     @Override
@@ -57,7 +62,7 @@ public record SeedUpdatingRecipe(ResourceLocation id, Ingredient base,
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return SPMMain.SEED_UPDATING_RECIPE_SERIALIZER;
+        return SPMMain.SEED_UPDATING_RECIPE_SERIALIZER.get();
     }
 
     @Override
@@ -70,8 +75,6 @@ public record SeedUpdatingRecipe(ResourceLocation id, Ingredient base,
     }
 
     public static class Serializer extends SimpleRecipeSerializer<SeedUpdatingRecipe> {
-
-
         @Override
         public SeedUpdatingRecipe readJson(ResourceLocation identifier, JsonObject jsonObject) {
             Ingredient ingredient = Ingredient.fromJson(GsonHelper.getAsJsonObject(jsonObject, "base"));

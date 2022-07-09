@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.featurehouse.mcmod.spm.util.objsettings.sweetpotato.SweetPotatoType;
-import org.featurehouse.mcmod.spm.util.platform.api.ClientOnly;
+import org.featurehouse.mcmod.spm.platform.api.ClientOnly;
 
 public class SweetPotatoesCropBlock extends CropBlock {
     private static final VoxelShape[] AGE_TO_SHAPE = new VoxelShape[]{

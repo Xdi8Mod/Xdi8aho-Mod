@@ -1,8 +1,6 @@
 package org.featurehouse.mcmod.spm.mixin.modinfo;
 
 import it.unimi.dsi.fastutil.ints.IntSet;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.WinScreen;
 import net.minecraft.util.FormattedCharSequence;
@@ -16,7 +14,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.List;
 
 @Mixin(WinScreen.class)
-@Environment(EnvType.CLIENT)
 abstract class CreditsScreenMixinC extends Screen {
     @Shadow private int totalScrollLength;
 
@@ -30,6 +27,6 @@ abstract class CreditsScreenMixinC extends Screen {
                 centeredLines, lines); 
     }
 
-    @Deprecated
+    @Deprecated @SuppressWarnings("all")
     private CreditsScreenMixinC() { super(null); }
 }

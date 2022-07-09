@@ -7,8 +7,10 @@ import net.minecraft.world.item.ItemNameBlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import org.featurehouse.mcmod.spm.util.annotation.StableApi;
-import org.featurehouse.mcmod.spm.util.registries.RegistryHelper;
+import org.featurehouse.mcmod.spm.platform.api.reg.PlatformRegister;
 import org.jetbrains.annotations.ApiStatus;
+
+import java.util.function.Supplier;
 
 @StableApi
 public class AliasedEnchantedItem extends ItemNameBlockItem {
@@ -22,17 +24,19 @@ public class AliasedEnchantedItem extends ItemNameBlockItem {
     }
 
     @ApiStatus.Internal
-    public static AliasedEnchantedItem of(String id, Block original) {
+    public static Supplier<Item> of(String id, Supplier<Block> original) {
         return of(id, original, CreativeModeTab.TAB_MISC);
     }
 
     @ApiStatus.Internal
-    public static AliasedEnchantedItem of(String id, Block original, CreativeModeTab itemGroup) {
-        return (AliasedEnchantedItem) RegistryHelper.item(id, new AliasedEnchantedItem(original, new Item.Properties().tab(itemGroup)));
+    public static Supplier<Item> of(String id, Supplier<Block> original, CreativeModeTab itemGroup) {
+        Supplier<Item> sup = ()->new AliasedEnchantedItem(original.get(), new Item.Properties().tab(itemGroup));
+        return PlatformRegister.getInstance().item(id, sup);
     }
 
     @ApiStatus.Internal
-    public static AliasedEnchantedItem ofMiscFood(String id, Block original, FoodProperties foodComponent) {
-        return (AliasedEnchantedItem) RegistryHelper.item(id, new AliasedEnchantedItem(original, new Item.Properties().tab(CreativeModeTab.TAB_MISC).food(foodComponent)));
+    public static Supplier<Item> ofMiscFood(String id, Supplier<Block> original, FoodProperties foodComponent) {
+        Supplier<Item> sup = ()->new AliasedEnchantedItem(original.get(), new Item.Properties().tab(CreativeModeTab.TAB_MISC).food(foodComponent));
+        return PlatformRegister.getInstance().item(id, sup);
     }
 }

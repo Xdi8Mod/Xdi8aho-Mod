@@ -1,4 +1,4 @@
-package org.featurehouse.mcmod.spm.util.platform.api.resource;
+package org.featurehouse.mcmod.spm.platform.api.resource;
 
 import net.minecraft.resources.ResourceLocation;
 

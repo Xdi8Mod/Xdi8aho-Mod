@@ -22,7 +22,7 @@ import org.featurehouse.mcmod.spm.util.effects.StatusEffectInstances;
 import org.featurehouse.mcmod.spm.util.inventory.PeelInserter;
 import org.featurehouse.mcmod.spm.util.objsettings.sweetpotato.SweetPotatoStatus;
 import org.featurehouse.mcmod.spm.util.objsettings.sweetpotato.SweetPotatoType;
-import org.featurehouse.mcmod.spm.util.platform.api.ClientOnly;
+import org.featurehouse.mcmod.spm.platform.api.ClientOnly;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;

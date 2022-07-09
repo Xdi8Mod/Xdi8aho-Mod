@@ -1,7 +1,5 @@
 package org.featurehouse.mcmod.spm.screen;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -13,6 +11,7 @@ import net.minecraft.world.level.Level;
 import org.featurehouse.mcmod.spm.SPMMain;
 import org.featurehouse.mcmod.spm.util.inventory.UniversalResultSlot;
 import org.featurehouse.mcmod.spm.util.iprops.IntGrinderProperties;
+import org.featurehouse.mcmod.spm.platform.api.ClientOnly;
 import org.featurehouse.mcmod.spm.util.registries.GrindingUtils;
 
 public class GrinderScreenHandler extends AbstractContainerMenu {
@@ -22,7 +21,7 @@ public class GrinderScreenHandler extends AbstractContainerMenu {
     protected Level world;
 
     /**
-     * From: Registry
+     * From: ClientSync
      */
     public GrinderScreenHandler(int i, Inventory playerInventory) {
         this(i, playerInventory, playerInventory.player.level, new SimpleContainer(2), new IntGrinderProperties.Impl());
@@ -32,7 +31,7 @@ public class GrinderScreenHandler extends AbstractContainerMenu {
      * From: Grinder Block Entity
      */
     public GrinderScreenHandler(int syncId, Inventory playerInventory, Level world, Container inventory, IntGrinderProperties properties) {
-        super(SPMMain.GRINDER_SCREEN_HANDLER_TYPE, syncId);
+        super(SPMMain.GRINDER_SCREEN_HANDLER_TYPE.get(), syncId);
         this.inventory = inventory;
         this.properties = properties;
         this.addDataSlots(properties);
@@ -100,14 +99,14 @@ public class GrinderScreenHandler extends AbstractContainerMenu {
         return itemStack;
     }
 
-    @Environment(EnvType.CLIENT)
+    @ClientOnly
     public int getGrindProgress() {
         int grindTime = properties.getGrindTime();
         int grindTimeTotal = properties.getGrindTimeTotal();
         return grindTimeTotal != 0 && grindTime != 0 ? grindTime * 22 / grindTimeTotal : 0;
     }
 
-    @Environment(EnvType.CLIENT)
+    @ClientOnly
     public double getIngredientData() {
         return properties.getIngredientData();
     }

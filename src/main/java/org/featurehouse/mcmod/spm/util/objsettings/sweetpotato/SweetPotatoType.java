@@ -45,33 +45,33 @@ public enum SweetPotatoType {
 
     public ItemLike getRaw() {
         return switch (this) {
-            case PURPLE -> SPMMain.PURPLE_POTATO;
-            case RED -> SPMMain.RED_POTATO;
-            case WHITE -> SPMMain.WHITE_POTATO;
+            case PURPLE -> SPMMain.PURPLE_POTATO.get();
+            case RED -> SPMMain.RED_POTATO.get();
+            case WHITE -> SPMMain.WHITE_POTATO.get();
         };
     }
 
     public ItemLike getBaked() {
         return switch (this) {
-            case PURPLE -> SPMMain.BAKED_PURPLE_POTATO;
-            case RED -> SPMMain.BAKED_RED_POTATO;
-            case WHITE -> SPMMain.BAKED_WHITE_POTATO;
+            case PURPLE -> SPMMain.BAKED_PURPLE_POTATO.get();
+            case RED -> SPMMain.BAKED_RED_POTATO.get();
+            case WHITE -> SPMMain.BAKED_WHITE_POTATO.get();
         };
     }
 
     public Block getCrop() {
         return switch (this) {
-            case PURPLE -> SPMMain.PURPLE_POTATO_CROP;
-            case RED -> SPMMain.RED_POTATO_CROP;
-            case WHITE -> SPMMain.WHITE_POTATO_CROP;
+            case PURPLE -> SPMMain.PURPLE_POTATO_CROP.get();
+            case RED -> SPMMain.RED_POTATO_CROP.get();
+            case WHITE -> SPMMain.WHITE_POTATO_CROP.get();
         };
     }
 
     public ItemLike getEnchanted() {
         return switch (this) {
-            case PURPLE -> SPMMain.ENCHANTED_PURPLE_POTATO;
-            case RED -> SPMMain.ENCHANTED_RED_POTATO;
-            case WHITE -> SPMMain.ENCHANTED_WHITE_POTATO;
+            case PURPLE -> SPMMain.ENCHANTED_PURPLE_POTATO.get();
+            case RED -> SPMMain.ENCHANTED_RED_POTATO.get();
+            case WHITE -> SPMMain.ENCHANTED_WHITE_POTATO.get();
         };
     }
 

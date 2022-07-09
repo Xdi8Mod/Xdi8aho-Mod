@@ -17,7 +17,7 @@ public class EnchantedBeetrootsBlock extends BeetrootBlock {
 
     @Override
     protected ItemLike getBaseSeedId() {
-        return SPMMain.ENCHANTED_BEETROOT_SEEDS;
+        return SPMMain.ENCHANTED_BEETROOT_SEEDS.get();
     }
 
     @Override

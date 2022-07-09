@@ -3,16 +3,13 @@ package org.featurehouse.mcmod.spm.util.objsettings;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.FlowerPotBlock;
-import net.minecraft.world.level.block.LeavesBlock;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.grower.AbstractTreeGrower;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import org.featurehouse.mcmod.spm.blocks.plants.EnchantedSaplings;
-import org.featurehouse.mcmod.spm.util.registries.RegistryHelper;
+import org.featurehouse.mcmod.spm.platform.api.reg.PlatformRegister;
 
 import java.util.function.Supplier;
 
@@ -21,12 +18,8 @@ public final class BlockSettings {
         return BlockBehaviour.Properties.of(material).destroyTime(hardness).explosionResistance(blastResistance).requiresCorrectToolForDrops();
     }
 
-    public static EnchantedSaplings createEnchantedSapling(String id, Supplier<AbstractTreeGrower> saplingGeneratorSupplier) {
-        return (EnchantedSaplings) RegistryHelper.block(id, new EnchantedSaplings(saplingGeneratorSupplier.get(), grassLike()));
-    }
-
-    public static FlowerPotBlock createPotted(String id, Block inside) {
-        return (FlowerPotBlock) RegistryHelper.block(id, new FlowerPotBlock(inside, BlockBehaviour.Properties.of(Material.DECORATION)));
+    public static Supplier<Block> createEnchantedSapling(String id, Supplier<AbstractTreeGrower> saplingGeneratorSupplier) {
+        return PlatformRegister.getInstance().block(id, ()->new EnchantedSaplings(saplingGeneratorSupplier.get(), grassLike()));
     }
 
     public static BlockBehaviour.Properties grassLike() { return GRASS_LIKE.get(); }
@@ -54,9 +47,9 @@ public final class BlockSettings {
         return type == EntityType.OCELOT || type == EntityType.PARROT;
     }
 
-    public static LeavesBlock createLeaves(String id) {
-        return (LeavesBlock) RegistryHelper.block(id,
-                new LeavesBlock(BlockBehaviour.Properties.of(Material.LEAVES)
+    public static Supplier<Block> createLeaves(String id) {
+        return PlatformRegister.getInstance().block(id,
+                ()->new LeavesBlock(BlockBehaviour.Properties.of(Material.LEAVES)
                         .strength(0.2F)
                         .randomTicks()
                         .sound(SoundType.GRASS)
@@ -64,19 +57,6 @@ public final class BlockSettings {
                         .isValidSpawn(BlockSettings::canSpawnOnLeaves)
                         .isSuffocating(BlockSettings::alwaysFalse)
                         .isViewBlocking(BlockSettings::alwaysFalse)));
-    }
-
-    @Deprecated(forRemoval = true)
-    public static LeavesBlock createEnchantedLeavesBlock() {
-        return new LeavesBlock(BlockBehaviour.Properties.of(Material.LEAVES)
-                .strength(0.2F)
-                .randomTicks()
-                .sound(SoundType.GRASS)
-                .noOcclusion()
-                .isValidSpawn(BlockSettings::canSpawnOnLeaves)
-                .isSuffocating(BlockSettings::alwaysFalse)
-                .isViewBlocking(BlockSettings::alwaysFalse)
-        );
     }
 
     private static boolean alwaysFalse(BlockState state, BlockGetter world, BlockPos pos) {

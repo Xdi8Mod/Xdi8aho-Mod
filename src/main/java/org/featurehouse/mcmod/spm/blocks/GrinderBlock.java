@@ -3,7 +3,9 @@ package org.featurehouse.mcmod.spm.blocks;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -18,6 +20,7 @@ import org.featurehouse.mcmod.spm.blocks.entities.GrinderBlockEntity;
 import org.featurehouse.mcmod.spm.lib.block.entity.AbstractBlockWithEntity;
 
 import java.util.List;
+import java.util.Random;
 
 public class GrinderBlock extends AbstractBlockWithEntity<GrinderBlockEntity> {
     public static BooleanProperty GRINDING = BooleanProperty.create("grinding");
@@ -44,11 +47,19 @@ public class GrinderBlock extends AbstractBlockWithEntity<GrinderBlockEntity> {
 
     @Override
     public BlockEntityType<GrinderBlockEntity> getBlockEntityType() {
-        return SPMMain.GRINDER_BLOCK_ENTITY_TYPE;
+        return SPMMain.GRINDER_BLOCK_ENTITY_TYPE.get();
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(GRINDING);
+    }
+
+    @Override
+    public void randomTick(BlockState pState, ServerLevel pLevel, BlockPos pPos, Random pRandom) {
+        if (pRandom.nextInt(128) == 0) {
+            pLevel.playSound(null, pPos, SPMMain.GRINDER_GRIND.get(),
+                    SoundSource.BLOCKS, 1.0f, 1.0f);
+        }
     }
 }

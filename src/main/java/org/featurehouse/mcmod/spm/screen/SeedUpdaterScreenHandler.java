@@ -27,17 +27,17 @@ public class SeedUpdaterScreenHandler extends ItemCombinerMenu {
     }
 
     public SeedUpdaterScreenHandler(int syncId, Inventory inventory, ContainerLevelAccess context) {
-        super(SPMMain.SEED_UPDATER_SCREEN_HANDLER_TYPE, syncId, inventory, context);
+        super(SPMMain.SEED_UPDATER_SCREEN_HANDLER_TYPE.get(), syncId, inventory, context);
         this.world = inventory.player.level;
         this.list = this.world.getRecipeManager().getAllRecipesFor(SPMMain.SEED_UPDATING_RECIPE_TYPE);
     }
 
     protected boolean isValidBlock(@NotNull BlockState state) {
-        return state.is(SPMMain.SEED_UPDATER);
+        return state.is(SPMMain.SEED_UPDATER.get());
     }
 
     public boolean stillValid(Player player) {
-        return stillValid(this.access, player, SPMMain.SEED_UPDATER);
+        return stillValid(this.access, player, SPMMain.SEED_UPDATER.get());
     }
 
     @Override
@@ -70,7 +70,7 @@ public class SeedUpdaterScreenHandler extends ItemCombinerMenu {
         //output.markDirty();
         this.access.execute((world1, blockPos) -> {
             /*world1.syncWorldEvent(1044, blockPos, 8844110));*/
-            world1.playSound(null, blockPos, SPMMain.AGROFORESTRY_TABLE_FINISH, SoundSource.BLOCKS, 1.0F, world1.getRandom().nextFloat() * 0.1F + 0.9F);
+            world1.playSound(null, blockPos, SPMMain.AGROFORESTRY_TABLE_FINISH.get(), SoundSource.BLOCKS, 1.0F, world1.getRandom().nextFloat() * 0.1F + 0.9F);
         });
         player.awardStat(SPMMain.CROP_UPGRADED);
         //return stack;

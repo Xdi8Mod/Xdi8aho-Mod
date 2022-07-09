@@ -10,9 +10,7 @@
     "ingredient.PigEntityMixin"
   ],
   "client": [
-    "MixinWorldEventC",
-    "modinfo.CreditsScreenMixinC",
-    "modinfo.TitleScreenMixinC"
+    "modinfo.CreditsScreenMixinC"
   ],
   "injectors": {
     "defaultRequire": 1

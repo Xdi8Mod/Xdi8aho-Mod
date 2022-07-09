@@ -17,7 +17,7 @@ public class EnchantedCarrotsBlock extends CarrotBlock {
 
     @Override
     protected ItemLike getBaseSeedId() {
-        return SPMMain.ENCHANTED_CARROT_ITEM;
+        return SPMMain.ENCHANTED_CARROT_ITEM.get();
     }
 
     @Override
