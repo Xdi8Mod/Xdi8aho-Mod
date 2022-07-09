@@ -31,9 +31,7 @@ public class Firefly8 {
         // Particle
         FireflyParticles.REGISTRY.register(modBus());
 
-        // Client
-        modBus().addListener(this::onClientSetup);
-        modBus().addListener(FireflyClientSetup::registerParticles);
+        // Client: use bus subscriber
     }
 
     private static IEventBus modBus() {
@@ -42,10 +40,6 @@ public class Firefly8 {
 
     private static IEventBus forgeBus() {
         return MinecraftForge.EVENT_BUS;
-    }
-
-    private void onClientSetup(FMLClientSetupEvent event) {
-        event.enqueueWork(new FireflyClientSetup());
     }
 
     private void registerEntityAttributes(EntityAttributeCreationEvent event) {
