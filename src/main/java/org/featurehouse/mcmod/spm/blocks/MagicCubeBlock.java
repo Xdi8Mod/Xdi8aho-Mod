@@ -3,7 +3,9 @@ package org.featurehouse.mcmod.spm.blocks;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
@@ -21,6 +23,7 @@ import org.featurehouse.mcmod.spm.blocks.entities.MagicCubeBlockEntity;
 import org.featurehouse.mcmod.spm.lib.block.entity.AbstractBlockWithEntity;
 
 import java.util.List;
+import java.util.Random;
 
 public class MagicCubeBlock extends AbstractBlockWithEntity<MagicCubeBlockEntity> {
     public static BooleanProperty ACTIVATED = BooleanProperty.create("activated");
@@ -37,7 +40,7 @@ public class MagicCubeBlock extends AbstractBlockWithEntity<MagicCubeBlockEntity
 
     @Override
     public BlockEntityType<MagicCubeBlockEntity> getBlockEntityType() {
-        return SPMMain.MAGIC_CUBE_BLOCK_ENTITY_TYPE;
+        return SPMMain.MAGIC_CUBE_BLOCK_ENTITY_TYPE.get();
     }
 
     @Override
@@ -66,5 +69,13 @@ public class MagicCubeBlock extends AbstractBlockWithEntity<MagicCubeBlockEntity
     @Override
     public MagicCubeBlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new MagicCubeBlockEntity(pos, state);
+    }
+
+    @Override
+    public void randomTick(BlockState pState, ServerLevel pLevel, BlockPos pPos, Random pRandom) {
+        if (pRandom.nextInt(128) == 0) {
+            pLevel.playSound(null, pPos, SPMMain.MAGIC_CUBE_AMBIENT.get(),
+                    SoundSource.BLOCKS, 1.0f, 1.0f);
+        }
     }
 }

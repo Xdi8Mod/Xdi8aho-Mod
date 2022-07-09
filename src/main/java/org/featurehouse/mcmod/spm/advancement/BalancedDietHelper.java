@@ -10,17 +10,18 @@ import org.featurehouse.mcmod.spm.SPMMain;
 import top.xdi8.mod.firefly8.item.tint.advancement.AdvancementLoadingContext;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 public final class BalancedDietHelper {
     private BalancedDietHelper() {}
-    private static final ImmutableList<Item> ITEMS = ImmutableList.of(
+    private static final ImmutableList<Supplier<Item>> ITEMS = ImmutableList.of(
             SPMMain.PURPLE_POTATO, SPMMain.RED_POTATO, SPMMain.WHITE_POTATO,
             SPMMain.BAKED_PURPLE_POTATO, SPMMain.BAKED_RED_POTATO, SPMMain.BAKED_WHITE_POTATO,
             SPMMain.ENCHANTED_PURPLE_POTATO, SPMMain.ENCHANTED_RED_POTATO, SPMMain.ENCHANTED_WHITE_POTATO
     );
 
     public static void setupCriteria(AdvancementLoadingContext ctx) {
-        List<Item> itemList = ITEMS;
+        List<Supplier<Item>> itemList = ITEMS;
         int itemListSize = itemList.size();
 
         String[][] requirementsOld = ctx.getRequirements();
@@ -28,10 +29,10 @@ public final class BalancedDietHelper {
         System.arraycopy(requirementsOld, 0, requirementsNew, itemListSize, requirementsOld.length);
 
         for (int i = 0; i < itemListSize; ++i) {
-            String reqId = "sweet_potato:balanced_diet__food$" + itemList.get(i);
+            String reqId = "sweet_potato:balanced_diet__food$" + i;
             ctx.addCriterion(new ResourceLocation(reqId),
                     new ConsumeItemTrigger.TriggerInstance(EntityPredicate.Composite.ANY,
-                            ItemPredicate.Builder.item().of(itemList.get(i)).build()));
+                            ItemPredicate.Builder.item().of(itemList.get(i).get()).build()));
             requirementsNew[i] = new String[] {reqId};
         }
         ctx.setRequirements(requirementsNew);

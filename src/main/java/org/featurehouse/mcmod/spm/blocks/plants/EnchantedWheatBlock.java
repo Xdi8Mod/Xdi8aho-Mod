@@ -6,7 +6,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import org.featurehouse.mcmod.spm.SPMMain;
-import org.featurehouse.mcmod.spm.util.platform.api.ClientOnly;
+import org.featurehouse.mcmod.spm.platform.api.ClientOnly;
 import org.featurehouse.mcmod.spm.util.tick.RandomTickHelper;
 import org.jetbrains.annotations.NotNull;
 
@@ -20,7 +20,7 @@ public class EnchantedWheatBlock extends CropBlock {
     @ClientOnly
     @Override
     protected ItemLike getBaseSeedId() {
-        return SPMMain.ENCHANTED_WHEAT_SEEDS;
+        return SPMMain.ENCHANTED_WHEAT_SEEDS.get();
     }
 
     @Override

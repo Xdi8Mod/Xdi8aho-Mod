@@ -1,13 +1,22 @@
-package org.featurehouse.mcmod.spm.util.platform.impl;
+package org.featurehouse.mcmod.spm.platform.api.recipe;
 
 import com.google.gson.JsonObject;
+import com.mojang.logging.annotations.MethodsReturnNonnullByDefault;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class InternalRecipeSerializer<T extends Recipe<?>> extends net.minecraftforge.registries.ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<T> {
+import javax.annotation.ParametersAreNonnullByDefault;
+
+@MethodsReturnNonnullByDefault
+@ParametersAreNonnullByDefault
+@ApiStatus.Internal
+abstract sealed class InternalRecipeSerializer<T extends Recipe<?>> extends net.minecraftforge.registries.ForgeRegistryEntry<RecipeSerializer<?>>
+        implements RecipeSerializer<T>
+        permits SimpleRecipeSerializer {
     protected abstract T readJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe);
     protected abstract T readPacket(ResourceLocation pRecipeId, FriendlyByteBuf pBuffer);
     protected abstract void writePacket(FriendlyByteBuf pBuffer, T pRecipe);

@@ -2,12 +2,11 @@ package org.featurehouse.mcmod.spm.util.registries;
 
 import it.unimi.dsi.fastutil.objects.Object2DoubleLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
-import net.minecraft.tags.Tag;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import org.featurehouse.mcmod.spm.util.annotation.StableApi;
-import org.featurehouse.mcmod.spm.util.tag.TagContainer;
+import org.featurehouse.mcmod.spm.platform.api.tag.TagContainer;
 import org.featurehouse.mcmod.spm.util.tag.TagLike;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -15,6 +14,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Objects;
 import java.util.OptionalDouble;
 
+/** @apiNote in forge, must be fired in an event, like FMLCommonSetupEvent */
 @StableApi  // Maybe not since 2.0!
 public final class GrindingUtils {
     public static IngredientDataMap ingredientDataMap() {
@@ -79,15 +79,5 @@ public final class GrindingUtils {
         public String toString() {
             return map.toString();
         }
-    }
-
-    /**
-     * @deprecated this {@link Tag tag} is a completely different thing from {@link TagContainer}
-     * or {@link net.minecraft.tags.TagKey} since 22w06a.
-     */
-    @Deprecated(forRemoval = true)
-    public static void registerGrindableItems(int ingredientDataAdded, @NotNull Tag<Item> tag) {
-        for (Item item: tag.getValues())
-            registerGrindableItem(ingredientDataAdded, item);
     }
 }

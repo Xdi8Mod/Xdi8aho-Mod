@@ -2,15 +2,14 @@ package org.featurehouse.mcmod.spm.client;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.screens.inventory.ItemCombinerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import org.featurehouse.mcmod.spm.screen.SeedUpdaterScreenHandler;
+import org.featurehouse.mcmod.spm.platform.api.ClientOnly;
 
-@Environment(EnvType.CLIENT)
+@ClientOnly
 public class SeedUpdaterScreen extends ItemCombinerScreen<SeedUpdaterScreenHandler> {
     private static final ResourceLocation TEXTURE = new ResourceLocation("sweet_potato:textures/gui/container/seed_updating.png");
 

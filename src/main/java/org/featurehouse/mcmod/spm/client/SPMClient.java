@@ -1,57 +1,50 @@
 package org.featurehouse.mcmod.spm.client;
 
-import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
-import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
+import com.google.common.collect.ImmutableSet;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.FoliageColor;
 import org.featurehouse.mcmod.spm.SPMMain;
-import org.featurehouse.mcmod.spm.util.platform.api.ClientOnly;
+import org.featurehouse.mcmod.spm.platform.api.ClientOnly;
+import org.featurehouse.mcmod.spm.platform.api.client.BlockRenderTypes;
+import org.featurehouse.mcmod.spm.platform.api.client.ColorProviders;
 
 @ClientOnly
 public class SPMClient {
     //@Override
     public void onInitializeClient() {
         /* Client Screens */
-
-        ScreenRegistry.register(SPMMain.SEED_UPDATER_SCREEN_HANDLER_TYPE, SeedUpdaterScreen::new);
-        ScreenRegistry.register(SPMMain.GRINDER_SCREEN_HANDLER_TYPE, GrinderScreen::new);
-        ScreenRegistry.register(SPMMain.MAGIC_CUBE_SCREEN_HANDLER_TYPE, MagicCubeScreen::new);
+        MenuScreens.register(SPMMain.GRINDER_SCREEN_HANDLER_TYPE.get(), GrinderScreen::new);
+        MenuScreens.register(SPMMain.MAGIC_CUBE_SCREEN_HANDLER_TYPE.get(), MagicCubeScreen::new);
+        MenuScreens.register(SPMMain.SEED_UPDATER_SCREEN_HANDLER_TYPE.get(), SeedUpdaterScreen::new);
 
         /* Color Providers */
 
-        ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) -> world != null && pos != null ? BiomeColors.getAverageFoliageColor(world, pos) : FoliageColor.getDefaultColor(),
-                SPMMain.ENCHANTED_ACACIA_LEAVES, SPMMain.ENCHANTED_DARK_OAK_LEAVES,
-                SPMMain.ENCHANTED_JUNGLE_LEAVES, SPMMain.ENCHANTED_OAK_LEAVES
+        ColorProviders.getBlock().register((state, world, pos, tintIndex) -> world != null && pos != null ? BiomeColors.getAverageFoliageColor(world, pos) : FoliageColor.getDefaultColor(),
+                ImmutableSet.of(SPMMain.ENCHANTED_ACACIA_LEAVES, SPMMain.ENCHANTED_DARK_OAK_LEAVES,
+                        SPMMain.ENCHANTED_JUNGLE_LEAVES, SPMMain.ENCHANTED_OAK_LEAVES)
         );
-        ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) -> FoliageColor.getBirchColor(), SPMMain.ENCHANTED_BIRCH_LEAVES);
-        ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) -> FoliageColor.getEvergreenColor(), SPMMain.ENCHANTED_SPRUCE_LEAVES);
-        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> FoliageColor.getDefaultColor(),
-                SPMMain.ENCHANTED_ACACIA_LEAVES_ITEM, SPMMain.ENCHANTED_DARK_OAK_LEAVES_ITEM,
-                SPMMain.ENCHANTED_JUNGLE_LEAVES_ITEM, SPMMain.ENCHANTED_OAK_LEAVES_ITEM
+        ColorProviders.getBlock().register(SPMMain.ENCHANTED_BIRCH_LEAVES, (state, world, pos, tintIndex) -> FoliageColor.getBirchColor());
+        ColorProviders.getBlock().register(SPMMain.ENCHANTED_SPRUCE_LEAVES, (state, world, pos, tintIndex) -> FoliageColor.getEvergreenColor());
+        ColorProviders.getItem().register((stack, tintIndex) -> FoliageColor.getDefaultColor(),
+                ImmutableSet.of(SPMMain.ENCHANTED_ACACIA_LEAVES_ITEM, SPMMain.ENCHANTED_DARK_OAK_LEAVES_ITEM,
+                SPMMain.ENCHANTED_JUNGLE_LEAVES_ITEM, SPMMain.ENCHANTED_OAK_LEAVES_ITEM)
         );
-        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> FoliageColor.getBirchColor(), SPMMain.ENCHANTED_BIRCH_LEAVES_ITEM);
-        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> FoliageColor.getEvergreenColor(), SPMMain.ENCHANTED_SPRUCE_LEAVES_ITEM);
+        ColorProviders.getItem().register(SPMMain.ENCHANTED_BIRCH_LEAVES_ITEM, (stack, tintIndex) -> FoliageColor.getBirchColor());
+        ColorProviders.getItem().register(SPMMain.ENCHANTED_SPRUCE_LEAVES_ITEM, (stack, tintIndex) -> FoliageColor.getEvergreenColor());
 
         /* Rendering */
 
-        BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(),
-                SPMMain.PURPLE_POTATO_CROP, SPMMain.RED_POTATO_CROP,
+        BlockRenderTypes.register(RenderType.cutout(),
+                ImmutableSet.of(SPMMain.PURPLE_POTATO_CROP, SPMMain.RED_POTATO_CROP,
                 SPMMain.WHITE_POTATO_CROP, SPMMain.SEED_UPDATER,
                 SPMMain.ENCHANTED_ACACIA_SAPLING, SPMMain.ENCHANTED_BIRCH_SAPLING,
                 SPMMain.ENCHANTED_DARK_OAK_SAPLING, SPMMain.ENCHANTED_OAK_SAPLING,
                 SPMMain.ENCHANTED_JUNGLE_SAPLING, SPMMain.ENCHANTED_SPRUCE_SAPLING,
-                //SPMMain.GRINDER,
-                SPMMain.POTTED_ENCHANTED_ACACIA_SAPLING,
-                SPMMain.POTTED_ENCHANTED_BIRCH_SAPLING,
-                SPMMain.POTTED_ENCHANTED_DARK_OAK_SAPLING,
-                SPMMain.POTTED_ENCHANTED_JUNGLE_SAPLING,
-                SPMMain.POTTED_ENCHANTED_OAK_SAPLING,
-                SPMMain.POTTED_ENCHANTED_SPRUCE_SAPLING,
                 SPMMain.ENCHANTED_BEETROOTS_CROP, SPMMain.ENCHANTED_CARROTS_CROP,
                 SPMMain.ENCHANTED_VANILLA_POTATOES_CROP, SPMMain.ENCHANTED_WHEAT_CROP,
-                SPMMain.ENCHANTED_SUGAR_CANE
+                SPMMain.ENCHANTED_SUGAR_CANE)
         );
     }
 }

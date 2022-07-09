@@ -2,15 +2,12 @@ package org.featurehouse.mcmod.spm.blocks.entities;
 
 import com.mojang.logging.LogUtils;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -36,14 +33,11 @@ import org.featurehouse.mcmod.spm.util.iprops.IntMagicCubeProperties;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 
 import static net.minecraft.world.level.block.Blocks.SOUL_FIRE;
 
-public class MagicCubeBlockEntity extends AbstractLockableContainerBlockEntity implements WorldlyContainer, ExtendedScreenHandlerFactory {
+public class MagicCubeBlockEntity extends AbstractLockableContainerBlockEntity implements WorldlyContainer {
     private static final Logger LOGGER = LogUtils.getLogger();
 
     //protected StateHelperV1 stateHelper;
@@ -62,7 +56,7 @@ public class MagicCubeBlockEntity extends AbstractLockableContainerBlockEntity i
     protected IntMagicCubeProperties propertyDelegate;
 
     public MagicCubeBlockEntity(BlockPos pos, BlockState state) {
-        this(SPMMain.MAGIC_CUBE_BLOCK_ENTITY_TYPE, 8, pos, state);
+        this(SPMMain.MAGIC_CUBE_BLOCK_ENTITY_TYPE.get(), 8, pos, state);
     }
 
     public MagicCubeBlockEntity(BlockEntityType<?> type, int size, BlockPos pos, BlockState state) {
@@ -108,11 +102,11 @@ public class MagicCubeBlockEntity extends AbstractLockableContainerBlockEntity i
                         MagicCubeBlockEntity.this.mainFuelTime = -1;
                         MagicCubeBlockEntity.this.viceFuelTime = 0;
                         MagicCubeBlockEntity.this.level.playSound(null, pos,
-                                SPMMain.MAGIC_CUBE_DEACTIVATE, SoundSource.BLOCKS,
+                                SPMMain.MAGIC_CUBE_DEACTIVATE.get(), SoundSource.BLOCKS,
                                 1.0F, 1.0F);
                     } else {
                         MagicCubeBlockEntity.this.level.playSound(null, pos,
-                                SPMMain.MAGIC_CUBE_ACTIVATE, SoundSource.BLOCKS,
+                                SPMMain.MAGIC_CUBE_ACTIVATE.get(), SoundSource.BLOCKS,
                                 1.0F, 1.0F);
                     }
                 }
@@ -164,7 +158,7 @@ public class MagicCubeBlockEntity extends AbstractLockableContainerBlockEntity i
             /*-* * PROPERTIES * *-*/
             if (!this.isProcessing()) {
                 // Check inventory
-                if (this.inventory.get(6).getItem() == SPMMain.PEEL) {
+                if (this.inventory.get(6).getItem() == SPMMain.PEEL.get()) {
                     boolean bl = false;
                     for (int i = 0; i < 3; ++i) {
                         if (SPMMain.RAW_SWEET_POTATOES.contains(this.inventory.get(i).getItem())) {
@@ -182,7 +176,7 @@ public class MagicCubeBlockEntity extends AbstractLockableContainerBlockEntity i
             }
             // CHECK VICE FUEL
             if (this.shouldUpdateViceFuel()) {
-                if (this.inventory.get(7).getItem() == SPMMain.POTATO_POWDER) {
+                if (this.inventory.get(7).getItem() == SPMMain.POTATO_POWDER.get()) {
                     this.viceFuelTime = 401;
                     this.inventory.get(7).shrink(1);
                     shallMarkDirty = true;
@@ -261,7 +255,6 @@ public class MagicCubeBlockEntity extends AbstractLockableContainerBlockEntity i
     }
 
     private List<MobEffectInstance> calcEnchantments() {
-        //TODO
         List<MobEffectInstance> enchantmentList = new ObjectArrayList<>();
         ShufflingList<MobEffectInstance> weightedList = new ShufflingList<>();
         WeightedStatusEffect.dump2weightedList(weightedList, withViceFuel());
@@ -279,7 +272,7 @@ public class MagicCubeBlockEntity extends AbstractLockableContainerBlockEntity i
 
     @Override
     protected AbstractContainerMenu createMenu(int syncId, Inventory playerInventory) {
-        return new MagicCubeScreenHandler(syncId, playerInventory, level, worldPosition, this, propertyDelegate);
+        return new MagicCubeScreenHandler(syncId, playerInventory, Objects.requireNonNull(level), this, propertyDelegate);
     }
 
     private boolean anyOutputIsClear() {
@@ -323,18 +316,13 @@ public class MagicCubeBlockEntity extends AbstractLockableContainerBlockEntity i
     }
 
     @Override
-    public void writeScreenOpeningData(ServerPlayer serverPlayerEntity, FriendlyByteBuf packetByteBuf) {
-        packetByteBuf.writeBlockPos(this.worldPosition);
-    }
-
-    @Override
     public boolean canPlaceItem(int slot, ItemStack fromHopperStack) {
         Item item = fromHopperStack.getItem();
         ItemStack toSlotStack = this.getItem(slot);
         if (slot == 6)
-            return item == SPMMain.PEEL;
+            return item == SPMMain.PEEL.get();
         if (slot == 7)
-            return item == SPMMain.POTATO_POWDER;
+            return item == SPMMain.POTATO_POWDER.get();
         if ((slot >= 3 && slot <= 5) || slot > 7 || slot < 0) return false;
         return SPMMain.RAW_SWEET_POTATOES.contains(item) && toSlotStack.isEmpty();
     }

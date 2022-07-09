@@ -24,6 +24,8 @@ import org.featurehouse.mcmod.spm.util.registries.GrindingUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
+
 public class GrinderBlockEntity extends AbstractLockableContainerBlockEntity implements WorldlyContainer {
     private int grindTime;
     private int grindTimeTotal;
@@ -38,7 +40,7 @@ public class GrinderBlockEntity extends AbstractLockableContainerBlockEntity imp
     protected BooleanStateManager stateHelper;
 
     public GrinderBlockEntity(BlockPos pos, BlockState state) {
-        this(SPMMain.GRINDER_BLOCK_ENTITY_TYPE, pos, state);
+        this(SPMMain.GRINDER_BLOCK_ENTITY_TYPE.get(), pos, state);
     }
 
     protected GrinderBlockEntity(BlockEntityType<?> blockEntityType, BlockPos pos, BlockState state) {
@@ -95,7 +97,7 @@ public class GrinderBlockEntity extends AbstractLockableContainerBlockEntity imp
                     GrinderBlockEntity.this.level.setBlockAndUpdate(
                             pos, GrinderBlockEntity.this.level.getBlockState(pos).setValue(property, b)
                     );
-                GrinderBlockEntity.this.level.levelEvent(1132119, GrinderBlockEntity.this.worldPosition, 805);
+                //GrinderBlockEntity.this.level.levelEvent(1132119, GrinderBlockEntity.this.worldPosition, 805);
             }
         };
     }
@@ -130,7 +132,7 @@ public class GrinderBlockEntity extends AbstractLockableContainerBlockEntity imp
 
     @Override
     protected AbstractContainerMenu createMenu(int syncId, Inventory playerInventory) {
-        return new GrinderScreenHandler(syncId, playerInventory, this.getLevel(), this, this.properties);
+        return new GrinderScreenHandler(syncId, playerInventory, Objects.requireNonNull(this.getLevel()), this, this.properties);
     }
 
     @Override
@@ -198,7 +200,7 @@ public class GrinderBlockEntity extends AbstractLockableContainerBlockEntity imp
 
     //@HardCoded
     private void craftRecipe() {
-        this.craftRecipe(new ItemStack(SPMMain.POTATO_POWDER));
+        this.craftRecipe(new ItemStack(SPMMain.POTATO_POWDER.get()));
     }
 
     //@HardCoded
@@ -207,7 +209,7 @@ public class GrinderBlockEntity extends AbstractLockableContainerBlockEntity imp
 
         if (!invOutput.sameItem(shallOutput))
             this.inventory.set(1, shallOutput.copy());
-        else if (invOutput.getItem() == SPMMain.POTATO_POWDER)
+        else if (invOutput.getItem() == SPMMain.POTATO_POWDER.get())
             invOutput.grow(1);
     }
 
@@ -233,7 +235,7 @@ public class GrinderBlockEntity extends AbstractLockableContainerBlockEntity imp
 
     //@HardCoded
     protected boolean canAcceptRecipeOutput() {
-        return canAcceptRecipeOutput(SPMMain.POTATO_POWDER);
+        return canAcceptRecipeOutput(SPMMain.POTATO_POWDER.get());
     }
 
     /**
