@@ -1,4 +1,5 @@
 {
+  "_deprecated": "REMOVAL",
   "type": "minecraft:smelting",
   "ingredient": {
     "item": "sweet_potato:enchanted_potato"

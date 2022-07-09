@@ -9,7 +9,7 @@
       "item": "sweet_potato:potato_powder"
     },
     "#": {
-      "item": "minecraft:gold_ingot"
+      "tag": "forge:ingots/gold"
     },
     "B": {
       "tag": "sweet_potato:blackstones"

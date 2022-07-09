@@ -1,4 +1,5 @@
 {
+  "_deprecation": "REMOVAL",
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "###"
