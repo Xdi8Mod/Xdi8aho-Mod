@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "firefly8:tint_honey_bottle",
+      "firefly8:split_honey_into_tinted"
+    ]
+  },
+  "criteria": {
+    "has_honey_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:honey_block",
+              "firefly8:tinted_glass_bottle"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "firefly8:tint_honey_bottle"
+      }
+    },
+    "has_the_recipe2": {
+      "trigger": "recipe_unlocked",
+      "conditions": {
+        "recipe": "firefly8:split_honey_into_tinted"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_honey_block",
+      "has_the_recipe",
+      "has_the_recipe2"
+    ]
+  ]
+}
