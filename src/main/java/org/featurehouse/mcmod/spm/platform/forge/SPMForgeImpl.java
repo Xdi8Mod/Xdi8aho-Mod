@@ -46,6 +46,7 @@ public class SPMForgeImpl {
     public static final DeferredRegister<SoundEvent> REG_SOUND = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, MODID);
 
     public SPMForgeImpl() {
+        SPMMain.getLogger().info("SPM initializing!");  // Don't you dare delete this line!
         final IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
         REG_ITEM.register(modBus);
         REG_BLOCK.register(modBus);
