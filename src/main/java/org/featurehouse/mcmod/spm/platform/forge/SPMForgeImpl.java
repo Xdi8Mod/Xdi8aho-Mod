@@ -16,6 +16,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -45,7 +46,6 @@ public class SPMForgeImpl {
     public static final DeferredRegister<SoundEvent> REG_SOUND = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, MODID);
 
     public SPMForgeImpl() {
-        SPMMain.getInstance().onInitialize();
         final IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
         REG_ITEM.register(modBus);
         REG_BLOCK.register(modBus);
@@ -53,6 +53,14 @@ public class SPMForgeImpl {
         REG_RECIPE_SERIALIZER.register(modBus);
         REG_MENU.register(modBus);
         REG_SOUND.register(modBus);
+    }
+
+    @Mod.EventBusSubscriber(modid = "sweet_potato", bus = Mod.EventBusSubscriber.Bus.MOD)
+    public static final class ModBusSubscribers {
+        @SubscribeEvent
+        public static void startup(FMLCommonSetupEvent event) {
+            SPMMain.getInstance().onInitialize();
+        }
     }
 
     @Mod.EventBusSubscriber(modid = "sweet_potato", bus = Mod.EventBusSubscriber.Bus.FORGE)
