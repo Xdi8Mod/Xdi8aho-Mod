@@ -62,7 +62,7 @@ public class SPMForgeImpl {
             SPMMain.getInstance().onInitialize();
         }
     }
-
+    
     @Mod.EventBusSubscriber(modid = "sweet_potato", bus = Mod.EventBusSubscriber.Bus.FORGE)
     public static final class Subscribers {
         @SubscribeEvent
