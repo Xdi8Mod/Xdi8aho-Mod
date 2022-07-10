@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "org.featurehouse.mcmod.spm.mixin",
+  "compatibilityLevel": "JAVA_16",
+  "mixins": [
+    "acc.IngredientAccessor",
+    "acc.ParrotEntityAccessor",
+    "ingredient.ChickenEntityMixin",
+    "ingredient.PigEntityMixin"
+  ],
+  "client": [
+    "modinfo.CreditsScreenMixinC"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

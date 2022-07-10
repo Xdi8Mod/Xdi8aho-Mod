@@ -239,6 +239,7 @@ mixin {
     add sourceSets.main, 'mixins.xdi8.refmap.json'
     config 'mixins.xdi8-fonts.json'
     config 'mixins.firefly8-tint.json'
+    config 'sweet_potato.mixins.json'
 }
 
 /*
