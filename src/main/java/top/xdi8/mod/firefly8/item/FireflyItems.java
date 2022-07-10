@@ -7,7 +7,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
-import top.xdi8.mod.firefly8.block.FIreflyBlocks;
+import top.xdi8.mod.firefly8.block.FireflyBlocks;
 import top.xdi8.mod.firefly8.entity.FireflyEntityTypes;
 import top.xdi8.mod.firefly8.item.tint.*;
 
@@ -61,7 +61,7 @@ public final class FireflyItems {
                         defaultProp()));
         // Blocks
         XDI8AHO_PORTAL_CORE_BLOCK = REGISTRY.register("xdi8aho_portal_core",
-                () -> new BlockItem(FIreflyBlocks.XDI8AHO_PORTAL_CORE_BLOCK.get(), defaultProp()));
+                () -> new BlockItem(FireflyBlocks.XDI8AHO_PORTAL_CORE_BLOCK.get(), defaultProp()));
     }
 
     static Item.Properties defaultProp() { return new Item.Properties().tab(TAB); }
