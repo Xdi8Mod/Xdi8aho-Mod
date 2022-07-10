@@ -7,36 +7,36 @@ import net.minecraftforge.eventbus.api.Event;
 import org.apache.commons.lang3.mutable.Mutable;
 
 public class AdvancementLoadingEvent extends Event {
-    private final ResourceLocation id;
-    private final Advancement.Builder task;
-    private final Mutable<String[][]> requirements;
+    private final AdvancementLoadingContext ctx;
 
     public AdvancementLoadingEvent(ResourceLocation id,
                                    Advancement.Builder task,
                                    Mutable<String[][]> requirements) {
-        this.id = id;
-        this.task = task;
-        this.requirements = requirements;
+        this.ctx = new AdvancementLoadingContext(id, task, requirements);
     }
 
     public ResourceLocation getId() {
-        return id;
+        return ctx.id();
     }
 
     public Advancement.Builder getTask() {
-        return task;
+        return ctx.task();
     }
 
     public String[][] getRequirements() {
-        return requirements.getValue();
+        return ctx.getRequirements();
     }
 
     public void setRequirements(String[][] req) {
-        requirements.setValue(req);
+        ctx.setRequirements(req);
     }
 
     public void addCriterion(ResourceLocation id,
                              CriterionTriggerInstance trigger) {
-        getTask().addCriterion(id.toString(), trigger);
+        ctx.addCriterion(id, trigger);
+    }
+
+    public AdvancementLoadingContext asContext() {
+        return ctx;
     }
 }
