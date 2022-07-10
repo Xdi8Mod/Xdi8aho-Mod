@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "firefly8:sugar_from_tinted"
+    ]
+  },
+  "criteria": {
+    "has_honey_bottle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:tinted_honey_bottle"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "firefly8:sugar_from_tinted"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_honey_bottle",
+      "has_the_recipe"
+    ]
+  ]
+}
