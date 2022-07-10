@@ -24,9 +24,11 @@ import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import top.xdi8.mod.firefly8.entity.FireflyEntity;
 import top.xdi8.mod.firefly8.entity.FireflyEntityTypes;
+import top.xdi8.mod.firefly8.item.FireflyItems;
 
 public class TintedFireflyBottleItem extends Item {
     private static final Logger LOGGER = LogUtils.getLogger();
+
     public TintedFireflyBottleItem(Properties pProperties) {
         super(pProperties);
     }
@@ -46,7 +48,6 @@ public class TintedFireflyBottleItem extends Item {
         firefly.setInBottleTime(level.getGameTime());
         CompoundTag targetTags = new CompoundTag();
         firefly.save(targetTags);
-        // TODO: add targetTags to the ItemStack
         ListTag fireflyList = stack.getOrCreateTag().getList("Fireflies", 9);
         fireflyList.add(targetTags);
         if (stack.isEmpty()) {
@@ -62,7 +63,6 @@ public class TintedFireflyBottleItem extends Item {
 
     @Override
     public @NotNull InteractionResult useOn(@NotNull UseOnContext pContext) {
-        // TODO: release the fireflies in the bottle
         Level level = pContext.getLevel();
         BlockPos clickedPos = pContext.getClickedPos();
         Block usedOnBlock = level.getBlockState(clickedPos).getBlock();
@@ -75,19 +75,42 @@ public class TintedFireflyBottleItem extends Item {
             Player player = pContext.getPlayer();
             ItemStack itemStack = pContext.getItemInHand();
             assert player != null;
-            assert itemStack.getTag() != null;
-            ListTag fireflyList = itemStack.getTag().getList("Fireflies", 9);
+            ListTag fireflyList = itemStack.getOrCreateTag().getList("Fireflies", 9);
+            if (fireflyList.size() == 0) {
+                itemStack.shrink(1);
+                ItemStack newStack = new ItemStack(FireflyItems.TINTED_GLASS_BOTTLE.get());
+                if (itemStack.isEmpty()){
+                    player.setItemInHand(pContext.getHand(), newStack);
+                }
+                else if (!player.getInventory().add(newStack)) {
+                    player.drop(newStack, false);
+                }
+                return InteractionResult.SUCCESS;
+            }
             CompoundTag fireflyTag = fireflyList.getCompound(fireflyList.size() - 1);
             EntityType<FireflyEntity> fireflyEntityType = FireflyEntityTypes.FIREFLY.get();
-            FireflyEntity fireflyEntity = (FireflyEntity) fireflyEntityType.spawn((ServerLevel) level, itemStack, player, airPos, MobSpawnType.BUCKET, true, false);
-            assert fireflyEntity != null;
-            fireflyEntity.load(fireflyTag);
-            fireflyEntity.setOutOfBottleTime(level.getGameTime());
-            if (fireflyEntity.getOutOfBottleTime() - fireflyEntity.getInBottleTime() >= 24000L){
-                // 20 minutes
-                fireflyEntity.setOwnerUUID(player.getUUID());
+            if (!level.isClientSide()) {
+                FireflyEntity fireflyEntity = (FireflyEntity) fireflyEntityType.spawn((ServerLevel) level, itemStack, player, airPos, MobSpawnType.BUCKET, true, false);
+                assert fireflyEntity != null;
+                fireflyEntity.load(fireflyTag);
+                fireflyEntity.setOutOfBottleTime(level.getGameTime());
+                if (fireflyEntity.getOutOfBottleTime() - fireflyEntity.getInBottleTime() >= 24000L) {
+                    // 20 minutes
+                    fireflyEntity.setOwnerUUID(player.getUUID());
+                }
             }
             fireflyList.remove(fireflyTag);
+            if (fireflyList.size() == 0) {
+                itemStack.shrink(1);
+                ItemStack newStack = new ItemStack(FireflyItems.TINTED_GLASS_BOTTLE.get());
+                if (itemStack.isEmpty()){
+                    player.setItemInHand(pContext.getHand(), newStack);
+                }
+                else if (!player.getInventory().add(newStack)) {
+                    player.drop(newStack, false);
+                }
+                return InteractionResult.SUCCESS;
+            }
             return InteractionResult.SUCCESS;
         }
         return InteractionResult.PASS;
