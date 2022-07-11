@@ -34,12 +34,12 @@ public sealed interface PlatformRegister
     Supplier<Block> block(String id, Supplier<Block> block);
 
     <E extends BlockEntity> Supplier<BlockEntityType<E>> blockEntity(String id, BlockEntityType.BlockEntitySupplier<E> supplier, Collection<Supplier<Block>> blocks);
-    <T extends Recipe<Container>> RecipeType<T> recipeType(String id);
+    <T extends Recipe<Container>> Supplier<RecipeType<T>> recipeType(String id);
     <S extends RecipeSerializer<?>> Supplier<S> recipeSerializer(String id, Supplier<S> serializerSupplier);
     <M extends AbstractContainerMenu> Supplier<MenuType<M>> menu(String id, MenuType.MenuSupplier<M> factory);
 
     TagContainer<Item> itemTag(String id);
 
-    ResourceLocation customStat(String id);
+    Supplier<ResourceLocation> customStat(String id);
     Supplier<SoundEvent> sound(String id);
 }

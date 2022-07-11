@@ -140,7 +140,7 @@ public class SPMMain {
 	public static final Supplier<RecipeSerializer<SeedUpdatingRecipe>> SEED_UPDATING_RECIPE_SERIALIZER;
 
 	// Recipe Type
-	public static final RecipeType<SeedUpdatingRecipe> SEED_UPDATING_RECIPE_TYPE;
+	public static final Supplier<RecipeType<SeedUpdatingRecipe>> SEED_UPDATING_RECIPE_TYPE;
 
 	// Block Entities
 	public static final Supplier<BlockEntityType<GrinderBlockEntity>> GRINDER_BLOCK_ENTITY_TYPE;
@@ -162,11 +162,11 @@ public class SPMMain {
 	public static final Supplier<SoundEvent> MAGIC_CUBE_AMBIENT;
 
 	// Stats
-	public static final ResourceLocation INTERACT_WITH_GRINDER;
-	public static final ResourceLocation INTERACT_WITH_AGRO;
-	public static final ResourceLocation CROP_UPGRADED;
-	public static final ResourceLocation SWEET_POTATO_EATEN;
-	public static final ResourceLocation INTERACT_WITH_MAGIC_CUBE;
+	public static final Supplier<ResourceLocation> INTERACT_WITH_GRINDER;
+	public static final Supplier<ResourceLocation> INTERACT_WITH_AGRO;
+	public static final Supplier<ResourceLocation> CROP_UPGRADED;
+	public static final Supplier<ResourceLocation> SWEET_POTATO_EATEN;
+	public static final Supplier<ResourceLocation> INTERACT_WITH_MAGIC_CUBE;
 
 	//@Override
 	public void onInitialize() {
