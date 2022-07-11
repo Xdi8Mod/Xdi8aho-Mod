@@ -50,7 +50,7 @@ credits="""
 See sweet_potato:credits.json for more info"""
 authors="Pigeonia Featurehouse"
 description='Combination of Agromagic'
-logoFile='assets/sweet_potato/icon.png'
+#logoFile='assets/sweet_potato/icon.png'
 
 [[dependencies.xdi8]] #optional
     # the modid of the dependency
