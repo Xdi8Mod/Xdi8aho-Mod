@@ -18,10 +18,10 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
+import top.xdi8.mod.firefly8.block.FireflyBlockTags;
 import top.xdi8.mod.firefly8.entity.FireflyEntity;
 import top.xdi8.mod.firefly8.entity.FireflyEntityTypes;
 
@@ -46,7 +46,6 @@ public class TintedFireflyBottleItem extends Item {
         firefly.setInBottleTime(level.getGameTime());
         CompoundTag targetTags = new CompoundTag();
         firefly.save(targetTags);
-        // TODO: add targetTags to the ItemStack
         final CompoundTag rootTag = stack.getOrCreateTag();
         ListTag fireflyList;
         if (rootTag.contains("Fireflies", 9))
@@ -69,25 +68,28 @@ public class TintedFireflyBottleItem extends Item {
 
     @Override
     public @NotNull InteractionResult useOn(@NotNull UseOnContext pContext) {
-        // TODO: release the fireflies in the bottle
         Level level = pContext.getLevel();
+        if (level.isClientSide()) return InteractionResult.SUCCESS;
+
         BlockPos clickedPos = pContext.getClickedPos();
-        Block usedOnBlock = level.getBlockState(clickedPos).getBlock();
-        if (usedOnBlock == Blocks.GRASS_BLOCK || usedOnBlock == Blocks.GRASS) {
+        final BlockState state = level.getBlockState(clickedPos);
+        if (state.is(FireflyBlockTags.FIREFLIES_CAN_RELEASE)) {
             var airPos = getNearAirPos(level, clickedPos);
             if (airPos.isEmpty()) {
                 LOGGER.debug("No space for spawning from {}", clickedPos);
-                return InteractionResult.FAIL;
+                return InteractionResult.PASS;
             }
             Player player = pContext.getPlayer();
             ItemStack itemStack = pContext.getItemInHand();
-            assert player != null;
-            assert itemStack.getTag() != null;
-            ListTag fireflyList = itemStack.getTag().getList("Fireflies", 9);
+            if (player == null) return InteractionResult.PASS;
+            ListTag fireflyList = itemStack.getOrCreateTag().getList("Fireflies", 10);
             CompoundTag fireflyTag = fireflyList.getCompound(fireflyList.size() - 1);
             EntityType<FireflyEntity> fireflyEntityType = FireflyEntityTypes.FIREFLY.get();
             FireflyEntity fireflyEntity = (FireflyEntity) fireflyEntityType.spawn((ServerLevel) level, itemStack, player, airPos.get(), MobSpawnType.BUCKET, true, false);
-            assert fireflyEntity != null;
+            if (fireflyEntity == null) {
+                LOGGER.error("Null firefly spawn");
+                return InteractionResult.PASS;
+            }
             fireflyEntity.load(fireflyTag);
             fireflyEntity.setOutOfBottleTime(level.getGameTime());
             if (fireflyEntity.getOutOfBottleTime() - fireflyEntity.getInBottleTime() >= 24000L){
@@ -95,7 +97,7 @@ public class TintedFireflyBottleItem extends Item {
                 fireflyEntity.setOwnerUUID(player.getUUID());
             }
             fireflyList.remove(fireflyTag);
-            return InteractionResult.SUCCESS;
+            return InteractionResult.CONSUME;
         }
         return InteractionResult.PASS;
     }
