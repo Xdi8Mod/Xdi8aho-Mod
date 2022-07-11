@@ -29,7 +29,7 @@ public final class BalancedDietHelper {
         System.arraycopy(requirementsOld, 0, requirementsNew, itemListSize, requirementsOld.length);
 
         for (int i = 0; i < itemListSize; ++i) {
-            String reqId = "sweet_potato:balanced_diet__food$" + i;
+            String reqId = "sweet_potato:balanced_diet__food/" + i;
             ctx.addCriterion(new ResourceLocation(reqId),
                     new ConsumeItemTrigger.TriggerInstance(EntityPredicate.Composite.ANY,
                             ItemPredicate.Builder.item().of(itemList.get(i).get()).build()));
