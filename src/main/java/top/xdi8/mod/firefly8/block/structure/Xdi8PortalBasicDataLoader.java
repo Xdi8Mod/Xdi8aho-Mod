@@ -6,6 +6,9 @@ import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimplePreparableReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
+import net.minecraftforge.event.AddReloadListenerEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import org.slf4j.Logger;
 
 import java.io.BufferedReader;
@@ -14,6 +17,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 
+@Mod.EventBusSubscriber(modid = "firefly8")
 public final class Xdi8PortalBasicDataLoader
         extends SimplePreparableReloadListener<Reader> {
     private static final ResourceLocation PATH_BASIC = 
@@ -34,5 +38,10 @@ public final class Xdi8PortalBasicDataLoader
     @Override
     protected void apply(Reader reader, ResourceManager pResourceManager, ProfilerFiller pProfiler) {
         Xdi8PortalBasicData.setInstance(Xdi8PortalBasicData.readText(reader));
+    }
+
+    @SubscribeEvent
+    public static void onLoadingData(AddReloadListenerEvent event) {
+        event.addListener(new Xdi8PortalBasicDataLoader());
     }
 }
