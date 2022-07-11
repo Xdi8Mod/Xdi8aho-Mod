@@ -47,7 +47,7 @@ public class SeedUpdaterBlock extends CraftingTableBlock {
         if (world.isClientSide)
             return InteractionResult.SUCCESS;
         player.openMenu(state.getMenuProvider(world, pos));
-        player.awardStat(SPMMain.INTERACT_WITH_AGRO);
+        player.awardStat(SPMMain.INTERACT_WITH_AGRO.get());
         return InteractionResult.CONSUME;
     }
 }

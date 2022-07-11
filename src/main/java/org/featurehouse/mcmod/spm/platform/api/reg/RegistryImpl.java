@@ -2,7 +2,6 @@ package org.featurehouse.mcmod.spm.platform.api.reg;
 
 import com.mojang.datafixers.types.Type;
 import net.minecraft.Util;
-import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.ItemTags;
@@ -51,9 +50,9 @@ final class RegistryImpl implements PlatformRegisterWrapper {
     }
 
     @Override
-    public <T extends Recipe<Container>> RecipeType<T> recipeType(String id) {
-        var location = new ResourceLocation(MODID, id);
-        return Registry.register(Registry.RECIPE_TYPE, location, new RecipeType<T>() {
+    public <T extends Recipe<Container>> Supplier<RecipeType<T>> recipeType(String id) {
+        var location = PlatformRegister.id(id);
+        return REG_RECIPE_TYPE.register(id, () -> new RecipeType<>() {
             @Override
             public String toString() {
                 return location.toString();
@@ -78,9 +77,8 @@ final class RegistryImpl implements PlatformRegisterWrapper {
     }
 
     @Override
-    public ResourceLocation customStat(String id) {
-        var loc = new ResourceLocation(MODID, id);
-        return Registry.register(Registry.CUSTOM_STAT, loc, loc);
+    public Supplier<ResourceLocation> customStat(String id) {
+        return REG_STAT.register(id, () -> PlatformRegister.id(id));
     }
 
     @Override
