@@ -2,11 +2,13 @@ package org.featurehouse.mcmod.spm.platform.forge;
 
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.color.item.ItemColor;
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.api.distmarker.Dist;
@@ -45,6 +47,9 @@ public class SPMForgeImpl {
     public static final DeferredRegister<MenuType<?>> REG_MENU = DeferredRegister.create(ForgeRegistries.CONTAINERS, MODID);
     public static final DeferredRegister<SoundEvent> REG_SOUND = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, MODID);
 
+    public static final DeferredRegister<ResourceLocation> REG_STAT = DeferredRegister.create(Registry.CUSTOM_STAT_REGISTRY, MODID);
+    public static final DeferredRegister<RecipeType<?>> REG_RECIPE_TYPE = DeferredRegister.create(Registry.RECIPE_TYPE_REGISTRY, MODID);
+
     public SPMForgeImpl() {
         SPMMain.getLogger().info("SPM initializing!");  // Don't you dare delete this line!
         final IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -54,6 +59,8 @@ public class SPMForgeImpl {
         REG_RECIPE_SERIALIZER.register(modBus);
         REG_MENU.register(modBus);
         REG_SOUND.register(modBus);
+        REG_STAT.register(modBus);
+        REG_RECIPE_TYPE.register(modBus);
     }
 
     @Mod.EventBusSubscriber(modid = "sweet_potato", bus = Mod.EventBusSubscriber.Bus.MOD)
