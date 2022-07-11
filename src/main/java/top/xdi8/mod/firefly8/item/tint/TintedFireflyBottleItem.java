@@ -47,7 +47,14 @@ public class TintedFireflyBottleItem extends Item {
         CompoundTag targetTags = new CompoundTag();
         firefly.save(targetTags);
         // TODO: add targetTags to the ItemStack
-        ListTag fireflyList = stack.getOrCreateTag().getList("Fireflies", 9);
+        final CompoundTag rootTag = stack.getOrCreateTag();
+        ListTag fireflyList;
+        if (rootTag.contains("Fireflies", 9))
+            fireflyList = rootTag.getList("Fireflies", 10);
+        else {
+            fireflyList = new ListTag();
+            rootTag.put("Fireflies", fireflyList);
+        }
         fireflyList.add(targetTags);
         if (stack.isEmpty()) {
             pPlayer.setItemInHand(pUsedHand, stack);
@@ -67,9 +74,9 @@ public class TintedFireflyBottleItem extends Item {
         BlockPos clickedPos = pContext.getClickedPos();
         Block usedOnBlock = level.getBlockState(clickedPos).getBlock();
         if (usedOnBlock == Blocks.GRASS_BLOCK || usedOnBlock == Blocks.GRASS) {
-            BlockPos airPos = getNearAirPos(level, clickedPos);
-            if (airPos == null) {
-                LOGGER.debug("No space for spawning");
+            var airPos = getNearAirPos(level, clickedPos);
+            if (airPos.isEmpty()) {
+                LOGGER.debug("No space for spawning from {}", clickedPos);
                 return InteractionResult.FAIL;
             }
             Player player = pContext.getPlayer();
@@ -79,7 +86,7 @@ public class TintedFireflyBottleItem extends Item {
             ListTag fireflyList = itemStack.getTag().getList("Fireflies", 9);
             CompoundTag fireflyTag = fireflyList.getCompound(fireflyList.size() - 1);
             EntityType<FireflyEntity> fireflyEntityType = FireflyEntityTypes.FIREFLY.get();
-            FireflyEntity fireflyEntity = (FireflyEntity) fireflyEntityType.spawn((ServerLevel) level, itemStack, player, airPos, MobSpawnType.BUCKET, true, false);
+            FireflyEntity fireflyEntity = (FireflyEntity) fireflyEntityType.spawn((ServerLevel) level, itemStack, player, airPos.get(), MobSpawnType.BUCKET, true, false);
             assert fireflyEntity != null;
             fireflyEntity.load(fireflyTag);
             fireflyEntity.setOutOfBottleTime(level.getGameTime());
@@ -93,20 +100,15 @@ public class TintedFireflyBottleItem extends Item {
         return InteractionResult.PASS;
     }
 
-    public static BlockPos getNearAirPos(Level level, BlockPos blockPos) {
-        if (level.getBlockState(blockPos.above()).isAir()) {
-            return blockPos.above();
-        } else if (level.getBlockState(blockPos.below()).isAir()) {
-            return blockPos.below();
-        } else if (level.getBlockState(blockPos.east()).isAir()) {
-            return blockPos.east();
-        } else if (level.getBlockState(blockPos.west()).isAir()) {
-            return blockPos.west();
-        } else if (level.getBlockState(blockPos.south()).isAir()) {
-            return blockPos.south();
-        } else if (level.getBlockState(blockPos.north()).isAir()) {
-            return blockPos.north();
-        }
-        return null;
+    public static java.util.Optional<BlockPos> getNearAirPos(Level level, BlockPos blockPos) {
+        return ALLOWED_SPAWN_POS.stream().map(t -> t.apply(blockPos))
+                .filter(p -> level.getBlockState(p).isAir()).findFirst();
     }
+
+    private static final java.util.List<java.util.function.UnaryOperator<BlockPos>> ALLOWED_SPAWN_POS =
+            com.google.common.collect.ImmutableList.of(
+                    BlockPos::above, //BlockPos::below,
+                    BlockPos::east, BlockPos::south,
+                    BlockPos::west, BlockPos::north
+            );
 }
