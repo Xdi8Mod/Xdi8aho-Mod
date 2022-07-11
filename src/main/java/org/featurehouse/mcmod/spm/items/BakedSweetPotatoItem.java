@@ -22,7 +22,7 @@ public class BakedSweetPotatoItem extends Item implements SweetPotatoProperties 
     public ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity user) {
         super.finishUsingItem(stack, world, user);
         if (user instanceof Player playerEntity) {
-            playerEntity.awardStat(SPMMain.SWEET_POTATO_EATEN);
+            playerEntity.awardStat(SPMMain.SWEET_POTATO_EATEN.get());
             if (!((Player) user).getAbilities().instabuild)
                 PeelInserter.run(playerEntity);
         }

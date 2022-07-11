@@ -30,7 +30,7 @@ public class MagicCubeBlock extends AbstractBlockWithEntity<MagicCubeBlockEntity
 
     @Override
     public List<ResourceLocation> incrementWhileOnUse(BlockState state, Level world, BlockPos pos, ServerPlayer serverPlayerEntity, InteractionHand hand, BlockHitResult blockHitResult) {
-        return ImmutableList.of(SPMMain.INTERACT_WITH_MAGIC_CUBE);
+        return ImmutableList.of(SPMMain.INTERACT_WITH_MAGIC_CUBE.get());
     }
 
     @Override

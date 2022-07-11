@@ -42,7 +42,7 @@ public class GrinderBlock extends AbstractBlockWithEntity<GrinderBlockEntity> {
 
     @Override
     public List<ResourceLocation> incrementWhileOnUse(BlockState state, Level world, BlockPos pos, ServerPlayer serverPlayerEntity, InteractionHand hand, BlockHitResult blockHitResult) {
-        return ImmutableList.of(SPMMain.INTERACT_WITH_GRINDER);
+        return ImmutableList.of(SPMMain.INTERACT_WITH_GRINDER.get());
     }
 
     @Override

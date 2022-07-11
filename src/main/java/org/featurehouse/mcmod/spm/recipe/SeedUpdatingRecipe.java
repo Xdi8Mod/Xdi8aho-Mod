@@ -67,7 +67,7 @@ public record SeedUpdatingRecipe(ResourceLocation id, Ingredient base,
 
     @Override
     public RecipeType<?> getType() {
-        return SPMMain.SEED_UPDATING_RECIPE_TYPE;
+        return SPMMain.SEED_UPDATING_RECIPE_TYPE.get();
     }
 
     public boolean method_30029(ItemStack itemStack) {
