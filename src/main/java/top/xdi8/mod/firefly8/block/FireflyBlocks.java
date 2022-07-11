@@ -5,7 +5,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-public class FIreflyBlocks {
+public class FireflyBlocks {
     public static final DeferredRegister<Block> REGISTRY
             = DeferredRegister.create(ForgeRegistries.BLOCKS, "firefly8");
 

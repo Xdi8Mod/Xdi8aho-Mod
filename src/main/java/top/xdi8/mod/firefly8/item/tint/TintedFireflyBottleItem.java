@@ -24,9 +24,11 @@ import org.slf4j.Logger;
 import top.xdi8.mod.firefly8.block.FireflyBlockTags;
 import top.xdi8.mod.firefly8.entity.FireflyEntity;
 import top.xdi8.mod.firefly8.entity.FireflyEntityTypes;
+import top.xdi8.mod.firefly8.item.FireflyItems;
 
 public class TintedFireflyBottleItem extends Item {
     private static final Logger LOGGER = LogUtils.getLogger();
+
     public TintedFireflyBottleItem(Properties pProperties) {
         super(pProperties);
     }
