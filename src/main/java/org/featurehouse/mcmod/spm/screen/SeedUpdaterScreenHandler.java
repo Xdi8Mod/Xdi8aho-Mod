@@ -29,7 +29,7 @@ public class SeedUpdaterScreenHandler extends ItemCombinerMenu {
     public SeedUpdaterScreenHandler(int syncId, Inventory inventory, ContainerLevelAccess context) {
         super(SPMMain.SEED_UPDATER_SCREEN_HANDLER_TYPE.get(), syncId, inventory, context);
         this.world = inventory.player.level;
-        this.list = this.world.getRecipeManager().getAllRecipesFor(SPMMain.SEED_UPDATING_RECIPE_TYPE);
+        this.list = this.world.getRecipeManager().getAllRecipesFor(SPMMain.SEED_UPDATING_RECIPE_TYPE.get());
     }
 
     protected boolean isValidBlock(@NotNull BlockState state) {
@@ -43,7 +43,7 @@ public class SeedUpdaterScreenHandler extends ItemCombinerMenu {
     @Override
     public void createResult() {
         List<SeedUpdatingRecipe> list1 = this.world.getRecipeManager().getRecipesFor(
-                SPMMain.SEED_UPDATING_RECIPE_TYPE, this.inputSlots, this.world
+                SPMMain.SEED_UPDATING_RECIPE_TYPE.get(), this.inputSlots, this.world
         );
         if (list1.isEmpty())
             this.resultSlots.setItem(0, ItemStack.EMPTY);
@@ -72,7 +72,7 @@ public class SeedUpdaterScreenHandler extends ItemCombinerMenu {
             /*world1.syncWorldEvent(1044, blockPos, 8844110));*/
             world1.playSound(null, blockPos, SPMMain.AGROFORESTRY_TABLE_FINISH.get(), SoundSource.BLOCKS, 1.0F, world1.getRandom().nextFloat() * 0.1F + 0.9F);
         });
-        player.awardStat(SPMMain.CROP_UPGRADED);
+        player.awardStat(SPMMain.CROP_UPGRADED.get());
         //return stack;
     }
 

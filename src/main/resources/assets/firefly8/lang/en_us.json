@@ -10,5 +10,7 @@
   "item.firefly8.tinted_firefly_bottle": "Bottle of Fireflies",
 
   "itemGroup.firefly8": "Xdi8 Aho",
-  "entity.firefly8.firefly": "Firefly"
+  "entity.firefly8.firefly": "Firefly",
+
+  "block.firefly8.xdi8aho_portal_core": "Xdi8 Aho Portal Core"
 }
