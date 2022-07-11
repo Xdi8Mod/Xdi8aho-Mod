@@ -19,21 +19,6 @@ public class SPMClient {
         MenuScreens.register(SPMMain.MAGIC_CUBE_SCREEN_HANDLER_TYPE.get(), MagicCubeScreen::new);
         MenuScreens.register(SPMMain.SEED_UPDATER_SCREEN_HANDLER_TYPE.get(), SeedUpdaterScreen::new);
 
-        /* Color Providers */
-
-        ColorProviders.getBlock().register((state, world, pos, tintIndex) -> world != null && pos != null ? BiomeColors.getAverageFoliageColor(world, pos) : FoliageColor.getDefaultColor(),
-                ImmutableSet.of(SPMMain.ENCHANTED_ACACIA_LEAVES, SPMMain.ENCHANTED_DARK_OAK_LEAVES,
-                        SPMMain.ENCHANTED_JUNGLE_LEAVES, SPMMain.ENCHANTED_OAK_LEAVES)
-        );
-        ColorProviders.getBlock().register(SPMMain.ENCHANTED_BIRCH_LEAVES, (state, world, pos, tintIndex) -> FoliageColor.getBirchColor());
-        ColorProviders.getBlock().register(SPMMain.ENCHANTED_SPRUCE_LEAVES, (state, world, pos, tintIndex) -> FoliageColor.getEvergreenColor());
-        ColorProviders.getItem().register((stack, tintIndex) -> FoliageColor.getDefaultColor(),
-                ImmutableSet.of(SPMMain.ENCHANTED_ACACIA_LEAVES_ITEM, SPMMain.ENCHANTED_DARK_OAK_LEAVES_ITEM,
-                SPMMain.ENCHANTED_JUNGLE_LEAVES_ITEM, SPMMain.ENCHANTED_OAK_LEAVES_ITEM)
-        );
-        ColorProviders.getItem().register(SPMMain.ENCHANTED_BIRCH_LEAVES_ITEM, (stack, tintIndex) -> FoliageColor.getBirchColor());
-        ColorProviders.getItem().register(SPMMain.ENCHANTED_SPRUCE_LEAVES_ITEM, (stack, tintIndex) -> FoliageColor.getEvergreenColor());
-
         /* Rendering */
 
         BlockRenderTypes.register(RenderType.cutout(),
@@ -47,4 +32,24 @@ public class SPMClient {
                 SPMMain.ENCHANTED_SUGAR_CANE)
         );
     }
+    private static final class ColorProviding {
+        static {
+            ColorProviders.getBlock().register((state, world, pos, tintIndex) -> world != null && pos != null ? BiomeColors.getAverageFoliageColor(world, pos) : FoliageColor.getDefaultColor(),
+                    ImmutableSet.of(SPMMain.ENCHANTED_ACACIA_LEAVES, SPMMain.ENCHANTED_DARK_OAK_LEAVES,
+                            SPMMain.ENCHANTED_JUNGLE_LEAVES, SPMMain.ENCHANTED_OAK_LEAVES)
+            );
+            ColorProviders.getBlock().register(SPMMain.ENCHANTED_BIRCH_LEAVES, (state, world, pos, tintIndex) -> FoliageColor.getBirchColor());
+            ColorProviders.getBlock().register(SPMMain.ENCHANTED_SPRUCE_LEAVES, (state, world, pos, tintIndex) -> FoliageColor.getEvergreenColor());
+            ColorProviders.getItem().register((stack, tintIndex) -> FoliageColor.getDefaultColor(),
+                    ImmutableSet.of(SPMMain.ENCHANTED_ACACIA_LEAVES_ITEM, SPMMain.ENCHANTED_DARK_OAK_LEAVES_ITEM,
+                            SPMMain.ENCHANTED_JUNGLE_LEAVES_ITEM, SPMMain.ENCHANTED_OAK_LEAVES_ITEM)
+            );
+            ColorProviders.getItem().register(SPMMain.ENCHANTED_BIRCH_LEAVES_ITEM, (stack, tintIndex) -> FoliageColor.getBirchColor());
+            ColorProviders.getItem().register(SPMMain.ENCHANTED_SPRUCE_LEAVES_ITEM, (stack, tintIndex) -> FoliageColor.getEvergreenColor());
+
+        }
+
+        static void init() {}
+    }
+    public static void initColorProviders() { ColorProviding.init(); }
 }

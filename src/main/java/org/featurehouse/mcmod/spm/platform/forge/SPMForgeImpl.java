@@ -96,13 +96,16 @@ public class SPMForgeImpl {
 
         @SubscribeEvent
         public static void provideItemColors(ColorHandlerEvent.Item event) {
+            SPMClient.initColorProviders();
             final Map<Supplier<Item>, ItemColor> view = ColorProviders.getItem().view();
+            SPMMain.getLogger().debug("ItemView: {}", view);
             view.forEach((itemSupplier, itemColor) ->
                     event.getItemColors().register(itemColor, itemSupplier.get()));
         }
 
         @SubscribeEvent
         public static void provideBlockColors(ColorHandlerEvent.Block event) {
+            SPMClient.initColorProviders();
             final Map<Supplier<Block>, BlockColor> view = ColorProviders.getBlock().view();
             view.forEach((blockSupplier, blockColor) ->
                     event.getBlockColors().register(blockColor, blockSupplier.get()));
