@@ -1,0 +1,41 @@
+-1	0	-1	#firefly8:portal/base_0
+-1	0	0	#firefly8:portal/base_0
+-1	0	1	#firefly8:portal/base_0
+0	0	-1	#firefly8:portal/base_0
+0	0	1	#firefly8:portal/base_0
+1	0	-1	#firefly8:portal/base_0
+1	0	0	#firefly8:portal/base_0
+1	0	1	#firefly8:portal/base_0
+
+
+2	-1	-2	#firefly8:portal/base_1
+2	-1	-1	#firefly8:portal/base_1
+2	-1	0	#firefly8:portal/base_1
+2	-1	1	#firefly8:portal/base_1
+2	-1	2	#firefly8:portal/base_1
+
+-2      -1      -2      #firefly8:portal/base_1
+-2      -1      -1      #firefly8:portal/base_1
+-2      -1      0       #firefly8:portal/base_1
+-2      -1      1       #firefly8:portal/base_1
+-2      -1      2       #firefly8:portal/base_1
+
+-1      -1      -2      #firefly8:portal/base_1
+-1      -1      -1      #firefly8:portal/base_1
+-1      -1      0       #firefly8:portal/base_1
+-1      -1      1       #firefly8:portal/base_1
+-1      -1      2       #firefly8:portal/base_1
+
+0      -1      -2      #firefly8:portal/base_1
+0      -1      -1      #firefly8:portal/base_1
+0      -1      0       #firefly8:portal/base_1
+0      -1      1       #firefly8:portal/base_1
+0      -1      2       #firefly8:portal/base_1
+
+1      -1      -2      #firefly8:portal/base_1
+1      -1      -1      #firefly8:portal/base_1
+1      -1      0       #firefly8:portal/base_1
+1      -1      1       #firefly8:portal/base_1
+1      -1      2       #firefly8:portal/base_1
+
+
