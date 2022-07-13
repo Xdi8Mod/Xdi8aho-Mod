@@ -16,7 +16,7 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import top.xdi8.mod.firefly8.ext.IPlayerWithHiddenInventory;
+import top.xdi8.mod.firefly8.ext.IServerPlayerWithHiddenInventory;
 
 @Mod.EventBusSubscriber(modid = "firefly8")
 public final class FireflyCommands {
@@ -45,7 +45,7 @@ public final class FireflyCommands {
 
     private static final class BindXdi8PortalCommand {
         private static int execute(ResourceKey<Level> level, BlockPos pos, ServerPlayer player, CommandSourceStack stack) {
-            final IPlayerWithHiddenInventory playerExt = IPlayerWithHiddenInventory.xdi8$extend(player);
+            final IServerPlayerWithHiddenInventory playerExt = IServerPlayerWithHiddenInventory.xdi8$extend(player);
             if (playerExt.xdi8$validatePortal()) {
                 playerExt.xdi8$setPortal(level, pos);
                 stack.sendSuccess(new TranslatableComponent("commands.bindxdi8portal.success", player.getDisplayName()), true);
