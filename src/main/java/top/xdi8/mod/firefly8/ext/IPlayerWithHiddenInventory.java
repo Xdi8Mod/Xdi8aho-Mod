@@ -1,22 +1,11 @@
 package top.xdi8.mod.firefly8.ext;
 
-import com.mojang.logging.LogUtils;
-import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.level.Level;
-import org.apache.commons.lang3.tuple.Pair;
-import org.slf4j.Logger;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.player.Player;
 
 public interface IPlayerWithHiddenInventory {
-    Logger LOGGER = LogUtils.getLogger();
-    static IPlayerWithHiddenInventory xdi8$extend(ServerPlayer player) { return (IPlayerWithHiddenInventory) player; }
-    default ServerPlayer xdi8$self() { return (ServerPlayer) this; }
+    static IPlayerWithHiddenInventory xdi8$extend(Player player) { return (IPlayerWithHiddenInventory) player; }
+    default Player xdi8$self() { return (Player) this; }
 
-    void xdi8$setPortal(ResourceKey<Level> dimension, BlockPos pos);
-    Pair<ResourceKey<Level>, BlockPos> xdi8$getPortal();
-
-    boolean xdi8$moveItemsToPortal();
-
-    boolean xdi8$validatePortal();
+    SimpleContainer xdi8$getPortalInv();
 }
