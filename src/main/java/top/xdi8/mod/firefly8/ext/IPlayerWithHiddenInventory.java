@@ -17,4 +17,6 @@ public interface IPlayerWithHiddenInventory {
     Pair<ResourceKey<Level>, BlockPos> xdi8$getPortal();
 
     boolean xdi8$moveItemsToPortal();
+
+    boolean xdi8$validatePortal();
 }
