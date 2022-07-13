@@ -30,6 +30,7 @@ public final class FireflyItems {
             TINTED_FIREFLY_BOTTLE,
             XDI8AHO_ICON,
             FIREFLY_SPAWN_EGG,
+            BUNDLER,
             XDI8AHO_PORTAL_CORE_BLOCK;
 
     static {
@@ -59,6 +60,7 @@ public final class FireflyItems {
                 new ForgeSpawnEggItem(FireflyEntityTypes.FIREFLY,
                         0x000000, 0x00f500,
                         defaultProp()));
+        BUNDLER = REGISTRY.register("bundler", BundlerItem::new);
         // Blocks
         XDI8AHO_PORTAL_CORE_BLOCK = REGISTRY.register("xdi8aho_portal_core",
                 () -> new BlockItem(FireflyBlocks.XDI8AHO_PORTAL_CORE_BLOCK.get(), defaultProp()));
