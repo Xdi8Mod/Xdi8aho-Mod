@@ -66,11 +66,12 @@ abstract class PlayerWithHiddenInventoryImpl extends Player implements IPlayerWi
 
     @Override
     public boolean xdi8$moveItemsToPortal() {
-        if (!validatePortal()) return false;
+        if (!xdi8$validatePortal()) return false;
         throw new org.apache.commons.lang3.NotImplementedException("TODO: Move Inventory");
     }
 
-    private boolean validatePortal() {
+    @Override
+    public boolean xdi8$validatePortal() {
         final MinecraftServer server = getServer();
         assert server != null;  // I'm sure
         final ServerLevel level = server.getLevel(xdi8$portalDimension);
