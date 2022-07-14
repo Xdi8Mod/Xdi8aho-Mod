@@ -1,8 +1,6 @@
 package org.featurehouse.mcmod.spm.util.tag;
 
 import com.google.common.collect.Iterators;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.TagKey;
 import org.featurehouse.mcmod.spm.platform.api.tag.TagContainer;
 import org.jetbrains.annotations.NotNull;
 
@@ -31,10 +29,6 @@ public sealed interface TagLike<T> extends Iterable<T> {
 
     static <T> TagLike<T> asTag(TagContainer<T> tagContainer) {
         return new AsTag<>(tagContainer);
-    }
-
-    static <T> TagLike<T> asTag(ResourceLocation regId, TagKey<T> tagKey) {
-        return asTag(TagContainer.of(regId, tagKey));
     }
 
     static <T> TagLike<T> asItem(T item) {
