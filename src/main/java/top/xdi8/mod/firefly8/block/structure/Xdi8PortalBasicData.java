@@ -7,36 +7,39 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.featurehouse.mcmod.spm.util.tag.TagLike;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Reader;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Scanner;
+import java.util.function.Predicate;
 
 public class Xdi8PortalBasicData {
-    private final Map<Vec3i, TagLike<Block>> map;
+    private final Map<Vec3i, Predicate<BlockState>> map;
 
-    Xdi8PortalBasicData(Map<Vec3i, TagLike<Block>> map) {
+    Xdi8PortalBasicData(Map<Vec3i, Predicate<BlockState>> map) {
         this.map = map;
     }
 
-    private static TagLike<Block> fromId(String id) {
+    private static Predicate<BlockState> fromId(String id) {
         if (id.startsWith("#")) {
             TagKey<Block> tagKey = BlockTags.create(new ResourceLocation(id.substring(1)));
-            return TagLike.asTag(new ResourceLocation("block"), tagKey);
+            return blockState -> blockState.is(tagKey);
         }
         var block = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(id));
-        return TagLike.asItem(block);
+        Objects.requireNonNull(block, () -> "Block " + id + " is invalid");
+        return blockState -> blockState.is(block);
     }
 
     public boolean fits(BlockGetter level, BlockPos pos) {
-        for (Map.Entry<Vec3i, TagLike<Block>> entry : map.entrySet()) {
+        for (Map.Entry<Vec3i, Predicate<BlockState>> entry : map.entrySet()) {
             Vec3i vec3i = entry.getKey();
-            TagLike<Block> blocks = entry.getValue();
-            if (!blocks.contains(level.getBlockState(pos.offset(vec3i)).getBlock()))
+            Predicate<BlockState> blocks = entry.getValue();
+            if (!blocks.test(level.getBlockState(pos.offset(vec3i))))
                 return false;
         }
         return true;
@@ -45,7 +48,7 @@ public class Xdi8PortalBasicData {
     public static @NotNull Xdi8PortalBasicData readText(Reader reader) {
         try {
             Scanner scanner = new Scanner(reader);
-            Map<Vec3i, TagLike<Block>> m = new HashMap<>();
+            Map<Vec3i, Predicate<BlockState>> m = new HashMap<>();
             while (scanner.hasNext()) {
                 int x = scanner.nextInt();
                 int y = scanner.nextInt();
@@ -55,7 +58,7 @@ public class Xdi8PortalBasicData {
             }
             return new Xdi8PortalBasicData(m);
         } catch (Throwable t) {
-            throw new RuntimeException("Cannot read xdi8 portal basic data", t);
+            throw new IllegalArgumentException("Cannot read xdi8 portal basic data", t);
         }
     }
 
