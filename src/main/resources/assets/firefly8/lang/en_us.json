@@ -12,5 +12,8 @@
   "itemGroup.firefly8": "Xdi8 Aho",
   "entity.firefly8.firefly": "Firefly",
 
-  "block.firefly8.xdi8aho_portal_core": "Xdi8 Aho Portal Core"
+  "block.firefly8.xdi8aho_portal_core": "Xdi8 Aho Portal Core",
+
+  "commands.bindxdi8portal.success": "Successfully set portal for %s",
+  "commands.bindxdi8portal.failure": "Can't set portal for %1$s at dimension %2$s / (%3$s)"
 }
