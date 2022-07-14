@@ -112,6 +112,6 @@ abstract class ServerPlayerWithHiddenInventoryImpl extends Player implements ISe
         if (level == null) return false;
         final BlockState state = level.getBlockState(xdi8$portalPosition);
         return state.is(FireflyBlocks.XDI8AHO_PORTAL_TOP_BLOCK.get()) &&
-                state.getValue(Xdi8ahoPortalTopBlock.IS_ACTIVATED);
+                state.getValue(Xdi8ahoPortalTopBlock.FIREFLY_COUNT) > 0;
     }
 }
