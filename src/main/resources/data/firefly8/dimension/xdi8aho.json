@@ -36,8 +36,8 @@
           "parameters": {
             "temperature": -0.7,
             "humidity": 0.0,
-            "continentalness": 0.5,
-            "erosion": 0.0,
+            "continentalness": 0.6,
+            "erosion": 0.1,
             "weirdness": 0.2,
             "depth": 0.0,
             "offset": 0.95
