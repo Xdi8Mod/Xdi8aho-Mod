@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "firefly8:plains",
+    "firefly8:frozen_peaks",
+    "firefly8:jagged_peaks",
+    "firefly8:meadow",
+    "firefly8:swamp"
+  ]
+}
