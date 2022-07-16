@@ -1,15 +1,13 @@
 package top.xdi8.mod.firefly8.item;
 
 import net.minecraft.world.food.Foods;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.*;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
+import top.xdi8.mod.firefly8.block.FireflyBlocks;
 import top.xdi8.mod.firefly8.entity.FireflyEntityTypes;
 import top.xdi8.mod.firefly8.item.tint.*;
 
@@ -31,7 +29,8 @@ public final class FireflyItems {
             TINTED_DRAGON_BREATH,
             TINTED_FIREFLY_BOTTLE,
             XDI8AHO_ICON,
-            FIREFLY_SPAWN_EGG;
+            FIREFLY_SPAWN_EGG,
+            XDI8AHO_PORTAL_CORE_BLOCK;
 
     static {
         TINTED_GLASS_BOTTLE = REGISTRY.register("tinted_glass_bottle", () ->
@@ -60,6 +59,9 @@ public final class FireflyItems {
                 new ForgeSpawnEggItem(FireflyEntityTypes.FIREFLY,
                         0x000000, 0x00f500,
                         defaultProp()));
+        // Blocks
+        XDI8AHO_PORTAL_CORE_BLOCK = REGISTRY.register("xdi8aho_portal_core",
+                () -> new BlockItem(FireflyBlocks.XDI8AHO_PORTAL_CORE_BLOCK.get(), defaultProp()));
     }
 
     static Item.Properties defaultProp() { return new Item.Properties().tab(TAB); }

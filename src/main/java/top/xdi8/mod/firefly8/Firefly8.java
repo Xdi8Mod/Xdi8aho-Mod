@@ -4,8 +4,8 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import top.xdi8.mod.firefly8.block.FireflyBlocks;
 import top.xdi8.mod.firefly8.entity.FireflyEntity;
 import top.xdi8.mod.firefly8.entity.FireflyEntityTypes;
 import top.xdi8.mod.firefly8.item.FireflyItems;
@@ -16,6 +16,8 @@ import top.xdi8.mod.firefly8.world.FireflyMobBiomeGen;
 @Mod("firefly8")
 public class Firefly8 {
     public Firefly8() {
+        // Block
+        FireflyBlocks.REGISTRY.register(modBus());
         // Item
         FireflyItems.REGISTRY.register(modBus());
         TintedPotionBrewing.register();
