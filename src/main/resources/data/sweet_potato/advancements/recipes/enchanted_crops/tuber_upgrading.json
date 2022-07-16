@@ -2,21 +2,21 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "sweet_potato:enchanted_carrot"
+      "sweet_potato:tuber_upgrading"
     ]
   },
   "criteria": {
     "_": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "sweet_potato:enchanted_carrot"
+        "recipe": "sweet_potato:tuber_upgrading"
       }
     },
     "vanilla_crop": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [{
-          "items": ["minecraft:carrot"]
+          "tag": "sweet_potato:tubers"
         }]
       }
     }

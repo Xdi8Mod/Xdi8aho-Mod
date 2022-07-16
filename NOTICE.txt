@@ -3,3 +3,4 @@ Fonts meta is generated with script (https://featurehouse.github.io/resources/9f
 Part of code are from Sweet Potato Mod (https://github.com/Featurehouse/sweet_potato-source).
 Some tags are from the UIN project (https://github.com/ououn/UIN).
 Some Fabric API and Forge tags are copied here to improve compatibility.
+Thank Dennis Lin for providing Enchanted Tuber item texture, which was to be used on Red Potato (sweet_potato:red_potato).

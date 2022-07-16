@@ -30,10 +30,7 @@ public final class ComposterHelper {
 
         registerCompostableItem(0.3f, SPMMain.ENCHANTED_WHEAT_SEEDS.get());
         registerCompostableItem(0.3f, SPMMain.ENCHANTED_BEETROOT_SEEDS.get());
-        registerCompostableItem(0.65f, SPMMain.ENCHANTED_CARROT_ITEM.get());
-        registerCompostableItem(0.65f, SPMMain.ENCHANTED_VANILLA_POTATO_ITEM.get());
-
-        registerCompostableItem(0.5f, SPMMain.ENCHANTED_SUGAR_CANE_ITEM.get());
+        registerCompostableItem(0.65f, SPMMain.ENCHANTED_TUBER_ITEM.get());
 
 
         for (SweetPotatoType type: SweetPotatoType.values()) {

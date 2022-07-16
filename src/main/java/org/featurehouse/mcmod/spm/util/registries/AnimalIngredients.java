@@ -17,8 +17,7 @@ public final class AnimalIngredients {
 
     public static Stream<ItemStack> configurePig(ItemStack[] stacks) {
         ArrayList<ItemStack> stackList = new ArrayList<>(Arrays.asList(stacks));
-        stackList.add(SPMMain.ENCHANTED_CARROT_ITEM.get().getDefaultInstance());
-        stackList.add(SPMMain.ENCHANTED_VANILLA_POTATO_ITEM.get().getDefaultInstance());
+        stackList.add(SPMMain.ENCHANTED_TUBER_ITEM.get().getDefaultInstance());
         stackList.add(SPMMain.PEEL.get().getDefaultInstance());
 
         return stackList.stream();
