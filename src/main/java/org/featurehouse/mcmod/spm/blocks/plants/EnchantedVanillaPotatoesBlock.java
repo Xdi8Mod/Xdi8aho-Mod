@@ -17,7 +17,7 @@ public class EnchantedVanillaPotatoesBlock extends PotatoBlock {
 
     @Override
     protected ItemLike getBaseSeedId() {
-        return SPMMain.ENCHANTED_VANILLA_POTATO_ITEM.get();
+        return SPMMain.ENCHANTED_TUBER_ITEM.get();
     }
 
     @Override

@@ -27,9 +27,9 @@ public class SPMClient {
                 SPMMain.ENCHANTED_ACACIA_SAPLING, SPMMain.ENCHANTED_BIRCH_SAPLING,
                 SPMMain.ENCHANTED_DARK_OAK_SAPLING, SPMMain.ENCHANTED_OAK_SAPLING,
                 SPMMain.ENCHANTED_JUNGLE_SAPLING, SPMMain.ENCHANTED_SPRUCE_SAPLING,
-                SPMMain.ENCHANTED_BEETROOTS_CROP, SPMMain.ENCHANTED_CARROTS_CROP,
-                SPMMain.ENCHANTED_VANILLA_POTATOES_CROP, SPMMain.ENCHANTED_WHEAT_CROP,
-                SPMMain.ENCHANTED_SUGAR_CANE)
+                SPMMain.ENCHANTED_BEETROOTS_CROP,
+                SPMMain.ENCHANTED_TUBER, SPMMain.ENCHANTED_WHEAT_CROP
+                )
         );
     }
     private static final class ColorProviding {
