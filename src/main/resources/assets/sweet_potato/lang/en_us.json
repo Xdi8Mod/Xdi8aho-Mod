@@ -67,5 +67,8 @@
   "tooltip.sweet_potato.enchanted_sweet_potato.effects": "Effects: ",
 
   "block.sweet_potato.enchanted_tubers": "Enchanted Tubers",
-  "item.sweet_potato.enchanted_tuber": "Enchanted Tuber"
+  "block.sweet_potato.enchanted_crops": "Enchanted Crops",
+  "item.sweet_potato.enchanted_tuber": "Enchanted Tuber",
+  "item.sweet_potato.enchanted_crop_seeds": "Enchanted Crop Seeds",
+  "item.sweet_potato.enchanted_crop": "Enchanted Crop"
 }
