@@ -165,10 +165,8 @@ public class SPMMain {
 	//@Override
 	public void onInitialize() {
 		getLogger().info("Successfully loaded Sweet Potato Mod!");
-		//FabricLoader.getInstance().getEntrypoints("sweet_potato", SPMLinkage.class).forEach(SPMLinkage::init);
 		ComposterHelper.register();
 		ResourceUtil.loadResource();
-		// Fuel
 		AnimalIngredients.configureParrot();
 	}
 
