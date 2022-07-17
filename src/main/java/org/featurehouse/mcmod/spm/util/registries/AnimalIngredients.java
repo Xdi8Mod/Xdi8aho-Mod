@@ -25,14 +25,12 @@ public final class AnimalIngredients {
 
     public static void configureParrot() {
         Set<Item> parrotTamingIngredients = ParrotEntityAccessor.getTamingIngredients();
-        parrotTamingIngredients.add(SPMMain.ENCHANTED_BEETROOT_SEEDS.get());
-        parrotTamingIngredients.add(SPMMain.ENCHANTED_WHEAT_SEEDS.get());
+        parrotTamingIngredients.add(SPMMain.ENCHANTED_CROP_SEEDS.get());
     }
 
     public static Stream<ItemStack> configureChicken(ItemStack[] stacks) {
         ArrayList<ItemStack> stackList = new ArrayList<>(Arrays.asList(stacks));
-        stackList.add(SPMMain.ENCHANTED_WHEAT_SEEDS.get().getDefaultInstance());
-        stackList.add(SPMMain.ENCHANTED_BEETROOT_SEEDS.get().getDefaultInstance());
+        stackList.add(SPMMain.ENCHANTED_CROP_SEEDS.get().getDefaultInstance());
 
         return stackList.stream();
     }
