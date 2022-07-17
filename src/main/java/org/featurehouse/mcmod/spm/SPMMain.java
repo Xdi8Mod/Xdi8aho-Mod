@@ -4,7 +4,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.food.Foods;
 import net.minecraft.world.inventory.MenuType;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -17,8 +16,12 @@ import org.featurehouse.mcmod.spm.blocks.SeedUpdaterBlock;
 import org.featurehouse.mcmod.spm.blocks.SweetPotatoesCropBlock;
 import org.featurehouse.mcmod.spm.blocks.entities.GrinderBlockEntity;
 import org.featurehouse.mcmod.spm.blocks.entities.MagicCubeBlockEntity;
-import org.featurehouse.mcmod.spm.blocks.plants.*;
+import org.featurehouse.mcmod.spm.blocks.plants.EnchantedBeetrootsBlock;
+import org.featurehouse.mcmod.spm.blocks.plants.EnchantedVanillaPotatoesBlock;
 import org.featurehouse.mcmod.spm.items.*;
+import org.featurehouse.mcmod.spm.platform.api.reg.PlatformRegister;
+import org.featurehouse.mcmod.spm.platform.api.resource.ResourceUtil;
+import org.featurehouse.mcmod.spm.platform.api.tag.TagContainer;
 import org.featurehouse.mcmod.spm.recipe.SeedUpdatingRecipe;
 import org.featurehouse.mcmod.spm.screen.GrinderScreenHandler;
 import org.featurehouse.mcmod.spm.screen.MagicCubeScreenHandler;
@@ -28,11 +31,8 @@ import org.featurehouse.mcmod.spm.util.objsettings.BlockSettings;
 import org.featurehouse.mcmod.spm.util.objsettings.ItemSettings;
 import org.featurehouse.mcmod.spm.util.objsettings.Materials;
 import org.featurehouse.mcmod.spm.util.objsettings.sweetpotato.SweetPotatoType;
-import org.featurehouse.mcmod.spm.platform.api.reg.PlatformRegister;
-import org.featurehouse.mcmod.spm.platform.api.resource.ResourceUtil;
 import org.featurehouse.mcmod.spm.util.registries.AnimalIngredients;
 import org.featurehouse.mcmod.spm.util.registries.ComposterHelper;
-import org.featurehouse.mcmod.spm.platform.api.tag.TagContainer;
 import org.featurehouse.mcmod.spm.world.gen.tree.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,7 +41,8 @@ import java.util.Collections;
 import java.util.function.Supplier;
 
 import static org.featurehouse.mcmod.spm.util.objsettings.BlockSettings.*;
-import static org.featurehouse.mcmod.spm.util.registries.RegistryHelper.*;
+import static org.featurehouse.mcmod.spm.util.registries.RegistryHelper.blockItem;
+import static org.featurehouse.mcmod.spm.util.registries.RegistryHelper.defaultItem;
 
 @StableApi
 public class SPMMain {
