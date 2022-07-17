@@ -13,31 +13,11 @@
                 {
                   "condition": "minecraft:match_tool",
                   "predicate": {
-                    "tag": "forge:shears",
-                    "enchantments": [
-                      {
-                        "enchantment": "minecraft:silk_touch",
-                        "levels": {
-                          "min": 1
-                        }
-                      }
-                    ]
-                  }
-                }
-              ],
-              "name": "sweet_potato:enchanted_acacia_leaves"
-            },
-            {
-              "type": "minecraft:item",
-              "conditions": [
-                {
-                  "condition": "minecraft:match_tool",
-                  "predicate": {
                     "tag": "forge:shears"
                   }
                 }
               ],
-              "name": "minecraft:acacia_leaves"
+              "name": "sweet_potato:enchanted_leaves"
             },
             {
               "type": "minecraft:item",
@@ -56,7 +36,7 @@
                   ]
                 }
               ],
-              "name": "minecraft:acacia_sapling"
+              "name": "sweet_potato:enchanted_sapling"
             }
           ]
         }
@@ -131,7 +111,7 @@
               ]
             }
           ],
-          "name": "sweet_potato:enchanted_acacia_sapling"
+          "name": "sweet_potato:enchanted_sapling"
         }
       ],
       "conditions": [
