@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/leaves",
+  "textures": {
+    "all": "sweet_potato:block/christmas_leaves_common"
+  }
+}

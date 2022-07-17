@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "sweet_potato:block/christmas_tree_sapling"
+  }
+}
