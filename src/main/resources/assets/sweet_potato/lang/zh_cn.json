@@ -68,6 +68,8 @@
 
   "block.sweet_potato.enchanted_tubers": "附魔块茎作物",
   "block.sweet_potato.enchanted_crops": "附魔粮食作物",
+  "block.sweet_potato.enchanted_sapling": "附魔树苗",
+  "block.sweet_potato.enchanted_leaves": "附魔树叶",
   "item.sweet_potato.enchanted_tuber": "附魔块茎",
   "item.sweet_potato.enchanted_crop": "附魔粮食",
   "item.sweet_potato.enchanted_crop_seeds": "附魔粮食种子"
