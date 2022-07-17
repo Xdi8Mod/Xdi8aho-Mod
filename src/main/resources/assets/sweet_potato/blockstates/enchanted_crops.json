@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "sweet_potato:block/enchcrops0"
+    },
+    "age=1": {
+      "model": "sweet_potato:block/enchcrops1"
+    },
+    "age=2": {
+      "model": "sweet_potato:block/enchcrops2"
+    },
+    "age=3": {
+      "model": "sweet_potato:block/enchcrops3"
+    }
+  }
+}

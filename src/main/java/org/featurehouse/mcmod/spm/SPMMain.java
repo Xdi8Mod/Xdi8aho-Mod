@@ -4,7 +4,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.food.Foods;
 import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
@@ -83,15 +85,10 @@ public class SPMMain {
 	public static final Supplier<Block> RED_POTATO_CROP;
 	public static final Supplier<Block> WHITE_POTATO_CROP;
 
-	public static final Supplier<Block> ENCHANTED_WHEAT_CROP;
-	public static final Supplier<Block> ENCHANTED_BEETROOTS_CROP;
+	public static final Supplier<Block> ENCHANTED_CROPS;
 	public static final Supplier<Block> ENCHANTED_TUBER;
-	//public static final Supplier<Block> ENCHANTED_VANILLA_POTATOES_CROP;
-	//public static final Supplier<Block> ENCHANTED_CARROTS_CROP;
 
-	//public static final Supplier<Block> ENCHANTED_SUGAR_CANE;
-
-		// Saplings
+	// Saplings
 	public static final Supplier<Block> ENCHANTED_OAK_SAPLING;
 	public static final Supplier<Block> ENCHANTED_SPRUCE_SAPLING;
 	public static final Supplier<Block> ENCHANTED_BIRCH_SAPLING;
@@ -117,18 +114,15 @@ public class SPMMain {
 	public static final Supplier<Item> ENCHANTED_JUNGLE_SAPLING_ITEM;
 	public static final Supplier<Item> ENCHANTED_ACACIA_SAPLING_ITEM;
 	public static final Supplier<Item> ENCHANTED_DARK_OAK_SAPLING_ITEM;
-	public static final Supplier<Item> ENCHANTED_WHEAT_SEEDS;
-	public static final Supplier<Item> ENCHANTED_BEETROOT_SEEDS;
+	public static final Supplier<Item> ENCHANTED_CROP_SEEDS;
+	public static final Supplier<Item> ENCHANTED_CROP_ITEM;
 	public static final Supplier<Item> ENCHANTED_TUBER_ITEM;
-	//public static final Supplier<Item> ENCHANTED_VANILLA_POTATO_ITEM;
-	//public static final Supplier<Item> ENCHANTED_CARROT_ITEM;
 	public static final Supplier<Item> ENCHANTED_OAK_LEAVES_ITEM;
 	public static final Supplier<Item> ENCHANTED_ACACIA_LEAVES_ITEM;
 	public static final Supplier<Item> ENCHANTED_BIRCH_LEAVES_ITEM;
 	public static final Supplier<Item> ENCHANTED_DARK_OAK_LEAVES_ITEM;
 	public static final Supplier<Item> ENCHANTED_JUNGLE_LEAVES_ITEM;
 	public static final Supplier<Item> ENCHANTED_SPRUCE_LEAVES_ITEM;
-	//public static final Supplier<Item> ENCHANTED_SUGAR_CANE_ITEM;
 
 
 	// -*- -*- MISC -*- -*- //
@@ -152,9 +146,6 @@ public class SPMMain {
 	public static final TagContainer<Item> RAW_SWEET_POTATOES;
 	public static final TagContainer<Item> ENCHANTED_SWEET_POTATOES;
 	public static final TagContainer<Item> ALL_SWEET_POTATOES;
-		// About Pigs & Parrots
-	public static final TagContainer<Item> PIG_BREEDING_INGREDIENTS;
-    public static final TagContainer<Item> CHICKEN_BREEDING_INGREDIENTS;
 
 	// Sounds
 	public static final Supplier<SoundEvent> AGROFORESTRY_TABLE_FINISH;
@@ -201,13 +192,9 @@ public class SPMMain {
 		PURPLE_POTATO_CROP = reg.block("purple_potatoes", ()->new SweetPotatoesCropBlock(BlockSettings.grassLike(), SweetPotatoType.PURPLE));
 		RED_POTATO_CROP = reg.block("red_potatoes", ()->new SweetPotatoesCropBlock(BlockSettings.grassLike(), SweetPotatoType.RED));
 		WHITE_POTATO_CROP = reg.block("white_potatoes", ()->new SweetPotatoesCropBlock(BlockSettings.grassLike(), SweetPotatoType.WHITE));
-		ENCHANTED_WHEAT_CROP = reg.block("enchanted_wheat", ()->new EnchantedWheatBlock(BlockSettings.grassLike()));
-		ENCHANTED_BEETROOTS_CROP = reg.block("enchanted_beetroots", ()->new EnchantedBeetrootsBlock(BlockSettings.grassLike()));
+		ENCHANTED_CROPS = reg.block("enchanted_crops", () -> new EnchantedBeetrootsBlock(BlockSettings.grassLike()));
 		ENCHANTED_TUBER = reg.block("enchanted_tubers", () -> new EnchantedVanillaPotatoesBlock(BlockSettings.grassLike()));
-		//ENCHANTED_VANILLA_POTATOES_CROP = reg.block("enchanted_potatoes", ()->new EnchantedVanillaPotatoesBlock(BlockSettings.grassLike()));
-		//ENCHANTED_CARROTS_CROP = reg.block("enchanted_carrots", ()->new EnchantedCarrotsBlock(BlockSettings.grassLike()));
-		//ENCHANTED_SUGAR_CANE = reg.block("enchanted_sugar_cane", ()->new EnchantedSugarCaneBlock(BlockSettings.grass()));
-			// Saplings
+		// Saplings
 		ENCHANTED_OAK_SAPLING = createEnchantedSapling("enchanted_oak_sapling", EnchantedOakSaplingGen::new);
 		ENCHANTED_SPRUCE_SAPLING = createEnchantedSapling("enchanted_spruce_sapling", EnchantedSpruceSaplingGen::new);
 		ENCHANTED_BIRCH_SAPLING = createEnchantedSapling("enchanted_birch_sapling", EnchantedBirchSaplingGen::new);
@@ -227,9 +214,9 @@ public class SPMMain {
 		RED_POTATO = reg.item("red_potato", ()->new RawSweetPotatoBlockItem(RED_POTATO_CROP.get(), ItemSettings.groupFood(), SweetPotatoType.RED));
 		WHITE_POTATO = reg.item("white_potato", ()->new RawSweetPotatoBlockItem(WHITE_POTATO_CROP.get(), ItemSettings.groupFood(), SweetPotatoType.WHITE));
 
-		ENCHANTED_WHEAT_SEEDS = AliasedEnchantedItem.of("enchanted_wheat_seeds", ENCHANTED_WHEAT_CROP);
-		ENCHANTED_BEETROOT_SEEDS = AliasedEnchantedItem.of("enchanted_beetroot_seeds", ENCHANTED_BEETROOTS_CROP);
+		ENCHANTED_CROP_SEEDS = AliasedEnchantedItem.of("enchanted_crop_seeds", ENCHANTED_CROPS);
 		ENCHANTED_TUBER_ITEM = AliasedEnchantedItem.ofMiscFood("enchanted_tuber", ENCHANTED_TUBER, Foods.COOKED_CHICKEN);
+		ENCHANTED_CROP_ITEM = defaultItem("enchanted_crop", () -> ItemSettings.groupFood().rarity(Rarity.UNCOMMON).food(Foods.BREAD));
 
 		ENCHANTED_ACACIA_LEAVES_ITEM = EnchantedBlockItem.of("enchanted_acacia_leaves", ENCHANTED_ACACIA_LEAVES, ItemSettings::decorations);
 		ENCHANTED_BIRCH_LEAVES_ITEM = EnchantedBlockItem.of("enchanted_birch_leaves", ENCHANTED_BIRCH_LEAVES, ItemSettings::decorations);
@@ -268,9 +255,6 @@ public class SPMMain {
 		RAW_SWEET_POTATOES = reg.itemTag("raw_sweet_potatoes");
 		ENCHANTED_SWEET_POTATOES = reg.itemTag("enchanted_sweet_potatoes");
 		ALL_SWEET_POTATOES = reg.itemTag("sweet_potatoes");
-			// About pig food, parrot food and chicken food
-		PIG_BREEDING_INGREDIENTS = reg.itemTag("pig_breeding_ingredients");
-		CHICKEN_BREEDING_INGREDIENTS = reg.itemTag("chicken_breeding_ingredients");
 
 		// Sounds
 		AGROFORESTRY_TABLE_FINISH = reg.sound("block.agroforestry_table.finish");
