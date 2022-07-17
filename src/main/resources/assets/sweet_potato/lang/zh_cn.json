@@ -67,5 +67,8 @@
   "tooltip.sweet_potato.enchanted_sweet_potato.effects": "效果： ",
 
   "block.sweet_potato.enchanted_tubers": "附魔块茎作物",
-  "item.sweet_potato.enchanted_tuber": "附魔块茎"
+  "block.sweet_potato.enchanted_crops": "附魔粮食作物",
+  "item.sweet_potato.enchanted_tuber": "附魔块茎",
+  "item.sweet_potato.enchanted_crop": "附魔粮食",
+  "item.sweet_potato.enchanted_crop_seeds": "附魔粮食种子"
 }
