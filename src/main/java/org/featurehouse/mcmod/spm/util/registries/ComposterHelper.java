@@ -28,8 +28,8 @@ public final class ComposterHelper {
         registerCompostableItem(0.3f, SPMMain.ENCHANTED_OAK_LEAVES_ITEM.get());
         registerCompostableItem(0.3f, SPMMain.ENCHANTED_SPRUCE_LEAVES_ITEM.get());
 
-        registerCompostableItem(0.3f, SPMMain.ENCHANTED_WHEAT_SEEDS.get());
-        registerCompostableItem(0.3f, SPMMain.ENCHANTED_BEETROOT_SEEDS.get());
+        registerCompostableItem(0.3f, SPMMain.ENCHANTED_CROP_SEEDS.get());
+        registerCompostableItem(0.65f, SPMMain.ENCHANTED_CROP_ITEM.get());
         registerCompostableItem(0.65f, SPMMain.ENCHANTED_TUBER_ITEM.get());
 
 
