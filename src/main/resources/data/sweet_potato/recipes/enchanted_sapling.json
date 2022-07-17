@@ -1,7 +1,7 @@
 {
   "type": "sweet_potato:seed_updating",
   "base": {
-    "item": "#minecraft:saplings"
+    "tag": "minecraft:saplings"
   },
   "addition": {
     "item": "sweet_potato:potato_powder"
