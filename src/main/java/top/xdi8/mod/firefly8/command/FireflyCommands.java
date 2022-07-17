@@ -27,6 +27,7 @@ public final class FireflyCommands {
                         .requires((CommandSourceStack src) -> src.hasPermission(2))
                         .then(Commands.argument("pos", BlockPosArgument.blockPos())
                                 .executes(BindXdi8PortalCommand::init0)
+                                .then(Commands.literal("for"))  // if not, Player "at" can't bind the portal!
                                 .then(Commands.argument("player", EntityArgument.player())
                                         .executes(BindXdi8PortalCommand::init1)
                                         .then(Commands.literal("at")
