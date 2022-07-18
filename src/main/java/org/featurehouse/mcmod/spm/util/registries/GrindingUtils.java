@@ -5,7 +5,6 @@ import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
-import org.featurehouse.mcmod.spm.util.annotation.StableApi;
 import org.featurehouse.mcmod.spm.platform.api.tag.TagContainer;
 import org.featurehouse.mcmod.spm.util.tag.TagLike;
 import org.jetbrains.annotations.NotNull;
@@ -15,7 +14,6 @@ import java.util.Objects;
 import java.util.OptionalDouble;
 
 /** @apiNote in forge, must be fired in an event, like FMLCommonSetupEvent */
-@StableApi  // Maybe not since 2.0!
 public final class GrindingUtils {
     public static IngredientDataMap ingredientDataMap() {
         return IngredientDataMap.INSTANCE;

@@ -11,6 +11,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.event.AddReloadListenerEvent;
@@ -49,6 +50,7 @@ public class SPMForgeImpl {
 
     public static final DeferredRegister<ResourceLocation> REG_STAT = DeferredRegister.create(Registry.CUSTOM_STAT_REGISTRY, MODID);
     public static final DeferredRegister<RecipeType<?>> REG_RECIPE_TYPE = DeferredRegister.create(Registry.RECIPE_TYPE_REGISTRY, MODID);
+    public static final DeferredRegister<TreeDecoratorType<?>> REG_TREE_DECORATOR_TYPE = DeferredRegister.create(ForgeRegistries.TREE_DECORATOR_TYPES, MODID);
 
     public SPMForgeImpl() {
         SPMMain.getLogger().info("SPM initializing!");  // Don't you dare delete this line!
@@ -61,6 +63,7 @@ public class SPMForgeImpl {
         REG_SOUND.register(modBus);
         REG_STAT.register(modBus);
         REG_RECIPE_TYPE.register(modBus);
+        REG_TREE_DECORATOR_TYPE.register(modBus);
     }
 
     @Mod.EventBusSubscriber(modid = "sweet_potato", bus = Mod.EventBusSubscriber.Bus.MOD)

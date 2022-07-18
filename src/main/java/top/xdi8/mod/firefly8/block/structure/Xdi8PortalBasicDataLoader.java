@@ -37,7 +37,11 @@ public final class Xdi8PortalBasicDataLoader
 
     @Override
     protected void apply(Reader reader, ResourceManager pResourceManager, ProfilerFiller pProfiler) {
-        Xdi8PortalBasicData.setInstance(Xdi8PortalBasicData.readText(reader));
+        try {
+            Xdi8PortalBasicData.setInstance(Xdi8PortalBasicData.readText(reader));
+        } catch (IllegalArgumentException e) {
+            LOGGER.error("Error applying portal data", e);
+        }
     }
 
     @SubscribeEvent
