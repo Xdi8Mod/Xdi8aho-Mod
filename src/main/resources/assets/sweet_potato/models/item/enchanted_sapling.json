@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "sweet_potato:block/enchanted_sapling"
+    "layer0": "sweet_potato:block/christmas_tree_sapling"
   }
 }
