@@ -8,10 +8,15 @@
   "item.firefly8.xdi8aho": "灯\uDB87\uDC30",
   "item.firefly8.tinted_dragon_breath": "神秘药水",
   "item.firefly8.tinted_firefly_bottle": "瓶装萤火虫",
+  "item.firefly8.bundler": "之前的物品栏",
 
   "itemGroup.firefly8": "灯\uDB87\uDC30",
   "entity.firefly8.firefly": "萤火虫",
 
 
-  "block.firefly8.xdi8aho_portal_core": "灯\uDB87\uDC30传送门核心"
+  "block.firefly8.xdi8aho_portal_core": "灯\uDB87\uDC30传送门核心",
+  "block.firefly8.xdi8aho_torch_top": "灯\uDB87\uDC30焰心",
+
+  "commands.bindxdi8portal.success": "已为 %1$s 绑定传送门",
+  "commands.bindxdi8portal.failure": "无法将 %1$s 的传送门绑定至 %2$s / (%3$s)"
 }

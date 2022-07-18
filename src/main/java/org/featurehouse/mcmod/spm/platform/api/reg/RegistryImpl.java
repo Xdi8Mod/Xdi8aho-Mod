@@ -1,6 +1,7 @@
 package org.featurehouse.mcmod.spm.platform.api.reg;
 
 import com.mojang.datafixers.types.Type;
+import com.mojang.serialization.Codec;
 import net.minecraft.Util;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
@@ -16,6 +17,8 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
+import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 import org.featurehouse.mcmod.spm.platform.api.tag.TagContainer;
 
 import java.util.Collection;
@@ -84,6 +87,11 @@ final class RegistryImpl implements PlatformRegisterWrapper {
     @Override
     public Supplier<SoundEvent> sound(String id) {
         return REG_SOUND.register(id, () -> new SoundEvent(new ResourceLocation(id)));
+    }
+
+    @Override
+    public <P extends TreeDecorator> Supplier<TreeDecoratorType<P>> treeDecoratorType(String id, Supplier<Codec<P>> codecGetter) {
+        return REG_TREE_DECORATOR_TYPE.register(id, () -> new TreeDecoratorType<>(codecGetter.get()));
     }
 }
 

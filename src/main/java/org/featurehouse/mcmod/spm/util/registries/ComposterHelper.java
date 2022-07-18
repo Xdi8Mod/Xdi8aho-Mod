@@ -14,26 +14,11 @@ public final class ComposterHelper {
     @ApiStatus.Internal
     public static void register() {
         registerCompostableItem(0.3f, SPMMain.PEEL.get());
-        registerCompostableItem(0.3f, SPMMain.ENCHANTED_OAK_SAPLING_ITEM.get());
-        registerCompostableItem(0.3f, SPMMain.ENCHANTED_SPRUCE_SAPLING_ITEM.get());
-        registerCompostableItem(0.3f, SPMMain.ENCHANTED_BIRCH_SAPLING_ITEM.get());
-        registerCompostableItem(0.3f, SPMMain.ENCHANTED_JUNGLE_SAPLING_ITEM.get());
-        registerCompostableItem(0.3f, SPMMain.ENCHANTED_ACACIA_SAPLING_ITEM.get());
-        registerCompostableItem(0.3f, SPMMain.ENCHANTED_DARK_OAK_SAPLING_ITEM.get());
-
-        registerCompostableItem(0.3f, SPMMain.ENCHANTED_ACACIA_LEAVES_ITEM.get());
-        registerCompostableItem(0.3f, SPMMain.ENCHANTED_BIRCH_LEAVES_ITEM.get());
-        registerCompostableItem(0.3f, SPMMain.ENCHANTED_DARK_OAK_LEAVES_ITEM.get());
-        registerCompostableItem(0.3f, SPMMain.ENCHANTED_JUNGLE_LEAVES_ITEM.get());
-        registerCompostableItem(0.3f, SPMMain.ENCHANTED_OAK_LEAVES_ITEM.get());
-        registerCompostableItem(0.3f, SPMMain.ENCHANTED_SPRUCE_LEAVES_ITEM.get());
-
-        registerCompostableItem(0.3f, SPMMain.ENCHANTED_WHEAT_SEEDS.get());
-        registerCompostableItem(0.3f, SPMMain.ENCHANTED_BEETROOT_SEEDS.get());
-        registerCompostableItem(0.65f, SPMMain.ENCHANTED_CARROT_ITEM.get());
-        registerCompostableItem(0.65f, SPMMain.ENCHANTED_VANILLA_POTATO_ITEM.get());
-
-        registerCompostableItem(0.5f, SPMMain.ENCHANTED_SUGAR_CANE_ITEM.get());
+        registerCompostableItem(0.3f, SPMMain.ENCHANTED_SAPLING_ITEM.get());
+        registerCompostableItem(0.3f, SPMMain.ENCHANTED_LEAVES_ITEM.get());
+        registerCompostableItem(0.3f, SPMMain.ENCHANTED_CROP_SEEDS.get());
+        registerCompostableItem(0.65f, SPMMain.ENCHANTED_CROP_ITEM.get());
+        registerCompostableItem(0.65f, SPMMain.ENCHANTED_TUBER_ITEM.get());
 
 
         for (SweetPotatoType type: SweetPotatoType.values()) {
