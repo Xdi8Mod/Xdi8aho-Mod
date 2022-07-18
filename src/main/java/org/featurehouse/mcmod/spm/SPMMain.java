@@ -147,6 +147,7 @@ public class SPMMain {
 		ComposterHelper.register();
 		ResourceUtil.loadResource();
 		AnimalIngredients.configureParrot();
+		TreeFeatures2.activateMe();
 	}
 
 	static {
