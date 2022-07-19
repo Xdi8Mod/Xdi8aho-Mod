@@ -6,5 +6,6 @@
   "mixins": [
     "AddTintedDragonBreathMixin",
     "AdvancementsMixin"
-  ]
+  ],
+  "refmap": "mixins.xdi8.refmap.json"
 }

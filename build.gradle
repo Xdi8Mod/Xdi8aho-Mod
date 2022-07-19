@@ -201,6 +201,13 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 }
 
+processResources {
+    inputs.property version, project.version
+    filesMatching("mods.toml") {
+        expand 'version': project.version
+    }
+}
+
 // Example for how to get properties into the manifest for reading at runtime.
 jar {
     manifest {
@@ -251,6 +258,7 @@ mixin {
     config 'mixins.firefly8-tint.json'
     config 'sweet_potato.mixins.json'
     config 'mixins.firefly8-main.json'
+
 }
 
 /*
