@@ -172,9 +172,12 @@ repositories {
         name = 'Aliyun Mirror'
         url  = 'https://maven.aliyun.com/repository/public'
     }
-    maven {
-        name = "Lss233's Mirror"
-        url  = 'https://maven.fastmirror.net/repositories/minecraft'
+    if (!"true".equalsIgnoreCase(System.getenv("GITHUB_ACTIONS")) ||
+            "true".equalsIgnoreCase(System.getenv("NO_LSS233_MIRROR"))) {
+        maven {
+            name = "Lss233's Mirror"
+            url  = 'https://maven.fastmirror.net/repositories/minecraft'
+        }
     }
 }
 
