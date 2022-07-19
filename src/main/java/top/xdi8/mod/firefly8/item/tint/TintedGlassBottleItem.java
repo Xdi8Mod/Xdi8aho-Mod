@@ -1,15 +1,12 @@
 package top.xdi8.mod.firefly8.item.tint;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Bee;
 import net.minecraft.world.entity.player.Player;
@@ -135,23 +132,15 @@ public class TintedGlassBottleItem extends BottleItem {
         }
         Level level = pPlayer.getLevel();
         ItemStack stack = pPlayer.getItemInHand(pUsedHand);
-        stack.shrink(1);
-        level.playSound(pPlayer, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), SoundEvents.BOTTLE_FILL,
-                SoundSource.NEUTRAL, 1.0F, 1.0F);
-
-        firefly.setInBottleTime(level.getGameTime());
-        CompoundTag targetTags = new CompoundTag();
-        firefly.save(targetTags);
         ItemStack resultStack = new ItemStack(FireflyItems.TINTED_FIREFLY_BOTTLE.get(), 1);
-        ListTag firefliesTag = new ListTag();
-        firefliesTag.add(targetTags);
-        resultStack.addTagElement("Fireflies", firefliesTag);
-        if (stack.isEmpty()) {
-            pPlayer.setItemInHand(pUsedHand, resultStack);
-        } else if (!pPlayer.getInventory().add(resultStack)) {
-            pPlayer.drop(resultStack, false);
+        if (TintedFireflyBottleItem.bottleFirefly(resultStack, pPlayer, level, firefly)) {
+            stack.shrink(1);
+            if (stack.isEmpty()) {
+                pPlayer.setItemInHand(pUsedHand, resultStack);
+            } else if (!pPlayer.getInventory().add(resultStack)) {
+                pPlayer.drop(resultStack, false);
+            }
         }
-        firefly.remove(Entity.RemovalReason.DISCARDED);
         return InteractionResult.SUCCESS;
     }
 
