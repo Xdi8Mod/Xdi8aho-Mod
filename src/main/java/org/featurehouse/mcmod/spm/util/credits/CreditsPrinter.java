@@ -13,7 +13,6 @@ import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.GsonHelper;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.featurehouse.mcmod.spm.platform.api.reg.PlatformRegister;
 import org.slf4j.Logger;
 
 import java.io.BufferedReader;
@@ -29,38 +28,42 @@ public record CreditsPrinter(Minecraft client,
                              IntSet centeredLines,
                              List<FormattedCharSequence> credits) {
     private static final Component SEPARATOR_LINE = new TextComponent("============").withStyle(ChatFormatting.WHITE);
-    private static final ResourceLocation SPM_FILE = PlatformRegister.id("credits.json");
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    public static void print(Minecraft client, IntConsumer creditsHeight,
-                             IntSet centeredLines, List<FormattedCharSequence> credits) {
-        new CreditsPrinter(client, creditsHeight, centeredLines, credits)
-                .print();
+    public static void printInternal(Minecraft client, IntConsumer creditsHeight,
+                                     IntSet centeredLines, List<FormattedCharSequence> credits) {
+        final CreditsPrinter printer = new CreditsPrinter(client, creditsHeight, centeredLines, credits);
+        printer.print("firefly8", "Xdi8 Aho Mod");
+        printer.print("sweet_potato", "Sweet Potato Mod");
     }
 
-    public void print() {
+    public void print(String modId, String modName) {
+        ResourceLocation file = new ResourceLocation(modId, "credits.json");
         Resource resource = null;
         try {
             resource = Objects.requireNonNull(this.client)
                     .getResourceManager()
-                    .getResource(SPM_FILE);
+                    .getResource(file);
             InputStream is = resource.getInputStream();
 
             ModCredits modCredits = ModCredits.fromJson(
                     GsonHelper.parse(new BufferedReader(new InputStreamReader(is))),
-                    SPM_FILE);
+                    file);
 
-            wrapTitle("Sweet Potato Mod Credits");
+            wrapTitle(modName + " Credits");
 
             wrapLines(false, "Author Group", ChatFormatting.GRAY);
             renderNameList(modCredits.authorGroup());
-            wrapLines(false, "Contributors", ChatFormatting.GRAY);
+            wrapLines(false, "Main Contributors", ChatFormatting.GRAY);
             renderContributorList(modCredits.contributors());
 
-            wrapTitle("Special Thanks from Sweet Potato Mod");
+            wrapTitle("Special Thanks from " + modName);
 
-            wrapLines(false, "Collaborators", ChatFormatting.GRAY);
-            renderNameList(modCredits.collaborators());
+            var collaborators = modCredits.collaborators();
+            if (!collaborators.isEmpty()) {
+                wrapLines(false, "Collaborators", ChatFormatting.GRAY);
+                renderNameList(collaborators);
+            }
             wrapLines(false, "Very Important Supporters", ChatFormatting.GRAY);
             renderNameList(modCredits.importantSupporters());
 
