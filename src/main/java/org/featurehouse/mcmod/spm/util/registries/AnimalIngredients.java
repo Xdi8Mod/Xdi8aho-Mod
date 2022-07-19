@@ -3,7 +3,7 @@ package org.featurehouse.mcmod.spm.util.registries;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import org.featurehouse.mcmod.spm.SPMMain;
-import org.featurehouse.mcmod.spm.mixin.acc.ParrotEntityAccessor;
+import org.featurehouse.mcmod.spm.platform.api.hook.AccParrot;
 import org.jetbrains.annotations.ApiStatus;
 
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ public final class AnimalIngredients {
     }
 
     public static void configureParrot() {
-        Set<Item> parrotTamingIngredients = ParrotEntityAccessor.getTamingIngredients();
+        Set<Item> parrotTamingIngredients = AccParrot.getTamingIngredients();
         parrotTamingIngredients.add(SPMMain.ENCHANTED_CROP_SEEDS.get());
     }
 
