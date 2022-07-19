@@ -10,6 +10,8 @@
   "item.firefly8.tinted_firefly_bottle": "Bottle of Fireflies",
   "item.firefly8.bundler": "Old Inventory",
 
+  "item.firefly8.tinted_firefly_bottle.too_many": "Can't stack fireflies over 5",
+
   "itemGroup.firefly8": "Xdi8 Aho",
   "entity.firefly8.firefly": "Firefly",
 
