@@ -1,10 +1,6 @@
-import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
-import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
-import java.time.format.DateTimeFormatterBuilder
-import java.time.temporal.ChronoUnit
 
 buildscript {
     repositories {
@@ -13,16 +9,12 @@ buildscript {
             name = 'Aliyun Mirror'
             url  = 'https://maven.aliyun.com/repository/public'
         }
-        maven {
-            name = "Lss233's Mirror"
-            url  = 'https://maven.fastmirror.net/repositories/minecraft'
-        }
         maven { url = 'https://maven.minecraftforge.net' }
         maven { url = 'https://maven.parchmentmc.org' }
         mavenCentral()
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.41', changing: true
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.41'
         //classpath "org.jetbrains.kotlin:kotlin-allopen:1.6.20"
         classpath 'org.parchmentmc:librarian:1.2.0'
         classpath 'org.spongepowered:mixingradle:0.7.32'
@@ -42,7 +34,8 @@ apply plugin: 'org.spongepowered.mixin'
 
 //apply from : 'https://featurehouse.github.io/resources/18/06/953b4d/e2d196c3f97701c23ca7d34ce2ed2576a86fab019e7a2009b2b94d/kff-3.3.2.gradle'
 class Constant {
-    static final String timestamp = "${DateTimeFormatter.ofPattern("yyMMdd.HHmm").format(LocalDateTime.now(ZoneId.of('+8')))}"
+    static final LocalDateTime now = LocalDateTime.now(ZoneId.of('+8'))
+    static final String timestamp = "${DateTimeFormatter.ofPattern("yyMMdd.HHmm").format(now)}"
 }
 
 version = "1.18.2-1.0.0+build.${Constant.timestamp}"
@@ -215,7 +208,7 @@ jar {
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : project.version,
                 "Implementation-Vendor"   : "teddyxlandlee",
-                "Implementation-Timestamp": Constant.timestamp
+                "Implementation-Timestamp": "${Constant.now}"
         ])
     }
     from("NOTICE.txt") {
