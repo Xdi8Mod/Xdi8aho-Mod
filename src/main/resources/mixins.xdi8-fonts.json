@@ -8,5 +8,6 @@
     "Wrapper"
   ],
 
-  "plugin": "top.xdi8.mod.fonts.asm.AsmPlugin"
+  "plugin": "top.xdi8.mod.fonts.asm.AsmPlugin",
+  "refmap": "mixins.xdi8.refmap.json"
 }
