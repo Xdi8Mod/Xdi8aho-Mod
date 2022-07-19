@@ -41,7 +41,6 @@ public class TintedFireflyBottleItem extends Item {
         }
         Level level = pPlayer.getLevel();
         ItemStack stack = pPlayer.getItemInHand(pUsedHand);
-        stack.shrink(1);
         level.playSound(pPlayer, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), SoundEvents.BOTTLE_FILL,
                 SoundSource.NEUTRAL, 1.0F, 1.0F);
 
