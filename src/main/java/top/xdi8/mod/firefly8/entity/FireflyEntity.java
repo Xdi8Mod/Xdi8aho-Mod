@@ -51,6 +51,8 @@ public class FireflyEntity extends PathfinderMob implements FlyingAnimal, Ownabl
     private long inBottleTime;
     private long outOfBottleTime;
 
+    public static FireflyEntity create(Level level) { return new FireflyEntity(FireflyEntityTypes.FIREFLY.get(), level); }
+    
     protected FireflyEntity(EntityType<FireflyEntity> entityType, Level level) {
         super(entityType, level);
         this.moveControl = new FlyingMoveControl(this, 20, false);
@@ -142,14 +144,10 @@ public class FireflyEntity extends PathfinderMob implements FlyingAnimal, Ownabl
         this.setOutOfBottleTime(pCompound.getLong("OutOfBottleTime"));
 
         // net.minecraft.world.entity.TamableAnimal
-        UUID uuid;
+        UUID uuid = null;
         if (pCompound.hasUUID("Owner")) {
             uuid = pCompound.getUUID("Owner");
-        } else {
-            String owner = pCompound.getString("Owner");
-            uuid = OldUsersConverter.convertMobOwnerIfNecessary(Objects.requireNonNull(this.getServer()),
-                    owner);
-        }
+        }   // no need to compat old owner id
 
         if (uuid != null) {
             try {
