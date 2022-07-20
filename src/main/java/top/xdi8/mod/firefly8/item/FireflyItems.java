@@ -34,6 +34,14 @@ public final class FireflyItems {
             XDI8AHO_PORTAL_CORE_BLOCK;
 
     static {
+        FIREFLY_SPAWN_EGG = REGISTRY.register("firefly_spawn_egg", () ->
+                new ForgeSpawnEggItem(FireflyEntityTypes.FIREFLY,
+                        0x000000, 0x00f500,
+                        defaultProp()));
+        // Blocks
+        XDI8AHO_PORTAL_CORE_BLOCK = REGISTRY.register("xdi8aho_portal_core",
+                () -> new BlockItem(FireflyBlocks.XDI8AHO_PORTAL_CORE_BLOCK.get(), defaultProp()));
+        // Bottles
         TINTED_GLASS_BOTTLE = REGISTRY.register("tinted_glass_bottle", () ->
             new TintedGlassBottleItem(defaultProp()));
         TINTED_POTION = REGISTRY.register("tinted_potion", () ->
@@ -53,17 +61,10 @@ public final class FireflyItems {
                         .craftRemainder(TINTED_GLASS_BOTTLE.get())
                         .rarity(Rarity.UNCOMMON)));
         TINTED_FIREFLY_BOTTLE = REGISTRY.register("tinted_firefly_bottle", () ->
-                new TintedFireflyBottleItem(defaultProp()));
+                new TintedFireflyBottleItem(defaultProp().stacksTo(1)));
         XDI8AHO_ICON = REGISTRY.register("xdi8aho", () ->
                 new Item(new Item.Properties()));
-        FIREFLY_SPAWN_EGG = REGISTRY.register("firefly_spawn_egg", () ->
-                new ForgeSpawnEggItem(FireflyEntityTypes.FIREFLY,
-                        0x000000, 0x00f500,
-                        defaultProp()));
         BUNDLER = REGISTRY.register("bundler", BundlerItem::new);
-        // Blocks
-        XDI8AHO_PORTAL_CORE_BLOCK = REGISTRY.register("xdi8aho_portal_core",
-                () -> new BlockItem(FireflyBlocks.XDI8AHO_PORTAL_CORE_BLOCK.get(), defaultProp()));
     }
 
     static Item.Properties defaultProp() { return new Item.Properties().tab(TAB); }
