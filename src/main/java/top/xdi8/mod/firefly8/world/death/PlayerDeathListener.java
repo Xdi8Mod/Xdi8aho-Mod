@@ -24,7 +24,8 @@ public class PlayerDeathListener {
         if (oldPlayer.level.getGameRules().getBoolean(GameRules.RULE_FORGIVE_DEAD_PLAYERS)) {
             oldPlayer.tellNeutralMobsThatIDied();
         }
-        final ServerPlayer newPlayer = oldPlayer.server.getPlayerList().respawn(oldPlayer, true);
-        // TODO: criterion
+        //final ServerPlayer newPlayer =
+                oldPlayer.server.getPlayerList().respawn(oldPlayer, true);
+        // TODO: criterion, when dealing with multiplatform
     }
 }

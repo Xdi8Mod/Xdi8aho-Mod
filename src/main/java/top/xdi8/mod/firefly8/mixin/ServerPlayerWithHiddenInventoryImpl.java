@@ -22,6 +22,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import org.apache.commons.lang3.tuple.Pair;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -29,6 +30,7 @@ import top.xdi8.mod.firefly8.block.FireflyBlocks;
 import top.xdi8.mod.firefly8.block.Xdi8ahoPortalTopBlock;
 import top.xdi8.mod.firefly8.ext.IServerPlayerWithHiddenInventory;
 import top.xdi8.mod.firefly8.item.FireflyItems;
+import top.xdi8.mod.firefly8.world.Xdi8DimensionUtils;
 
 import java.util.Objects;
 
@@ -77,6 +79,7 @@ abstract class ServerPlayerWithHiddenInventoryImpl extends Player implements ISe
 
     @Override
     public boolean xdi8$moveItemsToPortal() {
+        if (!Xdi8DimensionUtils.canRedirectRespawn(getLevel())) return false;
         if (!xdi8$validatePortal()) return false;
         final SimpleContainer inv = this.xdi8$getPortalInv();
         xdi8$dropOldThings(inv);
