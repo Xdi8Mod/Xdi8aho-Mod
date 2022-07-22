@@ -1,11 +1,10 @@
 package top.xdi8.mod.firefly8.entity;
 
+import it.unimi.dsi.fastutil.objects.Object2LongLinkedOpenHashMap;
+import it.unimi.dsi.fastutil.objects.Object2LongMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
-import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.server.players.OldUsersConverter;
+import net.minecraft.nbt.Tag;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageSource;
@@ -25,31 +24,26 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.RandomSource;
-import net.minecraft.world.level.levelgen.XoroshiroRandomSource;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import top.xdi8.mod.firefly8.particle.FireflyParticles;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Objects;
+import java.util.Collection;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @see net.minecraft.world.entity.animal.Bee
  * @see net.minecraft.world.entity.ambient.Bat
  */
-public class FireflyEntity extends PathfinderMob implements FlyingAnimal, OwnableEntity {
-    private final RandomSource randomSource = new XoroshiroRandomSource(this.random.nextLong(), this.random.nextLong());
+public class FireflyEntity extends PathfinderMob implements FlyingAnimal {
     private int lightTime;
-    /* NBT */
-    private boolean isNaturalGen = true;    // kept true for compatibility
-    // TODO more than 1 owner
-    protected static final EntityDataAccessor<Optional<UUID>> DATA_OWNERUUID_ID = SynchedEntityData.defineId(FireflyEntity.class, EntityDataSerializers.OPTIONAL_UUID);
-    private long inBottleTime;
-    private long outOfBottleTime;
+    private final Object2LongMap<UUID> ownerMap = new Object2LongLinkedOpenHashMap<>();
+    protected Object2LongMap<UUID> getOwnerMap() { return ownerMap; }
 
     public static FireflyEntity create(Level level) { return new FireflyEntity(FireflyEntityTypes.FIREFLY.get(), level); }
     
@@ -58,49 +52,15 @@ public class FireflyEntity extends PathfinderMob implements FlyingAnimal, Ownabl
         this.moveControl = new FlyingMoveControl(this, 20, false);
     }
 
-    public void setNaturalGen(boolean naturalGen) {
-        isNaturalGen = naturalGen;
+    public void addOwnerUUID(long outOfBottleTime, @Nullable UUID uuid) {
+        this.getOwnerMap().put(uuid, outOfBottleTime);
     }
 
-    public boolean isNaturalGen() {
-        return isNaturalGen;
-    }
-
-    public void setInBottleTime(long time) {
-        inBottleTime = time;
-    }
-
-    public long getInBottleTime() {
-        return inBottleTime;
-    }
-
-    public void setOutOfBottleTime(long time) {
-        outOfBottleTime = time;
-    }
-
-    public long getOutOfBottleTime() {
-        return outOfBottleTime;
-    }
-
-    @Nullable
-    @Override
-    public UUID getOwnerUUID() {
-        return this.entityData.get(DATA_OWNERUUID_ID).orElse(null);
-    }
-
-    public void setOwnerUUID(@Nullable UUID p_21817_) {
-        this.entityData.set(DATA_OWNERUUID_ID, Optional.ofNullable(p_21817_));
-    }
-
-    @Nullable
-    @Override
-    public Player getOwner() {
-        try {
-            UUID uuid = this.getOwnerUUID();
-            return uuid == null ? null : this.level.getPlayerByUUID(uuid);
-        } catch (IllegalArgumentException illegalargumentexception) {
-            return null;
-        }
+    @Nonnull
+    public Collection<Player> getOwners() {
+        return getOwnerMap().keySet().stream()
+                .flatMap(uuid -> Optional.ofNullable(level.getPlayerByUUID(uuid)).stream())
+                .collect(Collectors.toUnmodifiableSet());
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -113,13 +73,6 @@ public class FireflyEntity extends PathfinderMob implements FlyingAnimal, Ownabl
     }
 
     @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(DATA_OWNERUUID_ID, Optional.empty());
-        //this.getEntityData().define(DATA_LUMINANCE, (byte)0);
-    }
-
-    @Override
     public float getWalkTargetValue(@NotNull BlockPos pPos, @NotNull LevelReader pLevel) {
         return pLevel.getBlockState(pPos).isAir() ? 10 : 0;
     }
@@ -127,38 +80,20 @@ public class FireflyEntity extends PathfinderMob implements FlyingAnimal, Ownabl
     @Override
     public void addAdditionalSaveData(@NotNull CompoundTag pCompound) {
         super.addAdditionalSaveData(pCompound);
-        pCompound.putBoolean("NaturalGen", isNaturalGen());
-        pCompound.putLong("InBottleTime", getInBottleTime());
-        pCompound.putLong("OutOfBottleTime", getOutOfBottleTime());
-        // net.minecraft.world.entity.TamableAnimal
-        if (this.getOwnerUUID() != null) {
-            pCompound.putUUID("Owner", this.getOwnerUUID());
-        }
+        // New Schema, 22 Jul, teddyxlandlee
+        pCompound.put("OwnerData", FireflyEntityData.serializeOwners(this.getOwnerMap()));
     }
 
     @Override
     public void readAdditionalSaveData(@NotNull CompoundTag pCompound) {
         super.readAdditionalSaveData(pCompound);
-        this.setNaturalGen(pCompound.getBoolean("NaturalGen"));
-        this.setInBottleTime(pCompound.getLong("InBottleTime"));
-        this.setOutOfBottleTime(pCompound.getLong("OutOfBottleTime"));
-
-        // net.minecraft.world.entity.TamableAnimal
-        UUID uuid = null;
-        if (pCompound.hasUUID("Owner")) {
-            uuid = pCompound.getUUID("Owner");
-        }   // no need to compat old owner id
-
-        if (uuid != null) {
-            try {
-                this.setOwnerUUID(uuid);
-            } catch (Throwable ignored) {
-            }
+        if (pCompound.contains("OwnerData", Tag.TAG_LIST)) {
+            FireflyEntityData.deserializeOwners(this.getOwnerMap(), pCompound.getList("OwnerData", Tag.TAG_COMPOUND));
         }
     }
 
     private boolean shouldDamage() {
-        if (this.level.isDay() && !this.isNaturalGen) {
+        if (this.level.isDay()) {
             float brightness = this.getBrightness();
             BlockPos blockpos = new BlockPos(this.getX(), this.getEyeY(), this.getZ());
             return brightness > 0.5F && this.level.canSeeSky(blockpos);
@@ -169,14 +104,23 @@ public class FireflyEntity extends PathfinderMob implements FlyingAnimal, Ownabl
     @Override
     public void tick() {
         super.tick();
-        if (this.getLevel().isClientSide()) {
-            if (this.lightTime-- <= 0 && this.randomSource.nextInt(8) == 0) {
+        final Level level = this.getLevel();
+        if (level.isClientSide()) {
+            if (this.lightTime-- <= 0 && this.random.nextInt(8) == 0) {
                 this.lightTime = 100;
                 this.level.addParticle(FireflyParticles.FIREFLY.get(), this.getX(), this.getY(), this.getZ(), 0, 0, 0);
             }
         } else {
             if (this.shouldDamage()) {
                 this.hurt(DamageSource.ON_FIRE, 0.5F);
+            }
+        }
+
+        if (!level.isClientSide()) {
+            // optimize owner
+            final long gameTime = level.getGameTime();
+            if (gameTime % 256 == 0) {  // update each 12.8s - way shorter than an hour
+                FireflyEntityData.deleteOutdatedOwners(this.getOwnerMap(), gameTime);
             }
         }
     }
