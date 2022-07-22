@@ -85,7 +85,15 @@ public sealed abstract class AbstractFollowPlayerGoal extends Goal {
 
         @Override
         protected @Nullable LivingEntity whomToFollow() {
-            return self.getOwner();
+            //return self.getOwner();
+            final var players = self.getOwners().stream()
+                    .filter(p -> p.distanceToSqr(self) <= 4096 /* four chunks*/)
+                    .toList();
+            return switch (players.size()) {
+                case 0 -> null;
+                case 1 -> players.get(0);
+                default -> players.get(self.getRandom().nextInt(players.size()));
+            };
         }
     }
 
