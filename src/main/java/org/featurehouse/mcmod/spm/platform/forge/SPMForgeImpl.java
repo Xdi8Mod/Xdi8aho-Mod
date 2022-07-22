@@ -29,7 +29,7 @@ import org.featurehouse.mcmod.spm.client.SPMClient;
 import org.featurehouse.mcmod.spm.resource.magicalenchantment.MagicalEnchantmentLoader;
 import org.featurehouse.mcmod.spm.platform.api.client.ColorProviders;
 import org.jetbrains.annotations.ApiStatus;
-import top.xdi8.mod.firefly8.item.tint.advancement.AdvancementLoadingEvent;
+import top.xdi8.mod.firefly8.advancement.AdvancementLoadingEvent;
 
 import java.util.Map;
 import java.util.function.Supplier;

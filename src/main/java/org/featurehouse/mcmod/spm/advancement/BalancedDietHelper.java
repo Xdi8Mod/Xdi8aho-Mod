@@ -7,7 +7,7 @@ import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import org.featurehouse.mcmod.spm.SPMMain;
-import top.xdi8.mod.firefly8.item.tint.advancement.AdvancementLoadingContext;
+import top.xdi8.mod.firefly8.advancement.AdvancementLoadingContext;
 
 import java.util.List;
 import java.util.function.Supplier;
