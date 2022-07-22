@@ -56,8 +56,9 @@ public class GrinderBlock extends AbstractBlockWithEntity<GrinderBlockEntity> {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void randomTick(BlockState pState, ServerLevel pLevel, BlockPos pPos, Random pRandom) {
-        if (pRandom.nextInt(128) == 0) {
+        if (pState.getValue(GRINDING) && pRandom.nextInt(32) == 0) {
             pLevel.playSound(null, pPos, SPMMain.GRINDER_GRIND.get(),
                     SoundSource.BLOCKS, 1.0f, 1.0f);
         }
