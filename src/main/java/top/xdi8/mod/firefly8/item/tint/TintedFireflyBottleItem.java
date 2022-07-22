@@ -6,20 +6,16 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
@@ -27,7 +23,7 @@ import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import top.xdi8.mod.firefly8.block.FireflyBlockTags;
 import top.xdi8.mod.firefly8.entity.FireflyEntity;
-import top.xdi8.mod.firefly8.entity.FireflyEntityTypes;
+import top.xdi8.mod.firefly8.entity.FireflyEntityData;
 import top.xdi8.mod.firefly8.item.FireflyItems;
 
 import java.util.Optional;
@@ -69,20 +65,25 @@ public class TintedFireflyBottleItem extends Item {
             pPlayer.displayClientMessage(new TranslatableComponent("item.firefly8.tinted_firefly_bottle.too_many"), true);
             return false;
         } else {
-            firefly.setInBottleTime(level.getGameTime());
-            CompoundTag targetTags = new CompoundTag();
             if (firefly.isPassenger())
                 firefly.stopRiding();
-            firefly.save(targetTags);
+            if (firefly.isVehicle())
+                firefly.ejectPassengers();
+
+            CompoundTag targetTags = new CompoundTag();
+            targetTags.putLong("InBottleTime", level.getGameTime());
+            FireflyEntityData.saveToTag(targetTags, firefly);
+            fireflyList.add(targetTags);
+
+            firefly.remove(Entity.RemovalReason.DISCARDED);
             level.playSound(null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), SoundEvents.BOTTLE_FILL,
                     SoundSource.NEUTRAL, 1.0F, 1.0F);
-            fireflyList.add(targetTags);
-            firefly.remove(Entity.RemovalReason.DISCARDED);
             return true;
         }
     }
 
     /* FIREFLY BOTTLING END */
+    /* FIREFLY RELEASING START */
 
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level pLevel,
@@ -122,54 +123,18 @@ public class TintedFireflyBottleItem extends Item {
             }
             CompoundTag fireflyTag = fireflyList.getCompound(fireflyList.size() - 1);
             FireflyEntity fireflyEntity = FireflyEntity.create(level);
-            fireflyEntity.load(fireflyTag);
             fireflyEntity.moveTo(spawnPos);
-            fireflyEntity.setDeltaMovement(Vec3.ZERO);
-            fireflyEntity.setOutOfBottleTime(level.getGameTime());
-            if (fireflyEntity.getOutOfBottleTime() - fireflyEntity.getInBottleTime() >= 24000L){
-                // 20 minutes
-                fireflyEntity.setOwnerUUID(player.getUUID());
+
+            FireflyEntityData.loadFromTag(fireflyEntity, fireflyTag);
+            final long inBottleTime = fireflyTag.getLong("InBottleTime");
+            final long outOfBottleTime = level.getGameTime();
+            if (outOfBottleTime - inBottleTime >= FireflyEntityData.CHARGE_TIME) { // 20min
+                fireflyEntity.addOwnerUUID(outOfBottleTime, player.getUUID());
             }
             level.addFreshEntity(fireflyEntity);
             fireflyList.remove(fireflyList.size() - 1);
         }
         return Either.left(stack);
-    }
-
-    @Override
-    public @NotNull InteractionResult useOn(@NotNull UseOnContext pContext) {
-        Level level = pContext.getLevel();
-        if (level.isClientSide()) return InteractionResult.SUCCESS;
-
-        BlockPos clickedPos = pContext.getClickedPos();
-        final BlockState state = level.getBlockState(clickedPos);
-        if (state.is(FireflyBlockTags.FIREFLIES_CAN_RELEASE)) {
-            var airPos = getNearAirPos(level, clickedPos);
-            if (airPos.isEmpty()) {
-                LOGGER.debug("No space for spawning from {}", clickedPos);
-                return InteractionResult.PASS;
-            }
-            Player player = pContext.getPlayer();
-            ItemStack itemStack = pContext.getItemInHand();
-            if (player == null) return InteractionResult.PASS;
-            ListTag fireflyList = itemStack.getOrCreateTag().getList("Fireflies", 10);
-            CompoundTag fireflyTag = fireflyList.getCompound(fireflyList.size() - 1);
-            EntityType<FireflyEntity> fireflyEntityType = FireflyEntityTypes.FIREFLY.get();
-            FireflyEntity fireflyEntity = (FireflyEntity) fireflyEntityType.spawn((ServerLevel) level, itemStack, player, airPos.get(), MobSpawnType.BUCKET, true, false);
-            if (fireflyEntity == null) {
-                LOGGER.error("Null firefly spawn");
-                return InteractionResult.PASS;
-            }
-            fireflyEntity.load(fireflyTag);
-            fireflyEntity.setOutOfBottleTime(level.getGameTime());
-            if (fireflyEntity.getOutOfBottleTime() - fireflyEntity.getInBottleTime() >= 24000L){
-                // 20 minutes
-                fireflyEntity.setOwnerUUID(player.getUUID());
-            }
-            fireflyList.remove(fireflyTag);
-            return InteractionResult.CONSUME;
-        }
-        return InteractionResult.PASS;
     }
 
     static java.util.Optional<BlockPos> getNearAirPos(Level level, BlockPos blockPos) {
@@ -184,4 +149,5 @@ public class TintedFireflyBottleItem extends Item {
                     java.util.function.UnaryOperator.identity(),
                     BlockPos::below
             );
+    /* FIREFLY RELEASING END */
 }
