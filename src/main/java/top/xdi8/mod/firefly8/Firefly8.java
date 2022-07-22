@@ -12,12 +12,14 @@ import top.xdi8.mod.firefly8.item.FireflyItems;
 import top.xdi8.mod.firefly8.item.tint.brewing.TintedPotionBrewing;
 import top.xdi8.mod.firefly8.particle.FireflyParticles;
 import top.xdi8.mod.firefly8.world.FireflyMobBiomeGen;
+import top.xdi8.mod.firefly8.world.Xdi8PoiTypes;
 
 @Mod("firefly8")
 public class Firefly8 {
     public Firefly8() {
         // Block
         FireflyBlocks.REGISTRY.register(modBus());
+        Xdi8PoiTypes.REGISTRY.register(modBus());
         // Item
         FireflyItems.REGISTRY.register(modBus());
         TintedPotionBrewing.register();

@@ -11,9 +11,11 @@ public class FireflyBlocks {
 
     public static final RegistryObject<Block> XDI8AHO_PORTAL_CORE_BLOCK;
     public static final RegistryObject<Block> XDI8AHO_PORTAL_TOP_BLOCK;
+    public static final RegistryObject<Block> XDI8AHO_PORTAL_BLOCK;
 
     static {
         XDI8AHO_PORTAL_CORE_BLOCK = REGISTRY.register("xdi8aho_portal_core", Xdi8ahoPortalCoreBlock::new);
         XDI8AHO_PORTAL_TOP_BLOCK = REGISTRY.register("xdi8aho_torch_top", Xdi8ahoPortalTopBlock::new);
+        XDI8AHO_PORTAL_BLOCK = REGISTRY.register("xdi8aho_portal", Xdi8ahoPortalBlock::new);
     }
 }

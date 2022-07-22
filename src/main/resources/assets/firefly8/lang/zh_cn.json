@@ -19,6 +19,7 @@
 
   "block.firefly8.xdi8aho_portal_core": "灯\uDB87\uDC30传送门核心",
   "block.firefly8.xdi8aho_torch_top": "灯\uDB87\uDC30焰心",
+  "block.firefly8.xdi8aho_portal": "灯\uDB87\uDC30传送门方块",
 
   "commands.bindxdi8portal.success": "已为 %1$s 绑定传送门",
   "commands.bindxdi8portal.failure": "无法将 %1$s 的传送门绑定至 %2$s / (%3$s)"

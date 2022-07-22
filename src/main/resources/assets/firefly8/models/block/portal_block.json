@@ -1,0 +1,6 @@
+{
+  "parent": "firefly8:block/portal_block_parent",
+  "textures": {
+    "side": "firefly8:block/portal_block"
+  }
+}
