@@ -9,8 +9,7 @@ import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
 import top.xdi8.mod.firefly8.block.FireflyBlocks;
 import top.xdi8.mod.firefly8.entity.FireflyEntityTypes;
-import top.xdi8.mod.firefly8.item.indium.IndiumIngotItem;
-import top.xdi8.mod.firefly8.item.indium.IndiumNuggetItem;
+import top.xdi8.mod.firefly8.item.indium.*;
 import top.xdi8.mod.firefly8.item.tint.*;
 
 public final class FireflyItems {
@@ -39,6 +38,11 @@ public final class FireflyItems {
             XDI8AHO_PORTAL_TOP_BLOCK,
             INDIUM_INGOT,
             INDIUM_NUGGET,
+            INDIUM_AXE,
+            INDIUM_HOE,
+            INDIUM_PICKAXE,
+            INDIUM_SHOVEL,
+            INDIUM_SWORD,
             INDIUM_BLOCK,
             INDIUM_ORE_BLOCK,
             DEEPSLATE_INDIUM_ORE_BLOCK;
@@ -75,6 +79,16 @@ public final class FireflyItems {
                 () -> new IndiumIngotItem(defaultProp()));
         INDIUM_NUGGET = REGISTRY.register("indium_nugget",
                 () -> new IndiumNuggetItem(defaultProp()));
+        INDIUM_AXE = REGISTRY.register("indium_axe",
+                () -> new IndiumAxeItem(defaultProp()));
+        INDIUM_HOE = REGISTRY.register("indium_hoe",
+                () -> new IndiumHoeItem(defaultProp()));
+        INDIUM_PICKAXE = REGISTRY.register("indium_pickaxe",
+                () -> new IndiumPickaxeItem(defaultProp()));
+        INDIUM_SHOVEL = REGISTRY.register("indium_shovel",
+                () -> new IndiumShovelItem(defaultProp()));
+        INDIUM_SWORD = REGISTRY.register("indium_sword",
+                () -> new IndiumSwordItem(defaultProp()));
         // Blocks
         XDI8AHO_PORTAL_CORE_BLOCK = REGISTRY.register("xdi8aho_portal_core",
                 () -> new BlockItem(FireflyBlocks.XDI8AHO_PORTAL_CORE_BLOCK.get(), defaultProp()));
