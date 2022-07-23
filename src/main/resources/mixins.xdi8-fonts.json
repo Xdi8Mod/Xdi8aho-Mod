@@ -7,7 +7,6 @@
   "client": [
     "MixinLoadFonts"
   ],
-  "plugin": "top.xdi8.mod.fonts.Xdi8MixinConfig",
 
   "refmap": "refmap.xdi8-fonts.json"
 }
