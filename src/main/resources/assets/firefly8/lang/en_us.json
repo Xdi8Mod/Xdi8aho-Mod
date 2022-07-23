@@ -11,6 +11,11 @@
   "item.firefly8.bundler": "Old Inventory",
   "item.firefly8.indium_ingot": "Indium Ingot",
   "item.firefly8.indium_nugget": "Indium Nugget",
+  "item.firefly8.indium_axe": "Indium Axe",
+  "item.firefly8.indium_hoe": "Indium Hoe",
+  "item.firefly8.indium_pickaxe": "Indium Pickaxe",
+  "item.firefly8.indium_shovel": "Indium Shovel",
+  "item.firefly8.indium_sword": "Indium Sword",
 
   "item.firefly8.tinted_firefly_bottle.too_many": "Can't stack fireflies over 5",
 
