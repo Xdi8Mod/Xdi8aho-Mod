@@ -22,7 +22,6 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import org.apache.commons.lang3.tuple.Pair;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -106,15 +105,18 @@ abstract class ServerPlayerWithHiddenInventoryImpl extends Player implements ISe
         ItemEntity itemEntity = new ItemEntity(level, vec3.x(), vec3.y(), vec3.z(), itemStack);
         level.addFreshEntity(itemEntity);
     }
-
-    @Override
-    public boolean xdi8$validatePortal() {
+    
+    public boolean xdi8$validatePortal(ResourceKey<Level> dimension, BlockPos pos) {
         final MinecraftServer server = getServer();
         assert server != null;  // I'm sure
-        final ServerLevel level = server.getLevel(xdi8$portalDimension);
+        final ServerLevel level = server.getLevel(dimension);
         if (level == null) return false;
-        final BlockState state = level.getBlockState(xdi8$portalPosition);
+        final BlockState state = level.getBlockState(pos);
         return state.is(FireflyBlocks.XDI8AHO_PORTAL_TOP_BLOCK.get()) &&
                 state.getValue(Xdi8ahoPortalTopBlock.FIREFLY_COUNT) > 0;
+    }
+
+    public boolean xdi8$validatePortal() {
+        return xdi8$validatePortal(xdi8$portalDimension, xdi8$portalPosition);
     }
 }

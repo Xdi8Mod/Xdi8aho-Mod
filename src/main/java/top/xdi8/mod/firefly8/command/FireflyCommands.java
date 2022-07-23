@@ -48,7 +48,7 @@ public final class FireflyCommands {
     private static final class BindXdi8PortalCommand {
         private static int execute(ResourceKey<Level> level, BlockPos pos, ServerPlayer player, CommandSourceStack stack) {
             final IServerPlayerWithHiddenInventory playerExt = IServerPlayerWithHiddenInventory.xdi8$extend(player);
-            if (playerExt.xdi8$validatePortal()) {
+            if (playerExt.xdi8$validatePortal(level, pos)) {
                 playerExt.xdi8$setPortal(level, pos);
                 stack.sendSuccess(new TranslatableComponent("commands.bindxdi8portal.success", player.getDisplayName()), true);
                 return 1;
