@@ -1,7 +1,7 @@
 {
   "parent": "recipes/root",
   "rewards": {
-    "recipies": [
+    "recipes": [
       "firefly8:tint_glass_bottles",
       "firefly8:tinted_glass_bottle"
     ]
