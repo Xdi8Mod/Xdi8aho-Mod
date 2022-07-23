@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ii ",
+    "is ",
+    " s "
+  ],
+  "group": "firefly8:indium",
+  "key": {
+    "i": {
+      "item": "firefly8:indium_ingot"
+    },
+    "s": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "firefly8:indium_axe",
+    "count": 1
+  }
+}
