@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:village",
+  "config": {
+    "start_pool": "firefly8:little_house",
+    "size": 1
+  },
+  "biomes": "#firefly8:has_structure/houses",
+  "adapt_noise": true,
+  "spawn_overrides": {}
+}
