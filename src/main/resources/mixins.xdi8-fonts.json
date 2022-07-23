@@ -5,7 +5,9 @@
   "package": "top.xdi8.mod.fonts.mixin",
 
   "client": [
+    "MixinLoadFonts"
   ],
+  "plugin": "top.xdi8.mod.fonts.Xdi8MixinConfig",
 
-  "refmap": "mixins.xdi8.refmap.json"
+  "refmap": "refmap.xdi8-fonts.json"
 }
