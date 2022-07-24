@@ -2,12 +2,10 @@
   "minVersion": "0.8",
   "compatibilityLevel": "JAVA_17",
   "required": true,
-  "package": "top.xdi8.mod.fonts.asm.fake",
+  "package": "top.xdi8.mod.fonts.mixin",
 
   "client": [
-    "Wrapper"
   ],
 
-  "plugin": "top.xdi8.mod.fonts.asm.AsmPlugin",
   "refmap": "mixins.xdi8.refmap.json"
 }
