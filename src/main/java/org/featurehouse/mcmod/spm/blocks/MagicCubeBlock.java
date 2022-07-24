@@ -72,8 +72,9 @@ public class MagicCubeBlock extends AbstractBlockWithEntity<MagicCubeBlockEntity
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void randomTick(BlockState pState, ServerLevel pLevel, BlockPos pPos, Random pRandom) {
-        if (pRandom.nextInt(128) == 0) {
+        if (pState.getValue(ACTIVATED) && pRandom.nextInt(32) == 0) {
             pLevel.playSound(null, pPos, SPMMain.MAGIC_CUBE_AMBIENT.get(),
                     SoundSource.BLOCKS, 1.0f, 1.0f);
         }
