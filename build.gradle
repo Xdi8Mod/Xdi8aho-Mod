@@ -213,11 +213,11 @@ jar {
     manifest {
         attributes([
                 "Specification-Title"     : "Firefly8",
-                "Specification-Vendor"    : "Pigeonia Featurehouse",
+                "Specification-Vendor"    : "Xdi8Aho Mods",
                 "Specification-Version"   : "1", // We are version 1 of ourselves
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : project.version,
-                "Implementation-Vendor"   : "teddyxlandlee",
+                "Implementation-Vendor"   : "QWERTY770,teddyxlandlee",
                 "Implementation-Timestamp": "${Constant.now}"
         ])
     }

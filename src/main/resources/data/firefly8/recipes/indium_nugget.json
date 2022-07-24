@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "firefly8:indium_ingot"
+    }
+  ],
+  "group": "firefly8:indium",
+  "result": {
+    "item": "firefly8:indium_nugget",
+    "count": 9
+  }
+}

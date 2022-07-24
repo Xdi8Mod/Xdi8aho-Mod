@@ -9,6 +9,14 @@
   "item.firefly8.tinted_dragon_breath": "Potion of Mystery",
   "item.firefly8.tinted_firefly_bottle": "Bottle of Fireflies",
   "item.firefly8.bundler": "Old Inventory",
+  
+  "item.firefly8.indium_ingot": "Indium Ingot",
+  "item.firefly8.indium_nugget": "Indium Nugget",
+  "item.firefly8.indium_axe": "Indium Axe",
+  "item.firefly8.indium_hoe": "Indium Hoe",
+  "item.firefly8.indium_pickaxe": "Indium Pickaxe",
+  "item.firefly8.indium_shovel": "Indium Shovel",
+  "item.firefly8.indium_sword": "Indium Sword",
 
   "item.firefly8.tinted_firefly_bottle.too_many": "Can't stack fireflies over 5",
   "item.firefly8.tinted_firefly_bottle.empty": "There's no fireflies in the bottle",
@@ -19,6 +27,11 @@
   "block.firefly8.xdi8aho_portal_core": "Portal Core of Xdi8 Aho",
   "block.firefly8.xdi8aho_torch_top": "Xdi8 Aho Torchlight",
   "block.firefly8.xdi8aho_portal": "Xdi8 Aho Portal Block",
+
+  "block.firefly8.indium_block": "Block of Indium",
+  "block.firefly8.indium_ore": "Indium Ore",
+  "block.firefly8.deepslate_indium_ore": "Deepslate Indium Ore",
+
 
   "commands.bindxdi8portal.success": "Successfully set portal for %s",
   "commands.bindxdi8portal.failure": "Can't set portal for %1$s at dimension %2$s / (%3$s)"
