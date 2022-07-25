@@ -19,4 +19,6 @@ public interface IServerPlayerWithHiddenInventory extends IPlayerWithHiddenInven
     boolean xdi8$moveItemsToPortal();
 
     boolean xdi8$validatePortal();
+
+    boolean xdi8$validatePortal(ResourceKey<Level> dimension, BlockPos pos);
 }
