@@ -34,12 +34,12 @@ public class IndiumSwordItem extends SwordItem {
     public boolean mineBlock(@NotNull ItemStack pStack, @NotNull Level pLevel, BlockState pState, @NotNull BlockPos pPos, @NotNull LivingEntity pEntityLiving) {
         if (pState.getDestroySpeed(pLevel, pPos) != 0.0F) {
             pStack.hurtAndBreak(2, pEntityLiving, (p_43276_) -> p_43276_.broadcastBreakEvent(EquipmentSlot.MAINHAND));
-            if (pEntityLiving instanceof Player){
-                if (pLevel.isClientSide() || pLevel.getRandom().nextDouble() > 0.49) return true;
-                ItemStack nugget = new ItemStack(FireflyItems.INDIUM_NUGGET.get());
-                if (!((Player) pEntityLiving).getInventory().add(nugget)) {
-                    ((Player) pEntityLiving).drop(nugget, true);
-                }
+        }
+        if (pEntityLiving instanceof Player){
+            if (pLevel.isClientSide()) return true;
+            ItemStack nugget = new ItemStack(FireflyItems.INDIUM_NUGGET.get());
+            if (!((Player) pEntityLiving).getInventory().add(nugget)) {
+                ((Player) pEntityLiving).drop(nugget, true);
             }
         }
         return true;
