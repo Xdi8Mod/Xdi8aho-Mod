@@ -11,7 +11,7 @@
       "item": "firefly8:indium_ingot"
     },
     "s": {
-      "item": "minecraft:stick"
+      "tag": "forge:rods/wooden"
     }
   },
   "result": {
