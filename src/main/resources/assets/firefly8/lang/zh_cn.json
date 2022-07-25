@@ -9,6 +9,7 @@
   "item.firefly8.tinted_dragon_breath": "神秘药水",
   "item.firefly8.tinted_firefly_bottle": "瓶装萤火虫",
   "item.firefly8.bundler": "之前的物品栏",
+
   "item.firefly8.indium_ingot": "铟锭",
   "item.firefly8.indium_nugget": "铟粒",
   "item.firefly8.indium_axe": "铟斧",
@@ -18,13 +19,15 @@
   "item.firefly8.indium_sword": "铟剑",
 
   "item.firefly8.tinted_firefly_bottle.too_many": "1个瓶子最多可容纳5只萤火虫",
+  "item.firefly8.tinted_firefly_bottle.empty": "瓶子里没有萤火虫",
 
   "itemGroup.firefly8": "灯\uDB87\uDC30",
   "entity.firefly8.firefly": "萤火虫",
 
-
   "block.firefly8.xdi8aho_portal_core": "灯\uDB87\uDC30传送门核心",
   "block.firefly8.xdi8aho_torch_top": "灯\uDB87\uDC30焰心",
+  "block.firefly8.xdi8aho_portal": "灯\uDB87\uDC30传送门方块",
+
   "block.firefly8.indium_block": "铟块",
   "block.firefly8.indium_ore": "铟矿石",
   "block.firefly8.deepslate_indium_ore": "深层铟矿石",
