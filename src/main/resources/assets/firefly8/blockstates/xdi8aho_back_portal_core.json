@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model": "firefly8:block/back_portal_core" }
+  }
+}

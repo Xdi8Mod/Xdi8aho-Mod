@@ -1,5 +1,10 @@
 {
   "variants": {
-    "": { "model": "firefly8:block/xdi8aho_torch_top_model" }
+    "fireflies=0": { "model": "firefly8:block/torchlight_off" },
+    "fireflies=1": { "model": "firefly8:block/torchlight_on" },
+    "fireflies=2": { "model": "firefly8:block/torchlight_on" },
+    "fireflies=3": { "model": "firefly8:block/torchlight_on" },
+    "fireflies=4": { "model": "firefly8:block/torchlight_on" },
+    "fireflies=5": { "model": "firefly8:block/torchlight_on" }
   }
 }
