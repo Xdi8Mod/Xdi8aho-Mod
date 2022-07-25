@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "firefly8:block/xdi8aho_portal_core_texture"
+    "all": "firefly8:block/portal_block4"
   }
 }

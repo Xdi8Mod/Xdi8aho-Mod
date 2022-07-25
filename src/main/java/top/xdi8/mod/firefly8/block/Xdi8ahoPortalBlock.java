@@ -9,7 +9,8 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import org.jetbrains.annotations.NotNull;
-import top.xdi8.mod.firefly8.world.Xdi8TeleporterImpl;
+import top.xdi8.mod.firefly8.ext.IPortalCooldownEntity;
+import top.xdi8.mod.firefly8.world.Xdi8DimensionUtils;
 
 /** @see net.minecraft.world.level.block.NetherPortalBlock */
 public class Xdi8ahoPortalBlock extends Block {
@@ -17,21 +18,22 @@ public class Xdi8ahoPortalBlock extends Block {
     public Xdi8ahoPortalBlock() {
         super(Properties.of(Material.PORTAL)
                 .lightLevel(s->11)
-                .instabreak()
+                .strength(-1)
                 .noCollission()
                 .sound(SoundType.AMETHYST)
         );
     }
 
-    @SuppressWarnings("unused") // not used yet
-    public void entityInside0(@NotNull BlockState pState, @NotNull Level pLevel,
+    @SuppressWarnings("deprecation")
+    public void entityInside(@NotNull BlockState pState, @NotNull Level pLevel,
                              @NotNull BlockPos pPos, @NotNull Entity pEntity) {
         if (pLevel.isClientSide()) return;
+        IPortalCooldownEntity entityExt = IPortalCooldownEntity.xdi8$extend(pEntity);
         if (!pEntity.isPassenger() && !pEntity.isVehicle() &&
-                pEntity.canChangeDimensions()) {
+                pEntity.canChangeDimensions() && !entityExt.xdi8$isOnCooldown()) {
             ServerLevel level = (ServerLevel) pLevel;
-            pEntity.changeDimension((level),
-                    new Xdi8TeleporterImpl(level));
+            Xdi8DimensionUtils.teleportToXdi8aho(level, pEntity, pPos);
+            entityExt.xdi8$resetShortCooldown();
         }
     }
 }

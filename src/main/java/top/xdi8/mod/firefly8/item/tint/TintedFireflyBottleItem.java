@@ -5,6 +5,7 @@ import com.mojang.logging.LogUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -109,6 +110,13 @@ public class TintedFireflyBottleItem extends Item {
         } else return InteractionResultHolder.pass(itemStack);
     }
 
+    public static boolean removeFirefly(ItemStack stack) {
+        ListTag fireflyList = stack.getOrCreateTag().getList("Fireflies", Tag.TAG_COMPOUND);
+        if (fireflyList.isEmpty()) return false;
+        fireflyList.remove(fireflyList.size() - 1);
+        return true;
+    }
+
     @NotNull
     static Either<ItemStack, TranslatableComponent> spawnFirefly(@NotNull Level level,
                                                                  @NotNull ItemStack stack,
@@ -116,7 +124,7 @@ public class TintedFireflyBottleItem extends Item {
                                                                  @NotNull InteractionHand hand,
                                                                  @NotNull Vec3 spawnPos) {
         if (!level.isClientSide()) {
-            ListTag fireflyList = stack.getOrCreateTag().getList("Fireflies", 10);
+            ListTag fireflyList = stack.getOrCreateTag().getList("Fireflies", Tag.TAG_COMPOUND);
             if (fireflyList.isEmpty()) {
                 player.setItemInHand(hand, new ItemStack(FireflyItems.TINTED_GLASS_BOTTLE.get()));
                 return Either.right(new TranslatableComponent("item.firefly8.tinted_firefly_bottle.empty"));
