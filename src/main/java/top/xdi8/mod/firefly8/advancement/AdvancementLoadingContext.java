@@ -1,4 +1,4 @@
-package top.xdi8.mod.firefly8.item.tint.advancement;
+package top.xdi8.mod.firefly8.advancement;
 
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.CriterionTriggerInstance;
