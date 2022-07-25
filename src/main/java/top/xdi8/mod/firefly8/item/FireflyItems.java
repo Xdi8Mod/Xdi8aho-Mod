@@ -35,6 +35,7 @@ public final class FireflyItems {
             INDIUM_BLOCK,
             INDIUM_ORE_BLOCK,
             DEEPSLATE_INDIUM_ORE_BLOCK,
+            SYMBOL_STONE_BRICKS,
 
             XDI8AHO_ICON,
             FIREFLY_SPAWN_EGG,
@@ -73,6 +74,8 @@ public final class FireflyItems {
                 () -> new BlockItem(FireflyBlocks.INDIUM_ORE_BLOCK.get(), defaultProp()));
         DEEPSLATE_INDIUM_ORE_BLOCK = REGISTRY.register("deepslate_indium_ore",
                 () -> new BlockItem(FireflyBlocks.DEEPSLATE_INDIUM_ORE_BLOCK.get(), defaultProp()));
+        SYMBOL_STONE_BRICKS = REGISTRY.register("symbol_stone_bricks",
+                () -> new BlockItem(FireflyBlocks.SYMBOL_STONE_BRICKS.get(), defaultProp()));
 
         XDI8AHO_ICON = REGISTRY.register("xdi8aho", () ->
                 new Item(new Item.Properties()));
