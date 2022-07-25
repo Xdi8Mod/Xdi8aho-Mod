@@ -33,7 +33,7 @@
   "block.firefly8.indium_block": "Block of Indium",
   "block.firefly8.indium_ore": "Indium Ore",
   "block.firefly8.deepslate_indium_ore": "Deepslate Indium Ore",
-
+  "block.firefly8.symbol_stone_bricks": "Symbol Stone Bricks",
 
   "commands.bindxdi8portal.success": "Successfully set portal for %s",
   "commands.bindxdi8portal.failure": "Can't set portal for %1$s at dimension %2$s / (%3$s)",
