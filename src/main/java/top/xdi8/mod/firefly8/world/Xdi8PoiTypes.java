@@ -16,8 +16,8 @@ import java.util.stream.Collectors;
 public final class Xdi8PoiTypes {
     public static final DeferredRegister<PoiType> REGISTRY =
             DeferredRegister.create(ForgeRegistries.POI_TYPES, "firefly8");
-    public static final RegistryObject<PoiType> XDI8_ENTRANCE_PORTAL =
-            register("xdi8_entrance_portal", FireflyBlocks.XDI8AHO_PORTAL_BLOCK, 0, 1);
+    public static final RegistryObject<PoiType> XDI8_EXIT_PORTAL =
+            register("xdi8_exit_portal", FireflyBlocks.XDI8AHO_BACK_FIRE_BLOCK, 0, 1);
     // TODO: should be exit portal instead
 
     private static RegistryObject<PoiType> register(String id,

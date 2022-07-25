@@ -27,6 +27,8 @@
   "block.firefly8.xdi8aho_portal_core": "Portal Core of Xdi8 Aho",
   "block.firefly8.xdi8aho_torch_top": "Xdi8 Aho Torchlight",
   "block.firefly8.xdi8aho_portal": "Xdi8 Aho Portal Block",
+  "block.firefly8.xdi8aho_back_portal_core": "Return Portal Core",
+  "block.firefly8.xdi8aho_back_portal_fire": "Fire of Returning",
 
   "block.firefly8.indium_block": "Block of Indium",
   "block.firefly8.indium_ore": "Indium Ore",
@@ -34,5 +36,8 @@
 
 
   "commands.bindxdi8portal.success": "Successfully set portal for %s",
-  "commands.bindxdi8portal.failure": "Can't set portal for %1$s at dimension %2$s / (%3$s)"
+  "commands.bindxdi8portal.failure": "Can't set portal for %1$s at dimension %2$s / (%3$s)",
+  "commands.unbindxdi8portal.0": "No player selected",
+  "commands.unbindxdi8portal.1": "Unbound portal for %s",
+  "commands.unbindxdi8portal.more": "Unbound portal for %d players"
 }
