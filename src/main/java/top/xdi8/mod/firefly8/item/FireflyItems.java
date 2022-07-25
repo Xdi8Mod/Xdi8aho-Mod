@@ -54,9 +54,9 @@ public final class FireflyItems {
 
     static {
         INDIUM_INGOT = REGISTRY.register("indium_ingot",
-                () -> new IndiumIngotItem(defaultProp()));
+                () -> new Item(defaultProp()));
         INDIUM_NUGGET = REGISTRY.register("indium_nugget",
-                () -> new IndiumNuggetItem(defaultProp()));
+                () -> new Item(defaultProp()));
         INDIUM_AXE = REGISTRY.register("indium_axe",
                 () -> new IndiumAxeItem(defaultProp()));
         INDIUM_HOE = REGISTRY.register("indium_hoe",
@@ -75,7 +75,7 @@ public final class FireflyItems {
                 () -> new BlockItem(FireflyBlocks.DEEPSLATE_INDIUM_ORE_BLOCK.get(), defaultProp()));
 
         XDI8AHO_ICON = REGISTRY.register("xdi8aho", () ->
-                new Item(new Item.Properties()));
+                new Item(defaultProp()));
         FIREFLY_SPAWN_EGG = REGISTRY.register("firefly_spawn_egg", () ->
                 new ForgeSpawnEggItem(FireflyEntityTypes.FIREFLY,
                         0x000000, 0x00f500,
