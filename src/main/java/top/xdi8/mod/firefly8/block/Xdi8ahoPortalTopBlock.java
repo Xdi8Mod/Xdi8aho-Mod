@@ -1,6 +1,17 @@
 package top.xdi8.mod.firefly8.block;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
@@ -14,19 +25,25 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.phys.BlockHitResult;
 import org.featurehouse.mcmod.spm.util.tick.ITickable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Range;
 import top.xdi8.mod.firefly8.block.entity.FireflyBlockEntityTypes;
 import top.xdi8.mod.firefly8.block.entity.PortalTopBlockEntity;
 import top.xdi8.mod.firefly8.block.structure.Xdi8PortalBasicData;
+import top.xdi8.mod.firefly8.ext.IPlayerWithHiddenInventory;
+import top.xdi8.mod.firefly8.item.FireflyItems;
+import top.xdi8.mod.firefly8.item.tint.TintedFireflyBottleItem;
+import top.xdi8.mod.firefly8.screen.TakeOnlyChestMenu;
 
 import java.util.OptionalInt;
 
 public class Xdi8ahoPortalTopBlock extends BaseEntityBlock {
-    public static final IntegerProperty FIREFLY_COUNT =
-            IntegerProperty.create("fireflies", 0, 5);
     public static final int PORTAL_MIN_HEIGHT = 2, PORTAL_MAX_HEIGHT = 16;
+    public static final int MAX_FIREFLY_COUNT = 5;
+    public static final IntegerProperty FIREFLY_COUNT =
+            IntegerProperty.create("fireflies", 0, MAX_FIREFLY_COUNT);
 
     public Xdi8ahoPortalTopBlock() {
         super(Properties.of(Material.STONE)
@@ -118,5 +135,57 @@ public class Xdi8ahoPortalTopBlock extends BaseEntityBlock {
     @SuppressWarnings("deprecation")
     public @NotNull RenderShape getRenderShape(@NotNull BlockState state) {
         return RenderShape.MODEL;
+    }
+
+    /**
+     * @see org.featurehouse.mcmod.spm.blocks.GrinderBlock
+     * @see org.featurehouse.mcmod.spm.blocks.entities.GrinderBlockEntity
+     */
+    @Override
+    @SuppressWarnings("deprecation")
+    @NotNull
+    public InteractionResult use(@NotNull BlockState pState, @NotNull Level pLevel,
+                                 @NotNull BlockPos pPos, @NotNull Player pPlayer,
+                                 @NotNull InteractionHand pHand, @NotNull BlockHitResult pHit) {
+        if (!pLevel.isClientSide()) {
+            final int fireflyCount = pState.getValue(FIREFLY_COUNT);
+            if (fireflyCount < MAX_FIREFLY_COUNT) {
+                ItemStack stack = pPlayer.getItemInHand(pHand);
+                if (!stack.is(FireflyItems.TINTED_FIREFLY_BOTTLE.get()) && !stack.is(FireflyItems.FIREFLY_SPAWN_EGG.get())) {
+                    stack = pPlayer.getItemInHand(oppositeHand(pHand));
+                }
+                if (stack.is(FireflyItems.TINTED_FIREFLY_BOTTLE.get())) {
+                    if (TintedFireflyBottleItem.removeFirefly(stack)) {
+                        pLevel.setBlockAndUpdate(pPos, pState.setValue(FIREFLY_COUNT, fireflyCount + 1));
+                        pLevel.playSound(null, pPos, SoundEvents.AMETHYST_CLUSTER_PLACE, SoundSource.BLOCKS, 1.0f, 1.0f);
+                        return InteractionResult.CONSUME;
+                    }
+                } else if (stack.is(FireflyItems.FIREFLY_SPAWN_EGG.get())) {
+                    pLevel.setBlockAndUpdate(pPos, pState.setValue(FIREFLY_COUNT, fireflyCount + 1));
+                    pLevel.playSound(null, pPos, SoundEvents.AMETHYST_CLUSTER_PLACE, SoundSource.BLOCKS, 1.0f, 1.0f);
+                    return InteractionResult.CONSUME;
+                }
+            }
+
+            pPlayer.openMenu(new MenuProvider() {
+                @Override
+                public @NotNull Component getDisplayName() {
+                    return new TranslatableComponent("item.firefly8.bundler");  // Old Inventory
+                }
+
+                @Override
+                public @NotNull AbstractContainerMenu createMenu(int pContainerId, @NotNull Inventory pInventory, @NotNull Player pPlayer) {
+                    IPlayerWithHiddenInventory extPlayer = IPlayerWithHiddenInventory.xdi8$extend(pPlayer);
+                    //return ChestMenu.sixRows(pContainerId, pInventory, extPlayer.xdi8$getPortalInv());
+                    return new TakeOnlyChestMenu(pContainerId, pInventory, extPlayer.xdi8$getPortalInv());
+                }
+            });
+            return InteractionResult.CONSUME;
+        }
+        return InteractionResult.SUCCESS;
+    }
+
+    private static InteractionHand oppositeHand(InteractionHand hand) {
+        return hand == InteractionHand.OFF_HAND ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
     }
 }
