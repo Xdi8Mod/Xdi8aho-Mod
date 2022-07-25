@@ -1,4 +1,4 @@
-package top.xdi8.mod.firefly8.item.tint.advancement;
+package top.xdi8.mod.firefly8.item.tint.advanceent;
 
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.advancements.CriterionTriggerInstance;
@@ -10,6 +10,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import top.xdi8.mod.firefly8.advancement.AdvancementLoadingEvent;
 import top.xdi8.mod.firefly8.item.FireflyItemTags;
 
 import java.util.*;
