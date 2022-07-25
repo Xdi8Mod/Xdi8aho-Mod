@@ -12,7 +12,7 @@ import top.xdi8.mod.firefly8.ext.IPlayerWithHiddenInventory;
 
 @Mixin(Player.class)
 public class PlayerWithHiddenInventoryImpl implements IPlayerWithHiddenInventory {
-    private final SimpleContainer xdi8$portalInv = new SimpleContainer(52);
+    private final SimpleContainer xdi8$portalInv = new SimpleContainer(54);
 
     @Override
     public SimpleContainer xdi8$getPortalInv() {
