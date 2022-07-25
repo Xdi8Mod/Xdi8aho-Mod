@@ -137,10 +137,6 @@ public class Xdi8ahoPortalTopBlock extends BaseEntityBlock {
         return RenderShape.MODEL;
     }
 
-    /**
-     * @see org.featurehouse.mcmod.spm.blocks.GrinderBlock
-     * @see org.featurehouse.mcmod.spm.blocks.entities.GrinderBlockEntity
-     */
     @Override
     @SuppressWarnings("deprecation")
     @NotNull
