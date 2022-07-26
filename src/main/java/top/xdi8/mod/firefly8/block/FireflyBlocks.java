@@ -48,11 +48,7 @@ public class FireflyBlocks {
         );
         XDI8AHO_PORTAL_TOP_BLOCK = REGISTRY.register("xdi8aho_torch_top", Xdi8ahoPortalTopBlock::new);
         XDI8AHO_PORTAL_BLOCK = REGISTRY.register("xdi8aho_portal", Xdi8ahoPortalBlock::new);
-        XDI8AHO_BACK_PORTAL_CORE_BLOCK = ofDefaultBlock("xdi8aho_back_portal_core",
-                () -> BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_LIGHT_GRAY)
-                        .strength(10F, 800F)
-                        .requiresCorrectToolForDrops()
-        );
+        XDI8AHO_BACK_PORTAL_CORE_BLOCK = REGISTRY.register("xdi8aho_back_portal_core", BackPortalCoreBlock::new);
         XDI8AHO_BACK_FIRE_BLOCK = REGISTRY.register("xdi8aho_back_portal_fire", BackPortalFireBlock::new);
     }
 
