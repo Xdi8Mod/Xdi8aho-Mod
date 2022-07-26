@@ -176,22 +176,33 @@ public class Xdi8ahoPortalTopBlock extends BaseEntityBlock {
                 }
             }
 
-            pPlayer.openMenu(new MenuProvider() {
-                @Override
-                public @NotNull Component getDisplayName() {
-                    return new TranslatableComponent("item.firefly8.bundler");  // Old Inventory
-                }
-
-                @Override
-                public @NotNull AbstractContainerMenu createMenu(int pContainerId, @NotNull Inventory pInventory, @NotNull Player pPlayer) {
-                    IPlayerWithHiddenInventory extPlayer = IPlayerWithHiddenInventory.xdi8$extend(pPlayer);
-                    //return ChestMenu.sixRows(pContainerId, pInventory, extPlayer.xdi8$getPortalInv());
-                    return new TakeOnlyChestMenu(pContainerId, pInventory, extPlayer.xdi8$getPortalInv());
-                }
-            });
+            pPlayer.openMenu(menuProvider());
             return InteractionResult.CONSUME;
         }
         return InteractionResult.SUCCESS;
+    }
+
+    @NotNull
+    private MenuProvider menuProvider() {
+        return new MenuProvider() {
+            @Override
+            public @NotNull Component getDisplayName() {
+                return new TranslatableComponent("item.firefly8.bundler");  // Old Inventory
+            }
+
+            @Override
+            public @NotNull AbstractContainerMenu createMenu(int pContainerId, @NotNull Inventory pInventory, @NotNull Player pPlayer) {
+                IPlayerWithHiddenInventory extPlayer = IPlayerWithHiddenInventory.xdi8$extend(pPlayer);
+                //return ChestMenu.sixRows(pContainerId, pInventory, extPlayer.xdi8$getPortalInv());
+                return new TakeOnlyChestMenu(pContainerId, pInventory, extPlayer.xdi8$getPortalInv());
+            }
+        };
+    }
+
+    @Override
+    public MenuProvider getMenuProvider(@NotNull BlockState pState, @NotNull Level pLevel,
+                                        @NotNull BlockPos pPos) {
+        return menuProvider();
     }
 
     private static InteractionHand oppositeHand(InteractionHand hand) {

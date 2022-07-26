@@ -20,12 +20,13 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import org.featurehouse.mcmod.spm.SPMMain;
 import org.featurehouse.mcmod.spm.blocks.entities.MagicCubeBlockEntity;
-import org.featurehouse.mcmod.spm.lib.block.entity.AbstractBlockWithEntity;
+import org.featurehouse.mcmod.spm.lib.block.entity.TickableContainerEntityBlock;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Random;
 
-public class MagicCubeBlock extends AbstractBlockWithEntity<MagicCubeBlockEntity> {
+public class MagicCubeBlock extends TickableContainerEntityBlock<MagicCubeBlockEntity> {
     public static BooleanProperty ACTIVATED = BooleanProperty.create("activated");
 
     @Override
@@ -67,7 +68,7 @@ public class MagicCubeBlock extends AbstractBlockWithEntity<MagicCubeBlockEntity
     }
 
     @Override
-    public MagicCubeBlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+    public @NotNull MagicCubeBlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new MagicCubeBlockEntity(pos, state);
     }
 

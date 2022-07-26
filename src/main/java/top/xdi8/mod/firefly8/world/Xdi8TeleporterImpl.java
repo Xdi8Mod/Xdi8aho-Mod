@@ -1,6 +1,8 @@
 package top.xdi8.mod.firefly8.world;
 
+import com.google.common.collect.Lists;
 import com.mojang.logging.LogUtils;
+import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.TicketType;
@@ -24,10 +26,7 @@ import top.xdi8.mod.firefly8.block.FireflyBlockTags;
 import top.xdi8.mod.firefly8.block.FireflyBlocks;
 import top.xdi8.mod.firefly8.ext.IPortalCooldownEntity;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -77,14 +76,20 @@ public class Xdi8TeleporterImpl implements ITeleporter {
         });
     }
 
-    private static final List<Supplier<Block>> X2O_PORTAL_BLOCKS_V = List.of(
+    public static final List<Supplier<Block>> X2O_PORTAL_BASE = List.of(
             () -> Blocks.REDSTONE_BLOCK,
             () -> Blocks.REDSTONE_BLOCK,
-            () -> Blocks.GLOWSTONE, // TODO: replace with indium block?
-            FireflyBlocks.XDI8AHO_BACK_PORTAL_CORE_BLOCK,
-            FireflyBlocks.XDI8AHO_BACK_FIRE_BLOCK,
-            () -> Blocks.AIR
+            () -> Blocks.GLOWSTONE // TODO: replace with indium block?
     );
+
+    private static final List<Supplier<Block>> X2O_PORTAL_BLOCKS_V = Util.make(() -> {
+        var l = Lists.newArrayList(X2O_PORTAL_BASE);
+        l.addAll(List.<Supplier<Block>>of(FireflyBlocks.XDI8AHO_BACK_PORTAL_CORE_BLOCK,
+                FireflyBlocks.XDI8AHO_BACK_FIRE_BLOCK,
+                () -> Blocks.AIR)
+        );
+        return Collections.unmodifiableList(l);
+    });
 
     protected Optional<BlockPos> createPortal(BlockPos blockPos, ServerLevel destWorld) {
         final int height = destWorld.getHeight(Heightmap.Types.WORLD_SURFACE, blockPos.getX(), blockPos.getZ());

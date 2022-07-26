@@ -10,25 +10,22 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import org.featurehouse.mcmod.spm.util.tick.ITickable;
 import org.jetbrains.annotations.ApiStatus;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 @ApiStatus.Experimental
-public abstract class AbstractBlockWithEntity<E extends BlockEntity & ITickable> extends BaseEntityBlock {
+public abstract class TickableContainerEntityBlock<E extends BlockEntity & ITickable> extends TickableEntityBlock<E> {
     protected abstract boolean blockEntityPredicate(BlockEntity blockEntity);
 
-    protected AbstractBlockWithEntity(Properties settings) {
+    protected TickableContainerEntityBlock(Properties settings) {
         super(settings);
     }
 
@@ -37,6 +34,7 @@ public abstract class AbstractBlockWithEntity<E extends BlockEntity & ITickable>
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (!world.isClientSide) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
@@ -65,13 +63,7 @@ public abstract class AbstractBlockWithEntity<E extends BlockEntity & ITickable>
     }
 
     @Override
-    public RenderShape getRenderShape(BlockState state) {
-        return RenderShape.MODEL;
-    }
-
-    public abstract BlockEntityType<E> getBlockEntityType();
-
-    @Override
+    @SuppressWarnings("deprecation")
     public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean moved) {
         if (!state.is(newState.getBlock())) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
@@ -84,22 +76,14 @@ public abstract class AbstractBlockWithEntity<E extends BlockEntity & ITickable>
     }
 
     @Override
-    public abstract E newBlockEntity(BlockPos pos, BlockState state);
+    public abstract @NotNull E newBlockEntity(BlockPos pos, BlockState state);
 
-    //public abstract Optional<ITickable> getTickableBlockEntity(World world, BlockState state);
-    public BlockEntityTicker<E> ticker() {
-        return ITickable::iTick;
-    }
-
+    @SuppressWarnings("deprecation")
     public boolean hasAnalogOutputSignal(BlockState state) {
         return true;
     }
 
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
-        return world.isClientSide ? null : createTickerHelper(type, getBlockEntityType(), ticker());
-    }
-
+    @SuppressWarnings("deprecation")
     public int getAnalogOutputSignal(BlockState state, Level world, BlockPos pos) {
         return AbstractContainerMenu.getRedstoneSignalFromBlockEntity(world.getBlockEntity(pos));
     }

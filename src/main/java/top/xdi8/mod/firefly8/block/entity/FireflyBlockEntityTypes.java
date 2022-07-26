@@ -13,11 +13,15 @@ public final class FireflyBlockEntityTypes {
     public static final DeferredRegister<BlockEntityType<?>> REGISTRY = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, "firefly8");
 
     public static final RegistryObject<BlockEntityType<PortalTopBlockEntity>> PORTAL_TOP;
+    public static final RegistryObject<BlockEntityType<BackPortalCoreBlockEntity>> BACK_PORTAL_CORE;
 
     static {
         PORTAL_TOP = REGISTRY.register("portal_top", () ->
                 BlockEntityType.Builder.of(PortalTopBlockEntity::new, FireflyBlocks.XDI8AHO_PORTAL_TOP_BLOCK.get())
                         .build(getType("portal_top")));
+        BACK_PORTAL_CORE = REGISTRY.register("back_portal_core", () ->
+                BlockEntityType.Builder.of(BackPortalCoreBlockEntity::new, FireflyBlocks.XDI8AHO_BACK_PORTAL_CORE_BLOCK.get())
+                        .build(getType("back_portal_core")));
     }
 
     private static com.mojang.datafixers.types.Type<?> getType(String id) {
