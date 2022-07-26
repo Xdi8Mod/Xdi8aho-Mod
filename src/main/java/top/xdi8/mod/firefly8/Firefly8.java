@@ -7,6 +7,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import top.xdi8.mod.firefly8.block.FireflyBlocks;
 import top.xdi8.mod.firefly8.block.entity.FireflyBlockEntityTypes;
+import top.xdi8.mod.firefly8.core.letters.LettersUtil;
 import top.xdi8.mod.firefly8.entity.FireflyEntity;
 import top.xdi8.mod.firefly8.entity.FireflyEntityTypes;
 import top.xdi8.mod.firefly8.item.FireflyItems;
@@ -34,6 +35,8 @@ public class Firefly8 {
         // Particle
         FireflyParticles.REGISTRY.register(modBus());
 
+        // Letters
+        LettersUtil.fireLetterRegistry(modBus());
         // Client: use bus subscriber
     }
 
