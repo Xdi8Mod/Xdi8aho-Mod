@@ -1,6 +1,7 @@
 package top.xdi8.mod.firefly8.world.death;
 
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodData;
 import net.minecraft.world.level.GameRules;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -13,8 +14,12 @@ import top.xdi8.mod.firefly8.ext.IServerPlayerWithHiddenInventory;
 public class PlayerDeathListener {
     @SubscribeEvent
     public static void onPlayerDeath(LivingDeathEvent event) {
-        if (!(event.getEntityLiving() instanceof ServerPlayer oldPlayer))
+        if (!(event.getEntityLiving() instanceof Player player))
             return;
+        if (!(player instanceof ServerPlayer oldPlayer)) {
+            event.setCanceled(true);
+            return;
+        }
         oldPlayer.setHealth(oldPlayer.getMaxHealth());
         oldPlayer.foodData = new FoodData();
         oldPlayer.removeEntitiesOnShoulder();
