@@ -30,7 +30,7 @@ public class BackPortalCoreBlockEntity extends BlockEntity implements ITickable 
                 BlockPos thatPos = pos.below(3);
                 for (Supplier<Block> blockSupplier : Xdi8TeleporterImpl.X2O_PORTAL_BASE) {
                     if (!level.getBlockState(thatPos).is(blockSupplier.get())) return false;
-                    pos = pos.above();
+                    thatPos = thatPos.above();
                 }
                 return true;
             }

@@ -2,9 +2,7 @@
   "parent": "recipes/root",
   "rewards": {
     "recipes": [
-      "firefly8:indium_nugget",
-      "firefly8:indium_nugget_blast",
-      "firefly8:indium_nugget_smelt"
+      "firefly8:indium_nugget"
     ]
   },
   "criteria": {
@@ -13,12 +11,7 @@
       "conditions": {
         "items": [{
           "items": [
-            "firefly8:indium_ingot",
-            "firefly8:indium_axe",
-            "firefly8:indium_hoe",
-            "firefly8:indium_pickaxe",
-            "firefly8:indium_shovel",
-            "firefly8:indium_sword"
+            "firefly8:indium_ingot"
           ]
         }]
       }
@@ -26,24 +19,12 @@
     "recipe0": {
       "trigger": "recipe_unlocked",
       "conditions": {
-        "recipe": "firefly8:indium_axe"
-      }
-    },
-    "recipe1":{
-      "trigger": "recipe_unlocked",
-      "conditions": {
-        "recipe": "firefly8:indium_nugget_blast"
-      }
-    },
-    "recipe2":{
-      "trigger": "recipe_unlocked",
-      "conditions": {
-        "recipe": "firefly8:indium_nugget_smelt"
+        "recipe": "firefly8:indium_nugget"
       }
     }
   },
   "requirements": [[
     "get_indium",
-    "recipe0", "recipe1", "recipe2"
+    "recipe0"
   ]]
 }
