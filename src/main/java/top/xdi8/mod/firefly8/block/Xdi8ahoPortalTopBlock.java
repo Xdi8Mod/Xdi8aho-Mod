@@ -38,8 +38,6 @@ import top.xdi8.mod.firefly8.item.FireflyItems;
 import top.xdi8.mod.firefly8.item.tint.TintedFireflyBottleItem;
 import top.xdi8.mod.firefly8.screen.TakeOnlyChestMenu;
 
-import java.util.OptionalInt;
-
 public class Xdi8ahoPortalTopBlock extends BaseEntityBlock {
     public static final int PORTAL_MIN_HEIGHT = 2, PORTAL_MAX_HEIGHT = 16;
     public static final int MAX_FIREFLY_COUNT = 5;
@@ -61,20 +59,26 @@ public class Xdi8ahoPortalTopBlock extends BaseEntityBlock {
     }
 
     /** When placing the torchlight, checking the base & the pillar */
-    public static OptionalInt getPortalHeight(BlockGetter level, BlockPos thisPos, boolean checkBasement) {
-        int heightCount = 0;
-        for (int y = thisPos.getY() - 1 ;; y--) {
-            if (heightCount > 16) return OptionalInt.empty();
+    public static PortalTopBlockEntity.PortalStatus getPortalHeight(BlockGetter level, BlockPos thisPos, boolean checkBasement) {
+        int heightCount = 1;
+        int status = PortalTopBlockEntity.PortalStatus.ofStateStatus(level.getBlockState(thisPos.below()));
+        if (status == PortalTopBlockEntity.PortalStatus.UNACTIVATED)
+            return PortalTopBlockEntity.PortalStatus.empty();
+        for (int y = thisPos.getY() - 2 ;; y--) {
+            if (heightCount > PORTAL_MAX_HEIGHT) return PortalTopBlockEntity.PortalStatus.empty();
 
             final BlockPos thatPos = thisPos.atY(y);
             final BlockState blockState = level.getBlockState(thatPos);
             if (blockState.is(FireflyBlockTags.PORTAL_CORE)) {
-                if (heightCount < PORTAL_MIN_HEIGHT) return OptionalInt.empty();
+                if (heightCount < PORTAL_MIN_HEIGHT) return PortalTopBlockEntity.PortalStatus.empty();
                 return !checkBasement || isPortalBaseValid(level, thatPos) ?
-                        OptionalInt.of(heightCount) : OptionalInt.empty();
-            } else if (blockState.is(FireflyBlockTags.CENTER_PILLAR)) {
-                heightCount++;
-            } else return OptionalInt.empty();
+                        new PortalTopBlockEntity.PortalStatus(status, heightCount) :
+                        PortalTopBlockEntity.PortalStatus.empty();
+            } else {
+                status = PortalTopBlockEntity.PortalStatus.mix(status, PortalTopBlockEntity.PortalStatus.ofStateStatus(blockState));
+                if (status != PortalTopBlockEntity.PortalStatus.UNACTIVATED) heightCount++;
+                else return PortalTopBlockEntity.PortalStatus.empty();
+            }
         }
     }
 
@@ -98,9 +102,16 @@ public class Xdi8ahoPortalTopBlock extends BaseEntityBlock {
                         @NotNull BlockPos pPos, @NotNull BlockState pOldState, boolean pIsMoving) {
         if (pLevel.isClientSide()) return;
         if (pState.getValue(FIREFLY_COUNT) <= 0) return;
-        final OptionalInt portalHeight = getPortalHeight(pLevel, pPos, true);
-        if (portalHeight.isPresent()) {
-            fillPortalBlocks(pLevel, pPos, portalHeight.getAsInt());
+        processPortal(pLevel, pPos, true);
+    }
+
+    public static void processPortal(Level level, BlockPos pos, boolean checkBasement) {
+        final var portalHeight = getPortalHeight(level, pos, checkBasement);
+        switch (portalHeight.status()) {
+            case PortalTopBlockEntity.PortalStatus.UNACTIVATED ->
+                    removePortal(level, pos);
+            case PortalTopBlockEntity.PortalStatus.READY ->
+                    fillPortalBlocks(level, pos, portalHeight.height());
         }
     }
 
@@ -154,11 +165,13 @@ public class Xdi8ahoPortalTopBlock extends BaseEntityBlock {
                     if (TintedFireflyBottleItem.removeFirefly(stack)) {
                         pLevel.setBlockAndUpdate(pPos, pState.setValue(FIREFLY_COUNT, fireflyCount + 1));
                         pLevel.playSound(null, pPos, SoundEvents.AMETHYST_CLUSTER_PLACE, SoundSource.BLOCKS, 1.0f, 1.0f);
+                        processPortal(pLevel, pPos, false);
                         return InteractionResult.CONSUME;
                     }
                 } else if (stack.is(FireflyItems.FIREFLY_SPAWN_EGG.get())) {
                     pLevel.setBlockAndUpdate(pPos, pState.setValue(FIREFLY_COUNT, fireflyCount + 1));
                     pLevel.playSound(null, pPos, SoundEvents.AMETHYST_CLUSTER_PLACE, SoundSource.BLOCKS, 1.0f, 1.0f);
+                    processPortal(pLevel, pPos, false);
                     return InteractionResult.CONSUME;
                 }
             }
