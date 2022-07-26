@@ -9,6 +9,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import top.xdi8.mod.firefly8.ext.IPortalCooldownEntity;
 import top.xdi8.mod.firefly8.ext.IServerPlayerWithHiddenInventory;
+import top.xdi8.mod.firefly8.world.Xdi8DimensionUtils;
 
 @Mod.EventBusSubscriber(modid = "firefly8")
 public class PlayerDeathListener {
@@ -16,10 +17,13 @@ public class PlayerDeathListener {
     public static void onPlayerDeath(LivingDeathEvent event) {
         if (!(event.getEntityLiving() instanceof Player player))
             return;
+        if (!Xdi8DimensionUtils.canRedirectRespawn(player.getLevel())) return;
         if (!(player instanceof ServerPlayer oldPlayer)) {
             event.setCanceled(true);
             return;
         }
+        oldPlayer.unRide();
+        oldPlayer.ejectPassengers();
         oldPlayer.setHealth(oldPlayer.getMaxHealth());
         oldPlayer.foodData = new FoodData();
         oldPlayer.removeEntitiesOnShoulder();
