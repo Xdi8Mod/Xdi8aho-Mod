@@ -10,6 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import top.xdi8.mod.firefly8.block.FireflyBlocks;
 import top.xdi8.mod.firefly8.entity.FireflyEntityTypes;
 import top.xdi8.mod.firefly8.item.indium.*;
+import top.xdi8.mod.firefly8.item.symbol.SymbolStoneBlockItem;
 import top.xdi8.mod.firefly8.item.tint.*;
 
 public final class FireflyItems {
@@ -115,6 +116,7 @@ public final class FireflyItems {
                 new TintedFireflyBottleItem(defaultProp().stacksTo(1)));
 
         BUNDLER = REGISTRY.register("bundler", BundlerItem::new);
+        SymbolStoneBlockItem.registerAll(REGISTRY::register);
     }
 
     static Item.Properties defaultProp() {

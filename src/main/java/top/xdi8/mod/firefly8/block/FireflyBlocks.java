@@ -8,6 +8,7 @@ import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import top.xdi8.mod.firefly8.block.symbol.SymbolStoneBlock;
 
 import java.util.function.Supplier;
 
@@ -50,6 +51,7 @@ public class FireflyBlocks {
         XDI8AHO_PORTAL_BLOCK = REGISTRY.register("xdi8aho_portal", Xdi8ahoPortalBlock::new);
         XDI8AHO_BACK_PORTAL_CORE_BLOCK = REGISTRY.register("xdi8aho_back_portal_core", BackPortalCoreBlock::new);
         XDI8AHO_BACK_FIRE_BLOCK = REGISTRY.register("xdi8aho_back_portal_fire", BackPortalFireBlock::new);
+        SymbolStoneBlock.registerAll(REGISTRY::register);
     }
 
     private static RegistryObject<Block> ofDefaultBlock(String id,

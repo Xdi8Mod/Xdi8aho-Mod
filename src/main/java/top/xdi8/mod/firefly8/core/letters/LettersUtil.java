@@ -8,6 +8,7 @@ import org.jetbrains.annotations.ApiStatus;
 import top.xdi8.mod.firefly8.core.letters.event.LetterRegistryEvent;
 
 import java.util.Optional;
+import java.util.function.BiConsumer;
 import java.util.function.Function;
 
 public final class LettersUtil {
@@ -20,6 +21,10 @@ public final class LettersUtil {
 
     public static ResourceLocation getId(KeyedLetter letter) {
         return LETTER_MAP.inverse().getOrDefault(letter, EmptyLetter.ID);
+    }
+
+    public static void forEach(BiConsumer<ResourceLocation, KeyedLetter> action) {
+        LETTER_MAP.forEach(action);
     }
 
     public static <T> Optional<T> idToResource(KeyedLetter letter,
