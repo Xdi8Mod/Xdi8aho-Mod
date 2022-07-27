@@ -84,20 +84,11 @@ public class GrinderBlockEntity extends AbstractLockableContainerBlockEntity imp
         this.ingredientData = 0.0D;
 
         this.stateHelper = new BooleanStateManager(GrinderBlock.GRINDING) {
-            public boolean shouldChange(boolean newOne) {
-                assert GrinderBlockEntity.this.level != null;
-                return GrinderBlockEntity.this.level.getBlockState(pos).getValue(property) != newOne;
-            }
-
             @Override
-            public void run() {
-                assert GrinderBlockEntity.this.level != null;
+            public void run(Level level, BlockPos pos, BlockState oldState) {
                 boolean b;
-                if (this.shouldChange(b = GrinderBlockEntity.this.isGrinding()))
-                    GrinderBlockEntity.this.level.setBlockAndUpdate(
-                            pos, GrinderBlockEntity.this.level.getBlockState(pos).setValue(property, b)
-                    );
-                //GrinderBlockEntity.this.level.levelEvent(1132119, GrinderBlockEntity.this.worldPosition, 805);
+                if (this.shouldChange(b = GrinderBlockEntity.this.isGrinding(), oldState))
+                    level.setBlockAndUpdate(pos, oldState.setValue(property, b));
             }
         };
     }
@@ -188,7 +179,7 @@ public class GrinderBlockEntity extends AbstractLockableContainerBlockEntity imp
 
             // Check State each 50tick
             if (world.getGameTime() % 50L == 8L)
-                stateHelper.run();
+                stateHelper.run(level, pos, state);
         }
 
         if (shallMarkDirty) setChanged();

@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "firefly8:block/deepslate_indium_ore_texture"
+  }
+}

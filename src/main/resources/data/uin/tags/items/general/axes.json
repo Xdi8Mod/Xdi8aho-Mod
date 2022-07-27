@@ -5,6 +5,8 @@
 		"minecraft:iron_axe",
 		"minecraft:netherite_axe",
 		"minecraft:stone_axe",
-		"minecraft:wooden_axe"
+		"minecraft:wooden_axe",
+
+		"firefly8:indium_axe"
 	]
 }

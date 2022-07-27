@@ -25,7 +25,8 @@ public record SeedUpdatingRecipe(ResourceLocation id, Ingredient base,
 
     @Override
     public boolean matches(@NotNull Container inv, Level world) {
-        return this.base.test(inv.getItem(0)) && this.addition.test(inv.getItem(1));
+        return this.base.test(inv.getItem(0)) && this.addition.test(inv.getItem(1)) &&
+                !this.base.test(result);
     }
 
     @Override
@@ -70,7 +71,7 @@ public record SeedUpdatingRecipe(ResourceLocation id, Ingredient base,
         return SPMMain.SEED_UPDATING_RECIPE_TYPE.get();
     }
 
-    public boolean method_30029(ItemStack itemStack) {
+    public boolean matchesAddition(ItemStack itemStack) {
         return this.addition.test(itemStack);
     }
 

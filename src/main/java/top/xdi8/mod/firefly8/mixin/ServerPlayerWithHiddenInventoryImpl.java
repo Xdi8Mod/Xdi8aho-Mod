@@ -29,6 +29,7 @@ import top.xdi8.mod.firefly8.block.FireflyBlocks;
 import top.xdi8.mod.firefly8.block.Xdi8ahoPortalTopBlock;
 import top.xdi8.mod.firefly8.ext.IServerPlayerWithHiddenInventory;
 import top.xdi8.mod.firefly8.item.FireflyItems;
+import top.xdi8.mod.firefly8.world.Xdi8DimensionUtils;
 
 import java.util.Objects;
 
@@ -77,13 +78,14 @@ abstract class ServerPlayerWithHiddenInventoryImpl extends Player implements ISe
 
     @Override
     public boolean xdi8$moveItemsToPortal() {
+        if (!Xdi8DimensionUtils.canRedirectRespawn(getLevel())) return false;
         if (!xdi8$validatePortal()) return false;
         final SimpleContainer inv = this.xdi8$getPortalInv();
         xdi8$dropOldThings(inv);
         final LazyOptional<IItemHandler> capability = this.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
         capability.ifPresent(itemHandler -> {
             for (int i = 0; i < itemHandler.getSlots(); i++) {
-                var itemStack = itemHandler.getStackInSlot(i);
+                final ItemStack itemStack = itemHandler.extractItem(i, Integer.MAX_VALUE, false);
                 if (!itemStack.isEmpty()) {
                     inv.addItem(itemStack);
                 }
@@ -97,21 +99,26 @@ abstract class ServerPlayerWithHiddenInventoryImpl extends Player implements ISe
         assert level != null;
         Vec3 vec3 = Vec3.atCenterOf(xdi8$portalPosition).add(0, 1, 0);
         ListTag listTag = inv.createTag();
+        inv.clearContent();
+
         var compound = new CompoundTag();
         compound.put("StoredItems", listTag);
         final ItemStack itemStack = new ItemStack(FireflyItems.BUNDLER.get(), 1, compound);
         ItemEntity itemEntity = new ItemEntity(level, vec3.x(), vec3.y(), vec3.z(), itemStack);
         level.addFreshEntity(itemEntity);
     }
-
-    @Override
-    public boolean xdi8$validatePortal() {
+    
+    public boolean xdi8$validatePortal(ResourceKey<Level> dimension, BlockPos pos) {
         final MinecraftServer server = getServer();
         assert server != null;  // I'm sure
-        final ServerLevel level = server.getLevel(xdi8$portalDimension);
+        final ServerLevel level = server.getLevel(dimension);
         if (level == null) return false;
-        final BlockState state = level.getBlockState(xdi8$portalPosition);
+        final BlockState state = level.getBlockState(pos);
         return state.is(FireflyBlocks.XDI8AHO_PORTAL_TOP_BLOCK.get()) &&
                 state.getValue(Xdi8ahoPortalTopBlock.FIREFLY_COUNT) > 0;
+    }
+
+    public boolean xdi8$validatePortal() {
+        return xdi8$validatePortal(xdi8$portalDimension, xdi8$portalPosition);
     }
 }

@@ -7,9 +7,9 @@ import net.minecraft.world.level.block.state.BlockState;
 
 @FunctionalInterface
 public interface ITickable {
-    void tick(Level world, BlockPos pos, BlockState state);
+    void tick(Level level, BlockPos pos, BlockState state);
 
-    static <T extends BlockEntity & ITickable> void iTick(Level world, BlockPos pos, BlockState state, T blockEntity) {
-        blockEntity.tick(world, pos, state);
+    static <T extends BlockEntity & ITickable> void iTick(Level level, BlockPos pos, BlockState state, T blockEntity) {
+        blockEntity.tick(level, pos, state);
     }
 }

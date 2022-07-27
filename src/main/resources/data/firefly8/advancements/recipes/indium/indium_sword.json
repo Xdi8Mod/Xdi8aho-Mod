@@ -1,0 +1,28 @@
+{
+  "parent": "recipes/root",
+  "rewards": {
+    "recipes": [
+      "firefly8:indium_sword"
+    ]
+  },
+  "criteria": {
+    "get_indium": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [{
+          "items": [ "firefly8:indium_ingot" ]
+        }]
+      }
+    },
+    "recipe": {
+      "trigger": "recipe_unlocked",
+      "conditions": {
+        "recipe": "firefly8:indium_sword"
+      }
+    }
+  },
+  "requirements": [[
+    "get_indium",
+    "recipe"
+  ]]
+}
