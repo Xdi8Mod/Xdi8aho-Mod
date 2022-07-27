@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:blasting",
+  "group": "firefly8:indium_ingot",
+  "ingredient": {
+    "item": "firefly8:deepslate_indium_ore"
+  },
+  "result": "firefly8:indium_ingot",
+  "experience": 1.0,
+  "cookingtime": 100
+}

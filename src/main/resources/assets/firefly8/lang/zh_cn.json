@@ -10,15 +10,34 @@
   "item.firefly8.tinted_firefly_bottle": "瓶装萤火虫",
   "item.firefly8.bundler": "之前的物品栏",
 
+  "item.firefly8.indium_ingot": "铟锭",
+  "item.firefly8.indium_nugget": "铟粒",
+  "item.firefly8.indium_axe": "铟斧",
+  "item.firefly8.indium_hoe": "铟锄",
+  "item.firefly8.indium_pickaxe": "铟镐",
+  "item.firefly8.indium_shovel": "铟锹",
+  "item.firefly8.indium_sword": "铟剑",
+  "item.firefly8.indium_chisel": "凿子",
+
   "item.firefly8.tinted_firefly_bottle.too_many": "1个瓶子最多可容纳5只萤火虫",
+  "item.firefly8.tinted_firefly_bottle.empty": "瓶子里没有萤火虫",
 
   "itemGroup.firefly8": "灯\uDB87\uDC30",
   "entity.firefly8.firefly": "萤火虫",
 
-
   "block.firefly8.xdi8aho_portal_core": "灯\uDB87\uDC30传送门核心",
   "block.firefly8.xdi8aho_torch_top": "灯\uDB87\uDC30焰心",
+  "block.firefly8.xdi8aho_portal": "灯\uDB87\uDC30传送门方块",
+  "block.firefly8.xdi8aho_back_portal_core": "返回传送门核心",
+  "block.firefly8.xdi8aho_back_portal_fire": "归途圣\uDB87\uDC30",
+
+  "block.firefly8.indium_block": "铟块",
+  "block.firefly8.indium_ore": "铟矿石",
+  "block.firefly8.deepslate_indium_ore": "深层铟矿石",
 
   "commands.bindxdi8portal.success": "已为 %1$s 绑定传送门",
-  "commands.bindxdi8portal.failure": "无法将 %1$s 的传送门绑定至 %2$s / (%3$s)"
+  "commands.bindxdi8portal.failure": "无法将 %1$s 的传送门绑定至 %2$s / (%3$s)",
+  "commands.unbindxdi8portal.0": "未选中玩家",
+  "commands.unbindxdi8portal.1": "已为 %s 解绑传送门",
+  "commands.unbindxdi8portal.more": "已为 %d 名玩家解绑传送门"
 }

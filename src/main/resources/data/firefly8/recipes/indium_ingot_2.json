@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "nnn",
+    "nnn",
+    "nnn"
+  ],
+  "group": "firefly8:indium_ingot",
+  "key": {
+    "n": {
+      "item": "firefly8:indium_nugget"
+    }
+  },
+  "result": {
+    "item": "firefly8:indium_ingot",
+    "count": 1
+  }
+}

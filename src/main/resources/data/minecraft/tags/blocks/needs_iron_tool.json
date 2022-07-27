@@ -2,6 +2,11 @@
   "replace": false,
   "values": [
     "sweet_potato:magic_cube",
-    "sweet_potato:agroforestry_table"
+    "sweet_potato:agroforestry_table",
+    "firefly8:indium_block",
+    "firefly8:indium_ore",
+    "firefly8:deepslate_indium_ore",
+    "firefly8:xdi8aho_portal_core",
+    "firefly8:xdi8aho_back_portal_core"
   ]
 }

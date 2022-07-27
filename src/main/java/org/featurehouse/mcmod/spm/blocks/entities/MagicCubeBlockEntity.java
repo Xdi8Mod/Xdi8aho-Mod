@@ -83,29 +83,22 @@ public class MagicCubeBlockEntity extends AbstractLockableContainerBlockEntity i
             }
         };
         this.stateHelper = new BooleanStateManager(MagicCubeBlock.ACTIVATED) {
-            public boolean shouldChange(boolean newOne) {
-                assert MagicCubeBlockEntity.this.level != null;
-                return MagicCubeBlockEntity.this.level.getBlockState(pos).getValue(property) != newOne;
-            }
-
             @Override
-            public void run() {
-                assert MagicCubeBlockEntity.this.level != null;
+            public void run(Level level, BlockPos pos, BlockState oldState) {
                 boolean b;
-                byte fc = this.fireCount();
-                MagicCubeBlockEntity.this.fireCountCache = this.fireCount();
-                if (this.shouldChange(b = fc > 0)) {
-                    MagicCubeBlockEntity.this.level.setBlockAndUpdate(pos,
-                            MagicCubeBlockEntity.this.level.getBlockState(pos)
-                                    .setValue(property, b));
+                byte fc = this.fireCount(level, pos);
+                MagicCubeBlockEntity.this.fireCountCache = fc;
+                if (this.shouldChange(b = fc > 0, oldState)) {
+                    level.setBlockAndUpdate(pos,
+                            oldState.setValue(property, b));
                     if (!b) {
                         MagicCubeBlockEntity.this.mainFuelTime = -1;
                         MagicCubeBlockEntity.this.viceFuelTime = 0;
-                        MagicCubeBlockEntity.this.level.playSound(null, pos,
+                        level.playSound(null, pos,
                                 SPMMain.MAGIC_CUBE_DEACTIVATE.get(), SoundSource.BLOCKS,
                                 1.0F, 1.0F);
                     } else {
-                        MagicCubeBlockEntity.this.level.playSound(null, pos,
+                        level.playSound(null, pos,
                                 SPMMain.MAGIC_CUBE_ACTIVATE.get(), SoundSource.BLOCKS,
                                 1.0F, 1.0F);
                     }
@@ -113,13 +106,11 @@ public class MagicCubeBlockEntity extends AbstractLockableContainerBlockEntity i
                 MagicCubeBlockEntity.this.activationCache = b;
             }
 
-            byte fireCount() {
-                BlockPos[] blockPosList = calcPos(MagicCubeBlockEntity.this.getBlockPos());
-
-                assert MagicCubeBlockEntity.this.level != null;
+            byte fireCount(Level level, BlockPos pos) {
+                BlockPos[] blockPosList = calcPos(pos);
                 byte b = 0;
                 for (BlockPos eachPos: blockPosList) {
-                    if (MagicCubeBlockEntity.this.level.getBlockState(eachPos).getBlock() == SOUL_FIRE)
+                    if (level.getBlockState(eachPos).getBlock() == SOUL_FIRE)
                         ++b;
                 }
                 return b;
@@ -151,7 +142,7 @@ public class MagicCubeBlockEntity extends AbstractLockableContainerBlockEntity i
 
         if (!world.isClientSide) {
             if (world.getGameTime() % 10L == 5L) {
-                stateHelper.run();
+                stateHelper.run(world, pos, state);
             }
             if (!activationCache) return;
 

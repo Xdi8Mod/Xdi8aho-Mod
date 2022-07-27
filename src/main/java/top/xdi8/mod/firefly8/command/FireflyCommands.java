@@ -18,11 +18,14 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import top.xdi8.mod.firefly8.ext.IServerPlayerWithHiddenInventory;
 
+import java.util.Collection;
+import java.util.Collections;
+
 @Mod.EventBusSubscriber(modid = "firefly8")
 public final class FireflyCommands {
     @SubscribeEvent
     public static void init(RegisterCommandsEvent event) {
-        final LiteralArgumentBuilder<CommandSourceStack> command =
+        LiteralArgumentBuilder<CommandSourceStack> command =
                 Commands.literal("bindxdi8portal")
                         .requires((CommandSourceStack src) -> src.hasPermission(2))
                         .then(Commands.argument("pos", BlockPosArgument.blockPos())
@@ -43,12 +46,51 @@ public final class FireflyCommands {
                                 )
                         );
         event.getDispatcher().register(command);
+        command = Commands.literal("unbindxdi8portal")
+                .requires((CommandSourceStack src) -> src.hasPermission(2))
+                .executes(UnbindXdi8PortalCommand::unbind1)
+                .then(Commands.argument("players", EntityArgument.players())
+                        .executes(UnbindXdi8PortalCommand::unbind0)
+                );
+        event.getDispatcher().register(command);
+    }
+
+    private static final class UnbindXdi8PortalCommand {
+        private static int execute(Collection<ServerPlayer> players, CommandSourceStack stack) {
+            final int count = players.size();
+            if (count == 0) {
+                stack.sendFailure(new TranslatableComponent("commands.unbindxdi8portal.0"));
+                return 0;
+            }
+
+            for (ServerPlayer player : players) {
+                final IServerPlayerWithHiddenInventory ext = IServerPlayerWithHiddenInventory.xdi8$extend(player);
+                ext.xdi8$setPortal(null, BlockPos.ZERO);
+                if (count == 1) {
+                    stack.sendSuccess(new TranslatableComponent("commands.unbindxdi8portal.1", player.getDisplayName()), true);
+                }
+            }
+            if (count != 1) {
+                stack.sendSuccess(new TranslatableComponent("commands.unbindxdi8portal.more", count), true);
+            }
+            return 1;
+        }
+
+        static int unbind0(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
+            final Collection<ServerPlayer> players = EntityArgument.getPlayers(ctx, "players");
+            return execute(players, ctx.getSource());
+        }
+
+        static int unbind1(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
+            final ServerPlayer player = ctx.getSource().getPlayerOrException();
+            return execute(Collections.singleton(player), ctx.getSource());
+        }
     }
 
     private static final class BindXdi8PortalCommand {
         private static int execute(ResourceKey<Level> level, BlockPos pos, ServerPlayer player, CommandSourceStack stack) {
             final IServerPlayerWithHiddenInventory playerExt = IServerPlayerWithHiddenInventory.xdi8$extend(player);
-            if (playerExt.xdi8$validatePortal()) {
+            if (playerExt.xdi8$validatePortal(level, pos)) {
                 playerExt.xdi8$setPortal(level, pos);
                 stack.sendSuccess(new TranslatableComponent("commands.bindxdi8portal.success", player.getDisplayName()), true);
                 return 1;
