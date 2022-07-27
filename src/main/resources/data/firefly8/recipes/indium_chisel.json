@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " &",
+    "/ "
+  ],
+  "key": {
+    "&": {
+      "item": "firefly8:indium_ingot"
+    },
+    "/": {
+      "tag": "forge:rods/wooden"
+    }
+  },
+  "result": {
+    "item": "firefly8:indium_chisel"
+  }
+}

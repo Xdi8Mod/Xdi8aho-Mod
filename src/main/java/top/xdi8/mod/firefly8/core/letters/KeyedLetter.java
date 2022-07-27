@@ -15,4 +15,10 @@ public interface KeyedLetter {
 
     default boolean isNull() { return false; }
     static KeyedLetter empty() { return EmptyLetter.INSTANCE; }
+
+    @FunctionalInterface
+    interface Provider {
+        @javax.annotation.Nonnull
+        KeyedLetter letter();
+    }
 }

@@ -17,12 +17,13 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import org.featurehouse.mcmod.spm.SPMMain;
 import org.featurehouse.mcmod.spm.blocks.entities.GrinderBlockEntity;
-import org.featurehouse.mcmod.spm.lib.block.entity.AbstractBlockWithEntity;
+import org.featurehouse.mcmod.spm.lib.block.entity.TickableContainerEntityBlock;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Random;
 
-public class GrinderBlock extends AbstractBlockWithEntity<GrinderBlockEntity> {
+public class GrinderBlock extends TickableContainerEntityBlock<GrinderBlockEntity> {
     public static BooleanProperty GRINDING = BooleanProperty.create("grinding");
 
     public GrinderBlock(Properties settings) {
@@ -36,7 +37,7 @@ public class GrinderBlock extends AbstractBlockWithEntity<GrinderBlockEntity> {
     }
 
     @Override
-    public GrinderBlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+    public @NotNull GrinderBlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new GrinderBlockEntity(pos, state);
     }
 

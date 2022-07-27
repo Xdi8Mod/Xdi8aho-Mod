@@ -75,6 +75,10 @@ public final class BackPortalFireBlock extends Block {
     public void entityInside(@NotNull BlockState pState, @NotNull Level pLevel,
                              @NotNull BlockPos pPos, @NotNull Entity pEntity) {
         if (pLevel.isClientSide()) return;
+        BlockState downState = pLevel.getBlockState(pPos.below());
+        if (!(downState.is(FireflyBlocks.XDI8AHO_BACK_PORTAL_CORE_BLOCK.get())) ||
+                (!downState.getValue(BackPortalCoreBlock.IS_VALID))) return;
+
         IPortalCooldownEntity entityExt = IPortalCooldownEntity.xdi8$extend(pEntity);
         if (!pEntity.isPassenger() && !pEntity.isVehicle() &&
                 pEntity.canChangeDimensions() && !entityExt.xdi8$isOnCooldown()) {

@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import top.xdi8.mod.firefly8.ext.IPlayerWithHiddenInventory;
 
 @Mixin(Player.class)
-public class PlayerWithHiddenInventoryImpl implements IPlayerWithHiddenInventory {
+abstract class PlayerWithHiddenInventoryImpl implements IPlayerWithHiddenInventory {
     private final SimpleContainer xdi8$portalInv = new SimpleContainer(54);
 
     @Override
@@ -30,5 +30,12 @@ public class PlayerWithHiddenInventoryImpl implements IPlayerWithHiddenInventory
     private void writeNbt(CompoundTag pCompound, CallbackInfo ci) {
         final ListTag tag = xdi8$portalInv.createTag();
         pCompound.put("firefly8:portalInv", tag);
+    }
+
+    @Override
+    public void xdi8$passPortalInv(IPlayerWithHiddenInventory from) {
+        final SimpleContainer other = from.xdi8$getPortalInv();
+        this.xdi8$portalInv.clearContent();
+        other.removeAllItems().forEach(xdi8$portalInv::addItem);
     }
 }

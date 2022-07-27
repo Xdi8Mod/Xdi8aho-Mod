@@ -7,6 +7,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.portal.PortalInfo;
 import net.minecraft.world.phys.Vec3;
@@ -16,6 +17,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import top.xdi8.mod.firefly8.ext.IServerPlayerWithHiddenInventory;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
@@ -63,6 +66,16 @@ public class BackTeleporterImpl implements ITeleporter {
             pos = Optional.ofNullable(serverPlayer.getRespawnPosition())
                     .orElse(destWorld.getHeightmapPos(
                             Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, destWorld.getSharedSpawnPos()));
+        }
+        final List<BlockState> p2s = BlockPos.betweenClosedStream(pos, pos.atY(destWorld.getLogicalHeight() - 1))
+                .sorted(Comparator.comparingInt(BlockPos::getY))
+                .map(destWorld::getBlockState)
+                .toList();
+        for (int y = pos.getY(), i = 0; y < destWorld.getLogicalHeight(); y++, i++) {
+            if (p2s.get(i).isAir() && p2s.get(i + 1).isAir()) {
+                pos = pos.atY(y);
+                break;
+            }
         }
         return new PortalInfo(Vec3.atBottomCenterOf(pos),
                 oldEntity.getDeltaMovement(), oldEntity.getYRot(), oldEntity.getXRot());

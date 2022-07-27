@@ -10,6 +10,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import org.slf4j.Logger;
+import top.xdi8.mod.firefly8.block.FireflyBlocks;
 import top.xdi8.mod.firefly8.ext.IServerPlayerWithHiddenInventory;
 
 import java.util.Collection;
@@ -24,10 +25,19 @@ public class Xdi8DimensionUtils {
     public static void teleportToXdi8aho(ServerLevel oldLevel, Entity entity, BlockPos portalPos) {
         var dim = oldLevel.getServer().getLevel(Xdi8DimensionUtils.XDI8AHO_DIM_KEY);
         if (dim != null) {
-            if (null != entity.changeDimension(dim, new Xdi8TeleporterImpl(oldLevel))) {
-                if (entity instanceof ServerPlayer serverPlayer) {
+            final Entity e = entity.changeDimension(dim, new Xdi8TeleporterImpl(oldLevel));
+            if (e != null) {
+                if (e instanceof ServerPlayer serverPlayer) {
                     IServerPlayerWithHiddenInventory ext = IServerPlayerWithHiddenInventory.xdi8$extend(serverPlayer);
-                    ext.xdi8$setPortal(oldLevel.dimension(), portalPos);
+                    //ext.xdi8$setPortal(oldLevel.dimension(), portalPos);
+                    BlockPos thatPos = portalPos;
+                    for (int i = 1; i < 16; i++) {
+                        thatPos = thatPos.above();
+                        if (oldLevel.getBlockState(thatPos).is(FireflyBlocks.XDI8AHO_PORTAL_TOP_BLOCK.get())) {
+                            ext.xdi8$setPortal(oldLevel.dimension(), thatPos);
+                            break;
+                        }
+                    }
                 }
             }
         }

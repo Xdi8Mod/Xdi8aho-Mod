@@ -5,13 +5,12 @@
     " s ",
     " s "
   ],
-  "group": "firefly8:indium",
   "key": {
     "i": {
       "item": "firefly8:indium_ingot"
     },
     "s": {
-      "item": "minecraft:stick"
+      "tag": "forge:rods/wooden"
     }
   },
   "result": {

@@ -1,13 +1,17 @@
 package top.xdi8.mod.firefly8.block;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
 import org.jetbrains.annotations.NotNull;
 import top.xdi8.mod.firefly8.ext.IPortalCooldownEntity;
 import top.xdi8.mod.firefly8.world.Xdi8DimensionUtils;
@@ -16,7 +20,7 @@ import top.xdi8.mod.firefly8.world.Xdi8DimensionUtils;
 public class Xdi8ahoPortalBlock extends Block {
 
     public Xdi8ahoPortalBlock() {
-        super(Properties.of(Material.PORTAL)
+        super(Properties.of(Material.PORTAL, MaterialColor.GOLD)
                 .lightLevel(s->11)
                 .strength(-1)
                 .noCollission()
@@ -35,5 +39,22 @@ public class Xdi8ahoPortalBlock extends Block {
             Xdi8DimensionUtils.teleportToXdi8aho(level, pEntity, pPos);
             entityExt.xdi8$resetShortCooldown();
         }
+    }
+
+    @Override
+    @NotNull
+    @SuppressWarnings("deprecation")
+    public BlockState updateShape(@NotNull BlockState pState,
+                                  @NotNull Direction pDirection, @NotNull BlockState pNeighborState,
+                                  @NotNull LevelAccessor pLevel, @NotNull BlockPos pCurrentPos,
+                                  @NotNull BlockPos pNeighborPos) {
+        if (pDirection.getAxis() == Direction.Axis.Y) {
+            if (!pNeighborState.is(FireflyBlocks.XDI8AHO_PORTAL_BLOCK.get()) &&
+                !pNeighborState.is(FireflyBlocks.XDI8AHO_PORTAL_TOP_BLOCK.get()) &&
+                !pNeighborState.is(FireflyBlockTags.PORTAL_CORE)) {
+                return Blocks.AIR.defaultBlockState();
+            }
+        }
+        return pState;
     }
 }

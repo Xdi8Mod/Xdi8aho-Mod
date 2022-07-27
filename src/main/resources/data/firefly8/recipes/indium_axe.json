@@ -1,17 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "ii ",
-    "is ",
-    " s "
+    "ii",
+    "is",
+    " s"
   ],
-  "group": "firefly8:indium",
   "key": {
     "i": {
       "item": "firefly8:indium_ingot"
     },
     "s": {
-      "item": "minecraft:stick"
+      "tag": "forge:rods/wooden"
     }
   },
   "result": {
