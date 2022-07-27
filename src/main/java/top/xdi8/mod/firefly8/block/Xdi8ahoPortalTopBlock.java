@@ -25,6 +25,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.phys.BlockHitResult;
 import org.featurehouse.mcmod.spm.util.tick.ITickable;
 import org.jetbrains.annotations.NotNull;
@@ -33,11 +34,10 @@ import top.xdi8.mod.firefly8.block.entity.FireflyBlockEntityTypes;
 import top.xdi8.mod.firefly8.block.entity.PortalTopBlockEntity;
 import top.xdi8.mod.firefly8.block.structure.Xdi8PortalBasicData;
 import top.xdi8.mod.firefly8.ext.IPlayerWithHiddenInventory;
+import top.xdi8.mod.firefly8.ext.IServerPlayerWithHiddenInventory;
 import top.xdi8.mod.firefly8.item.FireflyItems;
 import top.xdi8.mod.firefly8.item.tint.TintedFireflyBottleItem;
 import top.xdi8.mod.firefly8.screen.TakeOnlyChestMenu;
-
-import java.util.OptionalInt;
 
 public class Xdi8ahoPortalTopBlock extends BaseEntityBlock {
     public static final int PORTAL_MIN_HEIGHT = 2, PORTAL_MAX_HEIGHT = 16;
@@ -46,8 +46,8 @@ public class Xdi8ahoPortalTopBlock extends BaseEntityBlock {
             IntegerProperty.create("fireflies", 0, MAX_FIREFLY_COUNT);
 
     public Xdi8ahoPortalTopBlock() {
-        super(Properties.of(Material.STONE)
-                .strength(8F, 800F)//TODO
+        super(Properties.of(Material.STONE, MaterialColor.GOLD)
+                .strength(8F, 800F)
                 .requiresCorrectToolForDrops()
                 .lightLevel(bs -> bs.getValue(FIREFLY_COUNT) * 3)
         );
@@ -60,20 +60,26 @@ public class Xdi8ahoPortalTopBlock extends BaseEntityBlock {
     }
 
     /** When placing the torchlight, checking the base & the pillar */
-    public static OptionalInt getPortalHeight(BlockGetter level, BlockPos thisPos, boolean checkBasement) {
-        int heightCount = 0;
-        for (int y = thisPos.getY() - 1 ;; y--) {
-            if (heightCount > 16) return OptionalInt.empty();
+    public static PortalTopBlockEntity.PortalStatus getPortalHeight(BlockGetter level, BlockPos thisPos, boolean checkBasement) {
+        int heightCount = 1;
+        int status = PortalTopBlockEntity.PortalStatus.ofStateStatus(level.getBlockState(thisPos.below()));
+        if (status == PortalTopBlockEntity.PortalStatus.UNACTIVATED)
+            return PortalTopBlockEntity.PortalStatus.empty();
+        for (int y = thisPos.getY() - 2 ;; y--) {
+            if (heightCount > PORTAL_MAX_HEIGHT) return PortalTopBlockEntity.PortalStatus.empty();
 
             final BlockPos thatPos = thisPos.atY(y);
             final BlockState blockState = level.getBlockState(thatPos);
             if (blockState.is(FireflyBlockTags.PORTAL_CORE)) {
-                if (heightCount < PORTAL_MIN_HEIGHT) return OptionalInt.empty();
+                if (heightCount < PORTAL_MIN_HEIGHT) return PortalTopBlockEntity.PortalStatus.empty();
                 return !checkBasement || isPortalBaseValid(level, thatPos) ?
-                        OptionalInt.of(heightCount) : OptionalInt.empty();
-            } else if (blockState.is(FireflyBlockTags.CENTER_PILLAR)) {
-                heightCount++;
-            } else return OptionalInt.empty();
+                        new PortalTopBlockEntity.PortalStatus(status, heightCount) :
+                        PortalTopBlockEntity.PortalStatus.empty();
+            } else {
+                status = PortalTopBlockEntity.PortalStatus.mix(status, PortalTopBlockEntity.PortalStatus.ofStateStatus(blockState));
+                if (status != PortalTopBlockEntity.PortalStatus.UNACTIVATED) heightCount++;
+                else return PortalTopBlockEntity.PortalStatus.empty();
+            }
         }
     }
 
@@ -97,9 +103,16 @@ public class Xdi8ahoPortalTopBlock extends BaseEntityBlock {
                         @NotNull BlockPos pPos, @NotNull BlockState pOldState, boolean pIsMoving) {
         if (pLevel.isClientSide()) return;
         if (pState.getValue(FIREFLY_COUNT) <= 0) return;
-        final OptionalInt portalHeight = getPortalHeight(pLevel, pPos, true);
-        if (portalHeight.isPresent()) {
-            fillPortalBlocks(pLevel, pPos, portalHeight.getAsInt());
+        processPortal(pLevel, pPos, true);
+    }
+
+    public static void processPortal(Level level, BlockPos pos, boolean checkBasement) {
+        final var portalHeight = getPortalHeight(level, pos, checkBasement);
+        switch (portalHeight.status()) {
+            case PortalTopBlockEntity.PortalStatus.UNACTIVATED ->
+                    removePortal(level, pos);
+            case PortalTopBlockEntity.PortalStatus.READY ->
+                    fillPortalBlocks(level, pos, portalHeight.height());
         }
     }
 
@@ -108,7 +121,9 @@ public class Xdi8ahoPortalTopBlock extends BaseEntityBlock {
     public void onRemove(@NotNull BlockState pState, @NotNull Level pLevel,
                          @NotNull BlockPos pPos, @NotNull BlockState pNewState, boolean pIsMoving) {
         // invalid portal
-        removePortal(pLevel, pPos);
+        if (!pNewState.is(pState.getBlock())) {
+            removePortal(pLevel, pPos);
+        }
     }
 
     public static void removePortal(@NotNull Level level, @NotNull BlockPos pos) {
@@ -132,7 +147,6 @@ public class Xdi8ahoPortalTopBlock extends BaseEntityBlock {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public @NotNull RenderShape getRenderShape(@NotNull BlockState state) {
         return RenderShape.MODEL;
     }
@@ -154,31 +168,46 @@ public class Xdi8ahoPortalTopBlock extends BaseEntityBlock {
                     if (TintedFireflyBottleItem.removeFirefly(stack)) {
                         pLevel.setBlockAndUpdate(pPos, pState.setValue(FIREFLY_COUNT, fireflyCount + 1));
                         pLevel.playSound(null, pPos, SoundEvents.AMETHYST_CLUSTER_PLACE, SoundSource.BLOCKS, 1.0f, 1.0f);
+                        processPortal(pLevel, pPos, false);
                         return InteractionResult.CONSUME;
                     }
                 } else if (stack.is(FireflyItems.FIREFLY_SPAWN_EGG.get())) {
                     pLevel.setBlockAndUpdate(pPos, pState.setValue(FIREFLY_COUNT, fireflyCount + 1));
                     pLevel.playSound(null, pPos, SoundEvents.AMETHYST_CLUSTER_PLACE, SoundSource.BLOCKS, 1.0f, 1.0f);
+                    processPortal(pLevel, pPos, false);
                     return InteractionResult.CONSUME;
                 }
             }
 
-            pPlayer.openMenu(new MenuProvider() {
-                @Override
-                public @NotNull Component getDisplayName() {
-                    return new TranslatableComponent("item.firefly8.bundler");  // Old Inventory
-                }
-
-                @Override
-                public @NotNull AbstractContainerMenu createMenu(int pContainerId, @NotNull Inventory pInventory, @NotNull Player pPlayer) {
-                    IPlayerWithHiddenInventory extPlayer = IPlayerWithHiddenInventory.xdi8$extend(pPlayer);
-                    //return ChestMenu.sixRows(pContainerId, pInventory, extPlayer.xdi8$getPortalInv());
-                    return new TakeOnlyChestMenu(pContainerId, pInventory, extPlayer.xdi8$getPortalInv());
-                }
-            });
-            return InteractionResult.CONSUME;
+            if (((IServerPlayerWithHiddenInventory)pPlayer).xdi8$validatePortal()) {
+                pPlayer.openMenu(menuProvider());
+                return InteractionResult.CONSUME;
+            } else return InteractionResult.PASS;
         }
         return InteractionResult.SUCCESS;
+    }
+
+    @NotNull
+    private MenuProvider menuProvider() {
+        return new MenuProvider() {
+            @Override
+            public @NotNull Component getDisplayName() {
+                return new TranslatableComponent("item.firefly8.bundler");  // Old Inventory
+            }
+
+            @Override
+            public @NotNull AbstractContainerMenu createMenu(int pContainerId, @NotNull Inventory pInventory, @NotNull Player pPlayer) {
+                IPlayerWithHiddenInventory extPlayer = IPlayerWithHiddenInventory.xdi8$extend(pPlayer);
+                //return ChestMenu.sixRows(pContainerId, pInventory, extPlayer.xdi8$getPortalInv());
+                return new TakeOnlyChestMenu(pContainerId, pInventory, extPlayer.xdi8$getPortalInv());
+            }
+        };
+    }
+
+    @Override
+    public MenuProvider getMenuProvider(@NotNull BlockState pState, @NotNull Level pLevel,
+                                        @NotNull BlockPos pPos) {
+        return menuProvider();
     }
 
     private static InteractionHand oppositeHand(InteractionHand hand) {

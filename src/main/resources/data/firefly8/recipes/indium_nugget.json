@@ -5,7 +5,7 @@
       "item": "firefly8:indium_ingot"
     }
   ],
-  "group": "firefly8:indium",
+  "group": "firefly8:indium_nugget",
   "result": {
     "item": "firefly8:indium_nugget",
     "count": 9

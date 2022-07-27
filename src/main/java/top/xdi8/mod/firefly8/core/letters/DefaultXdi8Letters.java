@@ -57,25 +57,18 @@ public enum DefaultXdi8Letters implements KeyedLetter {
     private final int lowercase;
     private final int middleCase;
     private final int uppercase;
-    private final String id;
     private final ResourceLocation resourceLocation;
 
     DefaultXdi8Letters(String id, int lowercase) {
-        this.id = id;
         this.lowercase = lowercase;
         this.uppercase = lowercase - 0x60;
         this.middleCase = uppercase + 0x60;
         this.resourceLocation = new ResourceLocation("firefly8", id);
     }
 
-    private static final Map<String, KeyedLetter> BY_ID =
+    static final Map<ResourceLocation, KeyedLetter> BY_ID =
             Arrays.stream(values()).collect(Collectors.toMap(
-                    DefaultXdi8Letters::rawId, Function.identity()));
-    public static KeyedLetter byId(String id) {
-        return BY_ID.getOrDefault(id, KeyedLetter.empty());
-    }
-
-    public String rawId() { return id; }
+                    DefaultXdi8Letters::id, Function.identity()));
 
     @Override
     public ResourceLocation id() {
