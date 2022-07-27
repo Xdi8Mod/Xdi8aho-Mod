@@ -11,5 +11,8 @@
     "/": {
       "tag": "forge:rods/wooden"
     }
+  },
+  "result": {
+    "item": "firefly8:indium_chisel"
   }
 }

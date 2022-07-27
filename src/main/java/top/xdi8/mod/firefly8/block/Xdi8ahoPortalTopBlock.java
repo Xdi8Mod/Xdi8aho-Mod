@@ -120,7 +120,9 @@ public class Xdi8ahoPortalTopBlock extends BaseEntityBlock {
     public void onRemove(@NotNull BlockState pState, @NotNull Level pLevel,
                          @NotNull BlockPos pPos, @NotNull BlockState pNewState, boolean pIsMoving) {
         // invalid portal
-        removePortal(pLevel, pPos);
+        if (!pNewState.is(pState.getBlock())) {
+            removePortal(pLevel, pPos);
+        }
     }
 
     public static void removePortal(@NotNull Level level, @NotNull BlockPos pos) {
