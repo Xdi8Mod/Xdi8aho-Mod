@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.border.WorldBorder;
 import net.minecraft.world.level.dimension.DimensionType;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.portal.PortalForcer;
 import net.minecraft.world.level.portal.PortalInfo;
 import net.minecraft.world.phys.Vec3;
@@ -91,7 +92,8 @@ public class Xdi8TeleporterImpl implements ITeleporter {
     });
 
     protected Optional<BlockPos> createPortal(BlockPos blockPos, ServerLevel destWorld) {
-        final int height = 172;
+        final int height = 175;
+        //final int height = destWorld.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, blockPos.getX(), blockPos.getZ());
         final int maxHeight = destWorld.getMaxBuildHeight() - 1;
         final List<BlockState> states = BlockPos.betweenClosedStream(blockPos.atY(height), blockPos.atY(maxHeight))
                 .sorted(Comparator.comparingInt(BlockPos::getY))
@@ -112,7 +114,7 @@ public class Xdi8TeleporterImpl implements ITeleporter {
                 }
             }
         }
-        throw new org.apache.commons.lang3.NotImplementedException();
+        return Optional.empty();
     }
 
     private static boolean canGen(BlockState state) {

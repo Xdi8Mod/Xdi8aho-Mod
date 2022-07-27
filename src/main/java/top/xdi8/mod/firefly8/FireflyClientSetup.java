@@ -2,6 +2,7 @@ package top.xdi8.mod.firefly8;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraftforge.api.distmarker.Dist;
@@ -9,6 +10,8 @@ import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import org.featurehouse.mcmod.spm.platform.api.client.BlockRenderTypes;
+import top.xdi8.mod.firefly8.block.FireflyBlocks;
 import top.xdi8.mod.firefly8.client.FireflyParticle;
 import top.xdi8.mod.firefly8.client.TakeOnlyContainerScreen;
 import top.xdi8.mod.firefly8.entity.FireflyEntityTypes;
@@ -22,6 +25,8 @@ public class FireflyClientSetup implements Runnable {
         EntityRenderers.register(FireflyEntityTypes.FIREFLY.get(), NoopRenderer::new);
         MenuScreens.register(FireflyMenus.TAKE_ONLY_CHEST.get(),
                 TakeOnlyContainerScreen::new);
+        BlockRenderTypes.register(RenderType.cutout(),
+                FireflyBlocks.XDI8AHO_PORTAL_TOP_BLOCK);
     }
 
     @SubscribeEvent

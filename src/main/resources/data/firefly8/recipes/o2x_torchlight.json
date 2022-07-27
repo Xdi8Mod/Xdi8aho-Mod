@@ -7,13 +7,13 @@
   ],
   "key": {
     "I": {
-      "item": "minecraft:crying_obsidian"
+      "item": "forge:nuggets/gold"
     },
     "G": {
       "tag": "forge:dusts/glowstone"
     }
   },
   "result": {
-    "item": "firefly8:xdi8aho_portal_top"
+    "item": "firefly8:xdi8aho_torch_top"
   }
 }
