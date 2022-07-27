@@ -37,14 +37,14 @@ public class SymbolStoneProductionRecipe extends SingleItemRecipe {
             return new SymbolStoneProductionRecipe(pRecipeId, s, ingredient, itemStack);
         }
 
-        public @NotNull SymbolStoneProductionRecipe readPacket(@NotNull ResourceLocation pRecipeId, FriendlyByteBuf pBuffer) {
+        public @NotNull SymbolStoneProductionRecipe readPacket(@NotNull ResourceLocation pRecipeId, @NotNull FriendlyByteBuf pBuffer) {
             String s = pBuffer.readUtf();
             Ingredient ingredient = Ingredient.fromNetwork(pBuffer);
             ItemStack itemstack = pBuffer.readItem();
             return new SymbolStoneProductionRecipe(pRecipeId, s, ingredient, itemstack);
         }
 
-        public void writePacket(FriendlyByteBuf pBuffer, SymbolStoneProductionRecipe pRecipe) {
+        public void writePacket(@NotNull FriendlyByteBuf pBuffer, @NotNull SymbolStoneProductionRecipe pRecipe) {
             pBuffer.writeUtf(pRecipe.group);
             pRecipe.ingredient.toNetwork(pBuffer);
             pBuffer.writeItem(pRecipe.result);
