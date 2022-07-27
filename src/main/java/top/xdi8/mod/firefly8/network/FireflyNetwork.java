@@ -15,7 +15,7 @@ import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
-import top.xdi8.mod.firefly8.ext.IPortalCooldownEntity;
+import top.xdi8.mod.firefly8.ext.IServerPlayerWithHiddenInventory;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -55,7 +55,10 @@ public class FireflyNetwork {
             context.enqueueWork(() -> {
                 final ServerPlayer newPlayer =
                         sender.server.getPlayerList().respawn(sender, true);
-                IPortalCooldownEntity.xdi8$extend(newPlayer).xdi8$resetCooldown();
+                final IServerPlayerWithHiddenInventory newPlayerExt =
+                        IServerPlayerWithHiddenInventory.xdi8$extend(newPlayer);
+                newPlayerExt.xdi8$resetCooldown();
+                newPlayerExt.xdi8$passPortalInv(IServerPlayerWithHiddenInventory.xdi8$extend(sender));
                 sender.connection.player = newPlayer;
             });
         }

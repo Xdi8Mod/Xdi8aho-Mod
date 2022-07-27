@@ -15,14 +15,12 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.border.WorldBorder;
 import net.minecraft.world.level.dimension.DimensionType;
-import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.portal.PortalForcer;
 import net.minecraft.world.level.portal.PortalInfo;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.util.ITeleporter;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
-import top.xdi8.mod.firefly8.block.FireflyBlockTags;
 import top.xdi8.mod.firefly8.block.FireflyBlocks;
 import top.xdi8.mod.firefly8.ext.IPortalCooldownEntity;
 
@@ -118,7 +116,7 @@ public class Xdi8TeleporterImpl implements ITeleporter {
     }
 
     private static boolean canGen(BlockState state) {
-        return state.isAir() || state.is(FireflyBlockTags.PORTAL_REPLACEABLE);
+        return state.isAir();
     }
 
     private static final int REGEN_SCALE = 32;

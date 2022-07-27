@@ -34,6 +34,7 @@ import top.xdi8.mod.firefly8.block.entity.FireflyBlockEntityTypes;
 import top.xdi8.mod.firefly8.block.entity.PortalTopBlockEntity;
 import top.xdi8.mod.firefly8.block.structure.Xdi8PortalBasicData;
 import top.xdi8.mod.firefly8.ext.IPlayerWithHiddenInventory;
+import top.xdi8.mod.firefly8.ext.IServerPlayerWithHiddenInventory;
 import top.xdi8.mod.firefly8.item.FireflyItems;
 import top.xdi8.mod.firefly8.item.tint.TintedFireflyBottleItem;
 import top.xdi8.mod.firefly8.screen.TakeOnlyChestMenu;
@@ -178,8 +179,10 @@ public class Xdi8ahoPortalTopBlock extends BaseEntityBlock {
                 }
             }
 
-            pPlayer.openMenu(menuProvider());
-            return InteractionResult.CONSUME;
+            if (((IServerPlayerWithHiddenInventory)pPlayer).xdi8$validatePortal()) {
+                pPlayer.openMenu(menuProvider());
+                return InteractionResult.CONSUME;
+            } else return InteractionResult.PASS;
         }
         return InteractionResult.SUCCESS;
     }
