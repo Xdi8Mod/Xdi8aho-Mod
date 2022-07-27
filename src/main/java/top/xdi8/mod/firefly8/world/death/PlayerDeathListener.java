@@ -39,5 +39,7 @@ public class PlayerDeathListener {
         }
         oldPlayer.getLevel().removePlayerImmediately(oldPlayer, Entity.RemovalReason.CHANGED_DIMENSION);
         // TODO: criterion, when dealing with multiplatform
+        FireflyNetwork.CHANNEL.send(PacketDistributor.PLAYER.with(() -> oldPlayer),
+                FireflyNetwork.S2CRespawn.getInstance());
     }
 }
