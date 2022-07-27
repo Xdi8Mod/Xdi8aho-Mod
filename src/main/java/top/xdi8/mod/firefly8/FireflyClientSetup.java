@@ -25,7 +25,7 @@ public class FireflyClientSetup implements Runnable {
         EntityRenderers.register(FireflyEntityTypes.FIREFLY.get(), NoopRenderer::new);
         MenuScreens.register(FireflyMenus.TAKE_ONLY_CHEST.get(),
                 TakeOnlyContainerScreen::new);
-        BlockRenderTypes.register(RenderType.cutout(),
+        BlockRenderTypes.register(RenderType.cutoutMipped(),
                 FireflyBlocks.XDI8AHO_PORTAL_TOP_BLOCK);
     }
 

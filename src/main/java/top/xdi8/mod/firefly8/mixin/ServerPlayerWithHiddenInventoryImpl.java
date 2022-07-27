@@ -85,7 +85,7 @@ abstract class ServerPlayerWithHiddenInventoryImpl extends Player implements ISe
         final LazyOptional<IItemHandler> capability = this.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
         capability.ifPresent(itemHandler -> {
             for (int i = 0; i < itemHandler.getSlots(); i++) {
-                var itemStack = itemHandler.getStackInSlot(i);
+                final ItemStack itemStack = itemHandler.extractItem(i, Integer.MAX_VALUE, false);
                 if (!itemStack.isEmpty()) {
                     inv.addItem(itemStack);
                 }
@@ -99,6 +99,8 @@ abstract class ServerPlayerWithHiddenInventoryImpl extends Player implements ISe
         assert level != null;
         Vec3 vec3 = Vec3.atCenterOf(xdi8$portalPosition).add(0, 1, 0);
         ListTag listTag = inv.createTag();
+        inv.clearContent();
+
         var compound = new CompoundTag();
         compound.put("StoredItems", listTag);
         final ItemStack itemStack = new ItemStack(FireflyItems.BUNDLER.get(), 1, compound);

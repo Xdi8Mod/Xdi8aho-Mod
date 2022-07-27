@@ -1,5 +1,6 @@
 package top.xdi8.mod.firefly8.world.death;
 
+import com.google.common.base.Suppliers;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -26,20 +27,20 @@ public class PlayerDeathListener {
         }
         oldPlayer.unRide();
         oldPlayer.removeEntitiesOnShoulder();
+        oldPlayer.setHealth(oldPlayer.getMaxHealth());
+        oldPlayer.foodData = new FoodData();
         final IServerPlayerWithHiddenInventory ext = IServerPlayerWithHiddenInventory.xdi8$extend(oldPlayer);
         if (!ext.xdi8$moveItemsToPortal()) {
-            FireflyNetwork.CHANNEL.send(PacketDistributor.PLAYER.with(() -> oldPlayer), FireflyNetwork.S2CDieIndeed.getInstance());
+            FireflyNetwork.CHANNEL.send(PacketDistributor.PLAYER.with(Suppliers.ofInstance(oldPlayer)), FireflyNetwork.S2CDieIndeed.getInstance());
             return;
         }
         event.setCanceled(true);
-        oldPlayer.setHealth(oldPlayer.getMaxHealth());
-        oldPlayer.foodData = new FoodData();
         if (oldPlayer.level.getGameRules().getBoolean(GameRules.RULE_FORGIVE_DEAD_PLAYERS)) {
             oldPlayer.tellNeutralMobsThatIDied();
         }
         oldPlayer.getLevel().removePlayerImmediately(oldPlayer, Entity.RemovalReason.CHANGED_DIMENSION);
         // TODO: criterion, when dealing with multiplatform
-        FireflyNetwork.CHANNEL.send(PacketDistributor.PLAYER.with(() -> oldPlayer),
+        FireflyNetwork.CHANNEL.send(PacketDistributor.PLAYER.with(Suppliers.ofInstance(oldPlayer)),
                 FireflyNetwork.S2CRespawn.getInstance());
     }
 }
