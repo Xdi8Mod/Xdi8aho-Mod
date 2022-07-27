@@ -35,6 +35,9 @@
   "block.firefly8.indium_ore": "铟矿石",
   "block.firefly8.deepslate_indium_ore": "深层铟矿石",
 
+  "block.firefly8.symbol_stone": "符文石",
+  "block.firefly8.symbol_stone.letter": "符文: %s",
+
   "commands.bindxdi8portal.success": "已为 %1$s 绑定传送门",
   "commands.bindxdi8portal.failure": "无法将 %1$s 的传送门绑定至 %2$s / (%3$s)",
   "commands.unbindxdi8portal.0": "未选中玩家",
