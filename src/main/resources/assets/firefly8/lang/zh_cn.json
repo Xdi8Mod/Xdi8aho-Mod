@@ -25,11 +25,14 @@
   "itemGroup.firefly8": "灯\uDB87\uDC30",
   "entity.firefly8.firefly": "萤火虫",
 
+  "menu.firefly8.xdi8_table": "灯法台",
+
   "block.firefly8.xdi8aho_portal_core": "灯\uDB87\uDC30传送门核心",
   "block.firefly8.xdi8aho_torch_top": "灯\uDB87\uDC30焰心",
   "block.firefly8.xdi8aho_portal": "灯\uDB87\uDC30传送门方块",
   "block.firefly8.xdi8aho_back_portal_core": "返回传送门核心",
   "block.firefly8.xdi8aho_back_portal_fire": "归途圣\uDB87\uDC30",
+  "block.firefly8.xdi8_table": "灯法台",
 
   "block.firefly8.indium_block": "铟块",
   "block.firefly8.indium_ore": "铟矿石",
