@@ -1,7 +1,6 @@
 package top.xdi8.mod.firefly8.item.tint;
 
 import com.mojang.datafixers.util.Either;
-import com.mojang.logging.LogUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -21,7 +20,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
-import org.slf4j.Logger;
 import top.xdi8.mod.firefly8.block.FireflyBlockTags;
 import top.xdi8.mod.firefly8.entity.FireflyEntity;
 import top.xdi8.mod.firefly8.entity.FireflyEntityData;
@@ -30,8 +28,6 @@ import top.xdi8.mod.firefly8.item.FireflyItems;
 import java.util.Optional;
 
 public class TintedFireflyBottleItem extends Item {
-    private static final Logger LOGGER = LogUtils.getLogger();
-
     public TintedFireflyBottleItem(Properties pProperties) {
         super(pProperties);
     }
@@ -141,6 +137,9 @@ public class TintedFireflyBottleItem extends Item {
             }
             level.addFreshEntity(fireflyEntity);
             fireflyList.remove(fireflyList.size() - 1);
+            if (fireflyList.isEmpty()) {
+                return Either.left(new ItemStack(FireflyItems.TINTED_GLASS_BOTTLE.get(), 1, stack.getTag()));
+            }
         }
         return Either.left(stack);
     }
