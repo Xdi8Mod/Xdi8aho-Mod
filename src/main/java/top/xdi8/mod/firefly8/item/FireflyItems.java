@@ -55,6 +55,7 @@ public final class FireflyItems {
             TINTED_DRAGON_BREATH,
             TINTED_FIREFLY_BOTTLE,
 
+            DARK_SYMBOL_STONE,
             BUNDLER;
 
     static {
@@ -121,6 +122,9 @@ public final class FireflyItems {
 
         BUNDLER = REGISTRY.register("bundler", BundlerItem::new);
         SymbolStoneBlockItem.registerAll(REGISTRY::register);
+        DARK_SYMBOL_STONE = REGISTRY.register("dark_symbol_stone", () ->
+                new BlockItem(FireflyBlocks.DARK_SYMBOL_STONE.get(),
+                        defaultProp().fireResistant()));
     }
 
     static Item.Properties defaultProp() {

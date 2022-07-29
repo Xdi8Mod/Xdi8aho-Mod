@@ -39,6 +39,7 @@
   "block.firefly8.deepslate_indium_ore": "深层铟矿石",
 
   "block.firefly8.symbol_stone": "符文石",
+  "block.firefly8.dark_symbol_stone": "暗符文石",
   "block.firefly8.symbol_stone.letter": "符文: %s",
 
   "commands.bindxdi8portal.success": "已为 %1$s 绑定传送门",

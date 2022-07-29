@@ -1,8 +1,7 @@
 package top.xdi8.mod.firefly8.item.symbol;
 
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Rarity;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.*;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -15,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 public class SymbolStoneBlockItem extends BlockItem implements KeyedLetter.Provider {
     private final KeyedLetter letter;
@@ -29,6 +29,12 @@ public class SymbolStoneBlockItem extends BlockItem implements KeyedLetter.Provi
     public SymbolStoneBlockItem(KeyedLetter letter, Properties pProperties) {
         super(SymbolStoneBlock.fromLetter(letter), pProperties);
         this.letter = letter;
+    }
+
+    @Override
+    public void onDestroyed(@NotNull ItemEntity pItemEntity) {
+        ItemUtils.onContainerDestroyed(pItemEntity, Stream.of(
+                new ItemStack(FireflyItems.DARK_SYMBOL_STONE.get(), pItemEntity.getItem().getCount())));
     }
 
     public SymbolStoneBlockItem withLetter(KeyedLetter letter) {
