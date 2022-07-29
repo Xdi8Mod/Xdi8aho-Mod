@@ -16,6 +16,10 @@ public class FireflyRecipes {
     public static final RegistryObject<RecipeSerializer<SymbolStoneProductionRecipe>> PRODUCE_S = SERIALIZERS.register("produce_symbol",
             SymbolStoneProductionRecipe.Serializer::new);
 
+    public static final RegistryObject<RecipeType<TotemRecipe>> TOTEM_T = ofType("totem");
+    public static final RegistryObject<RecipeSerializer<TotemRecipe>> TOTEM_S = SERIALIZERS.register("totem",
+            TotemRecipe.Serializer::new);
+
     private static <T extends Recipe<?>> RegistryObject<RecipeType<T>> ofType(String id) {
         return TYPES.register(id, () -> new RecipeType<>() {
             @Override
