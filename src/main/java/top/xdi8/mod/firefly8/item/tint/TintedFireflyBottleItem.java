@@ -24,6 +24,7 @@ import top.xdi8.mod.firefly8.block.FireflyBlockTags;
 import top.xdi8.mod.firefly8.entity.FireflyEntity;
 import top.xdi8.mod.firefly8.entity.FireflyEntityData;
 import top.xdi8.mod.firefly8.item.FireflyItems;
+import top.xdi8.mod.firefly8.stats.FireflyStats;
 
 import java.util.Optional;
 
@@ -62,10 +63,7 @@ public class TintedFireflyBottleItem extends Item {
             pPlayer.displayClientMessage(new TranslatableComponent("item.firefly8.tinted_firefly_bottle.too_many"), true);
             return false;
         } else {
-            if (firefly.isPassenger())
-                firefly.stopRiding();
-            if (firefly.isVehicle())
-                firefly.ejectPassengers();
+            firefly.unRide();
 
             CompoundTag targetTags = new CompoundTag();
             targetTags.putLong("InBottleTime", level.getGameTime());
@@ -75,6 +73,7 @@ public class TintedFireflyBottleItem extends Item {
             firefly.remove(Entity.RemovalReason.DISCARDED);
             level.playSound(null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), SoundEvents.BOTTLE_FILL,
                     SoundSource.NEUTRAL, 1.0F, 1.0F);
+            pPlayer.awardStat(FireflyStats.FIREFLIES_CAUGHT.get());
             return true;
         }
     }
@@ -96,9 +95,11 @@ public class TintedFireflyBottleItem extends Item {
             }
             final Either<ItemStack, TranslatableComponent> res = spawnFirefly(
                     pLevel, itemStack, pPlayer, pUsedHand, Vec3.atCenterOf(airPos.get()));
-            if (res.left().isPresent())
+            if (res.left().isPresent()) {
+                pPlayer.awardStat(FireflyStats.FIREFLIES_RELEASED.get());
                 return InteractionResultHolder.sidedSuccess(res.left().get(),
                         pLevel.isClientSide());
+            }
             if (!pLevel.isClientSide()) {
                 res.ifRight(c -> pPlayer.displayClientMessage(c, true));
             }

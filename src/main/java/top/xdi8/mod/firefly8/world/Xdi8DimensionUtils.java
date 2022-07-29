@@ -12,6 +12,7 @@ import net.minecraft.world.level.Level;
 import org.slf4j.Logger;
 import top.xdi8.mod.firefly8.block.FireflyBlocks;
 import top.xdi8.mod.firefly8.ext.IServerPlayerWithHiddenInventory;
+import top.xdi8.mod.firefly8.stats.FireflyStats;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -38,6 +39,7 @@ public class Xdi8DimensionUtils {
                             break;
                         }
                     }
+                    serverPlayer.awardStat(FireflyStats.O2X_PORTALS_ENTERED.get());
                 }
             }
         }

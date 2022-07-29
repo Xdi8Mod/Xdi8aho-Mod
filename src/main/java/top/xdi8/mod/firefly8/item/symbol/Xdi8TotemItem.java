@@ -1,6 +1,8 @@
 package top.xdi8.mod.firefly8.item.symbol;
 
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -51,11 +53,16 @@ public class Xdi8TotemItem extends Item {
 
     @Override
     public void appendHoverText(@NotNull ItemStack pStack, @Nullable Level pLevel, @NotNull List<Component> pTooltipComponents, @NotNull TooltipFlag pIsAdvanced) {
-        // TODO
+        @Nullable TotemAbility ability = getAbility(pStack);
+        if (ability != null) {
+            MutableComponent e = new TranslatableComponent("xdi8.totem.attribute");
+            e = e.append(new TranslatableComponent("xdi8.totem.attribute." + ability.getId()));
+            pTooltipComponents.add(e);
+        }
     }
 
     @Override
     public boolean isFoil(@NotNull ItemStack pStack) {
-        return super.isFoil(pStack);//TODO
+        return getAbility(pStack) != null || super.isFoil(pStack);
     }
 }
