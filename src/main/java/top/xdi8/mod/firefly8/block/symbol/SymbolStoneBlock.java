@@ -8,17 +8,13 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
-import org.codehaus.plexus.util.StringUtils;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import top.xdi8.mod.firefly8.core.letters.KeyedLetter;
 import top.xdi8.mod.firefly8.core.letters.LettersUtil;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
@@ -47,7 +43,7 @@ public class SymbolStoneBlock extends Block implements KeyedLetter.Provider {
         if (letter.hasUppercase()) sb.add(Character.toString(letter.uppercase()));
         if (letter.hasMiddleCase()) sb.add(Character.toString(letter.middleCase()));
         if (letter.hasLowercase()) sb.add(Character.toString(letter.lowercase()));
-        String s = StringUtils.join(sb.iterator(), " ");
+        String s = join(sb.iterator(), " ");
         if (!s.isBlank()) {
             pTooltip.add(new TranslatableComponent("block.firefly8.symbol_stone.letter", s));
         }
@@ -91,5 +87,20 @@ public class SymbolStoneBlock extends Block implements KeyedLetter.Provider {
         final SymbolStoneBlock block = LETTER_TO_BLOCK.get(letter);
         if (block == null) return LETTER_TO_BLOCK.get(KeyedLetter.empty());
         return block;
+    }
+
+    // from plexus-utils
+    private static String join(Iterator<?> iterator, String separator ) {
+        if ( separator == null ) {
+            separator = "";
+        }
+        StringBuilder buf = new StringBuilder( 256 ); // Java default is 16, probably too small
+        while ( iterator.hasNext() ) {
+            buf.append( iterator.next() );
+            if ( iterator.hasNext() ) {
+                buf.append( separator );
+            }
+        }
+        return buf.toString();
     }
 }

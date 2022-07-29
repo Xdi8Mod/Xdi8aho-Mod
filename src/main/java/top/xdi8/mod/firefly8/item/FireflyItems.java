@@ -75,7 +75,9 @@ public final class FireflyItems {
         INDIUM_SWORD = REGISTRY.register("indium_sword",
                 () -> new IndiumSwordItem(defaultProp()));
         INDIUM_CHISEL = REGISTRY.register("indium_chisel",
-                () -> new IndiumChiselItem(defaultProp()));
+                () -> new IndiumChiselItem(defaultProp()
+                        .durability(30)
+                ));
         INDIUM_BLOCK = REGISTRY.register("indium_block",
                 () -> new BlockItem(FireflyBlocks.INDIUM_BLOCK.get(), defaultProp()));
         INDIUM_ORE_BLOCK = REGISTRY.register("indium_ore",
