@@ -9,6 +9,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import top.xdi8.mod.firefly8.block.symbol.SymbolStoneBlock;
+import top.xdi8.mod.firefly8.block.symbol.Xdi8TableBlock;
 
 import java.util.function.Supplier;
 
@@ -23,7 +24,9 @@ public class FireflyBlocks {
             XDI8AHO_BACK_FIRE_BLOCK,
             INDIUM_BLOCK,
             INDIUM_ORE_BLOCK,
-            DEEPSLATE_INDIUM_ORE_BLOCK;
+            DEEPSLATE_INDIUM_ORE_BLOCK,
+            DARK_SYMBOL_STONE,
+            XDI8_TABLE;
 
     static {
         INDIUM_BLOCK = ofDefaultBlock("indium_block", () ->
@@ -51,7 +54,14 @@ public class FireflyBlocks {
         XDI8AHO_PORTAL_BLOCK = REGISTRY.register("xdi8aho_portal", Xdi8ahoPortalBlock::new);
         XDI8AHO_BACK_PORTAL_CORE_BLOCK = REGISTRY.register("xdi8aho_back_portal_core", BackPortalCoreBlock::new);
         XDI8AHO_BACK_FIRE_BLOCK = REGISTRY.register("xdi8aho_back_portal_fire", BackPortalFireBlock::new);
+        XDI8_TABLE = REGISTRY.register("xdi8_table", Xdi8TableBlock::new);
         SymbolStoneBlock.registerAll(REGISTRY::register);
+        DARK_SYMBOL_STONE = ofDefaultBlock("dark_symbol_stone", () ->
+                BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_GRAY)
+                        .strength(2.0F, 8.0F)
+                        .requiresCorrectToolForDrops()
+                        .sound(SoundType.POLISHED_DEEPSLATE)
+        );
     }
 
     private static RegistryObject<Block> ofDefaultBlock(String id,

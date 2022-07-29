@@ -14,6 +14,7 @@ import org.featurehouse.mcmod.spm.platform.api.client.BlockRenderTypes;
 import top.xdi8.mod.firefly8.block.FireflyBlocks;
 import top.xdi8.mod.firefly8.client.FireflyParticle;
 import top.xdi8.mod.firefly8.client.TakeOnlyContainerScreen;
+import top.xdi8.mod.firefly8.client.Xdi8TableScreen;
 import top.xdi8.mod.firefly8.entity.FireflyEntityTypes;
 import top.xdi8.mod.firefly8.particle.FireflyParticles;
 import top.xdi8.mod.firefly8.screen.FireflyMenus;
@@ -25,6 +26,12 @@ public class FireflyClientSetup implements Runnable {
         EntityRenderers.register(FireflyEntityTypes.FIREFLY.get(), NoopRenderer::new);
         MenuScreens.register(FireflyMenus.TAKE_ONLY_CHEST.get(),
                 TakeOnlyContainerScreen::new);
+        MenuScreens.register(FireflyMenus.CHISEL.get(),
+                (menu, inv, title) -> {
+                    throw new org.apache.commons.lang3.NotImplementedException();
+                });    // placeholder
+        MenuScreens.register(FireflyMenus.XDI8_TABLE.get(),
+                Xdi8TableScreen::new);
         BlockRenderTypes.register(RenderType.cutoutMipped(),
                 FireflyBlocks.XDI8AHO_PORTAL_TOP_BLOCK);
     }

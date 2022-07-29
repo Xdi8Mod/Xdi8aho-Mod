@@ -25,16 +25,22 @@
   "itemGroup.firefly8": "Xdi8 Aho",
   "entity.firefly8.firefly": "Firefly",
 
+  "menu.firefly8.xdi8_table": "Xdi8 Table",
+
   "block.firefly8.xdi8aho_portal_core": "Portal Core of Xdi8 Aho",
   "block.firefly8.xdi8aho_torch_top": "Xdi8 Aho Torchlight",
   "block.firefly8.xdi8aho_portal": "Xdi8 Aho Portal Block",
   "block.firefly8.xdi8aho_back_portal_core": "Return Portal Core",
   "block.firefly8.xdi8aho_back_portal_fire": "Fire of Returning",
+  "block.firefly8.xdi8_table": "Xdi8 Table",
 
   "block.firefly8.indium_block": "Block of Indium",
   "block.firefly8.indium_ore": "Indium Ore",
   "block.firefly8.deepslate_indium_ore": "Deepslate Indium Ore",
 
+  "block.firefly8.symbol_stone": "Symbol Stone",
+  "block.firefly8.dark_symbol_stone": "Dark Symbol Stone",
+  "block.firefly8.symbol_stone.letter": "Symbol: %s",
 
   "commands.bindxdi8portal.success": "Successfully set portal for %s",
   "commands.bindxdi8portal.failure": "Can't set portal for %1$s at dimension %2$s / (%3$s)",
