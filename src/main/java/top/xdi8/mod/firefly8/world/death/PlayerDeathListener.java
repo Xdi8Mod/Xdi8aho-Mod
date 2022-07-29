@@ -10,6 +10,7 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.network.PacketDistributor;
+import top.xdi8.mod.firefly8.advancement.criteria.FireflyCriteria;
 import top.xdi8.mod.firefly8.ext.IServerPlayerWithHiddenInventory;
 import top.xdi8.mod.firefly8.network.FireflyNetwork;
 import top.xdi8.mod.firefly8.stats.FireflyStats;
@@ -48,6 +49,7 @@ public class PlayerDeathListener {
         newPlayerExt.xdi8$resetCooldown();
         newPlayerExt.xdi8$passPortalInv(IServerPlayerWithHiddenInventory.xdi8$extend(oldPlayer));
         oldPlayer.connection.player = newPlayer;
+        FireflyCriteria.DIE_IN_XDI8AHO.trigger(newPlayer);
         newPlayer.awardStat(FireflyStats.FAKE_DEAD.get());
     }
 }
