@@ -31,7 +31,7 @@ public class IndiumChiselItem extends Item {
         if (level.getBlockState(clickedPos).is(SymbolStoneBlock.fromLetter(KeyedLetter.empty()))) {
             MutableBoolean b = new MutableBoolean(false);
             Optional.ofNullable(pContext.getPlayer()).ifPresent(p -> {
-                if (!p.isCrouching()) return;
+                //if (!p.isCrouching()) return;
                 p.openMenu(new MenuProvider() {
                     @Override
                     public @NotNull Component getDisplayName() {

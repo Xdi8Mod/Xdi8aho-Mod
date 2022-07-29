@@ -5,7 +5,9 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.entity.player.Inventory;
 import org.jetbrains.annotations.NotNull;
 import top.xdi8.mod.firefly8.screen.Xdi8TableMenu;
@@ -37,6 +39,11 @@ public class Xdi8TableScreen extends AbstractContainerScreen<Xdi8TableMenu> {
                     176, 0,
                     34, 16);
         }
+        FormattedCharSequence cs = new TranslatableComponent("gui.ok").getVisualOrderText();
+        final int width1 = (font.width(cs)) >> 1;
+        final int start = leftPos + 129 + 17 - width1;
+        font.draw(pPoseStack, cs, start, topPos + 40, 0xffffff);
+
     }
 
     @Override
