@@ -18,6 +18,7 @@ import top.xdi8.mod.firefly8.block.FireflyBlocks;
 import top.xdi8.mod.firefly8.item.FireflyItemTags;
 import top.xdi8.mod.firefly8.recipe.FireflyRecipes;
 import top.xdi8.mod.firefly8.recipe.TotemRecipe;
+import top.xdi8.mod.firefly8.stats.FireflyStats;
 
 import java.util.Collections;
 import java.util.Optional;
@@ -131,6 +132,7 @@ public class Xdi8TableMenu extends AbstractContainerMenu {
             if (!player.getLevel().isClientSide()) {
                 FireflyCriteria.GET_XDI8_TOTEM.trigger((ServerPlayer) player, assemble);
             }
+            player.awardStat(FireflyStats.TOTEMS_ENCHANTED.get());
             broadcastChanges();
         }
     }

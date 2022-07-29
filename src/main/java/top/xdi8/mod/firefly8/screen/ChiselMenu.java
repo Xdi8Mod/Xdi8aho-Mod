@@ -20,6 +20,7 @@ import top.xdi8.mod.firefly8.core.letters.KeyedLetter;
 import top.xdi8.mod.firefly8.item.symbol.SymbolStoneBlockItem;
 import top.xdi8.mod.firefly8.recipe.FireflyRecipes;
 import top.xdi8.mod.firefly8.recipe.SymbolStoneProductionRecipe;
+import top.xdi8.mod.firefly8.stats.FireflyStats;
 
 import java.util.List;
 
@@ -70,6 +71,7 @@ public class ChiselMenu extends AbstractContainerMenu {
             level.playSound(null, blockPos, SoundEvents.STONE_BREAK, SoundSource.BLOCKS, 1.0F, 1.0F);
             isOpen = false;
         });
+        pPlayer.awardStat(FireflyStats.SYMBOL_STONES_CARVED.get());
         breakingRunnable.run();
         return true;
     }

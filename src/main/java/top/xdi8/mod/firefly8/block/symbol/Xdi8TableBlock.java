@@ -21,6 +21,7 @@ import org.featurehouse.mcmod.spm.blocks.SeedUpdaterBlock;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import top.xdi8.mod.firefly8.screen.Xdi8TableMenu;
+import top.xdi8.mod.firefly8.stats.FireflyStats;
 
 /** @see SeedUpdaterBlock */
 public class Xdi8TableBlock extends Block {
@@ -49,6 +50,7 @@ public class Xdi8TableBlock extends Block {
                                           @NotNull BlockHitResult pHit) {
         if (pLevel.isClientSide()) return InteractionResult.SUCCESS;
         pPlayer.openMenu(pState.getMenuProvider(pLevel, pPos));
+        pPlayer.awardStat(FireflyStats.INTERACT_WITH_XDI8_TABLE.get());
         return InteractionResult.CONSUME;
     }
 
