@@ -28,6 +28,7 @@ public final class LettersUtil {
         return LETTER_MAP.getOrDefault(id, KeyedLetter.empty());
     }
 
+    @Deprecated
     public static ResourceLocation getId(KeyedLetter letter) {
         return LETTER_MAP.inverse().getOrDefault(letter, EmptyLetter.ID);
     }
