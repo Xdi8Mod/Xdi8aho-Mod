@@ -58,7 +58,7 @@ public class ChiselMenu extends AbstractContainerMenu {
     @Override
     public boolean stillValid(@NotNull Player pPlayer) {
         return pPlayer.getLevel().isClientSide() ||
-                (isOpen && pPlayer.distanceToSqr(Vec3.atCenterOf(pos)) > 256);
+                (isOpen && pPlayer.distanceToSqr(Vec3.atCenterOf(pos)) < 256);
     }
 
     @Override
