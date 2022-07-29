@@ -11,7 +11,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import org.featurehouse.mcmod.spm.SPMMain;
-import org.featurehouse.mcmod.spm.platform.api.ClientOnly;
 import org.featurehouse.mcmod.spm.platform.api.recipe.SimpleRecipeSerializer;
 import org.jetbrains.annotations.NotNull;
 
@@ -40,7 +39,7 @@ public record SeedUpdatingRecipe(ResourceLocation id, Ingredient base,
         return itemStack;
     }
 
-    @ClientOnly @Override
+    @Override
     public boolean canCraftInDimensions(int width, int height) {
         return width * height >= 2;
     }
@@ -50,7 +49,6 @@ public record SeedUpdatingRecipe(ResourceLocation id, Ingredient base,
         return this.result;
     }
 
-    @ClientOnly
     @Deprecated
     public ItemStack getRecipeKindIcon() {
         return new ItemStack(SPMMain.SEED_UPDATER.get());

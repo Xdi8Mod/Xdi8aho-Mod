@@ -9,6 +9,9 @@
     "firefly8:deepslate_indium_ore",
     "firefly8:xdi8aho_portal_core",
     "firefly8:xdi8aho_torch_top",
-    "firefly8:xdi8aho_back_portal_core"
+    "firefly8:xdi8aho_back_portal_core",
+    "#firefly8:symbol_stones",
+    "firefly8:xdi8_table",
+    "firefly8:dark_symbol_stone"
   ]
 }
