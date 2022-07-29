@@ -2,7 +2,7 @@
   "parent": "minecraft:block/cube_bottom_top",
   "textures": {
     "particle": "sweet_potato:block/magic_cube_side_unactivated",
-	"top": "minecraft:block/polished_blackstone",
+	"top": "firefly8:block/the_unlight_coloured_bricks_made_of_stone_that_has_symbol_on_it_which_it_has_the_longest_name",
 	"bottom": "minecraft:block/obsidian",
 	"side": "sweet_potato:block/magic_cube_side_unactivated"
   }

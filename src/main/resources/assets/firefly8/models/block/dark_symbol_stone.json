@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "firefly8:block/the_unlight_coloured_bricks_made_of_stone_that_has_symbol_on_it_which_it_has_the_longest_name"
+  }
+}

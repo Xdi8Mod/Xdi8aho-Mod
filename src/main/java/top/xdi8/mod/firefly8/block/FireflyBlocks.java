@@ -25,6 +25,7 @@ public class FireflyBlocks {
             INDIUM_BLOCK,
             INDIUM_ORE_BLOCK,
             DEEPSLATE_INDIUM_ORE_BLOCK,
+            DARK_SYMBOL_STONE,
             XDI8_TABLE;
 
     static {
@@ -55,6 +56,12 @@ public class FireflyBlocks {
         XDI8AHO_BACK_FIRE_BLOCK = REGISTRY.register("xdi8aho_back_portal_fire", BackPortalFireBlock::new);
         XDI8_TABLE = REGISTRY.register("xdi8_table", Xdi8TableBlock::new);
         SymbolStoneBlock.registerAll(REGISTRY::register);
+        DARK_SYMBOL_STONE = ofDefaultBlock("dark_symbol_stone", () ->
+                BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_GRAY)
+                        .strength(2.0F, 8.0F)
+                        .requiresCorrectToolForDrops()
+                        .sound(SoundType.POLISHED_DEEPSLATE)
+        );
     }
 
     private static RegistryObject<Block> ofDefaultBlock(String id,
