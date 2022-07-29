@@ -33,6 +33,8 @@ public class FireflyClientSetup implements Runnable {
                 Xdi8TableScreen::new);
         BlockRenderTypes.register(RenderType.cutoutMipped(),
                 FireflyBlocks.XDI8AHO_PORTAL_TOP_BLOCK);
+        BlockRenderTypes.register(RenderType.cutout(),
+                FireflyBlocks.XDI8AHO_BACK_FIRE_BLOCK);
     }
 
     @SubscribeEvent
