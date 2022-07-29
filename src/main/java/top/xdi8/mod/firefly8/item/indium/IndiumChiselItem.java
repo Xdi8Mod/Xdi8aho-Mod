@@ -16,6 +16,7 @@ import org.jetbrains.annotations.NotNull;
 import top.xdi8.mod.firefly8.block.symbol.SymbolStoneBlock;
 import top.xdi8.mod.firefly8.core.letters.KeyedLetter;
 import top.xdi8.mod.firefly8.screen.ChiselMenu;
+import top.xdi8.mod.firefly8.stats.FireflyStats;
 
 import java.util.Optional;
 
@@ -49,6 +50,7 @@ public class IndiumChiselItem extends Item {
                         });
                     }
                 });
+                p.awardStat(FireflyStats.INTERACT_WITH_CHISEL.get());
                 b.setTrue();
             });
             if (b.isTrue()) return InteractionResult.CONSUME;

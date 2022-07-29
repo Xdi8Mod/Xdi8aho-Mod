@@ -16,6 +16,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import top.xdi8.mod.firefly8.ext.IServerPlayerWithHiddenInventory;
+import top.xdi8.mod.firefly8.stats.FireflyStats;
 
 import java.util.Comparator;
 import java.util.List;
@@ -49,7 +50,10 @@ public class BackTeleporterImpl implements ITeleporter {
                 }
             }
         }
-        entity.changeDimension(dest, new BackTeleporterImpl(portalValid));
+        Entity destEntity = entity.changeDimension(dest, new BackTeleporterImpl(portalValid));
+        if (destEntity instanceof ServerPlayer player) {
+            player.awardStat(FireflyStats.X2O_PORTALS_ENTERED.get());
+        }
     }
 
     @Nullable

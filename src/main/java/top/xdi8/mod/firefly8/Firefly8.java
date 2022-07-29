@@ -18,6 +18,7 @@ import top.xdi8.mod.firefly8.network.FireflyNetwork;
 import top.xdi8.mod.firefly8.particle.FireflyParticles;
 import top.xdi8.mod.firefly8.recipe.FireflyRecipes;
 import top.xdi8.mod.firefly8.screen.FireflyMenus;
+import top.xdi8.mod.firefly8.stats.FireflyStats;
 import top.xdi8.mod.firefly8.world.Xdi8PoiTypes;
 
 @Mod("firefly8")
@@ -39,6 +40,9 @@ public class Firefly8 {
         // Recipe
         FireflyRecipes.SERIALIZERS.register(modBus());
         FireflyRecipes.TYPES.register(modBus());
+
+        // Stats
+        FireflyStats.REGISTRY.register(modBus());
 
         // Common
         modBus().addListener(this::onCommonSetup);

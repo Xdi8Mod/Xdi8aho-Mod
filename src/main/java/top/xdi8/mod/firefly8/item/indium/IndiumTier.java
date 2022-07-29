@@ -15,6 +15,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import top.xdi8.mod.firefly8.item.FireflyItems;
 import top.xdi8.mod.firefly8.item.indium.event.DropIndiumNuggetEvent;
+import top.xdi8.mod.firefly8.stats.FireflyStats;
 
 public class IndiumTier implements Tier {
     @Override
@@ -79,6 +80,7 @@ public class IndiumTier implements Tier {
             if (!player.getInventory().add(nugget)) {
                 player.drop(nugget, true);
             }
+            player.awardStat(FireflyStats.INDIUM_NUGGETS_DROPPED.get());
         }
     }
 }
