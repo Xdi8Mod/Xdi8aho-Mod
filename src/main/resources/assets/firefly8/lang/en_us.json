@@ -22,6 +22,9 @@
   "item.firefly8.tinted_firefly_bottle.too_many": "Can't stack fireflies over 5",
   "item.firefly8.tinted_firefly_bottle.empty": "There's no fireflies in the bottle",
 
+  "xdi8.totem.attribute": "Totem Attribute: ",
+  "xdi8.totem.attribute.firefly8:xdi8": "\uDB86\uDF2B\uDB86\uDF71\uDB86\uDF8D\uDB86\uDF89",
+
   "itemGroup.firefly8": "Xdi8 Aho",
   "entity.firefly8.firefly": "Firefly",
 

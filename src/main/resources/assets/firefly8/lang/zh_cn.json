@@ -22,6 +22,9 @@
   "item.firefly8.tinted_firefly_bottle.too_many": "1个瓶子最多可容纳5只萤火虫",
   "item.firefly8.tinted_firefly_bottle.empty": "瓶子里没有萤火虫",
 
+  "xdi8.totem.attribute": "图腾属性：",
+  "xdi8.totem.attribute.firefly8:xdi8": "\uDB86\uDF2B\uDB86\uDF71\uDB86\uDF8D\uDB86\uDF89",
+
   "itemGroup.firefly8": "灯\uDB87\uDC30",
   "entity.firefly8.firefly": "萤火虫",
 
