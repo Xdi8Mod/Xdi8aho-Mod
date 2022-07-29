@@ -39,6 +39,7 @@
   "block.firefly8.deepslate_indium_ore": "Deepslate Indium Ore",
 
   "block.firefly8.symbol_stone": "Symbol Stone",
+  "block.firefly8.symbol_stone.chiseling": "Chiseling",
   "block.firefly8.dark_symbol_stone": "Dark Symbol Stone",
   "block.firefly8.symbol_stone.letter": "Symbol: %s",
 

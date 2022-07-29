@@ -12,6 +12,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import org.featurehouse.mcmod.spm.platform.api.client.BlockRenderTypes;
 import top.xdi8.mod.firefly8.block.FireflyBlocks;
+import top.xdi8.mod.firefly8.client.ChiselScreen;
 import top.xdi8.mod.firefly8.client.FireflyParticle;
 import top.xdi8.mod.firefly8.client.TakeOnlyContainerScreen;
 import top.xdi8.mod.firefly8.client.Xdi8TableScreen;
@@ -27,9 +28,7 @@ public class FireflyClientSetup implements Runnable {
         MenuScreens.register(FireflyMenus.TAKE_ONLY_CHEST.get(),
                 TakeOnlyContainerScreen::new);
         MenuScreens.register(FireflyMenus.CHISEL.get(),
-                (menu, inv, title) -> {
-                    throw new org.apache.commons.lang3.NotImplementedException();
-                });    // placeholder
+                ChiselScreen::new);
         MenuScreens.register(FireflyMenus.XDI8_TABLE.get(),
                 Xdi8TableScreen::new);
         BlockRenderTypes.register(RenderType.cutoutMipped(),
