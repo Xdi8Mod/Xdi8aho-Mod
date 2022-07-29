@@ -26,6 +26,7 @@ public class FireflyBlocks {
             INDIUM_ORE_BLOCK,
             DEEPSLATE_INDIUM_ORE_BLOCK,
             DARK_SYMBOL_STONE,
+            SYMBOL_STONE_BRICKS,
             XDI8_TABLE;
 
     static {
@@ -61,6 +62,12 @@ public class FireflyBlocks {
                         .strength(2.0F, 8.0F)
                         .requiresCorrectToolForDrops()
                         .sound(SoundType.POLISHED_DEEPSLATE)
+        );
+        SYMBOL_STONE_BRICKS = ofDefaultBlock("symbol_stone_bricks", () ->
+                BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_GRAY)
+                        .strength(1.0F, 4.0F)
+                        .requiresCorrectToolForDrops()
+                        .sound(SoundType.STONE)
         );
     }
 
