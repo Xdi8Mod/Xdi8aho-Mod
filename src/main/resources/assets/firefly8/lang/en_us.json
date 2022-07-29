@@ -41,6 +41,7 @@
   "block.firefly8.symbol_stone": "Symbol Stone",
   "block.firefly8.dark_symbol_stone": "Dark Symbol Stone",
   "block.firefly8.symbol_stone.letter": "Symbol: %s",
+  "block.firefly8.symbol_stone_bricks": "Symbol Stone Bricks",
 
   "commands.bindxdi8portal.success": "Successfully set portal for %s",
   "commands.bindxdi8portal.failure": "Can't set portal for %1$s at dimension %2$s / (%3$s)",
