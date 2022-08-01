@@ -14,7 +14,7 @@
     "announce_to_chat": true,
     "hidden": false
   },
-  "parent": "firefly8:chisel",
+  "parent": "firefly8:get_symbol_stone",
   "criteria": {
     "1": {
       "trigger": "inventory_changed",

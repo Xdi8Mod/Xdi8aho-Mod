@@ -16,20 +16,8 @@
   "parent": "firefly8:enter_xdi8",
   "criteria": {
     "get_bottle": {
-      "trigger": "entity_killed_player",
-      "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "predicate": {
-              "location": {
-                "dimension": "firefly8:xdi8aho"
-              }
-            },
-            "entity": "this"
-          }
-        ]
-      }
+      "trigger": "firefly8:die_in_xdi8aho",
+      "conditions": {}
     }
   },
   "rewards": {}

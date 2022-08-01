@@ -45,7 +45,7 @@
   "block.firefly8.symbol_stone.chiseling": "Chiseling",
   "block.firefly8.dark_symbol_stone": "Dark Symbol Stone",
   "block.firefly8.symbol_stone.letter": "Symbol: %s",
-  "block.firefly8.symbol_stone_nn": "Symbol: NN",
+  "block.firefly8.symbol_stone_nn": "Symbol: N (Creative mode only)",
   "block.firefly8.symbol_stone_bricks": "Symbol Stone Bricks",
 
   "commands.bindxdi8portal.success": "Successfully set portal for %s",
