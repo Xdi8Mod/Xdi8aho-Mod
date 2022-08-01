@@ -7,24 +7,35 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import org.jetbrains.annotations.ApiStatus;
 import top.xdi8.mod.firefly8.core.letters.event.LetterRegistryEvent;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public final class LettersUtil {
     private LettersUtil() {}
     private static final BiMap<ResourceLocation, KeyedLetter> LETTER_MAP = HashBiMap.create(DefaultXdi8Letters.BY_ID);
+    // Mutable
+    private static final List<ResourceLocation> ID_LIST =
+            new ArrayList<>(DefaultXdi8Letters.BY_ID.keySet().stream()
+                    .sorted(Comparator.comparingInt(id -> DefaultXdi8Letters.BY_ID.get(id).lowercase()))
+                    .collect(Collectors.toList()));
 
     public static KeyedLetter byId(ResourceLocation id) {
         return LETTER_MAP.getOrDefault(id, KeyedLetter.empty());
     }
 
+    @Deprecated
     public static ResourceLocation getId(KeyedLetter letter) {
         return LETTER_MAP.inverse().getOrDefault(letter, EmptyLetter.ID);
     }
 
     public static void forEach(BiConsumer<ResourceLocation, KeyedLetter> action) {
-        LETTER_MAP.forEach(action);
+        for (var id : ID_LIST)
+            action.accept(id, LETTER_MAP.get(id));
     }
 
     public static <T> Optional<T> idToResource(KeyedLetter letter,
@@ -41,6 +52,9 @@ public final class LettersUtil {
 
     @ApiStatus.Internal
     public static void fireLetterRegistry(IEventBus modBus) {
-        modBus.post(new LetterRegistryEvent(LETTER_MAP::put));
+        modBus.post(new LetterRegistryEvent((key, value) -> {
+            LETTER_MAP.put(key, value);
+            ID_LIST.add(key);
+        }));
     }
 }

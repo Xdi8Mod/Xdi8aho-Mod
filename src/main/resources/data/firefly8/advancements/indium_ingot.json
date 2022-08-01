@@ -1,0 +1,28 @@
+{
+  "display": {
+    "title":{
+      "translate": "advancements.firefly8.indium_ingot.title"
+    },
+    "description": {
+      "translate": "advancements.firefly8.indium_ingot.description"
+    },
+    "icon": {
+      "item": "firefly8:indium_ingot"
+    },
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "firefly8:enter_xdi8",
+  "criteria": {
+    "get_ingot": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [{
+          "items": [ "firefly8:indium_ingot" ]
+        }]
+      }
+    }
+  },
+  "rewards": {}
+}

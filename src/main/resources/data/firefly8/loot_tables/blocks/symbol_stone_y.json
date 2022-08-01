@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "firefly8:y'",
+          "name": "firefly8:symbol_stone_y",
           "conditions": [
             {
               "condition": "minecraft:survives_explosion"

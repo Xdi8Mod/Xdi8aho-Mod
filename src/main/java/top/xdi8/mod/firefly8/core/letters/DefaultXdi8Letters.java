@@ -62,7 +62,7 @@ public enum DefaultXdi8Letters implements KeyedLetter {
     DefaultXdi8Letters(String id, int lowercase) {
         this.lowercase = lowercase;
         this.uppercase = lowercase - 0x60;
-        this.middleCase = uppercase + 0x60;
+        this.middleCase = lowercase + 0x60;
         this.resourceLocation = new ResourceLocation("firefly8", id);
     }
 

@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "firefly8:xdi8aho_torch_top"
+    "firefly8:xdi8aho_torch_top",
+    "firefly8:symbol_stone_bricks"
   ]
 }
