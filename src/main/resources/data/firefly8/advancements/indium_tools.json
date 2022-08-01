@@ -1,0 +1,80 @@
+{
+  "display": {
+    "title":{
+      "translate": "advancements.firefly8.indium_tools.title"
+    },
+    "description": {
+      "translate": "advancements.firefly8.indium_tools.description"
+    },
+    "icon": {
+      "item": "firefly8:indium_axe"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "axe": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:indium_axe"
+            ]
+          }
+        ]
+      }
+    },
+    "hoe": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:indium_hoe"
+            ]
+          }
+        ]
+      }
+    },
+    "pickaxe": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:indium_pickaxe"
+            ]
+          }
+        ]
+      }
+    },
+    "shovel": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:indium_shovel"
+            ]
+          }
+        ]
+      }
+    },
+    "sword": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:indium_sword"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {}
+}

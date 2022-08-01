@@ -1,0 +1,562 @@
+{
+  "display": {
+    "title": {
+      "translate": "advancements.firefly8.get_all_symbol_stones.title"
+    },
+    "description": {
+      "translate": "advancements.firefly8.get_all_symbol_stones.description"
+    },
+    "icon": {
+      "item": "firefly8:symbol_stone_hx"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "firefly8:chisel",
+  "criteria": {
+    "1": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:symbol_stone_1"
+            ]
+          }
+        ]
+      }
+    },
+    "2": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:symbol_stone_2"
+            ]
+          }
+        ]
+      }
+    },
+    "3": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:symbol_stone_3"
+            ]
+          }
+        ]
+      }
+    },
+    "4": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:symbol_stone_4"
+            ]
+          }
+        ]
+      }
+    },
+    "5": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:symbol_stone_5"
+            ]
+          }
+        ]
+      }
+    },
+    "6": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:symbol_stone_6"
+            ]
+          }
+        ]
+      }
+    },
+    "7": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:symbol_stone_7"
+            ]
+          }
+        ]
+      }
+    },
+    "8": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:symbol_stone_8"
+            ]
+          }
+        ]
+      }
+    },
+    "a": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:symbol_stone_a"
+            ]
+          }
+        ]
+      }
+    },
+    "ax": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:symbol_stone_ax"
+            ]
+          }
+        ]
+      }
+    },
+    "b": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:symbol_stone_b"
+            ]
+          }
+        ]
+      }
+    },
+    "bx": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:symbol_stone_bx"
+            ]
+          }
+        ]
+      }
+    },
+    "c": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:symbol_stone_c"
+            ]
+          }
+        ]
+      }
+    },
+    "d": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:symbol_stone_d"
+            ]
+          }
+        ]
+      }
+    },
+    "dx": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:symbol_stone_dx"
+            ]
+          }
+        ]
+      }
+    },
+    "e": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:symbol_stone_e"
+            ]
+          }
+        ]
+      }
+    },
+    "ex": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:symbol_stone_ex"
+            ]
+          }
+        ]
+      }
+    },
+    "f": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:symbol_stone_f"
+            ]
+          }
+        ]
+      }
+    },
+    "fx": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:symbol_stone_fx"
+            ]
+          }
+        ]
+      }
+    },
+    "g": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:symbol_stone_g"
+            ]
+          }
+        ]
+      }
+    },
+    "h": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:symbol_stone_h"
+            ]
+          }
+        ]
+      }
+    },
+    "hx": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:symbol_stone_hx"
+            ]
+          }
+        ]
+      }
+    },
+    "i": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:symbol_stone_i"
+            ]
+          }
+        ]
+      }
+    },
+    "j": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:symbol_stone_j"
+            ]
+          }
+        ]
+      }
+    },
+    "k": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:symbol_stone_k"
+            ]
+          }
+        ]
+      }
+    },
+    "l": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:symbol_stone_l"
+            ]
+          }
+        ]
+      }
+    },
+    "lx": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:symbol_stone_lx"
+            ]
+          }
+        ]
+      }
+    },
+    "m": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:symbol_stone_m"
+            ]
+          }
+        ]
+      }
+    },
+    "n": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:symbol_stone_n"
+            ]
+          }
+        ]
+      }
+    },
+    "nx": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:symbol_stone_nx"
+            ]
+          }
+        ]
+      }
+    },
+    "o": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:symbol_stone_o"
+            ]
+          }
+        ]
+      }
+    },
+    "p": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:symbol_stone_p"
+            ]
+          }
+        ]
+      }
+    },
+    "q": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:symbol_stone_q"
+            ]
+          }
+        ]
+      }
+    },
+    "r": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:symbol_stone_r"
+            ]
+          }
+        ]
+      }
+    },
+    "s": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:symbol_stone_s"
+            ]
+          }
+        ]
+      }
+    },
+    "t": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:symbol_stone_t"
+            ]
+          }
+        ]
+      }
+    },
+    "tx": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:symbol_stone_tx"
+            ]
+          }
+        ]
+      }
+    },
+    "u": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:symbol_stone_u"
+            ]
+          }
+        ]
+      }
+    },
+    "v": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:symbol_stone_v"
+            ]
+          }
+        ]
+      }
+    },
+    "vx": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:symbol_stone_vx"
+            ]
+          }
+        ]
+      }
+    },
+    "w": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:symbol_stone_w"
+            ]
+          }
+        ]
+      }
+    },
+    "x": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:symbol_stone_x"
+            ]
+          }
+        ]
+      }
+    },
+    "y": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:symbol_stone_y"
+            ]
+          }
+        ]
+      }
+    },
+    "yx": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:symbol_stone_yx"
+            ]
+          }
+        ]
+      }
+    },
+    "z": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:symbol_stone_z"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [],
+  "rewards": {}
+}
