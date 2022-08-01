@@ -12,8 +12,10 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import org.featurehouse.mcmod.spm.platform.api.client.BlockRenderTypes;
 import top.xdi8.mod.firefly8.block.FireflyBlocks;
+import top.xdi8.mod.firefly8.client.ChiselScreen;
 import top.xdi8.mod.firefly8.client.FireflyParticle;
 import top.xdi8.mod.firefly8.client.TakeOnlyContainerScreen;
+import top.xdi8.mod.firefly8.client.Xdi8TableScreen;
 import top.xdi8.mod.firefly8.entity.FireflyEntityTypes;
 import top.xdi8.mod.firefly8.particle.FireflyParticles;
 import top.xdi8.mod.firefly8.screen.FireflyMenus;
@@ -25,8 +27,14 @@ public class FireflyClientSetup implements Runnable {
         EntityRenderers.register(FireflyEntityTypes.FIREFLY.get(), NoopRenderer::new);
         MenuScreens.register(FireflyMenus.TAKE_ONLY_CHEST.get(),
                 TakeOnlyContainerScreen::new);
+        MenuScreens.register(FireflyMenus.CHISEL.get(),
+                ChiselScreen::new);
+        MenuScreens.register(FireflyMenus.XDI8_TABLE.get(),
+                Xdi8TableScreen::new);
         BlockRenderTypes.register(RenderType.cutoutMipped(),
                 FireflyBlocks.XDI8AHO_PORTAL_TOP_BLOCK);
+        BlockRenderTypes.register(RenderType.cutout(),
+                FireflyBlocks.XDI8AHO_BACK_FIRE_BLOCK);
     }
 
     @SubscribeEvent

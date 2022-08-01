@@ -11,6 +11,7 @@ import top.xdi8.mod.firefly8.block.FireflyBlocks;
 import top.xdi8.mod.firefly8.entity.FireflyEntityTypes;
 import top.xdi8.mod.firefly8.item.indium.*;
 import top.xdi8.mod.firefly8.item.symbol.SymbolStoneBlockItem;
+import top.xdi8.mod.firefly8.item.symbol.Xdi8TotemItem;
 import top.xdi8.mod.firefly8.item.tint.*;
 
 public final class FireflyItems {
@@ -37,6 +38,7 @@ public final class FireflyItems {
             INDIUM_BLOCK,
             INDIUM_ORE_BLOCK,
             DEEPSLATE_INDIUM_ORE_BLOCK,
+            SYMBOL_STONE_BRICKS,
 
             XDI8AHO_ICON,
             FIREFLY_SPAWN_EGG,
@@ -44,6 +46,7 @@ public final class FireflyItems {
             XDI8AHO_PORTAL_CORE_BLOCK,
             XDI8AHO_PORTAL_TOP_BLOCK,
             XDI8AHO_BACK_PORTAL_CORE_BLOCK,
+            XDI8_TABLE,
 
             TINTED_GLASS_BOTTLE,
             TINTED_POTION,
@@ -53,7 +56,9 @@ public final class FireflyItems {
             TINTED_DRAGON_BREATH,
             TINTED_FIREFLY_BOTTLE,
 
-            BUNDLER;
+            DARK_SYMBOL_STONE,
+            BUNDLER,
+            SYMBOL_STONE_NN;
 
     static {
         INDIUM_INGOT = REGISTRY.register("indium_ingot",
@@ -71,16 +76,20 @@ public final class FireflyItems {
         INDIUM_SWORD = REGISTRY.register("indium_sword",
                 () -> new IndiumSwordItem(defaultProp()));
         INDIUM_CHISEL = REGISTRY.register("indium_chisel",
-                () -> new IndiumChiselItem(defaultProp()));
+                () -> new IndiumChiselItem(defaultProp()
+                        .durability(30)
+                ));
         INDIUM_BLOCK = REGISTRY.register("indium_block",
                 () -> new BlockItem(FireflyBlocks.INDIUM_BLOCK.get(), defaultProp()));
         INDIUM_ORE_BLOCK = REGISTRY.register("indium_ore",
                 () -> new BlockItem(FireflyBlocks.INDIUM_ORE_BLOCK.get(), defaultProp()));
         DEEPSLATE_INDIUM_ORE_BLOCK = REGISTRY.register("deepslate_indium_ore",
                 () -> new BlockItem(FireflyBlocks.DEEPSLATE_INDIUM_ORE_BLOCK.get(), defaultProp()));
+        SYMBOL_STONE_BRICKS = REGISTRY.register("symbol_stone_bricks",
+                () -> new BlockItem(FireflyBlocks.SYMBOL_STONE_BRICKS.get(), defaultProp()));
 
         XDI8AHO_ICON = REGISTRY.register("xdi8aho",
-                () -> new Item(defaultProp()));
+                () -> new Xdi8TotemItem(defaultProp()));
         FIREFLY_SPAWN_EGG = REGISTRY.register("firefly_spawn_egg", () ->
                 new ForgeSpawnEggItem(FireflyEntityTypes.FIREFLY,
                         0x000000, 0x00f500,
@@ -92,6 +101,8 @@ public final class FireflyItems {
                 () -> new BlockItem(FireflyBlocks.XDI8AHO_PORTAL_TOP_BLOCK.get(), defaultProp()));
         XDI8AHO_BACK_PORTAL_CORE_BLOCK = REGISTRY.register("xdi8aho_back_portal_core",
                 () -> new BlockItem(FireflyBlocks.XDI8AHO_BACK_PORTAL_CORE_BLOCK.get(), defaultProp()));
+        XDI8_TABLE = REGISTRY.register("xdi8_table",
+                () -> new BlockItem(FireflyBlocks.XDI8_TABLE.get(), defaultProp()));
 
         // Bottles
         TINTED_GLASS_BOTTLE = REGISTRY.register("tinted_glass_bottle", () ->
@@ -117,6 +128,12 @@ public final class FireflyItems {
 
         BUNDLER = REGISTRY.register("bundler", BundlerItem::new);
         SymbolStoneBlockItem.registerAll(REGISTRY::register);
+        DARK_SYMBOL_STONE = REGISTRY.register("dark_symbol_stone", () ->
+                new BlockItem(FireflyBlocks.DARK_SYMBOL_STONE.get(),
+                        defaultProp().fireResistant()));
+        SYMBOL_STONE_NN = REGISTRY.register("symbol_stone_nn", () ->
+                new BlockItem(FireflyBlocks.SYMBOL_STONE_NN.get(),
+                        defaultProp().rarity(Rarity.UNCOMMON)));
     }
 
     static Item.Properties defaultProp() {

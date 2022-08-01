@@ -22,23 +22,58 @@
   "item.firefly8.tinted_firefly_bottle.too_many": "Can't stack fireflies over 5",
   "item.firefly8.tinted_firefly_bottle.empty": "There's no fireflies in the bottle",
 
+  "xdi8.totem.attribute": "Totem Attribute: ",
+  "xdi8.totem.attribute.firefly8:xdi8": "\uDB86\uDF2B\uDB86\uDF71\uDB86\uDF8D\uDB86\uDF89",
+
   "itemGroup.firefly8": "Xdi8 Aho",
   "entity.firefly8.firefly": "Firefly",
+
+  "menu.firefly8.xdi8_table": "Xdi8 Table",
 
   "block.firefly8.xdi8aho_portal_core": "Portal Core of Xdi8 Aho",
   "block.firefly8.xdi8aho_torch_top": "Xdi8 Aho Torchlight",
   "block.firefly8.xdi8aho_portal": "Xdi8 Aho Portal Block",
   "block.firefly8.xdi8aho_back_portal_core": "Return Portal Core",
   "block.firefly8.xdi8aho_back_portal_fire": "Fire of Returning",
+  "block.firefly8.xdi8_table": "Xdi8 Table",
 
   "block.firefly8.indium_block": "Block of Indium",
   "block.firefly8.indium_ore": "Indium Ore",
   "block.firefly8.deepslate_indium_ore": "Deepslate Indium Ore",
 
+  "block.firefly8.symbol_stone": "Symbol Stone",
+  "block.firefly8.symbol_stone.chiseling": "Chiseling",
+  "block.firefly8.dark_symbol_stone": "Dark Symbol Stone",
+  "block.firefly8.symbol_stone.letter": "Symbol: %s",
+  "block.firefly8.symbol_stone_nn": "Symbol: N (Creative mode only)",
+  "block.firefly8.symbol_stone_bricks": "Symbol Stone Bricks",
 
   "commands.bindxdi8portal.success": "Successfully set portal for %s",
   "commands.bindxdi8portal.failure": "Can't set portal for %1$s at dimension %2$s / (%3$s)",
   "commands.unbindxdi8portal.0": "No player selected",
   "commands.unbindxdi8portal.1": "Unbound portal for %s",
-  "commands.unbindxdi8portal.more": "Unbound portal for %d players"
+  "commands.unbindxdi8portal.more": "Unbound portal for %d players",
+
+  "advancements.firefly8.tinted_glass_bottle.title":"Bottle of tint",
+  "advancements.firefly8.tinted_glass_bottle.description":"Get a tinted glass bottle",
+  "advancements.firefly8.tinted_firefly_bottle.title":"Yeerane sheehore carechonetut",
+  "advancements.firefly8.tinted_firefly_bottle.description":"Put a firefly in a tinted glass bottle",
+  "advancements.firefly8.enter_xdi8.title":"Heading for Sakhalin! ",
+  "advancements.firefly8.enter_xdi8.description":"Activate the Xdi8 portal, and try to enter it",
+  "advancements.firefly8.die_in_xdi8.title":"Better for retreating",
+  "advancements.firefly8.die_in_xdi8.description":"Accidentally died in the Xdi8 Dimension",
+  "advancements.firefly8.bundler.title":"Scored twice to the void",
+  "advancements.firefly8.bundler.description":"Die again, then pick up your bundler and leave",
+  "advancements.firefly8.chisel.title":"Chiseling work",
+  "advancements.firefly8.chisel.description":"Get a chisel",
+  "advancements.firefly8.get_symbol_stone.title":"TRANSLATION ERROR stone",
+  "advancements.firefly8.get_symbol_stone.description":"Get a symbol stone…or a rune stone? ",
+  "advancements.firefly8.get_all_symbol_stones.title":"Xdi8-speaking scholar",
+  "advancements.firefly8.get_all_symbol_stones.description":"Collect all 45 symbol stones",
+  "advancements.firefly8.indium_ingot.title":"Acquire software",
+  "advancements.firefly8.indium_ingot.description":"Get a indium ingot",
+  "advancements.firefly8.indium_tools.title":"Xdi8 chief",
+  "advancements.firefly8.indium_tools.description":"Craft all the indium tools",
+  "advancements.firefly8.xdi8_totem.title":"Oh my Xdi8 aho",
+  "advancements.firefly8.xdi8_totem.description":"Get a xdi8 totem"
 }

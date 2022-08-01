@@ -133,7 +133,8 @@
       "minecraft:ore_lapis_buried",
       "minecraft:ore_copper",
       "minecraft:underwater_magma",
-      "minecraft:disk_clay"
+      "minecraft:disk_clay",
+      "firefly8:ore_indium_feature"
     ],
     [],
     [
