@@ -133,7 +133,7 @@ public final class FireflyItems {
                         defaultProp().fireResistant()));
         SYMBOL_STONE_NN = REGISTRY.register("symbol_stone_nn", () ->
                 new BlockItem(FireflyBlocks.SYMBOL_STONE_NN.get(),
-                        defaultProp()));
+                        defaultProp().rarity(Rarity.UNCOMMON)));
     }
 
     static Item.Properties defaultProp() {
