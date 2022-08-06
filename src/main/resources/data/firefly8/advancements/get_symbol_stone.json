@@ -557,7 +557,7 @@
       }
     }
   },
-  "requirements": [
+  "requirements": [[
     "1",
     "2",
     "3",
@@ -603,6 +603,6 @@
     "y",
     "yx",
     "z"
-  ],
+  ]],
   "rewards": {}
 }
