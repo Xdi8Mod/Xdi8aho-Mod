@@ -25,6 +25,7 @@ import top.xdi8.mod.firefly8.stats.FireflyStats;
 import java.util.List;
 
 /** @see net.minecraft.world.inventory.StonecutterMenu */
+@Deprecated
 public class ChiselMenu extends AbstractContainerMenu {
     private final BlockPos pos;
     private final ContainerLevelAccess cla;

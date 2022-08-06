@@ -6,48 +6,77 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.ShapedRecipe;
-import net.minecraft.world.item.crafting.SingleItemRecipe;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import org.featurehouse.mcmod.spm.platform.api.recipe.SimpleRecipeSerializer;
 import org.jetbrains.annotations.NotNull;
+import top.xdi8.mod.firefly8.core.letters.KeyedLetter;
+import top.xdi8.mod.firefly8.core.letters.LettersUtil;
+import top.xdi8.mod.firefly8.item.symbol.SymbolStoneBlockItem;
 
-public class SymbolStoneProductionRecipe extends SingleItemRecipe {
-    public SymbolStoneProductionRecipe(ResourceLocation pId, String pGroup, Ingredient pIngredient, ItemStack pResult) {
-        super(FireflyRecipes.PRODUCE_T.get(), FireflyRecipes.PRODUCE_S.get(),
-                pId, pGroup, pIngredient, pResult);
-    }
+import javax.annotation.ParametersAreNonnullByDefault;
+
+@ParametersAreNonnullByDefault
+public record SymbolStoneProductionRecipe(ResourceLocation id, KeyedLetter letter, int weight) implements Recipe<Container> {
+
     @Override
-    public boolean matches(@NotNull Container inv, @NotNull Level pLevel) {
-        return this.ingredient.test(inv.getItem(0));
+    public boolean matches(Container pContainer, Level pLevel) {
+        return true;
     }
 
-    static final class Serializer extends SimpleRecipeSerializer<SymbolStoneProductionRecipe> {
-        public @NotNull SymbolStoneProductionRecipe readJson(@NotNull ResourceLocation pRecipeId, @NotNull JsonObject pJson) {
-            String s = GsonHelper.getAsString(pJson, "group", "");
-            Ingredient ingredient;
-            if (GsonHelper.isArrayNode(pJson, "ingredient")) {
-                ingredient = Ingredient.fromJson(GsonHelper.getAsJsonArray(pJson, "ingredient"));
-            } else {
-                ingredient = Ingredient.fromJson(GsonHelper.getAsJsonObject(pJson, "ingredient"));
-            }
+    @Override
+    public @NotNull ItemStack assemble(Container pContainer) {
+        return getResultItem();
+    }
 
-            ItemStack itemStack = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pJson, "result"));
-            return new SymbolStoneProductionRecipe(pRecipeId, s, ingredient, itemStack);
+    @Override
+    public boolean canCraftInDimensions(int pWidth, int pHeight) {
+        return true;
+    }
+
+    @Override
+    public @NotNull ItemStack getResultItem() {
+        return new ItemStack(SymbolStoneBlockItem.fromLetter(letter));
+    }
+
+    @Override
+    public @NotNull ResourceLocation getId() {
+        return id;
+    }
+
+    @Override
+    public @NotNull RecipeSerializer<?> getSerializer() {
+        return FireflyRecipes.PRODUCE_S.get();
+    }
+
+    @Override
+    public @NotNull RecipeType<?> getType() {
+        return FireflyRecipes.PRODUCE_T.get();
+    }
+
+    public static class Serializer extends SimpleRecipeSerializer<SymbolStoneProductionRecipe>{
+
+        @Override
+        public SymbolStoneProductionRecipe readJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
+            final String letter = GsonHelper.getAsString(pSerializedRecipe, "letter");
+            final KeyedLetter keyedLetter = LettersUtil.byId(new ResourceLocation(letter));
+            final int weight = GsonHelper.getAsInt(pSerializedRecipe, "weight");
+            return new SymbolStoneProductionRecipe(pRecipeId, keyedLetter, weight);
         }
 
-        public @NotNull SymbolStoneProductionRecipe readPacket(@NotNull ResourceLocation pRecipeId, @NotNull FriendlyByteBuf pBuffer) {
-            String s = pBuffer.readUtf();
-            Ingredient ingredient = Ingredient.fromNetwork(pBuffer);
-            ItemStack itemstack = pBuffer.readItem();
-            return new SymbolStoneProductionRecipe(pRecipeId, s, ingredient, itemstack);
+        @Override
+        public SymbolStoneProductionRecipe readPacket(ResourceLocation pRecipeId, FriendlyByteBuf pBuffer) {
+            final String letter = pBuffer.readUtf();
+            final KeyedLetter keyedLetter = LettersUtil.byId(new ResourceLocation(letter));
+            final int weight = pBuffer.readInt();
+            return new SymbolStoneProductionRecipe(pRecipeId, keyedLetter, weight);
         }
 
-        public void writePacket(@NotNull FriendlyByteBuf pBuffer, @NotNull SymbolStoneProductionRecipe pRecipe) {
-            pBuffer.writeUtf(pRecipe.group);
-            pRecipe.ingredient.toNetwork(pBuffer);
-            pBuffer.writeItem(pRecipe.result);
+        @Override
+        public void writePacket(FriendlyByteBuf pBuffer, SymbolStoneProductionRecipe pRecipe) {
+            pBuffer.writeUtf(pRecipe.letter().id().toString());
+            pBuffer.writeInt(pRecipe.weight());
         }
     }
 }
