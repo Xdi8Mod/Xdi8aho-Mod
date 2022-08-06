@@ -11,7 +11,7 @@ public class FireflyMenus {
 
     public static final RegistryObject<MenuType<TakeOnlyChestMenu>> TAKE_ONLY_CHEST =
             create("take_only_chest", TakeOnlyChestMenu::new);
-    public static final RegistryObject<MenuType<ChiselMenu>> CHISEL =
+    public @Deprecated static final RegistryObject<MenuType<ChiselMenu>> CHISEL =
             create("chisel", ChiselMenu::new);
     public static final RegistryObject<MenuType<Xdi8TableMenu>> XDI8_TABLE =
             create("xdi8_table", Xdi8TableMenu::new);
