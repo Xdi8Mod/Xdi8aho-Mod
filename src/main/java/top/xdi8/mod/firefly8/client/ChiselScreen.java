@@ -17,6 +17,7 @@ import top.xdi8.mod.firefly8.screen.ChiselMenu;
 import java.util.List;
 import java.util.Objects;
 
+@Deprecated
 public final class ChiselScreen extends AbstractContainerScreen<ChiselMenu> {
     private float scrollOffs;
     private boolean scrolling;
