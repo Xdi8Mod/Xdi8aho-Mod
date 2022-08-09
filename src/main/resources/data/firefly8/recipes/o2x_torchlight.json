@@ -7,7 +7,7 @@
   ],
   "key": {
     "I": {
-      "item": "forge:nuggets/gold"
+      "tag": "forge:nuggets/gold"
     },
     "G": {
       "tag": "forge:dusts/glowstone"
