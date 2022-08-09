@@ -9,6 +9,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import top.xdi8.mod.firefly8.block.symbol.SymbolStoneBlock;
+import top.xdi8.mod.firefly8.block.symbol.SymbolStoneNNBlock;
 import top.xdi8.mod.firefly8.block.symbol.Xdi8TableBlock;
 
 import java.util.function.Supplier;
@@ -27,7 +28,8 @@ public class FireflyBlocks {
             DEEPSLATE_INDIUM_ORE_BLOCK,
             DARK_SYMBOL_STONE,
             SYMBOL_STONE_BRICKS,
-            XDI8_TABLE;
+            XDI8_TABLE,
+            SYMBOL_STONE_NN;
 
     static {
         INDIUM_BLOCK = ofDefaultBlock("indium_block", () ->
@@ -69,6 +71,7 @@ public class FireflyBlocks {
                         .requiresCorrectToolForDrops()
                         .sound(SoundType.STONE)
         );
+        SYMBOL_STONE_NN = REGISTRY.register("symbol_stone_nn", SymbolStoneNNBlock::new);
     }
 
     private static RegistryObject<Block> ofDefaultBlock(String id,

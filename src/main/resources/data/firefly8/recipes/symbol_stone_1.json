@@ -1,9 +1,5 @@
 {
- "type": "firefly8:produce_symbol",
- "ingredient": {
-  "item": "firefly8:symbol_stone"
- },
- "result": {
-  "item": "firefly8:symbol_stone_1"
- }
+  "type": "firefly8:produce_symbol",
+  "letter": "firefly8:1",
+  "weight": 1000000
 }

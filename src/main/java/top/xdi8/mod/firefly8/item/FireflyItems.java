@@ -57,7 +57,8 @@ public final class FireflyItems {
             TINTED_FIREFLY_BOTTLE,
 
             DARK_SYMBOL_STONE,
-            BUNDLER;
+            BUNDLER,
+            SYMBOL_STONE_NN;
 
     static {
         INDIUM_INGOT = REGISTRY.register("indium_ingot",
@@ -130,6 +131,9 @@ public final class FireflyItems {
         DARK_SYMBOL_STONE = REGISTRY.register("dark_symbol_stone", () ->
                 new BlockItem(FireflyBlocks.DARK_SYMBOL_STONE.get(),
                         defaultProp().fireResistant()));
+        SYMBOL_STONE_NN = REGISTRY.register("symbol_stone_nn", () ->
+                new BlockItem(FireflyBlocks.SYMBOL_STONE_NN.get(),
+                        defaultProp().rarity(Rarity.UNCOMMON)));
     }
 
     static Item.Properties defaultProp() {
