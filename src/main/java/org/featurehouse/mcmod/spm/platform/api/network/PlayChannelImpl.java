@@ -7,6 +7,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkDirection;
+import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
@@ -20,10 +21,7 @@ import java.lang.invoke.MethodType;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
+import java.util.function.*;
 
 final class PlayChannelImpl implements PlayChannel {
     private final ResourceLocation id;
@@ -42,17 +40,22 @@ final class PlayChannelImpl implements PlayChannel {
     @Override
     public <M extends PlayPacket> void registerC2S(int id, Class<M> packet, Function<FriendlyByteBuf, M> decoder) {
         forgeChannel.registerMessage(id, packet, PlayPacket::toPacket, decoder,
-                (msg, ctx) -> msg.accept(new PlayNetworkEnvironment(
-                        Optional.ofNullable(ctx.get().getSender())
-                )), Optional.of(NetworkDirection.PLAY_TO_SERVER));
+                ofConsumer(), Optional.of(NetworkDirection.PLAY_TO_SERVER));
     }
 
     @Override
     public <M extends PlayPacket> void registerS2C(int id, Class<M> packet, Function<FriendlyByteBuf,  M> decoder) {
         forgeChannel.registerMessage(id, packet, PlayPacket::toPacket, decoder,
-                (msg, ctx) -> msg.accept(new PlayNetworkEnvironment(
-                        Optional.ofNullable(ctx.get().getSender())
-                )), Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+                ofConsumer(), Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+    }
+
+    @SuppressWarnings("deprecation")
+    private <M extends PlayPacket> BiConsumer<M, Supplier<NetworkEvent.Context>> ofConsumer() {
+        return (msg, ctx) -> msg.accept(new PlayNetworkEnvironment(
+                Optional.ofNullable(ctx.get().getSender()),
+                r -> ctx.get().enqueueWork(r),
+                () -> ctx.get().setPacketHandled(true)
+        ));
     }
 
     @Override
