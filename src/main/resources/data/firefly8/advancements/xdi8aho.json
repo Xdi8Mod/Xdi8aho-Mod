@@ -1,6 +1,6 @@
 {
   "display": {
-    "title":{
+    "title": {
       "translate": "advancements.firefly8.xdi8aho.title"
     },
     "description": {
@@ -9,11 +9,22 @@
     "icon": {
       "item": "firefly8:xdi8aho"
     },
+    "frame": "task",
     "background": "firefly8:textures/gui/advancements/backgrounds/root.png",
     "show_toast": false,
     "announce_to_chat": false,
     "hidden": false
   },
-  "criteria": {},
+  "criteria": {
+    "consumed_item": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {}
+    }
+  },
+  "requirements": [
+    [
+      "consumed_item"
+    ]
+  ],
   "rewards": {}
 }
