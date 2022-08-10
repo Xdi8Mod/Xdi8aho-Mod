@@ -5,7 +5,8 @@ import net.minecraft.tags.TagKey;
 
 import java.util.stream.Stream;
 
-public sealed interface TagContainer<T> permits TagContainerImpl {
+public interface TagContainer<T> {
+    @Deprecated(forRemoval = true, since = "xdi8-1.0.1")
     static <T> TagContainer<T> of(ResourceLocation regId, TagKey<T> tagKey) {
         return TagContainerImpl.create(regId, tagKey);
     }

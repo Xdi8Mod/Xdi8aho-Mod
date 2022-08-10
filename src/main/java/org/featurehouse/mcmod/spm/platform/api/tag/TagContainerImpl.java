@@ -11,6 +11,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.stream.Stream;
 
+@Deprecated(since = "xdi8-1.0.1")
+@SuppressWarnings("all")
 record TagContainerImpl<T extends IForgeRegistryEntry<T>>(ITagManager<T> tagManager,
                                                                  TagKey<T> tagKey) implements TagContainer<T> {
     static <T> TagContainer<T> create(ResourceLocation regId, TagKey<T> tagKey) {
