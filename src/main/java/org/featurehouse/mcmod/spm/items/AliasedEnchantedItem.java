@@ -31,12 +31,12 @@ public class AliasedEnchantedItem extends ItemNameBlockItem {
     @ApiStatus.Internal
     public static Supplier<Item> of(String id, Supplier<Block> original, CreativeModeTab itemGroup) {
         Supplier<Item> sup = ()->new AliasedEnchantedItem(original.get(), new Item.Properties().tab(itemGroup));
-        return PlatformRegister.getInstance().item(id, sup);
+        return PlatformRegister.spm().item(id, sup);
     }
 
     @ApiStatus.Internal
     public static Supplier<Item> ofMiscFood(String id, Supplier<Block> original, FoodProperties foodComponent) {
         Supplier<Item> sup = ()->new AliasedEnchantedItem(original.get(), new Item.Properties().tab(CreativeModeTab.TAB_MISC).food(foodComponent));
-        return PlatformRegister.getInstance().item(id, sup);
+        return PlatformRegister.spm().item(id, sup);
     }
 }
