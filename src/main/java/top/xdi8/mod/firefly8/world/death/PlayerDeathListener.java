@@ -9,7 +9,6 @@ import net.minecraft.world.level.GameRules;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.network.PacketDistributor;
 import top.xdi8.mod.firefly8.advancement.criteria.FireflyCriteria;
 import top.xdi8.mod.firefly8.ext.IServerPlayerWithHiddenInventory;
 import top.xdi8.mod.firefly8.network.FireflyNetwork;
@@ -33,7 +32,7 @@ public class PlayerDeathListener {
         oldPlayer.foodData = new FoodData();
         final IServerPlayerWithHiddenInventory ext = IServerPlayerWithHiddenInventory.xdi8$extend(oldPlayer);
         if (!ext.xdi8$moveItemsToPortal()) {
-            FireflyNetwork.CHANNEL.send(PacketDistributor.PLAYER.with(Suppliers.ofInstance(oldPlayer)), FireflyNetwork.S2CDieIndeed.getInstance());
+            FireflyNetwork.CHANNEL.sendS2CPlayer(FireflyNetwork.S2C_DIE_INDEED, Suppliers.ofInstance(oldPlayer));
             return;
         }
         event.setCanceled(true);
