@@ -14,7 +14,7 @@
     "announce_to_chat": true,
     "hidden": false
   },
-  "parent": "firefly8:enter_xdi8",
+  "parent": "firefly8:indium_ingot",
   "criteria": {
     "axe": {
       "trigger": "inventory_changed",
