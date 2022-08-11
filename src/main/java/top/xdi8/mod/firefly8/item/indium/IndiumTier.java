@@ -10,7 +10,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.MinecraftForge;
+import org.featurehouse.mcmod.spm.platform.api.event.Events;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import top.xdi8.mod.firefly8.item.FireflyItems;
@@ -59,8 +59,8 @@ public class IndiumTier implements Tier {
                             @NotNull BlockPos pPos, @NotNull LivingEntity pEntityLiving) {
         if (pEntityLiving.getLevel().isClientSide()) return;
         if (pEntityLiving instanceof Player player) {
-            final DropIndiumNuggetEvent.Mine event = new DropIndiumNuggetEvent.Mine(pStack, pLevel, pState, pPos, player);
-            if (!MinecraftForge.EVENT_BUS.post(event))
+            final var event = new DropIndiumNuggetEvent.Mine(pStack, pLevel, pState, pPos, player);
+            if (!Events.fireForgeBusEvent(event))
                 dropNuggetsImpl(player, event.getChance());
         }
     }
@@ -68,8 +68,8 @@ public class IndiumTier implements Tier {
     static void dropNuggets(@NotNull ItemStack pStack, @NotNull LivingEntity pTarget, @NotNull LivingEntity pAttacker) {
         if (pAttacker.getLevel().isClientSide()) return;
         if (pAttacker instanceof Player player) {
-            final DropIndiumNuggetEvent.Attack event = new DropIndiumNuggetEvent.Attack(pStack, pTarget, player);
-            if (!MinecraftForge.EVENT_BUS.post(event))
+            final var event = new DropIndiumNuggetEvent.Attack(pStack, pTarget, player);
+            if (!Events.fireForgeBusEvent(event))
                 dropNuggetsImpl(player, event.getChance());
         }
     }

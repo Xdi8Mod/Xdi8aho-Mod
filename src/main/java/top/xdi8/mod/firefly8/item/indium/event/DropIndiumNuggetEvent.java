@@ -8,8 +8,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.eventbus.api.Cancelable;
-import net.minecraftforge.eventbus.api.Event;
+import org.featurehouse.mcmod.spm.platform.api.event.BaseEvent;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -17,9 +16,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @FieldsAreNonnullByDefault
 @ParametersAreNonnullByDefault
 @SuppressWarnings("unused")
-
-@Cancelable
-public abstract sealed class DropIndiumNuggetEvent extends Event {
+public abstract sealed class DropIndiumNuggetEvent extends BaseEvent {
     private final Player player;
     private final ItemStack tool;
 
@@ -82,5 +79,10 @@ public abstract sealed class DropIndiumNuggetEvent extends Event {
 
     public void setChance(float chance) {
         this.chance = chance;
+    }
+
+    @Override
+    public boolean isCancelable() {
+        return true;
     }
 }
