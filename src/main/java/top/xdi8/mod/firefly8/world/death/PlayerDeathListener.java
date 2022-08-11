@@ -3,6 +3,7 @@ package top.xdi8.mod.firefly8.world.death;
 import com.google.common.base.Suppliers;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodData;
 import net.minecraft.world.level.GameRules;
@@ -19,11 +20,15 @@ import top.xdi8.mod.firefly8.world.Xdi8DimensionUtils;
 public class PlayerDeathListener {
     @SubscribeEvent
     public static void onPlayerDeath(LivingDeathEvent event) {
-        if (!(event.getEntityLiving() instanceof Player player))
+        onPlayerDeath(event.getEntityLiving(), () -> event.setCanceled(true));
+    }
+
+    public static void onPlayerDeath(LivingEntity livingEntity, Runnable cancelEngine) {
+        if (!(livingEntity instanceof Player player))
             return;
         if (!Xdi8DimensionUtils.canRedirectRespawn(player.getLevel())) return;
         if (!(player instanceof ServerPlayer oldPlayer)) {
-            event.setCanceled(true);
+            cancelEngine.run();
             return;
         }
         oldPlayer.unRide();
@@ -35,7 +40,7 @@ public class PlayerDeathListener {
             FireflyNetwork.CHANNEL.sendS2CPlayer(FireflyNetwork.S2C_DIE_INDEED, Suppliers.ofInstance(oldPlayer));
             return;
         }
-        event.setCanceled(true);
+        cancelEngine.run();
         if (oldPlayer.level.getGameRules().getBoolean(GameRules.RULE_FORGIVE_DEAD_PLAYERS)) {
             oldPlayer.tellNeutralMobsThatIDied();
         }

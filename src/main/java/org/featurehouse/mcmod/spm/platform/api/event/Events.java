@@ -8,27 +8,21 @@ public final class Events {
     /** Return: event is canceled */
     @CanIgnoreReturnValue
     public static boolean fireModbusEvent(ModbusEvent event) {
-        return net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext.get().getModEventBus().post(event);
+        return EventsImpl.modBus().fire(event);
     }
 
     /** Return: event is canceled */
     @CanIgnoreReturnValue
     public static boolean fireForgeBusEvent(BaseEvent event) {
-        return net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event);
+        return EventsImpl.forgeBus().fire(event);
     }
 
     public static <E extends BaseEvent> void registerModbusEvent(Class<E> eventClass, Consumer<? super E> consumer) {
-        net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext.get().getModEventBus()
-                .addListener(net.minecraftforge.eventbus.api.EventPriority.NORMAL,
-                        /*receiveCanceled*/false,
-                        eventClass, consumer::accept);
+        EventsImpl.modBus().register(eventClass, consumer);
     }
 
     public static <E extends ModbusEvent> void registerForgeBusEvent(Class<E> eventClass, Consumer<? super E> consumer) {
-        net.minecraftforge.common.MinecraftForge.EVENT_BUS
-                .addListener(net.minecraftforge.eventbus.api.EventPriority.NORMAL,
-                        /*receiveCanceled*/false,
-                        eventClass, consumer::accept);
+        EventsImpl.forgeBus().register(eventClass, consumer);
     }
 
     private Events() {}

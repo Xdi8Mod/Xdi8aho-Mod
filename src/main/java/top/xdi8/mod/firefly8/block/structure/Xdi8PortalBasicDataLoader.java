@@ -9,6 +9,7 @@ import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import org.featurehouse.mcmod.spm.platform.api.resource.KeyedReloadListener;
 import org.slf4j.Logger;
 
 import java.io.BufferedReader;
@@ -19,9 +20,10 @@ import java.nio.charset.StandardCharsets;
 
 @Mod.EventBusSubscriber(modid = "firefly8")
 public final class Xdi8PortalBasicDataLoader
-        extends SimplePreparableReloadListener<Reader> {
+        extends SimplePreparableReloadListener<Reader>
+        implements KeyedReloadListener {
     private static final ResourceLocation PATH_BASIC = 
-            new ResourceLocation("firefly8:xdi8_portal_data.txt");
+            new ResourceLocation("firefly8", "xdi8_portal_data.txt");
     private static final Logger LOGGER = LogUtils.getLogger();
     
     /*** Performs any reloading that can be done off-thread, such as file IO */
@@ -42,6 +44,11 @@ public final class Xdi8PortalBasicDataLoader
         } catch (IllegalArgumentException e) {
             LOGGER.error("Error applying portal data", e);
         }
+    }
+
+    @Override
+    public ResourceLocation getId() {
+        return new ResourceLocation("firefly8", "portal_base");
     }
 
     @SubscribeEvent

@@ -1,5 +1,6 @@
 package top.xdi8.mod.firefly8.command;
 
+import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
@@ -25,6 +26,10 @@ import java.util.Collections;
 public final class FireflyCommands {
     @SubscribeEvent
     public static void init(RegisterCommandsEvent event) {
+        init(event.getDispatcher());
+    }
+
+    public static void init(CommandDispatcher<CommandSourceStack> dispatcher) {
         LiteralArgumentBuilder<CommandSourceStack> command =
                 Commands.literal("bindxdi8portal")
                         .requires((CommandSourceStack src) -> src.hasPermission(2))
@@ -45,14 +50,14 @@ public final class FireflyCommands {
                                         )
                                 )
                         );
-        event.getDispatcher().register(command);
+        dispatcher.register(command);
         command = Commands.literal("unbindxdi8portal")
                 .requires((CommandSourceStack src) -> src.hasPermission(2))
                 .executes(UnbindXdi8PortalCommand::unbind1)
                 .then(Commands.argument("players", EntityArgument.players())
                         .executes(UnbindXdi8PortalCommand::unbind0)
                 );
-        event.getDispatcher().register(command);
+        dispatcher.register(command);
     }
 
     private static final class UnbindXdi8PortalCommand {
