@@ -1,14 +1,18 @@
 package org.featurehouse.mcmod.spm.platform.api.event;
 
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
+
 import java.util.function.Consumer;
 
 public final class Events {
     /** Return: event is canceled */
+    @CanIgnoreReturnValue
     public static boolean fireModbusEvent(ModbusEvent event) {
         return net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext.get().getModEventBus().post(event);
     }
 
     /** Return: event is canceled */
+    @CanIgnoreReturnValue
     public static boolean fireForgeBusEvent(BaseEvent event) {
         return net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event);
     }

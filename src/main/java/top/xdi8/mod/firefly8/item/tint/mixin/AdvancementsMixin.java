@@ -3,9 +3,9 @@ package top.xdi8.mod.firefly8.item.tint.mixin;
 import com.google.gson.JsonObject;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.critereon.DeserializationContext;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.crafting.conditions.ICondition;
 import org.apache.commons.lang3.mutable.Mutable;
+import org.featurehouse.mcmod.spm.platform.api.event.Events;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -33,6 +33,6 @@ abstract class AdvancementsMixin {
                         builder.requirements(value);
                     }
                 });
-        MinecraftForge.EVENT_BUS.post(event);
+        Events.fireForgeBusEvent(event);
     }
 }
