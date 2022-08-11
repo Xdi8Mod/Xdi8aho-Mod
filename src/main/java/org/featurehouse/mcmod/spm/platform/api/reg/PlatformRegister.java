@@ -6,6 +6,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
@@ -15,11 +16,13 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 import org.featurehouse.mcmod.spm.platform.api.tag.TagContainer;
 
 import java.util.Collection;
+import java.util.Set;
 import java.util.function.Supplier;
 
 public sealed interface PlatformRegister
@@ -43,6 +46,9 @@ public sealed interface PlatformRegister
 
     Supplier<ResourceLocation> customStat(String id);
     Supplier<SoundEvent> sound(String id);
+    Supplier<PoiType> poiType(String id,
+                              int maxTickets, int validRange,
+                              Supplier<Set<BlockState>> matchingStatesSup);
     /* WORLD GEN */
     <P extends TreeDecorator> Supplier<TreeDecoratorType<P>> treeDecoratorType(String id, Supplier<Codec<P>> codecGetter);
 

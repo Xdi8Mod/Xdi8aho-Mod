@@ -5,6 +5,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -42,6 +43,7 @@ public final class ForgeRegistryContainer {
     public final DeferredRegister<ResourceLocation> stat = ofModRegistry(Registry.CUSTOM_STAT_REGISTRY);
     public final DeferredRegister<RecipeType<?>> recipeType = ofModRegistry(Registry.RECIPE_TYPE_REGISTRY);
     public final DeferredRegister<TreeDecoratorType<?>> treeDecoratorType = ofModRegistry(ForgeRegistries.TREE_DECORATOR_TYPES);
+    public final DeferredRegister<PoiType> poiType = ofModRegistry(ForgeRegistries.POI_TYPES);
 
     public void subscribeModBus(IEventBus modBus) {
         for (var reg : modBusRegistries) {
