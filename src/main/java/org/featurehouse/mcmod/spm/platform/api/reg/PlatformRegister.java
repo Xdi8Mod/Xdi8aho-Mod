@@ -4,6 +4,8 @@ import com.mojang.serialization.Codec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.Container;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
@@ -20,17 +22,11 @@ import org.featurehouse.mcmod.spm.platform.api.tag.TagContainer;
 import java.util.Collection;
 import java.util.function.Supplier;
 
-import static org.featurehouse.mcmod.spm.SPMMain.MODID;
-
 public sealed interface PlatformRegister
         permits PlatformRegisterWrapper {
-    static PlatformRegister getInstance() {
-        return RegistryImpl.getInstance();
-    }
+    static PlatformRegister of(String modId) { return new RegistryImpl(modId); }
 
-    static ResourceLocation id(String id) {
-        return new ResourceLocation(MODID, id);
-    }
+    ResourceLocation id(String id);
 
     Supplier<Item> item(String id, Supplier<Item> item);
 
@@ -40,11 +36,15 @@ public sealed interface PlatformRegister
     <T extends Recipe<Container>> Supplier<RecipeType<T>> recipeType(String id);
     <S extends RecipeSerializer<?>> Supplier<S> recipeSerializer(String id, Supplier<S> serializerSupplier);
     <M extends AbstractContainerMenu> Supplier<MenuType<M>> menu(String id, MenuType.MenuSupplier<M> factory);
+    <E extends Entity> Supplier<EntityType<E>> entityType(String id, Supplier<EntityType.Builder<E>> builder);
 
     TagContainer<Item> itemTag(String id);
+    TagContainer<Block> blockTag(String id);
 
     Supplier<ResourceLocation> customStat(String id);
     Supplier<SoundEvent> sound(String id);
     /* WORLD GEN */
     <P extends TreeDecorator> Supplier<TreeDecoratorType<P>> treeDecoratorType(String id, Supplier<Codec<P>> codecGetter);
+
+    static PlatformRegister spm() { return RegistryImpl.SPM; }
 }

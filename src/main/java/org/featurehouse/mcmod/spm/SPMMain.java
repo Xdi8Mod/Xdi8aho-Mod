@@ -152,7 +152,7 @@ public class SPMMain {
 
 	static {
 		// Item
-		PlatformRegister reg = PlatformRegister.getInstance();
+		PlatformRegister reg = PlatformRegister.spm();
 		PEEL = defaultItem("peel", ItemSettings::misc);
 		BAKED_PURPLE_POTATO = reg.item("baked_purple_potato", ()->new BakedSweetPotatoItem(ItemSettings.groupFood(), SweetPotatoType.PURPLE));
 		BAKED_RED_POTATO = reg.item("baked_red_potato", ()->new BakedSweetPotatoItem(ItemSettings.groupFood(), SweetPotatoType.RED));

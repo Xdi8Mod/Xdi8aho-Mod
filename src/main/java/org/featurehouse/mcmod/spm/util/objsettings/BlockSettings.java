@@ -19,14 +19,12 @@ public final class BlockSettings {
     }
 
     public static Supplier<Block> createEnchantedSapling(String id, Supplier<AbstractTreeGrower> saplingGeneratorSupplier) {
-        return PlatformRegister.getInstance().block(id, ()->new EnchantedSaplings(saplingGeneratorSupplier.get(), grassLike()));
+        return PlatformRegister.spm().block(id, ()->new EnchantedSaplings(saplingGeneratorSupplier.get(), grassLike()));
     }
 
     public static BlockBehaviour.Properties grassLike() { return GRASS_LIKE.get(); }
-    public static BlockBehaviour.Properties grass() { return GRASS.get(); }
 
     private static final java.util.function.Supplier<BlockBehaviour.Properties> GRASS_LIKE;
-    private static final java.util.function.Supplier<BlockBehaviour.Properties> GRASS;
 
     private BlockSettings() {}
 
@@ -36,11 +34,6 @@ public final class BlockSettings {
                 .randomTicks()
                 .instabreak()
                 .sound(SoundType.CROP);
-        GRASS = () -> BlockBehaviour.Properties.of(Materials.MATERIAL_PLANT)
-                .noCollission()
-                .randomTicks()
-                .instabreak()
-                .sound(SoundType.GRASS);
     }
 
     static boolean canSpawnOnLeaves(BlockState state, BlockGetter world, BlockPos pos, EntityType<?> type) {
@@ -48,7 +41,7 @@ public final class BlockSettings {
     }
 
     public static Supplier<Block> createLeaves(String id) {
-        return PlatformRegister.getInstance().block(id,
+        return PlatformRegister.spm().block(id,
                 ()->new LeavesBlock(BlockBehaviour.Properties.of(Material.LEAVES)
                         .strength(0.2F)
                         .randomTicks()

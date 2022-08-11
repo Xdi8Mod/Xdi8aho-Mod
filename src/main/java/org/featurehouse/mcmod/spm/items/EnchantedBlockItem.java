@@ -23,6 +23,6 @@ public class EnchantedBlockItem extends BlockItem {
 
     @ApiStatus.Internal
     public static Supplier<Item> of(String id, Supplier<Block> original, Supplier<Properties> settings) {
-        return PlatformRegister.getInstance().item(id, ()->new EnchantedBlockItem(original.get(), settings.get()));
+        return PlatformRegister.spm().item(id, ()->new EnchantedBlockItem(original.get(), settings.get()));
     }
 }

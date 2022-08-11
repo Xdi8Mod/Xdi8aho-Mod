@@ -6,6 +6,6 @@ import java.util.Set;
 
 public interface AccParrot {
     static Set<Item> getTamingIngredients() {
-        return AccParrotImpl.getParrotIngredients();
+        return net.minecraft.world.entity.animal.Parrot.TAME_FOOD;
     }
 }

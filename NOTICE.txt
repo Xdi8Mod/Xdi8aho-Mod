@@ -5,3 +5,4 @@ Some tags are from the UIN project (https://github.com/ououn/UIN).
 Some Fabric API and Forge tags are copied here to improve compatibility.
 Thank Dennis Lin for providing Enchanted Tuber item texture, which was to be used on Red Potato (sweet_potato:red_potato).
 Symbol Stones data are generated with symbol_stones_gen (https://featurehouse.github.io/resources/c7/34/5f06b6/60b072e8aae2fa387e7549acb25efafa16123268d3c3dfef044ce8/symbol_stones_gen.tar.xz), licensed under GPLv3 or later.
+This program is licensed under GPL-3.0 or later, with an exception to linking/injecting to Minecraft code.
