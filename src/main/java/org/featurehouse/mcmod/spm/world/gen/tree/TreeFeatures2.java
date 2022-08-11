@@ -26,7 +26,7 @@ public class TreeFeatures2 {
     @SuppressWarnings("all")
     static @NotNull Holder<ConfiguredFeature<?, ?>> register(String id, TreeConfiguration conf) {
         return BuiltinRegistries.register(BuiltinRegistries.CONFIGURED_FEATURE,
-                PlatformRegister.id(id), new ConfiguredFeature<>(Feature.TREE, conf));
+                PlatformRegister.spm().id(id), new ConfiguredFeature<>(Feature.TREE, conf));
     }
 
     public static final Holder<ConfiguredFeature<?, ?>> ENCHANTED_TREE_SMALL =

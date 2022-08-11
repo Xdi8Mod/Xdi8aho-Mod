@@ -1,6 +1,6 @@
 modLoader="javafml"
 loaderVersion="[40,)"
-license="GPL-3.0"
+license="GPL-3.0-or-later with Minecraft exception"
 #issueTrackerURL="https://change.me.to.your.issue.tracker.example.invalid/" #optional
 
 [[mods]]
