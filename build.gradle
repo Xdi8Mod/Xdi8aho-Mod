@@ -38,7 +38,7 @@ class Constant {
     static final String timestamp = "${DateTimeFormatter.ofPattern("yyMMdd.HHmm").format(now)}"
 }
 
-version = "1.18.2-1.0.0+build.${Constant.timestamp}"
+version = "1.18.2-1.0.1+build.${Constant.timestamp}"
 group = 'top.xdi8.mod' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'Xdi8aho-Mod'
 
