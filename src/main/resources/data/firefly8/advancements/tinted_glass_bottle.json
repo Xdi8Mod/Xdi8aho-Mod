@@ -9,11 +9,12 @@
     "icon": {
       "item": "firefly8:tinted_glass_bottle"
     },
-    "background": "firefly8:textures/gui/advancements/backgrounds/root.png",
+    "frame": "task",
     "show_toast": true,
     "announce_to_chat": true,
     "hidden": false
   },
+  "parent": "firefly8:xdi8aho",
   "criteria": {
     "get_bottle": {
       "trigger": "inventory_changed",

@@ -1,0 +1,49 @@
+{
+  "mod.sweet_potato": "薯",
+
+  "item.sweet_potato.purple_potato": "奇薯",
+  "item.sweet_potato.red_potato": "番薯",
+  "item.sweet_potato.white_potato": "白薯",
+  "item.sweet_potato.peel": "薯皮",
+  "item.sweet_potato.baked_purple_potato": "烤奇薯",
+  "item.sweet_potato.baked_red_potato": "烤番薯",
+  "item.sweet_potato.baked_white_potato": "烤白薯",
+  "item.sweet_potato.potato_powder": "薯粉",
+  "item.sweet_potato.enchanted_purple_potato": "魔奇薯",
+  "item.sweet_potato.enchanted_red_potato": "魔番薯",
+  "item.sweet_potato.enchanted_white_potato": "魔白薯",
+  "item.sweet_potato.treating_bowl": "许愿碗",
+
+  "block.sweet_potato.purple_potatoes": "奇薯",
+  "block.sweet_potato.red_potatoes": "番薯",
+  "block.sweet_potato.white_potatoes": "白薯",
+  "block.sweet_potato.magic_cube": "魔釜",
+  "block.sweet_potato.grinder": "磨器",
+  "block.sweet_potato.agroforestry_table": "農林案",
+
+  "advancement.husbandry.sweet_potato.get_sweet_potato.title": "香甜軟糯",
+  "advancement.husbandry.sweet_potato.get_sweet_potato.description": "得薯",
+  "advancement.nether.sweet_potato.get_magic_cube.title": "釜底游魂",
+  "advancement.nether.sweet_potato.get_magic_cube.description": "得魔釜",
+
+  "container.sweet_potato.magic_cube": "魔釜",
+  "container.sweet_potato.seed_updating": "益黍",
+  "container.sweet_potato.grinding": "研磨",
+  "container.grinding.ingredientData": "既有%f薯",
+
+  "stat.sweet_potato.interact_with_grinder": "磨薯数",
+  "stat.sweet_potato.interact_with_agroforestry_table": "農林案用數",
+  "stat.sweet_potato.crop_upgraded": "益黍数",
+  "stat.sweet_potato.sweet_potato_eaten": "食薯數",
+  "stat.sweet_potato.interact_with_magic_cube": "魔釜用數",
+
+  "tooltip.sweet_potato.enchanted_sweet_potato.effects": "效： ",
+
+  "block.sweet_potato.enchanted_tubers": "淬靈薯",
+  "block.sweet_potato.enchanted_crops": "淬靈黍",
+  "block.sweet_potato.enchanted_sapling": "淬靈㭜",
+  "block.sweet_potato.enchanted_leaves": "淬靈葉",
+  "item.sweet_potato.enchanted_tuber": "淬靈薯",
+  "item.sweet_potato.enchanted_crop": "淬靈黍",
+  "item.sweet_potato.enchanted_crop_seeds": "淬靈種"
+}
