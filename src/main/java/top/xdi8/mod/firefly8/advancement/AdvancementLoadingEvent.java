@@ -3,10 +3,10 @@ package top.xdi8.mod.firefly8.advancement;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.eventbus.api.Event;
 import org.apache.commons.lang3.mutable.Mutable;
+import org.featurehouse.mcmod.spm.platform.api.event.BaseEvent;
 
-public class AdvancementLoadingEvent extends Event {
+public class AdvancementLoadingEvent extends BaseEvent {
     private final AdvancementLoadingContext ctx;
 
     public AdvancementLoadingEvent(ResourceLocation id,

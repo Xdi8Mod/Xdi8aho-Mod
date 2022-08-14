@@ -9,6 +9,7 @@ import net.minecraft.util.datafix.fixes.References;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
@@ -18,6 +19,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -26,6 +28,7 @@ import org.featurehouse.mcmod.spm.platform.api.tag.TagContainer;
 import org.featurehouse.mcmod.spm.platform.forge.ForgeRegistryContainer;
 
 import java.util.Collection;
+import java.util.Set;
 import java.util.function.Supplier;
 
 final class RegistryImpl implements PlatformRegisterWrapper {
@@ -107,7 +110,13 @@ final class RegistryImpl implements PlatformRegisterWrapper {
 
     @Override
     public Supplier<SoundEvent> sound(String id) {
-        return registryContainer.sound.register(id, () -> new SoundEvent(new ResourceLocation(id)));
+        return registryContainer.sound.register(id, () -> new SoundEvent(id(id)));
+    }
+
+    @Override
+    public Supplier<PoiType> poiType(String id, int maxTickets, int validRange, Supplier<Set<BlockState>> matchingStatesSup) {
+        return registryContainer.poiType.register(id, () -> new PoiType(id(id).toString(),
+                matchingStatesSup.get(), maxTickets, validRange));
     }
 
     @Override
