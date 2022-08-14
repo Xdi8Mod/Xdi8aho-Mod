@@ -2,8 +2,11 @@ package top.xdi8.mod.firefly8.item.indium;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.behavior.ShufflingList;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
@@ -23,6 +26,10 @@ public class IndiumChiselItem extends Item {
     public @NotNull InteractionResult useOn(@NotNull UseOnContext pContext) {
         final BlockPos clickedPos = pContext.getClickedPos();
         final Level level = pContext.getLevel();
+        ItemStack stack = pContext.getItemInHand();
+        Player player = pContext.getPlayer();
+        if (player == null) return InteractionResult.PASS;
+        stack.hurtAndBreak(1, pContext.getPlayer(), (a) -> a.broadcastBreakEvent(EquipmentSlot.MAINHAND));
         if (level.getBlockState(clickedPos).is(SymbolStoneBlock.fromLetter(KeyedLetter.empty()))) {
             List<SymbolStoneProductionRecipe> recipeList = level.getRecipeManager().getAllRecipesFor(FireflyRecipes.PRODUCE_T.get());
             if (recipeList.isEmpty()) return InteractionResult.PASS;
