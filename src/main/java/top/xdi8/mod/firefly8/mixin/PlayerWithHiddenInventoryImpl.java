@@ -35,6 +35,7 @@ abstract class PlayerWithHiddenInventoryImpl implements IPlayerWithHiddenInvento
     @Override
     public void xdi8$passPortalInv(IPlayerWithHiddenInventory from) {
         final SimpleContainer other = from.xdi8$getPortalInv();
+        if (other == xdi8$getPortalInv()) return;
         this.xdi8$portalInv.clearContent();
         other.removeAllItems().forEach(xdi8$portalInv::addItem);
     }
