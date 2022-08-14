@@ -3,6 +3,7 @@ package top.xdi8.mod.firefly8.world;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.MobSpawnSettings;
+import net.minecraftforge.common.world.MobSpawnSettingsBuilder;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -16,6 +17,10 @@ public class FireflyMobBiomeGen {
     public static void onBiomeLoading(BiomeLoadingEvent event) {
         final Biome.BiomeCategory biomeCategory = event.getCategory();
         final var spawnSettings = event.getSpawns();
+        onBiomeLoading(biomeCategory, spawnSettings);
+    }
+
+    public static void onBiomeLoading(Biome.BiomeCategory biomeCategory, MobSpawnSettingsBuilder spawnSettings) {
         if (Objects.equals(biomeCategory, Biome.BiomeCategory.PLAINS)) {
             spawnSettings.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(
                     FireflyEntityTypes.FIREFLY.get(), 5, 1, 3));

@@ -39,6 +39,10 @@ public class FireflyClientSetup implements Runnable {
 
     @SubscribeEvent
     public static void registerParticles(ParticleFactoryRegisterEvent ignore1) {
+        registerParticles();
+    }
+
+    public static void registerParticles() {
         Minecraft.getInstance().particleEngine.register(FireflyParticles.FIREFLY.get(),
                 pSprites -> (pType, pLevel, pX, pY, pZ, pXSpeed, pYSpeed, pZSpeed) -> {
                     var particle = new FireflyParticle(pLevel, pX, pY, pZ, pXSpeed, pYSpeed, pZSpeed);
