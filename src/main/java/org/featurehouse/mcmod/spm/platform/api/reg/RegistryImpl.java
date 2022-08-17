@@ -3,10 +3,10 @@ package org.featurehouse.mcmod.spm.platform.api.reg;
 import com.mojang.datafixers.types.Type;
 import com.mojang.serialization.Codec;
 import net.minecraft.Util;
+import net.minecraft.core.particles.ParticleType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.datafix.fixes.References;
-import net.minecraft.world.Container;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
@@ -23,9 +23,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.featurehouse.mcmod.spm.platform.forge.ForgeTagContainer;
 import org.featurehouse.mcmod.spm.platform.api.tag.TagContainer;
 import org.featurehouse.mcmod.spm.platform.forge.ForgeRegistryContainer;
+import org.featurehouse.mcmod.spm.platform.forge.ForgeTagContainer;
 
 import java.util.Collection;
 import java.util.Set;
@@ -68,7 +68,7 @@ final class RegistryImpl implements PlatformRegisterWrapper {
     }
 
     @Override
-    public <T extends Recipe<Container>> Supplier<RecipeType<T>> recipeType(String id) {
+    public <T extends Recipe<?>> Supplier<RecipeType<T>> recipeType(String id) {
         var location = id(id);
         return registryContainer.recipeType.register(id, () -> new RecipeType<>() {
             @Override
@@ -111,6 +111,11 @@ final class RegistryImpl implements PlatformRegisterWrapper {
     @Override
     public Supplier<SoundEvent> sound(String id) {
         return registryContainer.sound.register(id, () -> new SoundEvent(id(id)));
+    }
+
+    @Override
+    public <P extends ParticleType<?>> Supplier<P> particleType(String id, Supplier<P> particleTypeSup) {
+        return registryContainer.particleType.register(id, particleTypeSup);
     }
 
     @Override
