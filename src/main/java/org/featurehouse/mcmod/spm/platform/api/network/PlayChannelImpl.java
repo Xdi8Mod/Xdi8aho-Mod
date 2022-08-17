@@ -184,7 +184,7 @@ final class PlayChannelImpl implements PlayChannel {
 
     private static final AtomicInteger AI = new AtomicInteger();
     private static final Logger LOGGER = LogUtils.getLogger();
-    synchronized private static String genClassName() {
+    private static String genClassName() {  // we just trust our atomic integer
         return Type.getInternalName(NoArgPlayPacketWrapper.class) + "$$asm-gen$" + AI.getAndAdd(1);
     }
 }

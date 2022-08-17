@@ -1,9 +1,9 @@
 package org.featurehouse.mcmod.spm.platform.api.reg;
 
 import com.mojang.serialization.Codec;
+import net.minecraft.core.particles.ParticleType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.Container;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
@@ -36,7 +36,7 @@ public sealed interface PlatformRegister
     Supplier<Block> block(String id, Supplier<Block> block);
 
     <E extends BlockEntity> Supplier<BlockEntityType<E>> blockEntity(String id, BlockEntityType.BlockEntitySupplier<E> supplier, Collection<Supplier<Block>> blocks);
-    <T extends Recipe<Container>> Supplier<RecipeType<T>> recipeType(String id);
+    <T extends Recipe<?>> Supplier<RecipeType<T>> recipeType(String id);
     <S extends RecipeSerializer<?>> Supplier<S> recipeSerializer(String id, Supplier<S> serializerSupplier);
     <M extends AbstractContainerMenu> Supplier<MenuType<M>> menu(String id, MenuType.MenuSupplier<M> factory);
     <E extends Entity> Supplier<EntityType<E>> entityType(String id, Supplier<EntityType.Builder<E>> builder);
@@ -46,6 +46,7 @@ public sealed interface PlatformRegister
 
     Supplier<ResourceLocation> customStat(String id);
     Supplier<SoundEvent> sound(String id);
+    <P extends ParticleType<?>> Supplier<P> particleType(String id, Supplier<P> particleTypeSup);
     Supplier<PoiType> poiType(String id,
                               int maxTickets, int validRange,
                               Supplier<Set<BlockState>> matchingStatesSup);

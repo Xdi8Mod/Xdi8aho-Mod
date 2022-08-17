@@ -2,7 +2,6 @@ package top.xdi8.mod.firefly8.item.indium;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.behavior.ShufflingList;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -14,6 +13,7 @@ import top.xdi8.mod.firefly8.block.symbol.SymbolStoneBlock;
 import top.xdi8.mod.firefly8.core.letters.KeyedLetter;
 import top.xdi8.mod.firefly8.recipe.FireflyRecipes;
 import top.xdi8.mod.firefly8.recipe.SymbolStoneProductionRecipe;
+import top.xdi8.mod.firefly8.stats.FireflyStats;
 
 import java.util.Collections;
 import java.util.List;
@@ -46,13 +46,14 @@ public class IndiumChiselItem extends Item {
         ItemStack stack = pContext.getItemInHand();
         Player player = pContext.getPlayer();
         if (player == null) return InteractionResult.PASS;
-        stack.hurtAndBreak(1, pContext.getPlayer(), (a) -> a.broadcastBreakEvent(EquipmentSlot.MAINHAND));
+        stack.hurtAndBreak(1, pContext.getPlayer(), (p) -> p.broadcastBreakEvent(pContext.getHand()));
         if (level.getBlockState(clickedPos).is(SymbolStoneBlock.fromLetter(KeyedLetter.empty()))) {
             List<SymbolStoneProductionRecipe> recipeList = level.getRecipeManager().getAllRecipesFor(FireflyRecipes.PRODUCE_T.get());
             ShufflingList<KeyedLetter> list = ShuffleCache.getShufflingList(recipeList);
             KeyedLetter resultLetter = list.shuffle().stream().findFirst().orElseGet(KeyedLetter::empty);
             SymbolStoneBlock resultBlock = SymbolStoneBlock.fromLetter(resultLetter);
             level.setBlock(clickedPos, resultBlock.defaultBlockState(), 4);
+            player.awardStat(FireflyStats.INTERACT_WITH_CHISEL.get());
             return InteractionResult.SUCCESS;
         }
         return InteractionResult.PASS;

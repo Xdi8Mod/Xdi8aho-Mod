@@ -6,6 +6,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.featurehouse.mcmod.spm.platform.forge.ForgeBusWrapper;
+import org.featurehouse.mcmod.spm.platform.forge.ForgeRegistryContainer;
 import top.xdi8.mod.firefly8.advancement.criteria.FireflyCriteria;
 import top.xdi8.mod.firefly8.block.FireflyBlocks;
 import top.xdi8.mod.firefly8.block.entity.FireflyBlockEntityTypes;
@@ -25,38 +26,42 @@ import top.xdi8.mod.firefly8.world.Xdi8PoiTypes;
 @Mod("firefly8")
 public class Firefly8 {
     public Firefly8() {
-        // Block
-        FireflyBlocks.REGISTRY.register(modBus());
-        FireflyBlockEntityTypes.REGISTRY.register(modBus());
-        Xdi8PoiTypes.REGISTRY.register(modBus());
+        activateRegistries();
+        ForgeRegistryContainer.of("firefly8").subscribeModBus(modBus());
+
         // Item
-        FireflyItems.REGISTRY.register(modBus());
         TintedPotionBrewing.register();
 
         // Entity
-        FireflyEntityTypes.REGISTRY.register(modBus());
         modBus().addListener(this::registerEntityAttributes);
         //forgeBus().addListener(FireflyMobBiomeGen::onBiomeLoading);
-
-        // Recipe
-        FireflyRecipes.SERIALIZERS.register(modBus());
-        FireflyRecipes.TYPES.register(modBus());
-
-        // Stats
-        FireflyStats.REGISTRY.register(modBus());
 
         // Common
         modBus().addListener(this::onCommonSetup);
 
-        // Particle
-        FireflyParticles.REGISTRY.register(modBus());
-
         // Network
         FireflyNetwork.init();
 
-        // Menu
-        FireflyMenus.REGISTRY.register(modBus());
         // Client: use bus subscriber
+    }
+
+    private static void activateRegistries() {
+        // Block
+        FireflyBlocks.LOG_WRAPPER.run();
+        FireflyBlockEntityTypes.LOG_WRAPPER.run();
+        Xdi8PoiTypes.LOG_WRAPPER.run();
+        // Item
+        FireflyItems.LOG_WRAPPER.run();
+        // Entity
+        FireflyEntityTypes.LOG_WRAPPER.run();
+        // Recipe
+        FireflyRecipes.LOG_WRAPPER.run();
+        // Stats
+        FireflyStats.LOG_WRAPPER.run();
+        // Particle
+        FireflyParticles.LOG_WRAPPER.run();
+        // Menu
+        FireflyMenus.LOG_WRAPPER.run();
     }
 
     private static IEventBus modBus() {
