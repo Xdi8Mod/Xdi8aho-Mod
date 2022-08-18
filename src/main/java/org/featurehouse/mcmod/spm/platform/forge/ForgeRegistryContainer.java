@@ -1,6 +1,7 @@
 package org.featurehouse.mcmod.spm.platform.forge;
 
 import net.minecraft.core.Registry;
+import net.minecraft.core.particles.ParticleType;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
@@ -38,6 +39,7 @@ public final class ForgeRegistryContainer {
     public final DeferredRegister<RecipeSerializer<?>> recipeSerializer = ofModRegistry(ForgeRegistries.RECIPE_SERIALIZERS);
     public final DeferredRegister<MenuType<?>> menu = ofModRegistry(ForgeRegistries.CONTAINERS);
     public final DeferredRegister<SoundEvent> sound = ofModRegistry(ForgeRegistries.SOUND_EVENTS);
+    public final DeferredRegister<ParticleType<?>> particleType = ofModRegistry(ForgeRegistries.PARTICLE_TYPES);
     public final DeferredRegister<EntityType<?>> entityType = ofModRegistry(ForgeRegistries.ENTITIES);
 
     public final DeferredRegister<ResourceLocation> stat = ofModRegistry(Registry.CUSTOM_STAT_REGISTRY);

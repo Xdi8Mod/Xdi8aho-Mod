@@ -6,13 +6,13 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.common.brewing.IBrewingRecipe;
 import net.minecraftforge.common.brewing.VanillaBrewingRecipe;
-import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import top.xdi8.mod.firefly8.item.FireflyItems;
 import top.xdi8.mod.firefly8.item.tint.ItemTinting;
 
 import java.util.Set;
+import java.util.function.Supplier;
 
 /**
  * <p>Register tinted potion for corresponding vanilla
@@ -26,7 +26,7 @@ public class TintedPotionBrewing extends VanillaBrewingRecipe
         BrewingRecipeRegistry.addRecipe(new TintedPotionBrewing());
     }
 
-    private static final Set<RegistryObject<Item>> INGREDIENTS
+    private static final Set<Supplier<Item>> INGREDIENTS
             = Set.of(FireflyItems.TINTED_POTION, FireflyItems.TINTED_LINGERING_POTION,
                 FireflyItems.TINTED_SPLASH_POTION, FireflyItems.TINTED_GLASS_BOTTLE);
 
