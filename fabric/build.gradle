@@ -14,7 +14,7 @@ dependencies {
 
     common(project(path: ":", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":", configuration: "transformProductionFabric")) { transitive false }
-    include(compileOnly(project(":fabric:spm_fake")))
+    //include(compileOnly(project(":fabric:spm_fake")))
 }
 
 remapJar {

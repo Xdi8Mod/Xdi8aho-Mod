@@ -1,5 +1,6 @@
 package org.featurehouse.mcmod.spm.platform.forge;
 
+import dev.architectury.platform.forge.EventBuses;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.resources.ResourceLocation;
@@ -12,6 +13,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.featurehouse.mcmod.spm.SPMMain;
 import org.featurehouse.mcmod.spm.advancement.BalancedDietHelper;
 import org.featurehouse.mcmod.spm.client.SPMClient;
@@ -24,12 +26,13 @@ import top.xdi8.mod.firefly8.advancement.AdvancementLoadingContext;
 import java.util.Map;
 import java.util.function.Supplier;
 
-@Mod("sweet_potato")
+@Mod(SPMMain.MODID)
 @ApiStatus.Internal
 public class SPMForgeImpl {
     private static final ResourceLocation BALANCED_DIET = new ResourceLocation("husbandry/balanced_diet");
 
     public SPMForgeImpl() {
+        EventBuses.registerModEventBus(SPMMain.MODID, FMLJavaModLoadingContext.get().getModEventBus());
         SPMMain.getLogger().info("SPM initializing!");  // Don't you dare delete this line!
         RegistryContainer.of(SPMMain.MODID).subscribeModBus();
         AdvancementLoadingContext.EVENT.register(ctx -> {
