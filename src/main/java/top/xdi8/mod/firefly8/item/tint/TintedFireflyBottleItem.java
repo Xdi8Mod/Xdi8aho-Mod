@@ -19,6 +19,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import org.featurehouse.mcmod.spm.util.ItemStacks;
 import org.jetbrains.annotations.NotNull;
 import top.xdi8.mod.firefly8.block.FireflyBlockTags;
 import top.xdi8.mod.firefly8.entity.FireflyEntity;
@@ -139,7 +140,8 @@ public class TintedFireflyBottleItem extends Item {
             level.addFreshEntity(fireflyEntity);
             fireflyList.remove(fireflyList.size() - 1);
             if (fireflyList.isEmpty()) {
-                return Either.left(new ItemStack(FireflyItems.TINTED_GLASS_BOTTLE.get(), 1, stack.getTag()));
+                return Either.left(ItemStacks.of(FireflyItems.TINTED_GLASS_BOTTLE.get(), 1,
+                        stack.getTag()));
             }
         }
         return Either.left(stack);

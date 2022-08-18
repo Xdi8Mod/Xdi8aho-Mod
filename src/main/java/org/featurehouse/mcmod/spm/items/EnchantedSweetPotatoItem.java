@@ -22,7 +22,6 @@ import org.featurehouse.mcmod.spm.util.effects.StatusEffectInstances;
 import org.featurehouse.mcmod.spm.util.inventory.PeelInserter;
 import org.featurehouse.mcmod.spm.util.objsettings.sweetpotato.SweetPotatoStatus;
 import org.featurehouse.mcmod.spm.util.objsettings.sweetpotato.SweetPotatoType;
-import org.featurehouse.mcmod.spm.platform.api.ClientOnly;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -102,7 +101,6 @@ public class EnchantedSweetPotatoItem extends EnchantedItem implements SweetPota
     }
 
     @Override
-    @ClientOnly
     public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> tooltip, TooltipFlag context) {
         super.appendHoverText(stack, world, tooltip, context);
 

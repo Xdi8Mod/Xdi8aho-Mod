@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "sweet_potato",
+  "name": "Sweet Potato Reborn",
+  "version": "2",
+  "license": "GPL-3.0-or-later with Minecraft exception",
+  "icon": "75e00dfd-ed5b-4626-a193-f6874736f052.png",
+  "description": "Combination of Agromagic",
+  "depends": {
+    "xdi8": "*"
+  },
+  "authors": [
+    "Pigeonia Featurehouse"
+  ],
+  "custom": {
+    "modmenu": {
+      "parent": "xdi8"
+    }
+  }
+}

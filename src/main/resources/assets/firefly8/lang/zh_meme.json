@@ -54,6 +54,11 @@
   "commands.unbindxdi8portal.1": "已为 %s 解绑门户",
   "commands.unbindxdi8portal.more": "已为 %d 名玩家解绑门户",
 
+  "modmenu.descriptionTranslation.firefly8": "萤火虫，提着灯，\n在月色里，轻轻的眨着眼睛，\n在黑夜里等待，寻找一份光明。",
+  "modmenu.summaryTranslation.firefly8": "灯\uDB87\uDC30 - 萤火虫",
+  "modmenu.descriptionTranslation.xdi8": "希顶 Mod",
+  "modmenu.summaryTranslation.xdi8": "灯\uDB87\uDC30",
+
   "advancements.firefly8.tinted_glass_bottle.title":"瓶装黑灯瞎\uDB87\uDC30",
   "advancements.firefly8.tinted_glass_bottle.description":"获取见光死玻璃瓶",
   "advancements.firefly8.tinted_firefly_bottle.title":"一萤熄火个虫子",

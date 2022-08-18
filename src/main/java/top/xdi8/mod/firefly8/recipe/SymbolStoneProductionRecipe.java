@@ -1,15 +1,16 @@
 package top.xdi8.mod.firefly8.recipe;
 
 import com.google.gson.JsonObject;
+import dev.architectury.core.AbstractRecipeSerializer;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import org.featurehouse.mcmod.spm.platform.api.recipe.SimpleRecipeSerializer;
 import org.jetbrains.annotations.NotNull;
 import top.xdi8.mod.firefly8.core.letters.KeyedLetter;
 import top.xdi8.mod.firefly8.core.letters.LettersUtil;
@@ -55,10 +56,10 @@ public record SymbolStoneProductionRecipe(ResourceLocation id, KeyedLetter lette
         return FireflyRecipes.PRODUCE_T.get();
     }
 
-    public static class Serializer extends SimpleRecipeSerializer<SymbolStoneProductionRecipe>{
+    public static class Serializer extends AbstractRecipeSerializer<SymbolStoneProductionRecipe> {
 
         @Override
-        public SymbolStoneProductionRecipe readJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
+        public SymbolStoneProductionRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
             final String letter = GsonHelper.getAsString(pSerializedRecipe, "letter");
             final KeyedLetter keyedLetter = LettersUtil.byId(new ResourceLocation(letter));
             final int weight = GsonHelper.getAsInt(pSerializedRecipe, "weight");
@@ -66,7 +67,7 @@ public record SymbolStoneProductionRecipe(ResourceLocation id, KeyedLetter lette
         }
 
         @Override
-        public SymbolStoneProductionRecipe readPacket(ResourceLocation pRecipeId, FriendlyByteBuf pBuffer) {
+        public SymbolStoneProductionRecipe fromNetwork(ResourceLocation pRecipeId, FriendlyByteBuf pBuffer) {
             final String letter = pBuffer.readUtf();
             final KeyedLetter keyedLetter = LettersUtil.byId(new ResourceLocation(letter));
             final int weight = pBuffer.readInt();
@@ -74,7 +75,7 @@ public record SymbolStoneProductionRecipe(ResourceLocation id, KeyedLetter lette
         }
 
         @Override
-        public void writePacket(FriendlyByteBuf pBuffer, SymbolStoneProductionRecipe pRecipe) {
+        public void toNetwork(FriendlyByteBuf pBuffer, SymbolStoneProductionRecipe pRecipe) {
             pBuffer.writeUtf(pRecipe.letter().id().toString());
             pBuffer.writeInt(pRecipe.weight());
         }

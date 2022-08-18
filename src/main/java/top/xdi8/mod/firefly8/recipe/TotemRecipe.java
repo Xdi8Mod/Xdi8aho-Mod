@@ -3,6 +3,7 @@ package top.xdi8.mod.firefly8.recipe;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import dev.architectury.core.AbstractRecipeSerializer;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -12,7 +13,6 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
-import org.featurehouse.mcmod.spm.platform.api.recipe.SimpleRecipeSerializer;
 import org.jetbrains.annotations.NotNull;
 import top.xdi8.mod.firefly8.core.letters.KeyedLetter;
 import top.xdi8.mod.firefly8.core.letters.LettersUtil;
@@ -107,9 +107,9 @@ public record TotemRecipe(ResourceLocation id,
         return FireflyRecipes.TOTEM_T.get();
     }
 
-    public static class Serializer extends SimpleRecipeSerializer<TotemRecipe> {
+    public static class Serializer extends AbstractRecipeSerializer<TotemRecipe> {
         @Override
-        public @NotNull TotemRecipe readJson(ResourceLocation pRecipeId, JsonObject obj) {
+        public @NotNull TotemRecipe fromJson(ResourceLocation pRecipeId, JsonObject obj) {
             final JsonArray letters = GsonHelper.getAsJsonArray(obj, "letters");
             final String ability = GsonHelper.getAsString(obj, "ability");
 
@@ -125,7 +125,7 @@ public record TotemRecipe(ResourceLocation id,
         }
 
         @Override
-        public @NotNull TotemRecipe readPacket(ResourceLocation pRecipeId, FriendlyByteBuf buf) {
+        public @NotNull TotemRecipe fromNetwork(ResourceLocation pRecipeId, FriendlyByteBuf buf) {
             final String ability = buf.readUtf();
             TotemAbility totemAbility = TotemAbilities.byId(new ResourceLocation(ability))
                     .orElseThrow(() -> new IllegalArgumentException("Invalid totem ability: " + ability));
@@ -141,7 +141,7 @@ public record TotemRecipe(ResourceLocation id,
         }
 
         @Override
-        public void writePacket(FriendlyByteBuf buf, TotemRecipe recipe) {
+        public void toNetwork(FriendlyByteBuf buf, TotemRecipe recipe) {
             buf.writeUtf(recipe.ability().getId().toString());
             List<String> letters = recipe.letters().stream()
                     .map(KeyedLetter::id)

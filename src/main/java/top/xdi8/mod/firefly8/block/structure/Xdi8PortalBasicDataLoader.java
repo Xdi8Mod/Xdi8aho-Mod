@@ -6,9 +6,6 @@ import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimplePreparableReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
-import net.minecraftforge.event.AddReloadListenerEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import org.featurehouse.mcmod.spm.platform.api.resource.KeyedReloadListener;
 import org.slf4j.Logger;
 
@@ -18,7 +15,6 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 
-@Mod.EventBusSubscriber(modid = "firefly8")
 public final class Xdi8PortalBasicDataLoader
         extends SimplePreparableReloadListener<Reader>
         implements KeyedReloadListener {
@@ -49,10 +45,5 @@ public final class Xdi8PortalBasicDataLoader
     @Override
     public ResourceLocation getId() {
         return new ResourceLocation("firefly8", "portal_base");
-    }
-
-    @SubscribeEvent
-    public static void onLoadingData(AddReloadListenerEvent event) {
-        event.addListener(new Xdi8PortalBasicDataLoader());
     }
 }

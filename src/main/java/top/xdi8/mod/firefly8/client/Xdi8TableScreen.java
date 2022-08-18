@@ -57,8 +57,8 @@ public class Xdi8TableScreen extends AbstractContainerScreen<Xdi8TableMenu> {
     @Override
     public boolean mouseClicked(double pMouseX, double pMouseY, int pButton) {
         if (isOnButton(pMouseX, pMouseY)) {
-            this.menu.clickMenuButton(Objects.requireNonNull(this.getMinecraft().player), 0);
-            Objects.requireNonNull(this.getMinecraft().gameMode)
+            this.menu.clickMenuButton(Objects.requireNonNull(Objects.requireNonNull(this.minecraft).player), 0);
+            Objects.requireNonNull(this.minecraft.gameMode)
                     .handleInventoryButtonClick(menu.containerId, 0);
             return true;
         }

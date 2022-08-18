@@ -11,7 +11,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.portal.PortalInfo;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.util.ITeleporter;
 import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -21,9 +20,8 @@ import top.xdi8.mod.firefly8.stats.FireflyStats;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Function;
 
-public class BackTeleporterImpl implements ITeleporter {
+public class BackTeleporterImpl implements TeleportWrapper {
     private final boolean portalValid;
 
     BackTeleporterImpl(boolean portalValid) {
@@ -50,15 +48,15 @@ public class BackTeleporterImpl implements ITeleporter {
                 }
             }
         }
-        Entity destEntity = entity.changeDimension(dest, new BackTeleporterImpl(portalValid));
+        Entity destEntity = Xdi8DimensionUtils.changeDimension(entity, dest, new BackTeleporterImpl(portalValid));
         if (destEntity instanceof ServerPlayer player) {
             player.awardStat(FireflyStats.X2O_PORTALS_ENTERED.get());
         }
     }
 
     @Nullable
-    @Override
-    public PortalInfo getPortalInfo(Entity oldEntity, ServerLevel destWorld, Function ignore) {
+    //@Override
+    public PortalInfo getPortalInfo(Entity oldEntity, ServerLevel destWorld) {
         if (!(oldEntity instanceof ServerPlayer serverPlayer))
             return ofOrdinaryEntities(oldEntity, destWorld);
         IServerPlayerWithHiddenInventory ext = IServerPlayerWithHiddenInventory.xdi8$extend(serverPlayer);
