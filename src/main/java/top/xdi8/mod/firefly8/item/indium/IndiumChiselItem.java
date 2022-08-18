@@ -46,14 +46,14 @@ public class IndiumChiselItem extends Item {
         ItemStack stack = pContext.getItemInHand();
         Player player = pContext.getPlayer();
         if (player == null) return InteractionResult.PASS;
-        stack.hurtAndBreak(1, pContext.getPlayer(), (p) -> p.broadcastBreakEvent(pContext.getHand()));
         if (level.getBlockState(clickedPos).is(SymbolStoneBlock.fromLetter(KeyedLetter.empty()))) {
+            stack.hurtAndBreak(1, pContext.getPlayer(), (p) -> p.broadcastBreakEvent(pContext.getHand()));
             List<SymbolStoneProductionRecipe> recipeList = level.getRecipeManager().getAllRecipesFor(FireflyRecipes.PRODUCE_T.get());
             ShufflingList<KeyedLetter> list = ShuffleCache.getShufflingList(recipeList);
             KeyedLetter resultLetter = list.shuffle().stream().findFirst().orElseGet(KeyedLetter::empty);
             SymbolStoneBlock resultBlock = SymbolStoneBlock.fromLetter(resultLetter);
             level.setBlock(clickedPos, resultBlock.defaultBlockState(), 4);
-            player.awardStat(FireflyStats.INTERACT_WITH_CHISEL.get());
+            player.awardStat(FireflyStats.SYMBOL_STONES_CARVED.get());
             return InteractionResult.SUCCESS;
         }
         return InteractionResult.PASS;

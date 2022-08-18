@@ -3,9 +3,8 @@ package top.xdi8.mod.firefly8.core.letters;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import net.minecraft.resources.ResourceLocation;
-import org.featurehouse.mcmod.spm.platform.api.event.BusWrapper;
 import org.jetbrains.annotations.ApiStatus;
-import top.xdi8.mod.firefly8.core.letters.event.LetterRegistryEvent;
+import top.xdi8.mod.firefly8.core.letters.event.Xdi8RegistryEvents;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -51,10 +50,10 @@ public final class LettersUtil {
     }
 
     @ApiStatus.Internal
-    public static void fireLetterRegistry(BusWrapper modBus) {
-        modBus.fire(new LetterRegistryEvent((key, value) -> {
+    public static void fireLetterRegistry() {
+        Xdi8RegistryEvents.LETTER.invoker().accept((key, value) -> {
             LETTER_MAP.put(key, value);
             ID_LIST.add(key);
-        }));
+        });
     }
 }

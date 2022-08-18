@@ -7,20 +7,11 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodData;
 import net.minecraft.world.level.GameRules;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import top.xdi8.mod.firefly8.ext.IServerPlayerWithHiddenInventory;
 import top.xdi8.mod.firefly8.network.FireflyNetwork;
 import top.xdi8.mod.firefly8.world.Xdi8DimensionUtils;
 
-@Mod.EventBusSubscriber(modid = "firefly8")
 public class PlayerDeathListener {
-    @SubscribeEvent
-    public static void onPlayerDeath(LivingDeathEvent event) {
-        onPlayerDeath(event.getEntityLiving(), () -> event.setCanceled(true));
-    }
-
     public static void onPlayerDeath(LivingEntity livingEntity, Runnable cancelEngine) {
         if (!(livingEntity instanceof Player player))
             return;

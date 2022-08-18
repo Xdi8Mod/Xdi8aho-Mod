@@ -1,14 +1,13 @@
 package top.xdi8.mod.firefly8.block.structure;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
 import net.minecraft.core.Vec3i;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Reader;
@@ -27,10 +26,11 @@ public class Xdi8PortalBasicData {
 
     private static Predicate<BlockState> fromId(String id) {
         if (id.startsWith("#")) {
-            TagKey<Block> tagKey = BlockTags.create(new ResourceLocation(id.substring(1)));
+            TagKey<Block> tagKey = TagKey.create(Registry.BLOCK_REGISTRY,
+                    new ResourceLocation(id.substring(1)));
             return blockState -> blockState.is(tagKey);
         }
-        var block = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(id));
+        Block block = Registry.BLOCK.get(new ResourceLocation(id));
         Objects.requireNonNull(block, () -> "Block " + id + " is invalid");
         return blockState -> blockState.is(block);
     }

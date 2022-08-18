@@ -1,5 +1,6 @@
 package top.xdi8.mod.firefly8.block;
 
+import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -16,7 +17,7 @@ import java.util.function.Supplier;
 public class FireflyBlocks {
     public static final InternalRegistryLogWrapper LOG_WRAPPER = InternalRegistryLogWrapper.firefly8("blocks");
 
-    public static final Supplier<Block> XDI8AHO_PORTAL_CORE_BLOCK,
+    public static final RegistrySupplier<Block> XDI8AHO_PORTAL_CORE_BLOCK,
             XDI8AHO_PORTAL_TOP_BLOCK,
             XDI8AHO_PORTAL_BLOCK,
             XDI8AHO_BACK_PORTAL_CORE_BLOCK,
@@ -75,8 +76,8 @@ public class FireflyBlocks {
         SYMBOL_STONE_NN = reg.block("symbol_stone_nn", SymbolStoneNNBlock::new);
     }
 
-    private static Supplier<Block> ofDefaultBlock(String id,
-                                                        Supplier<BlockBehaviour.Properties> propSup) {
+    private static RegistrySupplier<Block> ofDefaultBlock(String id,
+                                                          Supplier<BlockBehaviour.Properties> propSup) {
         return reg.block(id, () -> new Block(propSup.get()));
     }
 }
