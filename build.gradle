@@ -36,7 +36,7 @@ dependencies {
 }
 
 allprojects {
-    if (project.name.endsWith("fake")) return;
+    //if (project.name.endsWith("fake")) return;
     apply plugin: "dev.architectury.loom"
     apply plugin: "java"
     apply plugin: "architectury-plugin"
@@ -99,7 +99,7 @@ println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty '
 //sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 subprojects {
-    if (project.name.endsWith("fake")) return;
+    //if (project.name.endsWith("fake")) return;
     apply plugin: "com.github.johnrengelman.shadow"
 
     architectury {
