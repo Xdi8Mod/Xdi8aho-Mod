@@ -42,5 +42,8 @@
         "description": "Xdi8 Aho Mod"
       }
     }
-  }
+  },
+  "jars": [
+    { "file": "META-INF/spm_fake.jar" }
+  ]
 }
