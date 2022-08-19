@@ -54,6 +54,11 @@
   "commands.unbindxdi8portal.1": "既解%s之門",
   "commands.unbindxdi8portal.more": "既解%d人之門",
 
+  "modmenu.descriptionTranslation.firefly8": "的曆流光小，飄颻弱翅輕。恐畏無人識，獨自暗中明",
+  "modmenu.summaryTranslation.firefly8": "灯\uDB87\uDC31 - 螢",
+  "modmenu.descriptionTranslation.xdi8": "灯\uDB87\uDC31模組",
+  "modmenu.summaryTranslation.xdi8": "灯\uDB87\uDC31",
+
   "advancements.firefly8.tinted_glass_bottle.title": "瓶中黑灯瞎\uDB87\uDC31",
   "advancements.firefly8.tinted_glass_bottle.description": "得蔽明瓶",
   "advancements.firefly8.tinted_firefly_bottle.title": "飘飖弱翅轻",
@@ -77,5 +82,5 @@
   "advancements.firefly8.xdi8_totem.title": "灯\uDB87\uDC31輝煌",
   "advancements.firefly8.xdi8_totem.description": "得灯",
   "advancements.firefly8.xdi8aho.title": "灯\uDB87\uDC31",
-  "advancements.firefly8.xdi8aho.description": "萤兮萤兮，携乎灯兮"
+  "advancements.firefly8.xdi8aho.description": "螢兮螢兮，携乎灯兮"
 }

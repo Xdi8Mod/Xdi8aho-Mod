@@ -2,21 +2,28 @@ package top.xdi8.mod.firefly8.item.indium.event;
 
 import com.mojang.logging.annotations.FieldsAreNonnullByDefault;
 import com.mojang.logging.annotations.MethodsReturnNonnullByDefault;
+import dev.architectury.annotations.ForgeEventCancellable;
+import dev.architectury.event.Event;
+import dev.architectury.event.EventFactory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import org.featurehouse.mcmod.spm.platform.api.event.BaseEvent;
 
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.function.Consumer;
 
 @MethodsReturnNonnullByDefault
 @FieldsAreNonnullByDefault
 @ParametersAreNonnullByDefault
+@ForgeEventCancellable
 @SuppressWarnings("unused")
-public abstract sealed class DropIndiumNuggetEvent extends BaseEvent {
+public abstract sealed class DropIndiumNuggetEvent {
+    public static final Event<Consumer<Attack>> ATTACK = EventFactory.createLoop();
+    public static final Event<Consumer<Mine>> MINE = EventFactory.createLoop();
+
     private final Player player;
     private final ItemStack tool;
 
@@ -81,8 +88,7 @@ public abstract sealed class DropIndiumNuggetEvent extends BaseEvent {
         this.chance = chance;
     }
 
-    @Override
-    public boolean isCancelable() {
-        return true;
-    }
+    boolean isExecutable = true;
+    public void cancel() { isExecutable = false; }
+    public boolean isExecutable() { return isExecutable; }
 }

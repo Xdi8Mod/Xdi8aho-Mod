@@ -1,18 +1,18 @@
 package top.xdi8.mod.firefly8.block.entity;
 
+import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.featurehouse.mcmod.spm.platform.api.reg.PlatformRegister;
 import top.xdi8.mod.firefly8.block.FireflyBlocks;
 import top.xdi8.mod.firefly8.util.InternalRegistryLogWrapper;
 
 import java.util.Collections;
-import java.util.function.Supplier;
 
 public final class FireflyBlockEntityTypes {
     public static final InternalRegistryLogWrapper LOG_WRAPPER = InternalRegistryLogWrapper.firefly8("block_entities");
 
-    public static final Supplier<BlockEntityType<PortalTopBlockEntity>> PORTAL_TOP;
-    public static final Supplier<BlockEntityType<BackPortalCoreBlockEntity>> BACK_PORTAL_CORE;
+    public static final RegistrySupplier<BlockEntityType<PortalTopBlockEntity>> PORTAL_TOP;
+    public static final RegistrySupplier<BlockEntityType<BackPortalCoreBlockEntity>> BACK_PORTAL_CORE;
 
     static {
         var reg = PlatformRegister.of("firefly8");

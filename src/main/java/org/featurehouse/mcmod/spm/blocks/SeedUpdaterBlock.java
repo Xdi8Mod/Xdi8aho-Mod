@@ -31,6 +31,7 @@ public class SeedUpdaterBlock extends CraftingTableBlock {
         //setDefaultState(getStateManager().getDefaultState().with(WATERLOGGED, false));
     }
 
+    @SuppressWarnings("deprecation")
     public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
         return SHAPE;
     }
