@@ -2,6 +2,7 @@ package org.featurehouse.mcmod.spm.recipe;
 
 import com.google.gson.JsonObject;
 import com.mojang.logging.annotations.MethodsReturnNonnullByDefault;
+import dev.architectury.core.AbstractRecipeSerializer;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -11,7 +12,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import org.featurehouse.mcmod.spm.SPMMain;
-import org.featurehouse.mcmod.spm.platform.api.recipe.SimpleRecipeSerializer;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -73,9 +73,9 @@ public record SeedUpdatingRecipe(ResourceLocation id, Ingredient base,
         return this.addition.test(itemStack);
     }
 
-    public static class Serializer extends SimpleRecipeSerializer<SeedUpdatingRecipe> {
+    public static class Serializer extends AbstractRecipeSerializer<SeedUpdatingRecipe> {
         @Override
-        public SeedUpdatingRecipe readJson(ResourceLocation identifier, JsonObject jsonObject) {
+        public SeedUpdatingRecipe fromJson(ResourceLocation identifier, JsonObject jsonObject) {
             Ingredient ingredient = Ingredient.fromJson(GsonHelper.getAsJsonObject(jsonObject, "base"));
             Ingredient ingredient2 = Ingredient.fromJson(GsonHelper.getAsJsonObject(jsonObject, "addition"));
             ItemStack itemStack = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(jsonObject, "result"));
@@ -83,7 +83,7 @@ public record SeedUpdatingRecipe(ResourceLocation id, Ingredient base,
         }
 
         @Override
-        public SeedUpdatingRecipe readPacket(ResourceLocation identifier, FriendlyByteBuf packetByteBuf) {
+        public SeedUpdatingRecipe fromNetwork(ResourceLocation identifier, FriendlyByteBuf packetByteBuf) {
             Ingredient ingredient = Ingredient.fromNetwork(packetByteBuf);
             Ingredient ingredient2 = Ingredient.fromNetwork(packetByteBuf);
             ItemStack itemStack = packetByteBuf.readItem();
@@ -91,7 +91,7 @@ public record SeedUpdatingRecipe(ResourceLocation id, Ingredient base,
         }
 
         @Override
-        public void writePacket(FriendlyByteBuf buf, @NotNull SeedUpdatingRecipe recipe) {
+        public void toNetwork(FriendlyByteBuf buf, @NotNull SeedUpdatingRecipe recipe) {
             recipe.base.toNetwork(buf);
             recipe.addition.toNetwork(buf);
             buf.writeItem(recipe.result);

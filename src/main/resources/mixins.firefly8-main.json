@@ -4,12 +4,12 @@
   "required": true,
   "package": "top.xdi8.mod.firefly8.mixin",
   "mixins": [
+    "AddTintedDragonBreathMixin",
     "MixinEntityBaseTick",
     "PlayerWithHiddenInventoryImpl",
     "ServerPlayerWithHiddenInventoryImpl",
     "fire.MixinBaseFireBlock"
   ],
   "client": [
-  ],
-  "refmap": "mixins.xdi8.refmap.json"
+  ]
 }

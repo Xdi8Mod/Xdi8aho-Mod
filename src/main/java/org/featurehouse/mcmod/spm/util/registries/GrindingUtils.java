@@ -2,10 +2,11 @@ package org.featurehouse.mcmod.spm.util.registries;
 
 import it.unimi.dsi.fastutil.objects.Object2DoubleLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
+import net.minecraft.core.Holder;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
-import org.featurehouse.mcmod.spm.platform.api.tag.TagContainer;
 import org.featurehouse.mcmod.spm.util.tag.TagLike;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -26,7 +27,7 @@ public final class GrindingUtils {
         ingredientDataMap().put(item.asItem(), ingredientDataAdded);
     }
 
-    public static void registerGrindableTag(double ingredientDataAdded, @NotNull TagContainer<Item> tagContainer) {
+    public static void registerGrindableTag(double ingredientDataAdded, @NotNull TagKey<Item> tagContainer) {
         Objects.requireNonNull(tagContainer, "tagContainer");
         ingredientDataMap().put(tagContainer, ingredientDataAdded);
     }
@@ -54,11 +55,11 @@ public final class GrindingUtils {
             return map.put(TagLike.asItem(key), value);
         }
 
-        public double put(TagContainer<Item> key, double value) {
+        public double put(TagKey<Item> key, double value) {
             return map.put(TagLike.asTag(key), value);
         }
 
-        private OptionalDouble get0(Item key) {
+        private OptionalDouble get0(Holder<Item> key) {
             for (var entry : map.object2DoubleEntrySet()) {
                 if (entry.getKey().contains(key))
                     return OptionalDouble.of(entry.getDoubleValue());
@@ -66,11 +67,15 @@ public final class GrindingUtils {
         }
 
         public double getDouble(Item key) {
-            return get0(key).orElse(map.defaultReturnValue());
+            return get0(key.arch$holder()).orElse(map.defaultReturnValue());
         }
 
         public boolean containsItem(Item key) {
-            return get0(key).isPresent();
+            return containsItem(key.arch$holder());
+        }
+
+        public boolean containsItem(Holder<Item> itemHolder) {
+            return get0(itemHolder).isPresent();
         }
 
         @Override

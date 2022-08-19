@@ -1,10 +1,15 @@
 package top.xdi8.mod.firefly8.item;
 
+import dev.architectury.core.item.ArchitecturySpawnEggItem;
+import dev.architectury.registry.CreativeTabRegistry;
+import dev.architectury.registry.registries.RegistrySupplier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.food.Foods;
-import net.minecraft.world.item.*;
-import net.minecraftforge.common.ForgeSpawnEggItem;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
 import org.featurehouse.mcmod.spm.platform.api.reg.PlatformRegister;
-import org.jetbrains.annotations.NotNull;
 import top.xdi8.mod.firefly8.block.FireflyBlocks;
 import top.xdi8.mod.firefly8.entity.FireflyEntityTypes;
 import top.xdi8.mod.firefly8.item.indium.*;
@@ -13,21 +18,16 @@ import top.xdi8.mod.firefly8.item.symbol.Xdi8TotemItem;
 import top.xdi8.mod.firefly8.item.tint.*;
 import top.xdi8.mod.firefly8.util.InternalRegistryLogWrapper;
 
-import java.util.function.Supplier;
-
 public final class FireflyItems {
     public static final InternalRegistryLogWrapper LOG_WRAPPER = InternalRegistryLogWrapper.firefly8("items");
 
     private FireflyItems() {
     }
 
-    public static final CreativeModeTab TAB = new CreativeModeTab("firefly8") {
-        public @NotNull ItemStack makeIcon() {
-            return new ItemStack(XDI8AHO_ICON.get());
-        }
-    };
+    public static final CreativeModeTab TAB = CreativeTabRegistry.create(new ResourceLocation(
+            "firefly8", "firefly8"), () -> FireflyItems.XDI8AHO_ICON.get().getDefaultInstance());
 
-    public static final Supplier<Item>
+    public static final RegistrySupplier<Item>
             INDIUM_INGOT,
             INDIUM_NUGGET,
             INDIUM_AXE,
@@ -93,7 +93,7 @@ public final class FireflyItems {
         XDI8AHO_ICON = reg.item("xdi8aho",
                 () -> new Xdi8TotemItem(defaultProp()));
         FIREFLY_SPAWN_EGG = reg.item("firefly_spawn_egg", () ->
-                new ForgeSpawnEggItem(FireflyEntityTypes.FIREFLY,
+                new ArchitecturySpawnEggItem(FireflyEntityTypes.FIREFLY,
                         0x000000, 0x00f500,
                         defaultProp()));
                         

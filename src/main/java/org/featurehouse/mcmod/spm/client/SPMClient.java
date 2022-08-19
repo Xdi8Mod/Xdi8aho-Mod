@@ -1,20 +1,21 @@
 package org.featurehouse.mcmod.spm.client;
 
 import com.google.common.collect.ImmutableSet;
-import net.minecraft.client.gui.screens.MenuScreens;
+import dev.architectury.registry.menu.MenuRegistry;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.RenderType;
 import org.featurehouse.mcmod.spm.SPMMain;
-import org.featurehouse.mcmod.spm.platform.api.ClientOnly;
 import org.featurehouse.mcmod.spm.platform.api.client.BlockRenderTypes;
 
-@ClientOnly
+@Environment(EnvType.CLIENT)
 public class SPMClient {
     //@Override
     public void onInitializeClient() {
         /* Client Screens */
-        MenuScreens.register(SPMMain.GRINDER_SCREEN_HANDLER_TYPE.get(), GrinderScreen::new);
-        MenuScreens.register(SPMMain.MAGIC_CUBE_SCREEN_HANDLER_TYPE.get(), MagicCubeScreen::new);
-        MenuScreens.register(SPMMain.SEED_UPDATER_SCREEN_HANDLER_TYPE.get(), SeedUpdaterScreen::new);
+        MenuRegistry.registerScreenFactory(SPMMain.GRINDER_SCREEN_HANDLER_TYPE.get(), GrinderScreen::new);
+        MenuRegistry.registerScreenFactory(SPMMain.MAGIC_CUBE_SCREEN_HANDLER_TYPE.get(), MagicCubeScreen::new);
+        MenuRegistry.registerScreenFactory(SPMMain.SEED_UPDATER_SCREEN_HANDLER_TYPE.get(), SeedUpdaterScreen::new);
 
         /* Rendering */
 

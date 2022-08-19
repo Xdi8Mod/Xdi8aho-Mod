@@ -1,18 +1,14 @@
 package top.xdi8.mod.firefly8.item.indium;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import org.featurehouse.mcmod.spm.platform.api.event.Events;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import top.xdi8.mod.firefly8.item.FireflyItems;
 import top.xdi8.mod.firefly8.item.indium.event.DropIndiumNuggetEvent;
 import top.xdi8.mod.firefly8.stats.FireflyStats;
@@ -48,19 +44,13 @@ public class IndiumTier implements Tier {
         return Ingredient.of(FireflyItems.INDIUM_INGOT.get());
     }
 
-    @Nullable
-    @Override
-    public TagKey<Block> getTag() {
-        // Keep null, because there is nothing special to dig with indium tools right now.
-        return null;
-    }
-
     static void dropNuggets(@NotNull ItemStack pStack, @NotNull Level pLevel, @NotNull BlockState pState,
                             @NotNull BlockPos pPos, @NotNull LivingEntity pEntityLiving) {
         if (pEntityLiving.getLevel().isClientSide()) return;
         if (pEntityLiving instanceof Player player) {
             final var event = new DropIndiumNuggetEvent.Mine(pStack, pLevel, pState, pPos, player);
-            if (!Events.fireForgeBusEvent(event))
+            DropIndiumNuggetEvent.MINE.invoker().accept(event);
+            if (event.isExecutable())
                 dropNuggetsImpl(player, event.getChance());
         }
     }
@@ -69,7 +59,8 @@ public class IndiumTier implements Tier {
         if (pAttacker.getLevel().isClientSide()) return;
         if (pAttacker instanceof Player player) {
             final var event = new DropIndiumNuggetEvent.Attack(pStack, pTarget, player);
-            if (!Events.fireForgeBusEvent(event))
+            DropIndiumNuggetEvent.ATTACK.invoker().accept(event);
+            if (event.isExecutable())
                 dropNuggetsImpl(player, event.getChance());
         }
     }
