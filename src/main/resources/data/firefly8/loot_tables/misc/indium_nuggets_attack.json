@@ -1,0 +1,21 @@
+{
+  "type": "generic",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "firefly8:indium_nugget",
+          "conditions": [
+            {
+              "condition": "random_chance",
+              "chance": 0.45
+            }
+          ],
+          "weight": 810
+        }
+      ]
+    }
+  ]
+}
