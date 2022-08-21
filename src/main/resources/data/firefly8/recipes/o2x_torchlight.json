@@ -7,10 +7,10 @@
   ],
   "key": {
     "I": {
-      "tag": "forge:nuggets/gold"
+      "tag": "c:gold_nuggets"
     },
     "G": {
-      "tag": "forge:dusts/glowstone"
+      "tag": "c:glowstone_dusts"
     }
   },
   "result": {
