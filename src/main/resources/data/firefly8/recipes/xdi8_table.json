@@ -6,13 +6,13 @@
   ],
   "key": {
     "E": {
-      "tag": "forge:storage_blocks/gold"
+      "tag": "c:gold_blocks"
     },
     "I": {
       "item": "firefly8:indium_block"
     },
     "R": {
-      "tag": "forge:storage_blocks/redstone"
+      "tag": "c:redstone_blocks"
     }
   },
   "result": {
