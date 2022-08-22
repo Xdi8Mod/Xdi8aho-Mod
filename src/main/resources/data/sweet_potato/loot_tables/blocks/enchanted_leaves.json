@@ -10,7 +10,7 @@
             {
               "condition": "minecraft:match_tool",
               "predicate": {
-                "tag": "forge:shears"
+                "tag": "c:shears"
               }
             }
           ],
@@ -117,7 +117,7 @@
               {
                 "condition": "minecraft:match_tool",
                 "predicate": {
-                  "tag": "forge:shears"
+                  "tag": "c:shears"
                 }
               }
             ]

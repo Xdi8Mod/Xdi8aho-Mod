@@ -24,7 +24,7 @@
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [{
-          "items": ["minecraft:gold_ingot"]
+          "tag": ["c:gold_ingots"]
         }, {
           "tag": "sweet_potato:blackstones"
         }]
