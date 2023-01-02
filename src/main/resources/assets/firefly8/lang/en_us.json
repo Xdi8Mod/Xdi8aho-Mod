@@ -48,6 +48,13 @@
   "block.firefly8.symbol_stone_nn": "Symbol: N (Creative mode only)",
   "block.firefly8.symbol_stone_bricks": "Symbol Stone Bricks",
 
+  "block.firefly8.cedar_door": "Cedar Door",
+  "block.firefly8.cedar_leaves": "Cedar Leaves",
+  "block.firefly8.cedar_log": "Cedar Log",
+  "block.firefly8.cedar_planks": "Cedar Planks",
+  "block.firefly8.cedar_sign": "Cedar Sign",
+  "block.firefly8.stripped_cedar_log": "Stripped Cedar Log",
+
   "commands.bindxdi8portal.success": "Successfully set portal for %s",
   "commands.bindxdi8portal.failure": "Can't set portal for %1$s at dimension %2$s / (%3$s)",
   "commands.unbindxdi8portal.0": "No player selected",
