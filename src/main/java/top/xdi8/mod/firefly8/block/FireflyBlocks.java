@@ -1,8 +1,13 @@
 package top.xdi8.mod.firefly8.block;
 
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.registries.DeferredRegister;
@@ -18,6 +23,18 @@ public class FireflyBlocks {
     public static final DeferredRegister<Block> REGISTRY
             = DeferredRegister.create(ForgeRegistries.BLOCKS, "firefly8");
 
+    public static final MaterialColor cedarColor = MaterialColor.COLOR_RED;
+    public static final WoodType cedarWood = new WoodType("cedar");
+
+    // From net.minecraft.world.level.block.Blocks
+    private static boolean never(BlockState state, BlockGetter getter, BlockPos pos) {
+        return false;
+    }
+
+    private static Boolean ocelotOrParrot(BlockState state, BlockGetter getter, BlockPos pos, EntityType<?> entityType) {
+        return entityType == EntityType.OCELOT || entityType == EntityType.PARROT;
+    }
+
     public static final RegistryObject<Block> XDI8AHO_PORTAL_CORE_BLOCK,
             XDI8AHO_PORTAL_TOP_BLOCK,
             XDI8AHO_PORTAL_BLOCK,
@@ -29,7 +46,14 @@ public class FireflyBlocks {
             DARK_SYMBOL_STONE,
             SYMBOL_STONE_BRICKS,
             XDI8_TABLE,
-            SYMBOL_STONE_NN;
+            SYMBOL_STONE_NN,
+            CEDAR_PLANKS,
+            CEDAR_DOOR,
+            CEDAR_LEAVES,
+            CEDAR_LOG,
+            STRIPPED_CEDAR_LOG,
+            CEDAR_SIGN,
+            CEDAR_WALL_SIGN;
 
     static {
         INDIUM_BLOCK = ofDefaultBlock("indium_block", () ->
@@ -72,6 +96,43 @@ public class FireflyBlocks {
                         .sound(SoundType.STONE)
         );
         SYMBOL_STONE_NN = REGISTRY.register("symbol_stone_nn", SymbolStoneNNBlock::new);
+        CEDAR_PLANKS = ofDefaultBlock("cedar_planks", () ->
+                BlockBehaviour.Properties.of(Material.WOOD, cedarColor)
+                        .strength(2.0F, 3.0F)
+                        .sound(SoundType.WOOD));
+        CEDAR_DOOR = REGISTRY.register("cedar_door", () ->
+                new DoorBlock(BlockBehaviour.Properties.of(Material.WOOD, cedarColor)
+                        .strength(3.0F)
+                        .sound(SoundType.WOOD)
+                        .noOcclusion()));
+        CEDAR_LEAVES = REGISTRY.register("cedar_leaves", () ->
+                new LeavesBlock(BlockBehaviour.Properties.of(Material.LEAVES)
+                        .strength(0.2F)
+                        .randomTicks()
+                        .sound(SoundType.GRASS).noOcclusion()
+                        .isValidSpawn(FireflyBlocks::ocelotOrParrot)
+                        .isSuffocating(FireflyBlocks::never)
+                        .isViewBlocking(FireflyBlocks::never)));
+        CEDAR_LOG = REGISTRY.register("cedar_log", () ->
+                new RotatedPillarBlock(BlockBehaviour.Properties.of(Material.WOOD, (state) ->
+                        state.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? cedarColor : MaterialColor.PODZOL)
+                        .strength(2.0F)
+                        .sound(SoundType.WOOD)));
+        STRIPPED_CEDAR_LOG = REGISTRY.register("stripped_cedar_log", () ->
+                new RotatedPillarBlock(BlockBehaviour.Properties.of(Material.WOOD, cedarColor)
+                        .strength(2.0F)
+                        .sound(SoundType.WOOD)));
+        CEDAR_SIGN = REGISTRY.register("cedar_sign", () ->
+                new StandingSignBlock(BlockBehaviour.Properties.of(Material.WOOD, cedarColor)
+                        .noCollission()
+                        .strength(1.0F)
+                        .sound(SoundType.WOOD), cedarWood));
+        CEDAR_WALL_SIGN = REGISTRY.register("cedar_wall_sign", () ->
+                new WallSignBlock(BlockBehaviour.Properties.of(Material.WOOD)
+                        .noCollission()
+                        .strength(1.0F)
+                        .sound(SoundType.WOOD)
+                        .lootFrom(CEDAR_SIGN), cedarWood));
     }
 
     private static RegistryObject<Block> ofDefaultBlock(String id,

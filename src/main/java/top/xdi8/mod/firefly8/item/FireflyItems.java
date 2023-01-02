@@ -26,7 +26,7 @@ public final class FireflyItems {
         }
     };
 
-    public static final RegistryObject<Item> 
+    public static final RegistryObject<Item>
             INDIUM_INGOT,
             INDIUM_NUGGET,
             INDIUM_AXE,
@@ -58,7 +58,14 @@ public final class FireflyItems {
 
             DARK_SYMBOL_STONE,
             BUNDLER,
-            SYMBOL_STONE_NN;
+            SYMBOL_STONE_NN,
+
+            CEDAR_PLANKS,
+            CEDAR_DOOR,
+            CEDAR_LEAVES,
+            CEDAR_LOG,
+            STRIPPED_CEDAR_LOG,
+            CEDAR_SIGN;
 
     static {
         INDIUM_INGOT = REGISTRY.register("indium_ingot",
@@ -94,7 +101,7 @@ public final class FireflyItems {
                 new ForgeSpawnEggItem(FireflyEntityTypes.FIREFLY,
                         0x000000, 0x00f500,
                         defaultProp()));
-                        
+
         XDI8AHO_PORTAL_CORE_BLOCK = REGISTRY.register("xdi8aho_portal_core",
                 () -> new BlockItem(FireflyBlocks.XDI8AHO_PORTAL_CORE_BLOCK.get(), defaultProp()));
         XDI8AHO_PORTAL_TOP_BLOCK = REGISTRY.register("xdi8aho_torch_top",
@@ -134,6 +141,25 @@ public final class FireflyItems {
         SYMBOL_STONE_NN = REGISTRY.register("symbol_stone_nn", () ->
                 new BlockItem(FireflyBlocks.SYMBOL_STONE_NN.get(),
                         defaultProp().rarity(Rarity.UNCOMMON)));
+
+        CEDAR_PLANKS = REGISTRY.register("cedar_planks", () ->
+                new BlockItem(FireflyBlocks.CEDAR_PLANKS.get(),
+                        defaultProp()));
+        CEDAR_DOOR = REGISTRY.register("cedar_door", () ->
+                new BlockItem(FireflyBlocks.CEDAR_DOOR.get(),
+                        defaultProp()));
+        CEDAR_LEAVES = REGISTRY.register("cedar_leaves", () ->
+                new BlockItem(FireflyBlocks.CEDAR_PLANKS.get(),
+                        defaultProp()));
+        CEDAR_LOG = REGISTRY.register("cedar_log", () ->
+                new BlockItem(FireflyBlocks.CEDAR_LOG.get(),
+                        defaultProp()));
+        STRIPPED_CEDAR_LOG = REGISTRY.register("stripped_cedar_log", () ->
+                new BlockItem(FireflyBlocks.STRIPPED_CEDAR_LOG.get(),
+                        defaultProp()));
+        CEDAR_SIGN = REGISTRY.register("cedar_sign", () ->
+                new BlockItem(FireflyBlocks.CEDAR_SIGN.get(),
+                        defaultProp()));
     }
 
     static Item.Properties defaultProp() {
