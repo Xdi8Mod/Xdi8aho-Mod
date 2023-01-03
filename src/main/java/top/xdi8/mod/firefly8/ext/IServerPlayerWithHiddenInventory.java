@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.level.Level;
 import org.apache.commons.lang3.tuple.Pair;
 import org.slf4j.Logger;
@@ -17,6 +18,7 @@ public interface IServerPlayerWithHiddenInventory extends IPlayerWithHiddenInven
     Pair<ResourceKey<Level>, BlockPos> xdi8$getPortal();
 
     boolean xdi8$moveItemsToPortal();
+    void xdi8$dropOldThings(SimpleContainer inv);
 
     boolean xdi8$validatePortal();
 

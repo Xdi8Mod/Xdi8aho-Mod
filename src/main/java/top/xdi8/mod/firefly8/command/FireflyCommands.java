@@ -14,22 +14,16 @@ import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.event.RegisterCommandsEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import top.xdi8.mod.firefly8.ext.IServerPlayerWithHiddenInventory;
 
 import java.util.Collection;
 import java.util.Collections;
 
-@Mod.EventBusSubscriber(modid = "firefly8")
 public final class FireflyCommands {
-    @SubscribeEvent
-    public static void init(RegisterCommandsEvent event) {
-        init(event.getDispatcher());
-    }
 
-    public static void init(CommandDispatcher<CommandSourceStack> dispatcher) {
+    public static void init(CommandDispatcher<CommandSourceStack> dispatcher,
+                            Commands.CommandSelection selection) {
+        if (selection != Commands.CommandSelection.ALL) return;
         LiteralArgumentBuilder<CommandSourceStack> command =
                 Commands.literal("bindxdi8portal")
                         .requires((CommandSourceStack src) -> src.hasPermission(2))

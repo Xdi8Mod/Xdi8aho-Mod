@@ -10,7 +10,7 @@
       "item": "firefly8:indium_ingot"
     },
     "G": {
-      "tag": "forge:dusts/redstone"
+      "tag": "c:redstone_dusts"
     }
   },
   "result": {

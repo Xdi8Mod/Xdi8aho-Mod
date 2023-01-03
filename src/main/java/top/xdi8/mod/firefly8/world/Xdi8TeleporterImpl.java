@@ -18,18 +18,15 @@ import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.portal.PortalForcer;
 import net.minecraft.world.level.portal.PortalInfo;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.util.ITeleporter;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import top.xdi8.mod.firefly8.block.FireflyBlocks;
-import top.xdi8.mod.firefly8.ext.IPortalCooldownEntity;
 
 import java.util.*;
-import java.util.function.Function;
 import java.util.function.Supplier;
 
 /** @see PortalForcer */
-public class Xdi8TeleporterImpl implements ITeleporter {
+public class Xdi8TeleporterImpl implements TeleportWrapper {
     static final Logger LOGGER = LogUtils.getLogger();
 
     private final ServerLevel level;
@@ -41,7 +38,7 @@ public class Xdi8TeleporterImpl implements ITeleporter {
 
     @Nullable
     @Override
-    public PortalInfo getPortalInfo(Entity entity, ServerLevel destWorld, Function ignore) {
+    public PortalInfo getPortalInfo(Entity entity, ServerLevel destWorld) {
         WorldBorder worldBorder = destWorld.getWorldBorder();
         double scale = DimensionType.getTeleportationScale(this.level.dimensionType(), destWorld.dimensionType());
         BlockPos pos = worldBorder.clampToBounds(entity.getX() * scale, entity.getY(), entity.getZ() * scale);
@@ -122,11 +119,4 @@ public class Xdi8TeleporterImpl implements ITeleporter {
     private static final int REGEN_SCALE = 32;
     public static final int COOLDOWN = 200;
     public static final int COOLDOWN_SHORT = 10;
-
-    @Override
-    public Entity placeEntity(Entity entity, ServerLevel currentWorld, ServerLevel destWorld, float yaw, Function<Boolean, Entity> repositionEntity) {
-        final Entity entity1 = ITeleporter.super.placeEntity(entity, currentWorld, destWorld, yaw, repositionEntity);
-        IPortalCooldownEntity.xdi8$extend(entity1).xdi8$resetCooldown();
-        return entity1;
-    }
 }

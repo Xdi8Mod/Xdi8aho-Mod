@@ -3,9 +3,8 @@ package top.xdi8.mod.firefly8.core.totem;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import net.minecraft.resources.ResourceLocation;
-import org.featurehouse.mcmod.spm.platform.forge.ForgeBusWrapper;
 import org.jetbrains.annotations.ApiStatus;
-import top.xdi8.mod.firefly8.core.totem.event.TotemRegistryEvent;
+import top.xdi8.mod.firefly8.core.letters.event.Xdi8RegistryEvents;
 
 import java.util.Optional;
 import java.util.function.BiConsumer;
@@ -26,8 +25,8 @@ public final class TotemAbilities {
     }
 
     @ApiStatus.Internal
-    public static void fireRegistry(ForgeBusWrapper bus) {
-        bus.fire(new TotemRegistryEvent(MAP::put));
+    public static void fireRegistry() {
+        Xdi8RegistryEvents.TOTEM.invoker().accept(MAP::put);
     }
 
     // Default

@@ -2,7 +2,6 @@ package org.featurehouse.mcmod.spm.util.registries;
 
 import net.minecraft.world.item.Item;
 import org.featurehouse.mcmod.spm.SPMMain;
-import org.featurehouse.mcmod.spm.platform.api.hook.AccParrot;
 import org.jetbrains.annotations.ApiStatus;
 
 import java.util.Set;
@@ -16,7 +15,7 @@ public final class AnimalIngredients {
     }
 
     public static void configureParrot() {
-        Set<Item> parrotTamingIngredients = AccParrot.getTamingIngredients();
+        Set<Item> parrotTamingIngredients = net.minecraft.world.entity.animal.Parrot.TAME_FOOD;
         parrotTamingIngredients.add(SPMMain.ENCHANTED_CROP_SEEDS.get());
     }
 

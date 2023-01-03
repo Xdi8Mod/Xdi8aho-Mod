@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "id": "firefly8",
+  "version": "${version}",
+  "name": "Xdi8 Aho",
+  "provides": [
+    "xdi8"
+  ],
+  "description": "Firefly, carry light, In the night, blink his eye, Just to make his future bright.",
+  "environment": "*",
+
+  "depends": {
+    "fabricloader": ">=0.14.6",
+    "fabric": ">=0.54.0",
+    "architectury": ">=4.9",
+    "java": ">=17",
+    "minecraft": ">=1.18.2-beta.1 <1.19"
+  },
+  "entrypoints": {
+    "main": [
+      "top.xdi8.mod.firefly8.fabric.Firefly8Fabric",
+      "org.featurehouse.mcmod.spm.platform.fabric.SPMFabricImpl"
+    ],
+    "client": [
+      "top.xdi8.mod.firefly8.fabric.FireflyClientForge",
+      "org.featurehouse.mcmod.spm.platform.fabric.SPMClientFabric"
+    ]
+  },
+  "authors": [
+    "Xdi8Mod", "teddyxlandlee", "QWERTY770"
+  ],
+  "mixins": [
+    "mixins.firefly-fabric.json",
+    "sweet_potato.mixins.json",
+    "mixins.firefly8-main.json"
+  ],
+  "custom": {
+    "modmenu": {
+      "parent": {
+        "id": "xdi8",
+        "name": "Xdi8 Aho",
+        "description": "Xdi8 Aho Mod"
+      }
+    }
+  },
+  "jars": [
+    { "file": "META-INF/spm_fake.jar" }
+  ]
+}
