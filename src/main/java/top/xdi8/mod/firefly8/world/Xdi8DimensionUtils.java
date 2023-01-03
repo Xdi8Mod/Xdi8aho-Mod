@@ -1,6 +1,7 @@
 package top.xdi8.mod.firefly8.world;
 
 import com.mojang.logging.LogUtils;
+import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
@@ -26,21 +27,19 @@ public class Xdi8DimensionUtils {
     public static void teleportToXdi8aho(ServerLevel oldLevel, Entity entity, BlockPos portalPos) {
         var dim = oldLevel.getServer().getLevel(Xdi8DimensionUtils.XDI8AHO_DIM_KEY);
         if (dim != null) {
-            final Entity e = entity.changeDimension(dim, new Xdi8TeleporterImpl(oldLevel));
-            if (e != null) {
-                if (e instanceof ServerPlayer serverPlayer) {
-                    IServerPlayerWithHiddenInventory ext = IServerPlayerWithHiddenInventory.xdi8$extend(serverPlayer);
-                    //ext.xdi8$setPortal(oldLevel.dimension(), portalPos);
-                    BlockPos thatPos = portalPos;
-                    for (int i = 1; i < 16; i++) {
-                        thatPos = thatPos.above();
-                        if (oldLevel.getBlockState(thatPos).is(FireflyBlocks.XDI8AHO_PORTAL_TOP_BLOCK.get())) {
-                            ext.xdi8$setPortal(oldLevel.dimension(), thatPos);
-                            break;
-                        }
+            final Entity e = changeDimension(entity, dim, new Xdi8TeleporterImpl(oldLevel));
+            if (e instanceof ServerPlayer serverPlayer) {   // && e != null
+                IServerPlayerWithHiddenInventory ext = IServerPlayerWithHiddenInventory.xdi8$extend(serverPlayer);
+                //ext.xdi8$setPortal(oldLevel.dimension(), portalPos);
+                BlockPos thatPos = portalPos;
+                for (int i = 1; i < 16; i++) {
+                    thatPos = thatPos.above();
+                    if (oldLevel.getBlockState(thatPos).is(FireflyBlocks.XDI8AHO_PORTAL_TOP_BLOCK.get())) {
+                        ext.xdi8$setPortal(oldLevel.dimension(), thatPos);
+                        break;
                     }
-                    serverPlayer.awardStat(FireflyStats.O2X_PORTALS_ENTERED.get());
                 }
+                serverPlayer.awardStat(FireflyStats.O2X_PORTALS_ENTERED.get());
             }
         }
         else
@@ -52,5 +51,10 @@ public class Xdi8DimensionUtils {
 
     public static boolean canRedirectRespawn(Level level) {
         return SPECIAL_RESPAWN.contains(level.dimension().location());
+    }
+
+    @ExpectPlatform
+    static Entity changeDimension(Entity e, ServerLevel xdi8Level, TeleportWrapper teleporter) {
+        throw new AssertionError();
     }
 }

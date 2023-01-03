@@ -9,7 +9,7 @@
       "item": "firefly8:indium_ingot"
     },
     "/": {
-      "tag": "forge:rods/wooden"
+      "tag": "c:sticks"
     }
   },
   "result": {

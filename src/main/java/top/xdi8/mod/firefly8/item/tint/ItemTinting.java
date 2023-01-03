@@ -6,13 +6,13 @@ import com.google.common.collect.ImmutableBiMap;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
+import org.featurehouse.mcmod.spm.util.ItemStacks;
 import org.jetbrains.annotations.Nullable;
 import top.xdi8.mod.firefly8.item.FireflyItems;
-import top.xdi8.mod.firefly8.item.tint.brewing.TintedPotionBrewing;
 
 /**
  * <p>Item tint map used in {@link
- * TintedPotionBrewing
+ * top.xdi8.mod.firefly8.item.tint.brewing.TintedPotionBrewingRecipe
  * potions}.</p>
  */
 public final class ItemTinting {
@@ -38,13 +38,13 @@ public final class ItemTinting {
     public static ItemStack tint(ItemStack stack) {
         ItemLike itemLike = TINT_MAP.get(stack.getItem());
         if (itemLike == null) return stack.copy();
-        return new ItemStack(itemLike, stack.getCount(), stack.getTag());
+        return ItemStacks.of(itemLike, stack.getCount(), stack.getTag());
     }
 
     public static ItemStack unTint(ItemStack stack) {
         ItemLike itemLike = TINT_MAP.inverse().get(stack.getItem());
         if (itemLike == null) return stack.copy();
-        return new ItemStack(itemLike, stack.getCount(), stack.getTag());
+        return ItemStacks.of(itemLike, stack.getCount(), stack.getTag());
     }
 
     public static boolean shouldTint(ItemStack stack) {

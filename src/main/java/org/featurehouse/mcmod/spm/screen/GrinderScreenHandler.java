@@ -11,7 +11,6 @@ import net.minecraft.world.level.Level;
 import org.featurehouse.mcmod.spm.SPMMain;
 import org.featurehouse.mcmod.spm.util.inventory.UniversalResultSlot;
 import org.featurehouse.mcmod.spm.util.iprops.IntGrinderProperties;
-import org.featurehouse.mcmod.spm.platform.api.ClientOnly;
 import org.featurehouse.mcmod.spm.util.registries.GrindingUtils;
 
 public class GrinderScreenHandler extends AbstractContainerMenu {
@@ -99,14 +98,12 @@ public class GrinderScreenHandler extends AbstractContainerMenu {
         return itemStack;
     }
 
-    @ClientOnly
     public int getGrindProgress() {
         int grindTime = properties.getGrindTime();
         int grindTimeTotal = properties.getGrindTimeTotal();
         return grindTimeTotal != 0 && grindTime != 0 ? grindTime * 22 / grindTimeTotal : 0;
     }
 
-    @ClientOnly
     public double getIngredientData() {
         return properties.getIngredientData();
     }

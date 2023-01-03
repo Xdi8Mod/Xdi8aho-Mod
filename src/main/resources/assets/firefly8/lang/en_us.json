@@ -61,6 +61,11 @@
   "commands.unbindxdi8portal.1": "Unbound portal for %s",
   "commands.unbindxdi8portal.more": "Unbound portal for %d players",
 
+  "modmenu.descriptionTranslation.firefly8": "Firefly, carry light,\nIn the night, blink his eye,\nJust to make his future bright.",
+  "modmenu.summaryTranslation.firefly8": "Xdi8 Aho - Firefly",
+  "modmenu.descriptionTranslation.xdi8": "Xdi8 Aho Mod",
+  "modmenu.summaryTranslation.xdi8": "Xdi8 Aho",
+
   "advancements.firefly8.tinted_glass_bottle.title":"Bottle of tint",
   "advancements.firefly8.tinted_glass_bottle.description":"Get a tinted glass bottle",
   "advancements.firefly8.tinted_firefly_bottle.title":"Yeerane sheehore carechonetut",

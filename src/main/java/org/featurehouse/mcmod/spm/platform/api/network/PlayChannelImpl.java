@@ -1,16 +1,15 @@
 package org.featurehouse.mcmod.spm.platform.api.network;
 
 import com.mojang.logging.LogUtils;
+import dev.architectury.networking.NetworkChannel;
+import dev.architectury.networking.NetworkManager;
+import dev.architectury.platform.Platform;
+import dev.architectury.utils.Env;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraftforge.network.NetworkDirection;
-import net.minecraftforge.network.NetworkEvent;
-import net.minecraftforge.network.NetworkRegistry;
-import net.minecraftforge.network.PacketDistributor;
-import net.minecraftforge.network.simple.SimpleChannel;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
@@ -21,62 +20,50 @@ import java.lang.invoke.MethodType;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.*;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 final class PlayChannelImpl implements PlayChannel {
     private final ResourceLocation id;
-    private final int version;
-    private final int subversion;
-    private final SimpleChannel forgeChannel;
+    private final NetworkChannel universalChannel;
 
-    public PlayChannelImpl(ResourceLocation id, int version, int subversion) {
+    public PlayChannelImpl(ResourceLocation id) {
         this.id = id;
-        this.version = version;
-        this.subversion = subversion;
-        Predicate<String> p = s -> s.split("u", 2)[0].equals(Integer.toString(version));
-        this.forgeChannel = NetworkRegistry.newSimpleChannel(id, () -> version + "u" + subversion, p, p);
+        this.universalChannel = NetworkChannel.create(id);
     }
 
     @Override
-    public <M extends PlayPacket> void registerC2S(int id, Class<M> packet, Function<FriendlyByteBuf, M> decoder) {
-        forgeChannel.registerMessage(id, packet, PlayPacket::toPacket, decoder,
-                ofConsumer(), Optional.of(NetworkDirection.PLAY_TO_SERVER));
+    public <M extends PlayPacket> void registerC2S(Class<M> packet, Function<FriendlyByteBuf, M> decoder) {
+        universalChannel.register(packet, PlayPacket::toPacket, decoder, handleByEnv(Env.SERVER));
     }
 
     @Override
-    public <M extends PlayPacket> void registerS2C(int id, Class<M> packet, Function<FriendlyByteBuf,  M> decoder) {
-        forgeChannel.registerMessage(id, packet, PlayPacket::toPacket, decoder,
-                ofConsumer(), Optional.of(NetworkDirection.PLAY_TO_CLIENT));
-    }
-
-    @SuppressWarnings("deprecation")
-    private <M extends PlayPacket> BiConsumer<M, Supplier<NetworkEvent.Context>> ofConsumer() {
-        return (msg, ctx) -> msg.accept(new PlayNetworkEnvironment(
-                Optional.ofNullable(ctx.get().getSender()),
-                r -> ctx.get().enqueueWork(r),
-                () -> ctx.get().setPacketHandled(true)
-        ));
+    public <M extends PlayPacket> void registerS2C(Class<M> packet, Function<FriendlyByteBuf,  M> decoder) {
+        universalChannel.register(packet, PlayPacket::toPacket, decoder, handleByEnv(Env.CLIENT));
     }
 
     @Override
-    public NoArgPlayPacket registerC2S(int id, Consumer<PlayNetworkEnvironment> lambda) {
+    public NoArgPlayPacket registerC2S(int id, Consumer<NetworkManager.PacketContext> lambda) {
         NoArgPlayPacket instance = createLambdaPacket(lambda);
-        this.registerC2S(id, instance.getClass().asSubclass(PlayPacket.class), buf -> instance);
+        this.registerC2S(instance.getClass().asSubclass(PlayPacket.class), buf -> instance);
         noArgPacketIdCacheMap.put(id, instance);
         return instance;
     }
 
     @Override
-    public NoArgPlayPacket registerS2C(int id, Consumer<PlayNetworkEnvironment> lambda) {
+    public NoArgPlayPacket registerS2C(int id, Consumer<NetworkManager.PacketContext> lambda) {
         NoArgPlayPacket instance = createLambdaPacket(lambda);
-        this.registerS2C(id, instance.getClass().asSubclass(PlayPacket.class), buf -> instance);
+        this.registerS2C(instance.getClass().asSubclass(PlayPacket.class), buf -> instance);
         noArgPacketIdCacheMap.put(id, instance);
         return instance;
     }
 
     @Override
     public void sendC2S(PlayPacket packet) {
-        forgeChannel.send(PacketDistributor.SERVER.noArg(), packet);
+        if (Platform.getEnvironment() == Env.SERVER) throw new UnsupportedOperationException();
+        universalChannel.sendToServer(packet);
     }
 
     @Override
@@ -86,7 +73,7 @@ final class PlayChannelImpl implements PlayChannel {
 
     @Override
     public void sendS2CPlayer(PlayPacket packet, Supplier<ServerPlayer> supplier) {
-        forgeChannel.send(PacketDistributor.PLAYER.with(supplier), packet);
+        universalChannel.sendToPlayer(supplier.get(), packet);
     }
 
     @Override
@@ -99,35 +86,23 @@ final class PlayChannelImpl implements PlayChannel {
         return id;
     }
 
-    public int version() {
-        return version;
-    }
-
-    public int subversion() {
-        return subversion;
-    }
-
     @Override
     public boolean equals(Object obj) {
         if (obj == this) return true;
         if (obj == null || obj.getClass() != this.getClass()) return false;
         var that = (PlayChannelImpl) obj;
-        return Objects.equals(this.id, that.id) &&
-                this.version == that.version &&
-                this.subversion == that.subversion;
+        return Objects.equals(this.id, that.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, version, subversion);
+        return Objects.hash(id);
     }
 
     @Override
     public String toString() {
         return "PlayChannelImpl[" +
-                "id=" + id + ", " +
-                "version=" + version + ", " +
-                "subversion=" + subversion + ']';
+                "id=" + id + ']';
     }
 
     private final Int2ObjectMap<NoArgPlayPacket> noArgPacketIdCacheMap = new Int2ObjectOpenHashMap<>();
@@ -137,7 +112,7 @@ final class PlayChannelImpl implements PlayChannel {
                         " or is not a NoArgPlayPacket."));
     }
 
-    private static NoArgPlayPacket createLambdaPacket(Consumer<PlayNetworkEnvironment> consumer) {
+    private static NoArgPlayPacket createLambdaPacket(Consumer<NetworkManager.PacketContext> consumer) {
         Class<? extends NoArgPlayPacket> clazz = null;
         try {
             clazz = createClass();
@@ -168,8 +143,8 @@ final class PlayChannelImpl implements PlayChannel {
         m.visitInsn(Opcodes.RETURN);
         m.visitMaxs(-1, -1);
 
-        m = cw.visitMethod(Opcodes.ACC_PUBLIC, "accept",
-                '(' + Type.getDescriptor(PlayNetworkEnvironment.class) + ")V",
+        m = cw.visitMethod(Opcodes.ACC_PUBLIC, "handle",
+                '(' + Type.getDescriptor(NetworkManager.PacketContext.class) + ")V",
                 null, null);
         m.visitVarInsn(Opcodes.ALOAD, 0);
         m.visitFieldInsn(Opcodes.GETFIELD, className, "c", "Ljava/util/function/Consumer;");
@@ -184,7 +159,14 @@ final class PlayChannelImpl implements PlayChannel {
 
     private static final AtomicInteger AI = new AtomicInteger();
     private static final Logger LOGGER = LogUtils.getLogger();
-    synchronized private static String genClassName() {
+    private static String genClassName() {  // we just trust our atomic integer
         return Type.getInternalName(NoArgPlayPacketWrapper.class) + "$$asm-gen$" + AI.getAndAdd(1);
+    }
+
+    private static <M extends PlayPacket> BiConsumer<M, Supplier<NetworkManager.PacketContext>> handleByEnv(Env directionEnv) {
+        return (m, packetContextSupplier) -> {
+            var ctx = packetContextSupplier.get();
+            if (ctx.getEnvironment() == directionEnv) m.handle(ctx);
+        };
     }
 }

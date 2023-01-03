@@ -1,6 +1,7 @@
 package org.featurehouse.mcmod.spm.resource.magicalenchantment;
 
 import com.google.gson.*;
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
@@ -8,7 +9,6 @@ import net.minecraft.util.GsonHelper;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.featurehouse.mcmod.spm.SPMMain;
 import org.featurehouse.mcmod.spm.platform.api.resource.KeyedReloadListener;
 import org.jetbrains.annotations.NotNull;
@@ -41,11 +41,11 @@ public class MagicalEnchantmentLoader extends SimpleJsonResourceReloadListener i
             for (JsonElement je: root) {
                 JsonObject eachObj = GsonHelper.convertToJsonObject(je, "Element #" + i);
                 ResourceLocation id = new ResourceLocation(GsonHelper.getAsString(eachObj, "id"));
-                //if (!Registry.MOB_EFFECT.keySet().contains(id)) {
-                if (!ForgeRegistries.MOB_EFFECTS.containsKey(id)) {
+                if (!Registry.MOB_EFFECT.keySet().contains(id)) {
+                //if (!ForgeRegistries.MOB_EFFECTS.containsKey(id)) {
                     LOGGER.error("Invalid status effect id: " + id);
                     continue;
-                } @NotNull MobEffect effect = Objects.requireNonNull(ForgeRegistries.MOB_EFFECTS.getValue(id));
+                } @NotNull MobEffect effect = Objects.requireNonNull(Registry.MOB_EFFECT.get(id));
                 int duration = GsonHelper.getAsInt(eachObj, "duration", 0);
                 int amplifier = GsonHelper.getAsInt(eachObj, "amplifier", 0);
                 int weight = GsonHelper.getAsInt(eachObj, "weight", 1);

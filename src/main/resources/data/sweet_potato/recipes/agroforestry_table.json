@@ -1,5 +1,4 @@
 {
-  "_deprecated": "CHANGING",
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "A#A",
@@ -10,7 +9,7 @@
       "item": "sweet_potato:potato_powder"
     },
     "#": {
-      "tag": "forge:ingots/gold"
+      "tag": "c:gold_ingots"
     },
     "B": {
       "tag": "sweet_potato:blackstones"

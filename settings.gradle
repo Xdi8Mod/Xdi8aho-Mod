@@ -1,1 +1,24 @@
+pluginManagement {
+    repositories {
+        maven {
+            name = 'Aliyun Mirror'
+            url  = 'https://maven.aliyun.com/repository/public'
+        }
+        maven {
+            name = 'Aliyun Gradle Plugins'
+            url = 'https://maven.aliyun.com/repository/gradle-plugin'
+        }
+        maven {
+            name = "Lss233"
+            url = "https://lss233.littleservice.cn/repositories/minecraft/"
+        }
+        maven { url = 'https://maven.minecraftforge.net' }
+        maven { url "https://maven.fabricmc.net/" }
+        maven { url "https://maven.architectury.dev/" }
+    }
+}
+include("forge")
+include("fabric")
+//include("fabric:spm_fake")
+
 rootProject.name = 'Xdi8aho-Mod'
