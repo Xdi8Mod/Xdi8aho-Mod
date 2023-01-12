@@ -18,5 +18,6 @@ public final class BlockRenderTypes {
 
     @ExpectPlatform
     public static void register(RenderType type, Supplier<Block> block) {
+        throw new AssertionError("Not Implemented");
     }
 }
