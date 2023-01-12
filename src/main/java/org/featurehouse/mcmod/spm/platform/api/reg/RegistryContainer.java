@@ -24,8 +24,8 @@ public final class RegistryContainer {
     private RegistryContainer(String modId) {
         this.modId = Objects.requireNonNull(modId);
 
-        item = ofModRegistry(Registry.ITEM_REGISTRY);
         block = ofModRegistry(Registry.BLOCK_REGISTRY);
+        item = ofModRegistry(Registry.ITEM_REGISTRY);
         blockEntity = ofModRegistry(Registry.BLOCK_ENTITY_TYPE_REGISTRY);
         recipeSerializer = ofModRegistry(Registry.RECIPE_SERIALIZER_REGISTRY);
         menu = ofModRegistry(Registry.MENU_REGISTRY);
@@ -42,8 +42,8 @@ public final class RegistryContainer {
 
     private final List<DeferredRegister<?>> modBusRegistries = new ArrayList<>();
 
-    public final DeferredRegister<Item> item;
     public final DeferredRegister<Block> block;
+    public final DeferredRegister<Item> item;
     public final DeferredRegister<BlockEntityType<?>> blockEntity;
     public final DeferredRegister<RecipeSerializer<?>> recipeSerializer;
     public final DeferredRegister<MenuType<?>> menu;

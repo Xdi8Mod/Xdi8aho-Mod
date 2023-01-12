@@ -16,6 +16,6 @@ abstract class PigEntityMixin {
     private static Ingredient FOOD_ITEMS;
 
     static {
-        FOOD_ITEMS = ItemStacks.expandIngredient(FOOD_ITEMS, AnimalIngredients.pigFood());
+        FOOD_ITEMS = ItemStacks.expandIngredient(FOOD_ITEMS, AnimalIngredients.PIG_EXTRA_FOOD);
     }
 }
