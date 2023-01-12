@@ -3,6 +3,7 @@ package org.featurehouse.mcmod.spm.util;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -19,9 +20,9 @@ public final class ItemStacks {
         return stack;
     }
 
-    public static Ingredient expandIngredient(Ingredient old, Item[] added) {
+    public static Ingredient expandIngredient(Ingredient old, TagKey<Item> tagAdded) {
         JsonArray a = serializeIngredientToArray(old);
-        a.addAll(serializeIngredientToArray(Ingredient.of(added)));
+        a.addAll(serializeIngredientToArray(Ingredient.of(tagAdded)));
         if (a.isEmpty()) return Ingredient.EMPTY;
         return Ingredient.fromJson(a);
     }

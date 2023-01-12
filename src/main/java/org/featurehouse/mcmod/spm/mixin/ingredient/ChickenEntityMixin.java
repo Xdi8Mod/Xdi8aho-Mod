@@ -16,6 +16,6 @@ abstract class ChickenEntityMixin {
     private static Ingredient FOOD_ITEMS;
 
     static {
-        FOOD_ITEMS = ItemStacks.expandIngredient(FOOD_ITEMS, AnimalIngredients.chickenFood());
+        FOOD_ITEMS = ItemStacks.expandIngredient(FOOD_ITEMS, AnimalIngredients.CHICKEN_EXTRA_FOOD);
     }
 }
