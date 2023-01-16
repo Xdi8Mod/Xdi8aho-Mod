@@ -148,6 +148,7 @@ final class PlayChannelImpl implements PlayChannel {
                 null, null);
         m.visitVarInsn(Opcodes.ALOAD, 0);
         m.visitFieldInsn(Opcodes.GETFIELD, className, "c", "Ljava/util/function/Consumer;");
+        m.visitVarInsn(Opcodes.ALOAD, 1);
         m.visitMethodInsn(Opcodes.INVOKEINTERFACE, "java/util/function/Consumer", "accept",
                 "(Ljava/lang/Object;)V", true);
         m.visitInsn(Opcodes.RETURN);
