@@ -41,15 +41,15 @@ public final class FireflyItems {
             DEEPSLATE_INDIUM_ORE_BLOCK,
             SYMBOL_STONE_BRICKS,
 
-    XDI8AHO_ICON,
+            XDI8AHO_ICON,
             FIREFLY_SPAWN_EGG,
 
-    XDI8AHO_PORTAL_CORE_BLOCK,
+            XDI8AHO_PORTAL_CORE_BLOCK,
             XDI8AHO_PORTAL_TOP_BLOCK,
             XDI8AHO_BACK_PORTAL_CORE_BLOCK,
             XDI8_TABLE,
 
-    TINTED_GLASS_BOTTLE,
+            TINTED_GLASS_BOTTLE,
             TINTED_POTION,
             TINTED_HONEY_BOTTLE,
             TINTED_SPLASH_POTION,
@@ -57,11 +57,11 @@ public final class FireflyItems {
             TINTED_DRAGON_BREATH,
             TINTED_FIREFLY_BOTTLE,
 
-    DARK_SYMBOL_STONE,
+            DARK_SYMBOL_STONE,
             BUNDLER,
             SYMBOL_STONE_NN,
 
-    CEDAR_PLANKS,
+            CEDAR_PLANKS,
             CEDAR_DOOR,
             CEDAR_LEAVES,
             CEDAR_LOG,
@@ -150,7 +150,7 @@ public final class FireflyItems {
                 new BlockItem(FireflyBlocks.CEDAR_DOOR.get(),
                         defaultProp()));
         CEDAR_LEAVES = reg.item("cedar_leaves", () ->
-                new BlockItem(FireflyBlocks.CEDAR_PLANKS.get(),
+                new BlockItem(FireflyBlocks.CEDAR_LEAVES.get(),
                         defaultProp()));
         CEDAR_LOG = reg.item("cedar_log", () ->
                 new BlockItem(FireflyBlocks.CEDAR_LOG.get(),
