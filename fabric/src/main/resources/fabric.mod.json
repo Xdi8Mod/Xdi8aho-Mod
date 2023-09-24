@@ -14,7 +14,7 @@
     "fabric": ">=0.54.0",
     "architectury": ">=4.9",
     "java": ">=17",
-    "minecraft": ">=1.18.2-beta.1 <1.19"
+    "minecraft": ">=1.18.2 <1.19"
   },
   "entrypoints": {
     "main": [
