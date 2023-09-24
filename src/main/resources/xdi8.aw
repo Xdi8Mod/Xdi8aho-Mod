@@ -7,3 +7,4 @@ accessible  field   net/minecraft/world/entity/animal/Parrot    TAME_FOOD   Ljav
 accessible  class   net/minecraft/world/item/alchemy/PotionBrewing$Mix
 accessible  method  net/minecraft/world/entity/ai/village/poi/PoiType   <init> (Ljava/lang/String;Ljava/util/Set;II)V
 accessible  method  net/minecraft/world/level/levelgen/feature/treedecorators/TreeDecoratorType <init>  (Lcom/mojang/serialization/Codec;)V
+accessible  method  net/minecraft/world/level/block/state/properties/WoodType <init> (Ljava/lang/String;)V

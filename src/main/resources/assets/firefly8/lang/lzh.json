@@ -48,6 +48,13 @@
   "block.firefly8.symbol_stone_nn": "紋：N（但創）",
   "block.firefly8.symbol_stone_bricks": "紋磚",
 
+  "block.firefly8.cedar_door": "红杉木门",
+  "block.firefly8.cedar_leaves": "红杉树叶",
+  "block.firefly8.cedar_log": "红杉原木",
+  "block.firefly8.cedar_planks": "红杉木板",
+  "block.firefly8.cedar_sign": "红杉木告示牌",
+  "block.firefly8.stripped_cedar_log": "去皮红杉原木",
+
   "commands.bindxdi8portal.success": "既設%s之門",
   "commands.bindxdi8portal.failure": "試設%1$s之門於%2$s之%3$s",
   "commands.unbindxdi8portal.0": "未選戯者",
