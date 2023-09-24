@@ -48,6 +48,13 @@
   "block.firefly8.symbol_stone.letter": "符文: %s",
   "block.firefly8.symbol_stone_nn": "符文: N（仅创造模式）",
 
+  "block.firefly8.cedar_door": "红杉木门",
+  "block.firefly8.cedar_leaves": "红杉树叶",
+  "block.firefly8.cedar_log": "红杉原木",
+  "block.firefly8.cedar_planks": "红杉木板",
+  "block.firefly8.cedar_sign": "红杉木告示牌",
+  "block.firefly8.stripped_cedar_log": "去皮红杉原木",
+
   "commands.bindxdi8portal.success": "已为 %1$s 绑定传送门",
   "commands.bindxdi8portal.failure": "无法将 %1$s 的传送门绑定至 %2$s / (%3$s)",
   "commands.unbindxdi8portal.0": "未选中玩家",

@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[40,)"
+loaderVersion="[40,41)"
 license="GPL-3.0-or-later with Minecraft exception"
 #issueTrackerURL="https://change.me.to.your.issue.tracker.example.invalid/" #optional
 
@@ -58,7 +58,7 @@ description='Combination of Agromagic'
     # Does this dependency have to exist - if not, ordering below must be specified
     mandatory=true #mandatory
     # The version range of the dependency
-    versionRange="[40.1.14,)" #mandatory
+    versionRange="[40.1.14,41.0.1)" #mandatory
     # An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
     ordering="NONE"
     # Side this dependency is applied on - BOTH, CLIENT or SERVER
