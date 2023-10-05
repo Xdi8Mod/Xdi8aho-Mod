@@ -2,7 +2,6 @@ package org.featurehouse.mcmod.spm.platform.fabric;
 
 import dev.architectury.registry.ReloadListenerRegistry;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.dimension.v1.FabricDimensions;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import org.featurehouse.mcmod.spm.SPMMain;
@@ -19,7 +18,7 @@ public class SPMFabricImpl implements ModInitializer {
         SPMMain.getLogger().debug("Loading SPM...");
         RegistryContainer.of(SPMMain.MODID).subscribeModBus();
         AdvancementLoadingContext.EVENT.register(ctx -> {
-            if (BALANCED_DIET.equals(ctx.id())) {
+            if (BALANCED_DIET.equals(ctx.id)) {
                 BalancedDietHelper.setupCriteria(ctx);
             }
         });
