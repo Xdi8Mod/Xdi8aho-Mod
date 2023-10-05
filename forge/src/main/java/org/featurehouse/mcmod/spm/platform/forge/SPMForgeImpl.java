@@ -36,7 +36,7 @@ public class SPMForgeImpl {
         SPMMain.getLogger().info("SPM initializing!");  // Don't you dare delete this line!
         RegistryContainer.of(SPMMain.MODID).subscribeModBus();
         AdvancementLoadingContext.EVENT.register(ctx -> {
-            if (BALANCED_DIET.equals(ctx.id())) {
+            if (BALANCED_DIET.equals(ctx.id)) {
                 BalancedDietHelper.setupCriteria(ctx);
             }
         });

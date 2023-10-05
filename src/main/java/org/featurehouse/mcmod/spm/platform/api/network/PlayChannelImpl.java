@@ -117,7 +117,7 @@ final class PlayChannelImpl implements PlayChannel {
         try {
             clazz = createClass();
             var c = MethodHandles.lookup().findConstructor(clazz, MethodType.methodType(void.class, Consumer.class));
-            return (NoArgPlayPacket) c.invokeExact(consumer);
+            return (NoArgPlayPacket) c.invoke(consumer);
         } catch (Throwable t) {
             if (clazz != null)
                 LOGGER.error("Bad lambda packet inner class found" + clazz, t);
