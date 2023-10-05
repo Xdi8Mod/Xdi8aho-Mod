@@ -48,7 +48,7 @@ public class VanillaAdvancements {
 
     //@SubscribeEvent
     public static void patchTintedItem(AdvancementLoadingContext context) {
-        final ResourceLocation id = context.id();
+        final ResourceLocation id = context.id;
         if (BALANCED_DIET.equals(id)) {
             balancedDiet(context);
             return;
