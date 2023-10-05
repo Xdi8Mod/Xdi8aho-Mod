@@ -1,10 +1,13 @@
 package top.xdi8.mod.firefly8;
 
-import dev.architectury.registry.client.level.entity.EntityRendererRegistry;
 import dev.architectury.registry.client.particle.ParticleProviderRegistry;
+import dev.architectury.registry.client.rendering.ColorHandlerRegistry;
 import dev.architectury.registry.menu.MenuRegistry;
+import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.NoopRenderer;
+import net.minecraft.world.level.FoliageColor;
 import org.featurehouse.mcmod.spm.platform.api.client.BlockRenderTypes;
 import top.xdi8.mod.firefly8.block.FireflyBlocks;
 import top.xdi8.mod.firefly8.client.FireflyParticle;
@@ -18,7 +21,14 @@ import top.xdi8.mod.firefly8.screen.FireflyMenus;
 public class FireflyClientSetup implements Runnable {
     @Override
     public void run() {
-        EntityRendererRegistry.register(FireflyEntityTypes.FIREFLY, NoopRenderer::new);
+        // EntityRendererRegistry.register(FireflyEntityTypes.FIREFLY, NoopRenderer::new);
+        EntityRenderers.register(FireflyEntityTypes.FIREFLY.get(), NoopRenderer::new);
+        ColorHandlerRegistry.registerBlockColors((blockState, blockAndTintGetter, blockPos, i) -> {
+            if (blockAndTintGetter == null || blockPos == null) {
+                return FoliageColor.getDefaultColor();
+            }
+            return BiomeColors.getAverageFoliageColor(blockAndTintGetter, blockPos);
+        }, FireflyBlocks.CEDAR_LEAVES);
         MenuRegistry.registerScreenFactory(FireflyMenus.TAKE_ONLY_CHEST.get(),
                 TakeOnlyContainerScreen::new);
         MenuRegistry.registerScreenFactory(FireflyMenus.XDI8_TABLE.get(),
