@@ -2,14 +2,13 @@
   "minVersion": "0.8",
   "compatibilityLevel": "JAVA_17",
   "required": true,
-  "package": "top.xdi8.mod.firefly8",
+  "package": "top.xdi8.mod.firefly8.mixin",
   "mixins": [
-    "mixin.MixinEntityBaseTick",
-    "mixin.PlayerWithHiddenInventoryImpl",
-    "mixin.ServerPlayerWithHiddenInventoryImpl",
-    "mixin.fire.MixinBaseFireBlock"
+    "MixinEntityBaseTick",
+    "PlayerWithHiddenInventoryImpl",
+    "ServerPlayerWithHiddenInventoryImpl",
+    "fire.MixinBaseFireBlock"
   ],
   "client": [
-    "block.cedar.MixinBlockColors"
   ]
 }
