@@ -1,4 +1,4 @@
-package top.xdi8.mod.firefly8.mixin;
+package top.xdi8.mod.firefly8.mixin.forge;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
