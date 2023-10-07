@@ -8,7 +8,6 @@
     "ingredient.PigEntityMixin"
   ],
   "client": [
-    "modinfo.CreditsScreenMixinC"
   ],
   "injectors": {
     "defaultRequire": 1
