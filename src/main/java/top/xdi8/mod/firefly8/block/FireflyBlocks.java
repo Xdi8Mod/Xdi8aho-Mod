@@ -1,11 +1,11 @@
 package top.xdi8.mod.firefly8.block;
 
+import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
-import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.WoodType;
@@ -46,12 +46,19 @@ public class FireflyBlocks {
             SYMBOL_STONE_BRICKS,
             XDI8_TABLE,
             SYMBOL_STONE_NN,
-            CEDAR_PLANKS,
+
+            CEDAR_BUTTON,
             CEDAR_DOOR,
+            CEDAR_FENCE,
+            CEDAR_FENCE_GATE,
             CEDAR_LEAVES,
             CEDAR_LOG,
             STRIPPED_CEDAR_LOG,
+            CEDAR_PLANKS,
+            CEDAR_PRESSURE_PLATE,
             CEDAR_SIGN,
+            CEDAR_SLAB,
+            CEDAR_STAIRS,
             CEDAR_WALL_SIGN;
 
     private static final PlatformRegister reg;
@@ -97,15 +104,24 @@ public class FireflyBlocks {
                         .requiresCorrectToolForDrops()
                         .sound(SoundType.STONE)
         );
-        CEDAR_PLANKS = ofDefaultBlock("cedar_planks", () ->
-                BlockBehaviour.Properties.of(Material.WOOD, cedarColor)
-                        .strength(2.0F, 3.0F)
-                        .sound(SoundType.WOOD));
+        CEDAR_BUTTON = reg.block("cedar_button", () ->
+                new WoodButtonBlock(BlockBehaviour.Properties.of(Material.DECORATION, cedarColor)
+                        .noCollission()
+                        .strength(0.5f)
+                        .sound(SoundType.WOOD)));
         CEDAR_DOOR = reg.block("cedar_door", () ->
                 new DoorBlock(BlockBehaviour.Properties.of(Material.WOOD, cedarColor)
                         .strength(3.0F)
                         .sound(SoundType.WOOD)
                         .noOcclusion()));
+        CEDAR_FENCE = reg.block("cedar_fence", () ->
+                new FenceBlock(BlockBehaviour.Properties.of(Material.WOOD, cedarColor)
+                        .strength(2.0f, 3.0f)
+                        .sound(SoundType.WOOD)));
+        CEDAR_FENCE_GATE = reg.block("cedar_fence_gate", () ->
+                new FenceGateBlock(BlockBehaviour.Properties.of(Material.WOOD, cedarColor)
+                        .strength(2.0f, 3.0f)
+                        .sound(SoundType.WOOD)));
         CEDAR_LEAVES = reg.block("cedar_leaves", () ->
                 new LeavesBlock(BlockBehaviour.Properties.of(Material.LEAVES)
                         .strength(0.2F)
@@ -123,11 +139,29 @@ public class FireflyBlocks {
                 new RotatedPillarBlock(BlockBehaviour.Properties.of(Material.WOOD, cedarColor)
                         .strength(2.0F)
                         .sound(SoundType.WOOD)));
+        CEDAR_PLANKS = ofDefaultBlock("cedar_planks", () ->
+                BlockBehaviour.Properties.of(Material.WOOD, cedarColor)
+                        .strength(2.0F, 3.0F)
+                        .sound(SoundType.WOOD));
+        CEDAR_PRESSURE_PLATE = reg.block("cedar_pressure_plate", () ->
+                new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING,
+                        BlockBehaviour.Properties.of(Material.WOOD, cedarColor)
+                                .noCollission()
+                                .strength(0.5f)
+                                .sound(SoundType.WOOD)));
         CEDAR_SIGN = reg.block("cedar_sign", () ->
                 new StandingSignBlock(BlockBehaviour.Properties.of(Material.WOOD, cedarColor)
                         .noCollission()
                         .strength(1.0F)
                         .sound(SoundType.WOOD), cedarWood));
+        CEDAR_SLAB = reg.block("cedar_slab", () ->
+                new SlabBlock(BlockBehaviour.Properties.of(Material.WOOD, cedarColor)
+                        .strength(2.0f, 3.0f)
+                        .sound(SoundType.WOOD)));
+        CEDAR_STAIRS = reg.block("cedar_stairs", () ->
+                new SlabBlock(BlockBehaviour.Properties.of(Material.WOOD, cedarColor)
+                        .strength(2.0f, 3.0f)
+                        .sound(SoundType.WOOD)));
         CEDAR_WALL_SIGN = reg.block("cedar_wall_sign", () ->
                 new WallSignBlock(BlockBehaviour.Properties.of(Material.WOOD)
                         .noCollission()
