@@ -22,7 +22,7 @@
       "org.featurehouse.mcmod.spm.platform.fabric.SPMFabricImpl"
     ],
     "client": [
-      "top.xdi8.mod.firefly8.fabric.FireflyClientForge",
+      "top.xdi8.mod.firefly8.fabric.FireflyClientFabric",
       "org.featurehouse.mcmod.spm.platform.fabric.SPMClientFabric"
     ]
   },
