@@ -18,5 +18,9 @@
     "L": {
       "item": "minecraft:lapis_lazuli"
     }
+  },
+  "result": {
+    "item": "firefly8:totem",
+    "count": 1
   }
 }

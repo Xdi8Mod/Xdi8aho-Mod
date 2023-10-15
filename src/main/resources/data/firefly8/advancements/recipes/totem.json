@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "firefly8:totem"
+    ]
+  },
+  "criteria": {
+    "has_xdi8_table": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:xdi8_table"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "firefly8:totem"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_xdi8_table",
+      "has_the_recipe"
+    ]
+  ]
+}
