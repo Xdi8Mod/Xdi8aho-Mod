@@ -7,10 +7,10 @@ plugins {
     id "java"
     id ("architectury-plugin") version "3.4-SNAPSHOT"
     id ("dev.architectury.loom") version "1.1-SNAPSHOT"
-    id 'io.github.juuxel.loom-vineflower' version '1.11.0' apply false
     //id 'org.jetbrains.kotlin.jvm' version '1.6.20'
     id ("com.github.johnrengelman.shadow") version "7.1.2" apply false
     id "maven-publish"
+    id 'io.github.juuxel.loom-vineflower' version '1.11.0' apply false  // add vineflower, see https://github.com/Juuxel/loom-vineflower
 }
 
 //apply from : 'https://featurehouse.github.io/resources/18/06/953b4d/e2d196c3f97701c23ca7d34ce2ed2576a86fab019e7a2009b2b94d/kff-3.3.2.gradle'
@@ -44,7 +44,7 @@ allprojects {
     apply plugin: "io.github.juuxel.loom-vineflower"
     apply plugin: "maven-publish"
 
-    version = "1.18.2-2.0.0+build.${Constant.timestamp}"
+    version = "1.18.2-2.0.0-beta1+build.${Constant.timestamp}"
     group = "top.xdi8.mod"
     archivesBaseName = "Xdi8aho-Mod"
 
@@ -118,6 +118,7 @@ repositories {
 subprojects {
     //if (project.name.endsWith("fake")) return;
     apply plugin: "com.github.johnrengelman.shadow"
+    apply plugin: "io.github.juuxel.loom-vineflower"  // add vineflower
 
     architectury {
         platformSetupLoomIde()
