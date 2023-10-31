@@ -61,12 +61,18 @@ public final class FireflyItems {
             BUNDLER,
             SYMBOL_STONE_NN,
 
-            CEDAR_PLANKS,
+            CEDAR_BUTTON,
             CEDAR_DOOR,
+            CEDAR_FENCE,
+            CEDAR_FENCE_GATE,
             CEDAR_LEAVES,
             CEDAR_LOG,
             STRIPPED_CEDAR_LOG,
-            CEDAR_SIGN;
+            CEDAR_PLANKS,
+            CEDAR_PRESSURE_PLATE,
+            CEDAR_SIGN,
+            CEDAR_SLAB,
+            CEDAR_STAIRS;
 
     static {
         var reg = PlatformRegister.of("firefly8");
@@ -143,11 +149,17 @@ public final class FireflyItems {
                 new BlockItem(FireflyBlocks.SYMBOL_STONE_NN.get(),
                         defaultProp().rarity(Rarity.UNCOMMON)));
 
-        CEDAR_PLANKS = reg.item("cedar_planks", () ->
-                new BlockItem(FireflyBlocks.CEDAR_PLANKS.get(),
+        CEDAR_BUTTON = reg.item("cedar_button", () ->
+                new BlockItem(FireflyBlocks.CEDAR_BUTTON.get(),
                         defaultProp()));
         CEDAR_DOOR = reg.item("cedar_door", () ->
                 new BlockItem(FireflyBlocks.CEDAR_DOOR.get(),
+                        defaultProp()));
+        CEDAR_FENCE = reg.item("cedar_fence", () ->
+                new BlockItem(FireflyBlocks.CEDAR_FENCE.get(),
+                        defaultProp()));
+        CEDAR_FENCE_GATE = reg.item("cedar_fence_gate", () ->
+                new BlockItem(FireflyBlocks.CEDAR_FENCE_GATE.get(),
                         defaultProp()));
         CEDAR_LEAVES = reg.item("cedar_leaves", () ->
                 new BlockItem(FireflyBlocks.CEDAR_LEAVES.get(),
@@ -158,8 +170,20 @@ public final class FireflyItems {
         STRIPPED_CEDAR_LOG = reg.item("stripped_cedar_log", () ->
                 new BlockItem(FireflyBlocks.STRIPPED_CEDAR_LOG.get(),
                         defaultProp()));
+        CEDAR_PLANKS = reg.item("cedar_planks", () ->
+                new BlockItem(FireflyBlocks.CEDAR_PLANKS.get(),
+                        defaultProp()));
+        CEDAR_PRESSURE_PLATE = reg.item("cedar_pressure_plate", () ->
+                new BlockItem(FireflyBlocks.CEDAR_PRESSURE_PLATE.get(),
+                        defaultProp()));
         CEDAR_SIGN = reg.item("cedar_sign", () ->
                 new BlockItem(FireflyBlocks.CEDAR_SIGN.get(),
+                        defaultProp()));
+        CEDAR_SLAB = reg.item("cedar_slab", () ->
+                new BlockItem(FireflyBlocks.CEDAR_SLAB.get(),
+                        defaultProp()));
+        CEDAR_STAIRS = reg.item("cedar_stairs", () ->
+                new BlockItem(FireflyBlocks.CEDAR_STAIRS.get(),
                         defaultProp()));
     }
 
