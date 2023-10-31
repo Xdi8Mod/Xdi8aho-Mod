@@ -1,5 +1,5 @@
 {
  "type": "firefly8:produce_symbol",
  "letter": "firefly8:c",
- "weight": 5000000
+ "weight": 100
 }
