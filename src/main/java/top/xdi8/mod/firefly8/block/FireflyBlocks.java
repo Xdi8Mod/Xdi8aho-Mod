@@ -159,8 +159,11 @@ public class FireflyBlocks {
                         .strength(2.0f, 3.0f)
                         .sound(SoundType.WOOD)));
         CEDAR_STAIRS = reg.block("cedar_stairs", () ->
-                new SlabBlock(BlockBehaviour.Properties.of(Material.WOOD, cedarColor)
-                        .strength(2.0f, 3.0f)
+                new StairBlock(CEDAR_PLANKS.isPresent() ? CEDAR_PLANKS.get().defaultBlockState() : new Block(BlockBehaviour.Properties.of(Material.WOOD, cedarColor)
+                        .strength(2.0F, 3.0F)
+                        .sound(SoundType.WOOD)).defaultBlockState(),
+                        BlockBehaviour.Properties.of(Material.WOOD, cedarColor)
+                        .strength(2.0F, 3.0F)
                         .sound(SoundType.WOOD)));
         CEDAR_WALL_SIGN = reg.block("cedar_wall_sign", () ->
                 new WallSignBlock(BlockBehaviour.Properties.of(Material.WOOD)
