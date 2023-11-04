@@ -1,5 +1,7 @@
 package top.xdi8.mod.firefly8.network;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.ReceivingLevelScreen;
 import net.minecraft.client.player.LocalPlayer;
@@ -19,7 +21,8 @@ public class FireflyNetwork {
     public static final int S2C_PREPARE_RESPAWN = 0x3000;
     public static final int C2S_RESPAWN = 0x3800;
 
-    static {
+    @Environment(EnvType.CLIENT)
+    public static void registerClientNetwork() {
         CHANNEL.registerS2C(S2C_DIE_INDEED, env -> env.queue(() -> {
             final Minecraft minecraft = Minecraft.getInstance();
             final LocalPlayer player = minecraft.player;
@@ -39,6 +42,10 @@ public class FireflyNetwork {
                 minecraft.setScreen(new ReceivingLevelScreen());
             }
         }));
+    }
+
+    @Environment(EnvType.SERVER)
+    public static void registerServerNetwork() {
         CHANNEL.registerC2S(C2S_RESPAWN, env -> env.queue(() -> {
             if (!(env.getPlayer() instanceof ServerPlayer oldPlayer)) return;
             ServerGamePacketListenerImpl connection = oldPlayer.connection;
@@ -51,6 +58,4 @@ public class FireflyNetwork {
             newPlayer.awardStat(FireflyStats.FAKE_DEAD.get());
         }));
     }
-
-    public static void init() {}
 }
