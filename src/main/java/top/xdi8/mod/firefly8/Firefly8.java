@@ -21,7 +21,6 @@ import top.xdi8.mod.firefly8.entity.FireflyEntityTypes;
 import top.xdi8.mod.firefly8.item.FireflyItems;
 import top.xdi8.mod.firefly8.item.tint.advanceent.VanillaAdvancements;
 import top.xdi8.mod.firefly8.item.tint.brewing.TintedPotionBrewingRecipe;
-import top.xdi8.mod.firefly8.network.FireflyNetwork;
 import top.xdi8.mod.firefly8.particle.FireflyParticles;
 import top.xdi8.mod.firefly8.recipe.FireflyRecipes;
 import top.xdi8.mod.firefly8.screen.FireflyMenus;
@@ -30,7 +29,6 @@ import top.xdi8.mod.firefly8.world.FireflyMobBiomeGen;
 import top.xdi8.mod.firefly8.world.Xdi8PoiTypes;
 import top.xdi8.mod.firefly8.world.death.PlayerDeathListener;
 
-//@Mod("firefly8")
 public class Firefly8 {
     public static void init() {
         activateRegistries();
@@ -38,9 +36,6 @@ public class Firefly8 {
 
         // Item
         TintedPotionBrewingRecipe.register();
-
-        // Network
-        FireflyNetwork.init();
 
         // WorldGen
         FireflyMobBiomeGen.registerBiomeModifications();
