@@ -44,7 +44,7 @@ allprojects {
     apply plugin: "io.github.juuxel.loom-vineflower"
     apply plugin: "maven-publish"
 
-    version = "1.18.2-2.0.0-beta1+build.${Constant.timestamp}"
+    version = "1.18.2-2.0.0-beta2+build.${Constant.timestamp}"
     group = "top.xdi8.mod"
     archivesBaseName = "Xdi8aho-Mod"
 
