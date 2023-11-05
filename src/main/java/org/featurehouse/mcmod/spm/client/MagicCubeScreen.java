@@ -2,6 +2,8 @@ package org.featurehouse.mcmod.spm.client;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
@@ -9,9 +11,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import org.featurehouse.mcmod.spm.SPMMain;
 import org.featurehouse.mcmod.spm.screen.MagicCubeScreenHandler;
-import org.featurehouse.mcmod.spm.platform.api.ClientOnly;
 
-@ClientOnly
+@Environment(EnvType.CLIENT)
 public class MagicCubeScreen extends AbstractContainerScreen<MagicCubeScreenHandler> {
     private static final ResourceLocation BG = new ResourceLocation(SPMMain.MODID, "textures/gui/container/magic_cube.png");
 

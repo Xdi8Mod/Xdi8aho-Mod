@@ -2,7 +2,7 @@ package org.featurehouse.mcmod.spm.mixin.ingredient;
 
 import net.minecraft.world.entity.animal.Chicken;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraftforge.common.crafting.CompoundIngredient;
+import org.featurehouse.mcmod.spm.util.ItemStacks;
 import org.featurehouse.mcmod.spm.util.registries.AnimalIngredients;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -16,6 +16,6 @@ abstract class ChickenEntityMixin {
     private static Ingredient FOOD_ITEMS;
 
     static {
-        FOOD_ITEMS = CompoundIngredient.of(FOOD_ITEMS, Ingredient.of(AnimalIngredients.chickenFood()));
+        FOOD_ITEMS = ItemStacks.expandIngredient(FOOD_ITEMS, AnimalIngredients.CHICKEN_EXTRA_FOOD);
     }
 }

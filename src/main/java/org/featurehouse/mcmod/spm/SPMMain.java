@@ -2,6 +2,7 @@ package org.featurehouse.mcmod.spm;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.food.Foods;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
@@ -21,8 +22,6 @@ import org.featurehouse.mcmod.spm.blocks.plants.EnchantedBeetrootsBlock;
 import org.featurehouse.mcmod.spm.blocks.plants.EnchantedVanillaPotatoesBlock;
 import org.featurehouse.mcmod.spm.items.*;
 import org.featurehouse.mcmod.spm.platform.api.reg.PlatformRegister;
-import org.featurehouse.mcmod.spm.platform.api.resource.ResourceUtil;
-import org.featurehouse.mcmod.spm.platform.api.tag.TagContainer;
 import org.featurehouse.mcmod.spm.recipe.SeedUpdatingRecipe;
 import org.featurehouse.mcmod.spm.screen.GrinderScreenHandler;
 import org.featurehouse.mcmod.spm.screen.MagicCubeScreenHandler;
@@ -34,7 +33,9 @@ import org.featurehouse.mcmod.spm.util.objsettings.Materials;
 import org.featurehouse.mcmod.spm.util.objsettings.sweetpotato.SweetPotatoType;
 import org.featurehouse.mcmod.spm.util.registries.AnimalIngredients;
 import org.featurehouse.mcmod.spm.util.registries.ComposterHelper;
-import org.featurehouse.mcmod.spm.world.gen.tree.*;
+import org.featurehouse.mcmod.spm.world.gen.tree.EnchantedTreeGen;
+import org.featurehouse.mcmod.spm.world.gen.tree.GrassDecorator;
+import org.featurehouse.mcmod.spm.world.gen.tree.TreeFeatures2;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -120,9 +121,9 @@ public class SPMMain {
 	public static final Supplier<BlockEntityType<MagicCubeBlockEntity>> MAGIC_CUBE_BLOCK_ENTITY_TYPE;
 
 	// Item Tags
-	public static final TagContainer<Item> RAW_SWEET_POTATOES;
-	public static final TagContainer<Item> ENCHANTED_SWEET_POTATOES;
-	public static final TagContainer<Item> ALL_SWEET_POTATOES;
+	public static final TagKey<Item> RAW_SWEET_POTATOES;
+	public static final TagKey<Item> ENCHANTED_SWEET_POTATOES;
+	public static final TagKey<Item> ALL_SWEET_POTATOES;
 
 	// Sounds
 	public static final Supplier<SoundEvent> AGROFORESTRY_TABLE_FINISH;
@@ -145,14 +146,14 @@ public class SPMMain {
 	public void onInitialize() {
 		getLogger().info("Successfully loaded Sweet Potato Mod!");
 		ComposterHelper.register();
-		ResourceUtil.loadResource();
+		//ResourceUtil.loadResource();
 		AnimalIngredients.configureParrot();
 		TreeFeatures2.activateMe();
 	}
 
 	static {
 		// Item
-		PlatformRegister reg = PlatformRegister.getInstance();
+		PlatformRegister reg = PlatformRegister.spm();
 		PEEL = defaultItem("peel", ItemSettings::misc);
 		BAKED_PURPLE_POTATO = reg.item("baked_purple_potato", ()->new BakedSweetPotatoItem(ItemSettings.groupFood(), SweetPotatoType.PURPLE));
 		BAKED_RED_POTATO = reg.item("baked_red_potato", ()->new BakedSweetPotatoItem(ItemSettings.groupFood(), SweetPotatoType.RED));

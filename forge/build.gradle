@@ -1,0 +1,32 @@
+architectury {
+    forge()
+}
+
+loom {
+    forge {
+        convertAccessWideners = true
+        extraAccessWideners.add loom.accessWidenerPath.get().asFile.name
+
+        mixinConfig 'mixins.xdi8-fonts.json'
+        mixinConfig 'sweet_potato.mixins.json'
+        mixinConfig 'mixins.firefly8-main.json'
+        mixinConfig 'mixins.firefly-forge.json'
+    }
+}
+
+configurations {
+    developmentForge.extendsFrom common
+}
+
+dependencies {
+    forge "net.minecraftforge:forge:${rootProject.forge_version}"
+    // Remove the next line if you don't want to depend on the API
+    modApi "dev.architectury:architectury-forge:${rootProject.architectury_version}"
+
+    common(project(path: ":", configuration: "namedElements")) { transitive false }
+    shadowCommon(project(path: ":", configuration: "transformProductionForge")) { transitive = false }
+}
+
+shadowJar {
+    exclude "fabric.mod.json"
+}

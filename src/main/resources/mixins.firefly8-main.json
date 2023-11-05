@@ -10,6 +10,5 @@
     "fire.MixinBaseFireBlock"
   ],
   "client": [
-  ],
-  "refmap": "mixins.xdi8.refmap.json"
+  ]
 }

@@ -48,11 +48,29 @@
   "block.firefly8.symbol_stone_nn": "Symbol: N (Creative mode only)",
   "block.firefly8.symbol_stone_bricks": "Symbol Stone Bricks",
 
+  "block.firefly8.cedar_button": "Cedar Button",
+  "block.firefly8.cedar_door": "Cedar Door",
+  "block.firefly8.cedar_fence": "Cedar Fence",
+  "block.firefly8.cedar_fence_gate": "Cedar Fence Gate",
+  "block.firefly8.cedar_leaves": "Cedar Leaves",
+  "block.firefly8.cedar_log": "Cedar Log",
+  "block.firefly8.stripped_cedar_log": "Stripped Cedar Log",
+  "block.firefly8.cedar_planks": "Cedar Planks",
+  "block.firefly8.cedar_pressure_plate": "Cedar Pressure Plate",
+  "block.firefly8.cedar_sign": "Cedar Sign",
+  "block.firefly8.cedar_slab": "Cedar Slab",
+  "block.firefly8.cedar_stairs": "Cedar Stairs",
+
   "commands.bindxdi8portal.success": "Successfully set portal for %s",
   "commands.bindxdi8portal.failure": "Can't set portal for %1$s at dimension %2$s / (%3$s)",
   "commands.unbindxdi8portal.0": "No player selected",
   "commands.unbindxdi8portal.1": "Unbound portal for %s",
   "commands.unbindxdi8portal.more": "Unbound portal for %d players",
+
+  "modmenu.descriptionTranslation.firefly8": "Firefly, carry light,\nIn the night, blink his eye,\nJust to make his future bright.",
+  "modmenu.summaryTranslation.firefly8": "Xdi8 Aho - Firefly",
+  "modmenu.descriptionTranslation.xdi8": "Xdi8 Aho Mod",
+  "modmenu.summaryTranslation.xdi8": "Xdi8 Aho",
 
   "advancements.firefly8.tinted_glass_bottle.title":"Bottle of tint",
   "advancements.firefly8.tinted_glass_bottle.description":"Get a tinted glass bottle",
@@ -62,11 +80,11 @@
   "advancements.firefly8.enter_xdi8.description":"Activate the Xdi8 portal, and try to enter it",
   "advancements.firefly8.die_in_xdi8.title":"Better for retreating",
   "advancements.firefly8.die_in_xdi8.description":"Accidentally died in the Xdi8 Dimension",
-  "advancements.firefly8.bundler.title":"Scored twice to the void",
-  "advancements.firefly8.bundler.description":"Die again, then pick up your bundler and leave",
+  "advancements.firefly8.bundler.title":"keepInventory2",
+  "advancements.firefly8.bundler.description":"Pick up your inventory before",
   "advancements.firefly8.chisel.title":"Chiseling work",
   "advancements.firefly8.chisel.description":"Get a chisel",
-  "advancements.firefly8.get_symbol_stone.title":"TRANSLATION ERROR stone",
+  "advancements.firefly8.get_symbol_stone.title":"Empty symbol stone",
   "advancements.firefly8.get_symbol_stone.description":"Get a symbol stone…or a rune stone? ",
   "advancements.firefly8.get_all_symbol_stones.title":"Xdi8-speaking scholar",
   "advancements.firefly8.get_all_symbol_stones.description":"Collect all 45 symbol stones",
@@ -75,5 +93,7 @@
   "advancements.firefly8.indium_tools.title":"Xdi8 chief",
   "advancements.firefly8.indium_tools.description":"Craft all the indium tools",
   "advancements.firefly8.xdi8_totem.title":"Oh my Xdi8 aho",
-  "advancements.firefly8.xdi8_totem.description":"Get a xdi8 totem"
+  "advancements.firefly8.xdi8_totem.description":"Get a xdi8 totem",
+  "advancements.firefly8.xdi8aho.title": "Xdi8Aho",
+  "advancements.firefly8.xdi8aho.description": "Fireflies, carry light"
 }

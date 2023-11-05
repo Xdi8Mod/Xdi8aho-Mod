@@ -1,79 +1,82 @@
 package top.xdi8.mod.firefly8;
 
-import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import dev.architectury.event.EventResult;
+import dev.architectury.event.events.common.CommandRegistrationEvent;
+import dev.architectury.event.events.common.EntityEvent;
+import dev.architectury.registry.ReloadListenerRegistry;
+import dev.architectury.registry.level.entity.EntityAttributeRegistry;
+import net.minecraft.server.packs.PackType;
+import org.apache.commons.lang3.mutable.MutableBoolean;
+import org.featurehouse.mcmod.spm.platform.api.reg.RegistryContainer;
+import top.xdi8.mod.firefly8.advancement.AdvancementLoadingContext;
 import top.xdi8.mod.firefly8.advancement.criteria.FireflyCriteria;
 import top.xdi8.mod.firefly8.block.FireflyBlocks;
 import top.xdi8.mod.firefly8.block.entity.FireflyBlockEntityTypes;
+import top.xdi8.mod.firefly8.block.structure.Xdi8PortalBasicDataLoader;
+import top.xdi8.mod.firefly8.command.FireflyCommands;
 import top.xdi8.mod.firefly8.core.letters.LettersUtil;
 import top.xdi8.mod.firefly8.core.totem.TotemAbilities;
 import top.xdi8.mod.firefly8.entity.FireflyEntity;
 import top.xdi8.mod.firefly8.entity.FireflyEntityTypes;
 import top.xdi8.mod.firefly8.item.FireflyItems;
-import top.xdi8.mod.firefly8.item.tint.brewing.TintedPotionBrewing;
-import top.xdi8.mod.firefly8.network.FireflyNetwork;
+import top.xdi8.mod.firefly8.item.tint.advanceent.VanillaAdvancements;
+import top.xdi8.mod.firefly8.item.tint.brewing.TintedPotionBrewingRecipe;
 import top.xdi8.mod.firefly8.particle.FireflyParticles;
 import top.xdi8.mod.firefly8.recipe.FireflyRecipes;
 import top.xdi8.mod.firefly8.screen.FireflyMenus;
 import top.xdi8.mod.firefly8.stats.FireflyStats;
+import top.xdi8.mod.firefly8.world.FireflyMobBiomeGen;
 import top.xdi8.mod.firefly8.world.Xdi8PoiTypes;
+import top.xdi8.mod.firefly8.world.death.PlayerDeathListener;
 
-@Mod("firefly8")
 public class Firefly8 {
-    public Firefly8() {
-        // Block
-        FireflyBlocks.REGISTRY.register(modBus());
-        FireflyBlockEntityTypes.REGISTRY.register(modBus());
-        Xdi8PoiTypes.REGISTRY.register(modBus());
+    public static void init() {
+        activateRegistries();
+        RegistryContainer.of("firefly8").subscribeModBus();
+
         // Item
-        FireflyItems.REGISTRY.register(modBus());
-        TintedPotionBrewing.register();
+        TintedPotionBrewingRecipe.register();
 
+        // WorldGen
+        FireflyMobBiomeGen.registerBiomeModifications();
+
+        AdvancementLoadingContext.EVENT.register(VanillaAdvancements::patchTintedItem);
+
+        ReloadListenerRegistry.register(PackType.SERVER_DATA, new Xdi8PortalBasicDataLoader());
+        EntityEvent.LIVING_DEATH.register(((entity, source) -> {
+            MutableBoolean mb = new MutableBoolean();
+            PlayerDeathListener.onPlayerDeath(entity, mb::setTrue);
+            return mb.isTrue() ? EventResult.interruptFalse() : EventResult.pass();
+        }));
+        EntityAttributeRegistry.register(FireflyEntityTypes.FIREFLY, FireflyEntity::createAttributes);
+        CommandRegistrationEvent.EVENT.register(FireflyCommands::init);
+    }
+
+    private static void activateRegistries() {
+        // Block
+        FireflyBlocks.LOG_WRAPPER.run();
+        FireflyBlockEntityTypes.LOG_WRAPPER.run();
+        Xdi8PoiTypes.LOG_WRAPPER.run();
+        // Item
+        FireflyItems.LOG_WRAPPER.run();
         // Entity
-        FireflyEntityTypes.REGISTRY.register(modBus());
-        modBus().addListener(this::registerEntityAttributes);
-        //forgeBus().addListener(FireflyMobBiomeGen::onBiomeLoading);
-
+        FireflyEntityTypes.LOG_WRAPPER.run();
         // Recipe
-        FireflyRecipes.SERIALIZERS.register(modBus());
-        FireflyRecipes.TYPES.register(modBus());
-
+        FireflyRecipes.LOG_WRAPPER.run();
         // Stats
-        FireflyStats.REGISTRY.register(modBus());
-
-        // Common
-        modBus().addListener(this::onCommonSetup);
-
+        FireflyStats.LOG_WRAPPER.run();
         // Particle
-        FireflyParticles.REGISTRY.register(modBus());
-
-        // Network
-        FireflyNetwork.init();
-
+        FireflyParticles.LOG_WRAPPER.run();
         // Menu
-        FireflyMenus.REGISTRY.register(modBus());
-        // Client: use bus subscriber
+        FireflyMenus.LOG_WRAPPER.run();
     }
 
-    private static IEventBus modBus() {
-        return FMLJavaModLoadingContext.get().getModEventBus();
-    }
-
-    private void registerEntityAttributes(EntityAttributeCreationEvent event) {
-        event.put(FireflyEntityTypes.FIREFLY.get(), FireflyEntity.createAttributes().build());
-    }
-
-    private void onCommonSetup(FMLCommonSetupEvent event) {
-        event.enqueueWork(() -> {
-            // Letters
-            LettersUtil.fireLetterRegistry(modBus());
-            // Totem
-            TotemAbilities.fireRegistry(modBus());
-            // Criteria
-            FireflyCriteria.init();
-        });
+    public static void commonSetup() {
+        // Letters
+        LettersUtil.fireLetterRegistry();
+        // Totem
+        TotemAbilities.fireRegistry();
+        // Criteria
+        FireflyCriteria.init();
     }
 }

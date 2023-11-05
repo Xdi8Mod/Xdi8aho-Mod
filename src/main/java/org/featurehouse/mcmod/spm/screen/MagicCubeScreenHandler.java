@@ -13,7 +13,6 @@ import org.featurehouse.mcmod.spm.SPMMain;
 import org.featurehouse.mcmod.spm.util.inventory.MagicCubeInputSlot;
 import org.featurehouse.mcmod.spm.util.inventory.UniversalResultSlot;
 import org.featurehouse.mcmod.spm.util.iprops.IntMagicCubeProperties;
-import org.featurehouse.mcmod.spm.platform.api.ClientOnly;
 
 import static org.featurehouse.mcmod.spm.SPMMain.*;
 
@@ -59,12 +58,10 @@ public class MagicCubeScreenHandler extends AbstractContainerMenu {
         return this.inventory.stillValid(player);
     }
 
-    @ClientOnly
     public short getMainFuelTime() {
         return magicCubeProperties.getMainFuelTime();
     }
 
-    @ClientOnly
     public short getViceFuelTime() {
         return magicCubeProperties.getViceFuelTime();
     }
@@ -83,7 +80,7 @@ public class MagicCubeScreenHandler extends AbstractContainerMenu {
                 } else if (this.mainFuelSlot.mayPlace(itemStack2)) {
                     if (!this.moveItemStackTo(itemStack2, 6, 7, false))
                         return ItemStack.EMPTY;
-                } else if (RAW_SWEET_POTATOES.contains(itemStack.getItem()) && itemStack.getCount() == 1) {
+                } else if (itemStack.is(RAW_SWEET_POTATOES) && itemStack.getCount() == 1) {
                     if (!this.moveItemStackTo(itemStack2, 0, 3, false))
                         return ItemStack.EMPTY;
                 } else if (index < 35) {

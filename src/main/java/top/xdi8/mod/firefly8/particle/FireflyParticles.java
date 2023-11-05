@@ -1,14 +1,14 @@
 package top.xdi8.mod.firefly8.particle;
 
-import net.minecraft.core.particles.ParticleType;
+import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.particles.SimpleParticleType;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import org.featurehouse.mcmod.spm.platform.api.reg.PlatformRegister;
+import top.xdi8.mod.firefly8.util.InternalRegistryLogWrapper;
 
 public class FireflyParticles {
-    public static final DeferredRegister<ParticleType<?>> REGISTRY
-            = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, "firefly8");
-    public static final RegistryObject<SimpleParticleType> FIREFLY
-            = REGISTRY.register("firefly", () -> new SimpleParticleType(true));
+    public static final InternalRegistryLogWrapper LOG_WRAPPER = InternalRegistryLogWrapper.firefly8("particles");
+
+    public static final RegistrySupplier<SimpleParticleType> FIREFLY
+            = PlatformRegister.of("firefly8").particleType("firefly",
+            () -> new SimpleParticleType(true) {});
 }

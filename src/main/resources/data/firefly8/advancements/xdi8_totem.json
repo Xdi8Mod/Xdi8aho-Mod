@@ -7,8 +7,9 @@
       "translate": "advancements.firefly8.xdi8_totem.description"
     },
     "icon": {
-      "item": "firefly8:totem"
+      "item": "firefly8:xdi8aho"
     },
+    "frame": "goal",
     "show_toast": true,
     "announce_to_chat": true,
     "hidden": false

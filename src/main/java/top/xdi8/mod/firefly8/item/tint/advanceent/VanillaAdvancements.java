@@ -8,20 +8,19 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import top.xdi8.mod.firefly8.advancement.AdvancementLoadingEvent;
+import top.xdi8.mod.firefly8.advancement.AdvancementLoadingContext;
 import top.xdi8.mod.firefly8.item.FireflyItemTags;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.UUID;
 import java.util.function.Supplier;
 
-@Mod.EventBusSubscriber(modid = "firefly8")
 public class VanillaAdvancements {
     private static final ResourceLocation SAFELY_HARVEST_HONEY = new ResourceLocation("husbandry/safely_harvest_honey");
     private static final ResourceLocation DRAGON_BREATH = new ResourceLocation("end/dragon_breath");
     private static final ResourceLocation BALANCED_DIET = new ResourceLocation("husbandry/balanced_diet");
-    private static final TagKey<Block> BEEHIVES_TAG = BlockTags.create(new ResourceLocation("beehives"));
+    private static final TagKey<Block> BEEHIVES_TAG = BlockTags.BEEHIVES;
 
     private static final Map<ResourceLocation, UUID> TO_UUID = ImmutableMap.of(
             SAFELY_HARVEST_HONEY, UUID.fromString("b0ec73e8-c187-4f25-a83c-cc42263282b7"),
@@ -47,18 +46,18 @@ public class VanillaAdvancements {
             )
     );
 
-    @SubscribeEvent
-    public static void patchTintedItem(AdvancementLoadingEvent event) {
-        final ResourceLocation id = event.getId();
+    //@SubscribeEvent
+    public static void patchTintedItem(AdvancementLoadingContext context) {
+        final ResourceLocation id = context.id;
         if (BALANCED_DIET.equals(id)) {
-            balancedDiet(event);
+            balancedDiet(context);
             return;
         }
         if (!TO_UUID.containsKey(id)) return;
-        String[][] req = event.getRequirements();
+        String[][] req = context.getRequirements();
         ResourceLocation reqId = new ResourceLocation("firefly8",
                 TO_UUID.get(id).toString());
-        event.addCriterion(reqId, TO_TRIGGER.get(id).get());
+        context.addCriterion(reqId, TO_TRIGGER.get(id).get());
         String[] instance = req[0], newInstance = Arrays.copyOf(instance, instance.length+1);
         newInstance[instance.length] = reqId.toString();
         req[0] = newInstance;
@@ -66,14 +65,14 @@ public class VanillaAdvancements {
 
     /* BalancedDietHelper start */
 
-    private static void balancedDiet(AdvancementLoadingEvent event) {
-        String[][] requirements = event.getRequirements();
+    private static void balancedDiet(AdvancementLoadingContext context) {
+        String[][] requirements = context.getRequirements();
 
         // 0: honey bottles
         for (int i = 0; i < requirements.length; i++) {
             String[] as = requirements[i];
             if (Arrays.asList(as).contains("honey_bottle")) {
-                event.addCriterion(new ResourceLocation("firefly8:05f921ae-5f96-410d-bcce-bf20d57e5d1a"),
+                context.addCriterion(new ResourceLocation("firefly8:05f921ae-5f96-410d-bcce-bf20d57e5d1a"),
                         consumeItemTrigger(FireflyItemTags.TINTED_HONEY_BOTTLES));
                 String[] nas = Arrays.copyOf(as, as.length + 1);
                 nas[as.length] = "firefly8:05f921ae-5f96-410d-bcce-bf20d57e5d1a";

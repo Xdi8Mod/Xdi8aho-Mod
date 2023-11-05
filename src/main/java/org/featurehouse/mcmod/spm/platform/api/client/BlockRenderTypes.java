@@ -1,5 +1,6 @@
 package org.featurehouse.mcmod.spm.platform.api.client;
 
+import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.block.Block;
 
@@ -15,8 +16,8 @@ public final class BlockRenderTypes {
             register(type, b);
     }
 
-    // Forge: hooks
+    @ExpectPlatform
     public static void register(RenderType type, Supplier<Block> block) {
-        net.minecraft.client.renderer.ItemBlockRenderTypes.setRenderLayer(block.get(), type);
+        throw new AssertionError("Not Implemented");
     }
 }

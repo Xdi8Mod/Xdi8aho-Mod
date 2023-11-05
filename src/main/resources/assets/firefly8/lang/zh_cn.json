@@ -48,11 +48,29 @@
   "block.firefly8.symbol_stone.letter": "符文: %s",
   "block.firefly8.symbol_stone_nn": "符文: N（仅创造模式）",
 
+  "block.firefly8.cedar_button": "红杉木按钮",
+  "block.firefly8.cedar_door": "红杉木门",
+  "block.firefly8.cedar_fence": "红杉木栅栏",
+  "block.firefly8.cedar_fence_gate": "红杉木栅栏门",
+  "block.firefly8.cedar_leaves": "红杉树叶",
+  "block.firefly8.cedar_log": "红杉原木",
+  "block.firefly8.stripped_cedar_log": "去皮红杉原木",
+  "block.firefly8.cedar_planks": "红杉木板",
+  "block.firefly8.cedar_pressure_plate": "红杉木压力板",
+  "block.firefly8.cedar_sign": "红杉木告示牌",
+  "block.firefly8.cedar_slab": "红杉木台阶",
+  "block.firefly8.cedar_stairs": "红杉木楼梯",
+
   "commands.bindxdi8portal.success": "已为 %1$s 绑定传送门",
   "commands.bindxdi8portal.failure": "无法将 %1$s 的传送门绑定至 %2$s / (%3$s)",
   "commands.unbindxdi8portal.0": "未选中玩家",
   "commands.unbindxdi8portal.1": "已为 %s 解绑传送门",
   "commands.unbindxdi8portal.more": "已为 %d 名玩家解绑传送门",
+
+  "modmenu.descriptionTranslation.firefly8": "萤火虫，提着灯，\n在月色里，轻轻的眨着眼睛，\n在黑夜里等待，寻找一份光明。",
+  "modmenu.summaryTranslation.firefly8": "灯\uDB87\uDC30 - 萤火虫",
+  "modmenu.descriptionTranslation.xdi8": "希顶 Mod",
+  "modmenu.summaryTranslation.xdi8": "灯\uDB87\uDC30",
 
   "advancements.firefly8.tinted_glass_bottle.title":"瓶装黑灯瞎\uDB87\uDC30",
   "advancements.firefly8.tinted_glass_bottle.description":"获取遮光玻璃瓶",
@@ -62,11 +80,11 @@
   "advancements.firefly8.enter_xdi8.description":"激活灯\uDB87\uDC30传送门，并试着进入",
   "advancements.firefly8.die_in_xdi8.title":"还是撤退要紧",
   "advancements.firefly8.die_in_xdi8.description":"不慎在希顶维度死亡",
-  "advancements.firefly8.bundler.title":"梅开二度",
-  "advancements.firefly8.bundler.description":"再一次死亡，然后拿起你的收纳袋走人",
+  "advancements.firefly8.bundler.title":"保留物品栏2.0",
+  "advancements.firefly8.bundler.description":"捡起你遗落的物品栏",
   "advancements.firefly8.chisel.title":"雕刻工作",
   "advancements.firefly8.chisel.description":"获取一把凿子",
-  "advancements.firefly8.get_symbol_stone.title":"翻译错误石",
+  "advancements.firefly8.get_symbol_stone.title":"空符文石",
   "advancements.firefly8.get_symbol_stone.description":"获取一块符文石……还是符号石？",
   "advancements.firefly8.get_all_symbol_stones.title":"希顶语学家",
   "advancements.firefly8.get_all_symbol_stones.description":"收集所有的45个符文石",
@@ -75,5 +93,7 @@
   "advancements.firefly8.indium_tools.title":"灯\uDB87\uDC30首席",
   "advancements.firefly8.indium_tools.description":"合成所有铟工具",
   "advancements.firefly8.xdi8_totem.title":"我的灯\uDB87\uDC30",
-  "advancements.firefly8.xdi8_totem.description":"获取希顶图腾"
+  "advancements.firefly8.xdi8_totem.description":"获取希顶图腾",
+  "advancements.firefly8.xdi8aho.title": "灯\uDB87\uDC30",
+  "advancements.firefly8.xdi8aho.description": "萤火虫，提着灯"
 }

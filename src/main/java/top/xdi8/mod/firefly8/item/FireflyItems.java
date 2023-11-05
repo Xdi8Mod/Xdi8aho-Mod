@@ -1,32 +1,33 @@
 package top.xdi8.mod.firefly8.item;
 
+import dev.architectury.core.item.ArchitecturySpawnEggItem;
+import dev.architectury.registry.CreativeTabRegistry;
+import dev.architectury.registry.registries.RegistrySupplier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.food.Foods;
-import net.minecraft.world.item.*;
-import net.minecraftforge.common.ForgeSpawnEggItem;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
+import org.featurehouse.mcmod.spm.platform.api.reg.PlatformRegister;
 import top.xdi8.mod.firefly8.block.FireflyBlocks;
 import top.xdi8.mod.firefly8.entity.FireflyEntityTypes;
 import top.xdi8.mod.firefly8.item.indium.*;
 import top.xdi8.mod.firefly8.item.symbol.SymbolStoneBlockItem;
 import top.xdi8.mod.firefly8.item.symbol.Xdi8TotemItem;
 import top.xdi8.mod.firefly8.item.tint.*;
+import top.xdi8.mod.firefly8.util.InternalRegistryLogWrapper;
 
 public final class FireflyItems {
-    public static final DeferredRegister<Item> REGISTRY = DeferredRegister.create(ForgeRegistries.ITEMS, "firefly8");
+    public static final InternalRegistryLogWrapper LOG_WRAPPER = InternalRegistryLogWrapper.firefly8("items");
 
     private FireflyItems() {
     }
 
-    public static final CreativeModeTab TAB = new CreativeModeTab("firefly8") {
-        public @NotNull ItemStack makeIcon() {
-            return new ItemStack(XDI8AHO_ICON.get());
-        }
-    };
+    public static final CreativeModeTab TAB = CreativeTabRegistry.create(new ResourceLocation(
+            "firefly8", "firefly8"), () -> FireflyItems.XDI8AHO_ICON.get().getDefaultInstance());
 
-    public static final RegistryObject<Item> 
+    public static final RegistrySupplier<Item>
             INDIUM_INGOT,
             INDIUM_NUGGET,
             INDIUM_AXE,
@@ -58,82 +59,132 @@ public final class FireflyItems {
 
             DARK_SYMBOL_STONE,
             BUNDLER,
-            SYMBOL_STONE_NN;
+            SYMBOL_STONE_NN,
+
+            CEDAR_BUTTON,
+            CEDAR_DOOR,
+            CEDAR_FENCE,
+            CEDAR_FENCE_GATE,
+            CEDAR_LEAVES,
+            CEDAR_LOG,
+            STRIPPED_CEDAR_LOG,
+            CEDAR_PLANKS,
+            CEDAR_PRESSURE_PLATE,
+            CEDAR_SIGN,
+            CEDAR_SLAB,
+            CEDAR_STAIRS;
 
     static {
-        INDIUM_INGOT = REGISTRY.register("indium_ingot",
+        var reg = PlatformRegister.of("firefly8");
+        INDIUM_INGOT = reg.item("indium_ingot",
                 () -> new Item(defaultProp()));
-        INDIUM_NUGGET = REGISTRY.register("indium_nugget",
+        INDIUM_NUGGET = reg.item("indium_nugget",
                 () -> new Item(defaultProp()));
-        INDIUM_AXE = REGISTRY.register("indium_axe",
+        INDIUM_AXE = reg.item("indium_axe",
                 () -> new IndiumAxeItem(defaultProp()));
-        INDIUM_HOE = REGISTRY.register("indium_hoe",
+        INDIUM_HOE = reg.item("indium_hoe",
                 () -> new IndiumHoeItem(defaultProp()));
-        INDIUM_PICKAXE = REGISTRY.register("indium_pickaxe",
+        INDIUM_PICKAXE = reg.item("indium_pickaxe",
                 () -> new IndiumPickaxeItem(defaultProp()));
-        INDIUM_SHOVEL = REGISTRY.register("indium_shovel",
+        INDIUM_SHOVEL = reg.item("indium_shovel",
                 () -> new IndiumShovelItem(defaultProp()));
-        INDIUM_SWORD = REGISTRY.register("indium_sword",
+        INDIUM_SWORD = reg.item("indium_sword",
                 () -> new IndiumSwordItem(defaultProp()));
-        INDIUM_CHISEL = REGISTRY.register("indium_chisel",
+        INDIUM_CHISEL = reg.item("indium_chisel",
                 () -> new IndiumChiselItem(defaultProp()
                         .durability(30)
                 ));
-        INDIUM_BLOCK = REGISTRY.register("indium_block",
+        INDIUM_BLOCK = reg.item("indium_block",
                 () -> new BlockItem(FireflyBlocks.INDIUM_BLOCK.get(), defaultProp()));
-        INDIUM_ORE_BLOCK = REGISTRY.register("indium_ore",
+        INDIUM_ORE_BLOCK = reg.item("indium_ore",
                 () -> new BlockItem(FireflyBlocks.INDIUM_ORE_BLOCK.get(), defaultProp()));
-        DEEPSLATE_INDIUM_ORE_BLOCK = REGISTRY.register("deepslate_indium_ore",
+        DEEPSLATE_INDIUM_ORE_BLOCK = reg.item("deepslate_indium_ore",
                 () -> new BlockItem(FireflyBlocks.DEEPSLATE_INDIUM_ORE_BLOCK.get(), defaultProp()));
-        SYMBOL_STONE_BRICKS = REGISTRY.register("symbol_stone_bricks",
+        SYMBOL_STONE_BRICKS = reg.item("symbol_stone_bricks",
                 () -> new BlockItem(FireflyBlocks.SYMBOL_STONE_BRICKS.get(), defaultProp()));
 
-        XDI8AHO_ICON = REGISTRY.register("xdi8aho",
+        XDI8AHO_ICON = reg.item("xdi8aho",
                 () -> new Xdi8TotemItem(defaultProp()));
-        FIREFLY_SPAWN_EGG = REGISTRY.register("firefly_spawn_egg", () ->
-                new ForgeSpawnEggItem(FireflyEntityTypes.FIREFLY,
+        FIREFLY_SPAWN_EGG = reg.item("firefly_spawn_egg", () ->
+                new ArchitecturySpawnEggItem(FireflyEntityTypes.FIREFLY,
                         0x000000, 0x00f500,
                         defaultProp()));
-                        
-        XDI8AHO_PORTAL_CORE_BLOCK = REGISTRY.register("xdi8aho_portal_core",
+        XDI8AHO_PORTAL_CORE_BLOCK = reg.item("xdi8aho_portal_core",
                 () -> new BlockItem(FireflyBlocks.XDI8AHO_PORTAL_CORE_BLOCK.get(), defaultProp()));
-        XDI8AHO_PORTAL_TOP_BLOCK = REGISTRY.register("xdi8aho_torch_top",
+        XDI8AHO_PORTAL_TOP_BLOCK = reg.item("xdi8aho_torch_top",
                 () -> new BlockItem(FireflyBlocks.XDI8AHO_PORTAL_TOP_BLOCK.get(), defaultProp()));
-        XDI8AHO_BACK_PORTAL_CORE_BLOCK = REGISTRY.register("xdi8aho_back_portal_core",
+        XDI8AHO_BACK_PORTAL_CORE_BLOCK = reg.item("xdi8aho_back_portal_core",
                 () -> new BlockItem(FireflyBlocks.XDI8AHO_BACK_PORTAL_CORE_BLOCK.get(), defaultProp()));
-        XDI8_TABLE = REGISTRY.register("xdi8_table",
+        XDI8_TABLE = reg.item("xdi8_table",
                 () -> new BlockItem(FireflyBlocks.XDI8_TABLE.get(), defaultProp()));
 
         // Bottles
-        TINTED_GLASS_BOTTLE = REGISTRY.register("tinted_glass_bottle", () ->
+        TINTED_GLASS_BOTTLE = reg.item("tinted_glass_bottle", () ->
                 new TintedGlassBottleItem(defaultProp()));
-        TINTED_POTION = REGISTRY.register("tinted_potion", () ->
+        TINTED_POTION = reg.item("tinted_potion", () ->
                 new TintedPotionItem(defaultProp()));
-        TINTED_HONEY_BOTTLE = REGISTRY.register("tinted_honey_bottle", () ->
+        TINTED_HONEY_BOTTLE = reg.item("tinted_honey_bottle", () ->
                 new TintedHoneyBottleItem(defaultProp()
                         .craftRemainder(TINTED_GLASS_BOTTLE.get())
                         .food(Foods.HONEY_BOTTLE)
                         .stacksTo(16)
                 ));
-        TINTED_SPLASH_POTION = REGISTRY.register("tinted_splash_potion", () ->
+        TINTED_SPLASH_POTION = reg.item("tinted_splash_potion", () ->
                 new TintedSplashPotionItem(defaultProp()));
-        TINTED_LINGERING_POTION = REGISTRY.register("tinted_lingering_potion", () ->
+        TINTED_LINGERING_POTION = reg.item("tinted_lingering_potion", () ->
                 new TintedLingeringPotionItem(defaultProp()));
-        TINTED_DRAGON_BREATH = REGISTRY.register("tinted_dragon_breath", () ->
+        TINTED_DRAGON_BREATH = reg.item("tinted_dragon_breath", () ->
                 new Item(defaultProp()
                         .craftRemainder(TINTED_GLASS_BOTTLE.get())
                         .rarity(Rarity.UNCOMMON)));
-        TINTED_FIREFLY_BOTTLE = REGISTRY.register("tinted_firefly_bottle", () ->
+        TINTED_FIREFLY_BOTTLE = reg.item("tinted_firefly_bottle", () ->
                 new TintedFireflyBottleItem(defaultProp().stacksTo(1)));
 
-        BUNDLER = REGISTRY.register("bundler", BundlerItem::new);
-        SymbolStoneBlockItem.registerAll(REGISTRY::register);
-        DARK_SYMBOL_STONE = REGISTRY.register("dark_symbol_stone", () ->
+        BUNDLER = reg.item("bundler", BundlerItem::new);
+        SymbolStoneBlockItem.registerAll((id, sup) -> reg.item(id, sup::get));
+        DARK_SYMBOL_STONE = reg.item("dark_symbol_stone", () ->
                 new BlockItem(FireflyBlocks.DARK_SYMBOL_STONE.get(),
                         defaultProp().fireResistant()));
-        SYMBOL_STONE_NN = REGISTRY.register("symbol_stone_nn", () ->
+        SYMBOL_STONE_NN = reg.item("symbol_stone_nn", () ->
                 new BlockItem(FireflyBlocks.SYMBOL_STONE_NN.get(),
                         defaultProp().rarity(Rarity.UNCOMMON)));
+
+        CEDAR_BUTTON = reg.item("cedar_button", () ->
+                new BlockItem(FireflyBlocks.CEDAR_BUTTON.get(),
+                        defaultProp()));
+        CEDAR_DOOR = reg.item("cedar_door", () ->
+                new BlockItem(FireflyBlocks.CEDAR_DOOR.get(),
+                        defaultProp()));
+        CEDAR_FENCE = reg.item("cedar_fence", () ->
+                new BlockItem(FireflyBlocks.CEDAR_FENCE.get(),
+                        defaultProp()));
+        CEDAR_FENCE_GATE = reg.item("cedar_fence_gate", () ->
+                new BlockItem(FireflyBlocks.CEDAR_FENCE_GATE.get(),
+                        defaultProp()));
+        CEDAR_LEAVES = reg.item("cedar_leaves", () ->
+                new BlockItem(FireflyBlocks.CEDAR_LEAVES.get(),
+                        defaultProp()));
+        CEDAR_LOG = reg.item("cedar_log", () ->
+                new BlockItem(FireflyBlocks.CEDAR_LOG.get(),
+                        defaultProp()));
+        STRIPPED_CEDAR_LOG = reg.item("stripped_cedar_log", () ->
+                new BlockItem(FireflyBlocks.STRIPPED_CEDAR_LOG.get(),
+                        defaultProp()));
+        CEDAR_PLANKS = reg.item("cedar_planks", () ->
+                new BlockItem(FireflyBlocks.CEDAR_PLANKS.get(),
+                        defaultProp()));
+        CEDAR_PRESSURE_PLATE = reg.item("cedar_pressure_plate", () ->
+                new BlockItem(FireflyBlocks.CEDAR_PRESSURE_PLATE.get(),
+                        defaultProp()));
+        CEDAR_SIGN = reg.item("cedar_sign", () ->
+                new BlockItem(FireflyBlocks.CEDAR_SIGN.get(),
+                        defaultProp()));
+        CEDAR_SLAB = reg.item("cedar_slab", () ->
+                new BlockItem(FireflyBlocks.CEDAR_SLAB.get(),
+                        defaultProp()));
+        CEDAR_STAIRS = reg.item("cedar_stairs", () ->
+                new BlockItem(FireflyBlocks.CEDAR_STAIRS.get(),
+                        defaultProp()));
     }
 
     static Item.Properties defaultProp() {

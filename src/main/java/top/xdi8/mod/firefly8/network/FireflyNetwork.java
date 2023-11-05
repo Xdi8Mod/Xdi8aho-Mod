@@ -1,97 +1,61 @@
 package top.xdi8.mod.firefly8.network;
 
-import com.google.common.base.Suppliers;
-import com.mojang.logging.LogUtils;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.ReceivingLevelScreen;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.network.NetworkDirection;
-import net.minecraftforge.network.NetworkEvent;
-import net.minecraftforge.network.NetworkRegistry;
-import net.minecraftforge.network.simple.SimpleChannel;
-import org.slf4j.Logger;
-
-import java.util.Optional;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.network.ServerGamePacketListenerImpl;
+import org.featurehouse.mcmod.spm.platform.api.network.PlayChannel;
+import top.xdi8.mod.firefly8.advancement.criteria.FireflyCriteria;
+import top.xdi8.mod.firefly8.ext.IServerPlayerWithHiddenInventory;
+import top.xdi8.mod.firefly8.stats.FireflyStats;
 
 public class FireflyNetwork {
-    static final Logger LOGGER = LogUtils.getLogger();
-    private static final String VERSION = "B.B";
-    private static final Predicate<String> ACCEPTED_VERSION = s ->
-            s.startsWith("B.");
+    public static final PlayChannel CHANNEL = PlayChannel.create(
+            new ResourceLocation("firefly8", "main-5.0"));
 
-    public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
-            new ResourceLocation("firefly8", "main"),
-            Suppliers.ofInstance(VERSION),
-            ACCEPTED_VERSION, ACCEPTED_VERSION
-    );
+    public static final int S2C_DIE_INDEED = 0x2000;
+    public static final int S2C_PREPARE_RESPAWN = 0x3000;
+    public static final int C2S_RESPAWN = 0x3800;
 
-    static {
-        CHANNEL.registerMessage(0x2000, S2CDieIndeed.class, (a, b) -> {}, b -> S2CDieIndeed.getInstance(),
-                S2CDieIndeed::processContext, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
-        // Deprecated REMOVAL
-        CHANNEL.registerMessage(0x2010, S2CRespawn.class, (a, b) -> {}, b -> S2CRespawn.getInstance(),
-                S2CRespawn::processContext, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
-        // Deprecated REMOVAL
-        CHANNEL.registerMessage(0x2800, C2SRespawnConfirm.class, (a, b) -> {}, b -> C2SRespawnConfirm.getInstance(),
-                C2SRespawnConfirm::processContext, Optional.of(NetworkDirection.PLAY_TO_SERVER));
-    }
-
-    public static void init() {}
-
-    @Deprecated(forRemoval = true)
-    @SuppressWarnings("all")
-    public static final class C2SRespawnConfirm {
-        static final C2SRespawnConfirm INSTANCE = new C2SRespawnConfirm();
-        public static C2SRespawnConfirm getInstance() { return INSTANCE; }
-
-        void processContext(Supplier<NetworkEvent.Context> ctx) {}
-
-        private C2SRespawnConfirm() {}
-    }
-
-    @Deprecated(forRemoval = true)
-    @SuppressWarnings("all")
-    public static final class S2CRespawn {
-        static final S2CRespawn INSTANCE = new S2CRespawn();
-        public static S2CRespawn getInstance() {return INSTANCE;}
-
-        void processContext(Supplier<NetworkEvent.Context> ctx) {}
-
-        private S2CRespawn() {}
-    }
-
-    public static final class S2CDieIndeed {
-        @OnlyIn(Dist.CLIENT)
-        private void processContextImpl(NetworkEvent.Context ctx) {
-            ctx.enqueueWork(() -> {
-                final Minecraft minecraft = Minecraft.getInstance();
-                final LocalPlayer player = minecraft.player;
-                if (player != null && minecraft.level != null) {
-                    if (player.shouldShowDeathScreen()) {
-                        minecraft.setScreen(null);
-                    } else {
-                        player.respawn();
-                    }
+    @Environment(EnvType.CLIENT)
+    public static void registerClientNetwork() {
+        CHANNEL.registerS2C(S2C_DIE_INDEED, env -> env.queue(() -> {
+            final Minecraft minecraft = Minecraft.getInstance();
+            final LocalPlayer player = minecraft.player;
+            if (player != null && minecraft.level != null) {
+                if (player.shouldShowDeathScreen()) {
+                    minecraft.setScreen(null);
+                } else {
+                    player.respawn();
                 }
-            });
-            ctx.setPacketHandled(true);
-        }
-
-        void processContext(Supplier<NetworkEvent.Context> ctx) {
-            try {
-                processContextImpl(ctx.get());
-            } catch (NoSuchMethodError e) {
-                LOGGER.error("You're not running this on client!", e);
             }
-        }
+        }));
+        CHANNEL.registerS2C(S2C_PREPARE_RESPAWN, env -> env.queue(() -> {
+            final Minecraft minecraft = Minecraft.getInstance();
+            final LocalPlayer player = minecraft.player;
+            if (player != null && minecraft.level != null) {
+                CHANNEL.sendC2S(C2S_RESPAWN);
+                minecraft.setScreen(new ReceivingLevelScreen());
+            }
+        }));
+    }
 
-        static final S2CDieIndeed INSTANCE = new S2CDieIndeed();
-
-        public static S2CDieIndeed getInstance() {return INSTANCE; }
-        private S2CDieIndeed() {}
+    @Environment(EnvType.SERVER)
+    public static void registerServerNetwork() {
+        CHANNEL.registerC2S(C2S_RESPAWN, env -> env.queue(() -> {
+            if (!(env.getPlayer() instanceof ServerPlayer oldPlayer)) return;
+            ServerGamePacketListenerImpl connection = oldPlayer.connection;
+            ServerPlayer newPlayer = connection.player = oldPlayer.server.getPlayerList().respawn(oldPlayer, true);
+            final IServerPlayerWithHiddenInventory newPlayerExt =
+                    IServerPlayerWithHiddenInventory.xdi8$extend(newPlayer);
+            newPlayerExt.xdi8$resetCooldown();
+            newPlayerExt.xdi8$passPortalInv(IServerPlayerWithHiddenInventory.xdi8$extend(oldPlayer));
+            FireflyCriteria.DIE_IN_XDI8AHO.trigger(newPlayer);
+            newPlayer.awardStat(FireflyStats.FAKE_DEAD.get());
+        }));
     }
 }

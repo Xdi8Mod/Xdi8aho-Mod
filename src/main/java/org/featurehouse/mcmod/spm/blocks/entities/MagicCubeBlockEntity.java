@@ -152,7 +152,7 @@ public class MagicCubeBlockEntity extends AbstractLockableContainerBlockEntity i
                 if (this.inventory.get(6).getItem() == SPMMain.PEEL.get()) {
                     boolean bl = false;
                     for (int i = 0; i < 3; ++i) {
-                        if (SPMMain.RAW_SWEET_POTATOES.contains(this.inventory.get(i).getItem())) {
+                        if ((this.inventory.get(i)).is(SPMMain.RAW_SWEET_POTATOES)) {
                             this.mainFuelTime = 200;
                             bl = true;
                             break;
@@ -214,7 +214,7 @@ public class MagicCubeBlockEntity extends AbstractLockableContainerBlockEntity i
         } else if (random.nextDouble() <= (withViceFuel() ? 0.5D : 0.4D)) {
             // GENE-WORK
             List<ItemLike> itemSet = new ObjectArrayList<>(2);
-            if (item instanceof RawSweetPotatoBlockItem sweetPotato && SPMMain.RAW_SWEET_POTATOES.contains(item)) {
+            if (item instanceof RawSweetPotatoBlockItem sweetPotato && inputCopy.is(SPMMain.RAW_SWEET_POTATOES)) {
                 sweetPotato.asType().getOtherTwo().forEach(sweetPotatoType -> itemSet.add(sweetPotatoType.getRaw()));
                 this.setItem(outputIndex, new ItemStack(
                         random.nextBoolean() ? itemSet.get(0) : itemSet.get(1)
@@ -226,10 +226,8 @@ public class MagicCubeBlockEntity extends AbstractLockableContainerBlockEntity i
     }
 
     private ItemStack enchant(ItemStack originRaw) {
-        Item item;
-        Item element = item = originRaw.getItem();
-        if (!SPMMain.RAW_SWEET_POTATOES.contains(element)
-                || !(item instanceof RawSweetPotatoBlockItem sweetPotato))
+        if (!originRaw.is(SPMMain.RAW_SWEET_POTATOES)
+                || !(originRaw.getItem() instanceof RawSweetPotatoBlockItem sweetPotato))
             return originRaw;
         CompoundTag tag = new CompoundTag();
         ListTag listTag = new ListTag();
@@ -315,7 +313,7 @@ public class MagicCubeBlockEntity extends AbstractLockableContainerBlockEntity i
         if (slot == 7)
             return item == SPMMain.POTATO_POWDER.get();
         if ((slot >= 3 && slot <= 5) || slot > 7 || slot < 0) return false;
-        return SPMMain.RAW_SWEET_POTATOES.contains(item) && toSlotStack.isEmpty();
+        return fromHopperStack.is(SPMMain.RAW_SWEET_POTATOES) && toSlotStack.isEmpty();
     }
 
     @Override

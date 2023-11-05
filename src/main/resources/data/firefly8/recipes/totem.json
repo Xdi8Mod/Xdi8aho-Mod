@@ -7,16 +7,20 @@
   ],
   "key": {
     "G": {
-      "tag": "forge:ingots/gold"
+      "tag": "c:gold_ingots"
     },
     "*": {
       "item": "minecraft:diamond"
     },
     "r": {
-      "tag": "forge:dusts/redstone"
+      "tag": "c:redstone_dusts"
     },
     "L": {
       "item": "minecraft:lapis_lazuli"
     }
+  },
+  "result": {
+    "item": "firefly8:totem",
+    "count": 1
   }
 }

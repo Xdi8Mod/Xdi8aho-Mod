@@ -19,7 +19,7 @@ public final class FireflyEntityData {
 
     public static void loadFromTag(FireflyEntity firefly, CompoundTag tag) {
         if (tag.contains("NoAi", Tag.TAG_BYTE)) firefly.setNoAi(tag.getBoolean("NoAi"));
-        if (tag.contains("Invulnerable", Tag.TAG_BYTE)) firefly.setNoAi(tag.getBoolean("Invulnerable"));
+        if (tag.contains("Invulnerable", Tag.TAG_BYTE)) firefly.setInvulnerable(tag.getBoolean("Invulnerable"));
         if (tag.contains("OwnerData", Tag.TAG_LIST))
             deserializeOwners(firefly.getOwnerMap(), tag.getList("OwnerData", Tag.TAG_COMPOUND));
     }
