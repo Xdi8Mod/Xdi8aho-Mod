@@ -48,7 +48,7 @@ public class IndiumAxeItem extends AxeItem {
         }
         else {
             level.playSound(player, blockPos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0f, 1.0f);
-            if (blockState.getBlock() != FireflyBlocks.CEDAR_WOOD.get()){
+            if (blockState.getBlock() == FireflyBlocks.CEDAR_WOOD.get()){
                 newState = FireflyBlocks.STRIPPED_CEDAR_WOOD.get().defaultBlockState();
             }
             else {
