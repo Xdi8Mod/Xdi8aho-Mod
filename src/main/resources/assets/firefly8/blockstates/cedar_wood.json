@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "firefly8:block/cedar_wood",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "firefly8:block/cedar_wood"
+    },
+    "axis=z": {
+      "model": "firefly8:block/cedar_wood",
+      "x": 90
+    }
+  }
+}
