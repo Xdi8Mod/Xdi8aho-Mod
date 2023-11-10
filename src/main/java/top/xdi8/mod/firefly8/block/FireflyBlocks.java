@@ -59,6 +59,8 @@ public class FireflyBlocks {
             CEDAR_SIGN,
             CEDAR_SLAB,
             CEDAR_STAIRS,
+            CEDAR_WOOD,
+            STRIPPED_CEDAR_WOOD,
             CEDAR_WALL_SIGN;
 
     private static final PlatformRegister reg;
@@ -171,6 +173,14 @@ public class FireflyBlocks {
                         .strength(1.0F)
                         .sound(SoundType.WOOD)
                         .dropsLike(CEDAR_SIGN.get()), cedarWood));
+        CEDAR_WOOD = reg.block("cedar_wood", () ->
+                new RotatedPillarBlock(BlockBehaviour.Properties.of(Material.WOOD, cedarColor)
+                        .strength(2.0f)
+                        .sound(SoundType.WOOD)));
+        STRIPPED_CEDAR_WOOD = reg.block("stripped_cedar_wood", () ->
+                new RotatedPillarBlock(BlockBehaviour.Properties.of(Material.WOOD, cedarColor)
+                        .strength(2.0f)
+                        .sound(SoundType.WOOD)));
         SYMBOL_STONE_NN = reg.block("symbol_stone_nn", SymbolStoneNNBlock::new);
     }
 

@@ -25,7 +25,7 @@
   "xdi8.totem.attribute": "图腾属性：",
   "xdi8.totem.attribute.firefly8:xdi8": "\uDB86\uDF2B\uDB86\uDF71\uDB86\uDF8D\uDB86\uDF89",
 
-  "itemGroup.firefly8": "灯\uDB87\uDC30",
+  "itemGroup.firefly8.firefly8": "灯\uDB87\uDC30",
   "entity.firefly8.firefly": "萤火虫",
 
   "menu.firefly8.xdi8_table": "灯法台",
@@ -60,6 +60,8 @@
   "block.firefly8.cedar_sign": "红杉木告示牌",
   "block.firefly8.cedar_slab": "红杉木台阶",
   "block.firefly8.cedar_stairs": "红杉木楼梯",
+  "block.firefly8.cedar_wood": "红杉木",
+  "block.firefly8.stripped_cedar_wood": "去皮红杉木",
 
   "commands.bindxdi8portal.success": "已为 %1$s 绑定门户",
   "commands.bindxdi8portal.failure": "无法将 %1$s 的门户绑定至 %2$s / (%3$s)",
