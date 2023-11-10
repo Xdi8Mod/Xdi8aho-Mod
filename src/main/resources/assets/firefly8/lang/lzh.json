@@ -25,7 +25,7 @@
   "xdi8.totem.attribute": "圖騰之品：",
   "xdi8.totem.attribute.firefly8:xdi8": "\uDB86\uDF2B\uDB86\uDF71\uDB86\uDF8D\uDB86\uDF89",
 
-  "itemGroup.firefly8": "灯",
+  "itemGroup.firefly8.firefly8": "灯",
   "entity.firefly8.firefly": "螢",
 
   "menu.firefly8.xdi8_table": "灯幻案",
@@ -60,6 +60,8 @@
   "block.firefly8.cedar_sign": "红杉木告示牌",
   "block.firefly8.cedar_slab": "红杉木台阶",
   "block.firefly8.cedar_stairs": "红杉木楼梯",
+  "block.firefly8.cedar_wood": "红杉木",
+  "block.firefly8.stripped_cedar_wood": "去皮红杉木",
 
   "commands.bindxdi8portal.success": "既設%s之門",
   "commands.bindxdi8portal.failure": "試設%1$s之門於%2$s之%3$s",
