@@ -28,8 +28,6 @@
   "itemGroup.firefly8.firefly8": "Xdi8 Aho",
   "entity.firefly8.firefly": "Firefly",
 
-  "menu.firefly8.xdi8_table": "Xdi8 Table",
-
   "block.firefly8.xdi8aho_portal_core": "Portal Core of Xdi8 Aho",
   "block.firefly8.xdi8aho_torch_top": "Xdi8 Aho Torchlight",
   "block.firefly8.xdi8aho_portal": "Xdi8 Aho Portal Block",
@@ -57,9 +55,11 @@
   "block.firefly8.stripped_cedar_log": "Stripped Cedar Log",
   "block.firefly8.cedar_planks": "Cedar Planks",
   "block.firefly8.cedar_pressure_plate": "Cedar Pressure Plate",
+  "block.firefly8.cedar_sapling": "Cedar Sapling",
   "block.firefly8.cedar_sign": "Cedar Sign",
   "block.firefly8.cedar_slab": "Cedar Slab",
   "block.firefly8.cedar_stairs": "Cedar Stairs",
+  "block.firefly8.cedar_trapdoor": "Cedar Trapdoor",
   "block.firefly8.cedar_wood": "Cedar Wood",
   "block.firefly8.stripped_cedar_wood": "Stripped Cedar Wood",
 
@@ -73,6 +73,7 @@
   "modmenu.summaryTranslation.firefly8": "Xdi8 Aho - Firefly",
   "modmenu.descriptionTranslation.xdi8": "Xdi8 Aho Mod",
   "modmenu.summaryTranslation.xdi8": "Xdi8 Aho",
+  "menu.firefly8.xdi8_table": "Xdi8 Table",
 
   "advancements.firefly8.tinted_glass_bottle.title":"Bottle of tint",
   "advancements.firefly8.tinted_glass_bottle.description":"Get a tinted glass bottle",
@@ -97,5 +98,11 @@
   "advancements.firefly8.xdi8_totem.title":"Oh my Xdi8 aho",
   "advancements.firefly8.xdi8_totem.description":"Get a xdi8 totem",
   "advancements.firefly8.xdi8aho.title": "Xdi8Aho",
-  "advancements.firefly8.xdi8aho.description": "Fireflies, carry light"
+  "advancements.firefly8.xdi8aho.description": "Fireflies, carry light",
+
+  "biome.firefly8.frozen_peaks": "Firefly8 Frozen Peaks",
+  "biome.firefly8.jagged_peaks": "Firefly8 Jagged Peaks",
+  "biome.firefly8.meadow": "Firefly8 Meadow",
+  "biome.firefly8.plains": "Firefly8 Plains",
+  "biome.firefly8.swamp": "Firefly8 Swamp"
 }
