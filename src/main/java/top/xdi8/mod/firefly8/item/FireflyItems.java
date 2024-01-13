@@ -70,9 +70,11 @@ public final class FireflyItems {
             STRIPPED_CEDAR_LOG,
             CEDAR_PLANKS,
             CEDAR_PRESSURE_PLATE,
+            CEDAR_SAPLING,
             CEDAR_SIGN,
             CEDAR_SLAB,
             CEDAR_STAIRS,
+            CEDAR_TRAPDOOR,
             CEDAR_WOOD,
             STRIPPED_CEDAR_WOOD;
 
@@ -178,6 +180,9 @@ public final class FireflyItems {
         CEDAR_PRESSURE_PLATE = reg.item("cedar_pressure_plate", () ->
                 new BlockItem(FireflyBlocks.CEDAR_PRESSURE_PLATE.get(),
                         defaultProp()));
+        CEDAR_SAPLING = reg.item("cedar_sapling", () ->
+                new BlockItem(FireflyBlocks.CEDAR_SAPLING.get(),
+                        defaultProp()));
         CEDAR_SIGN = reg.item("cedar_sign", () ->
                 new BlockItem(FireflyBlocks.CEDAR_SIGN.get(),
                         defaultProp()));
@@ -186,6 +191,9 @@ public final class FireflyItems {
                         defaultProp()));
         CEDAR_STAIRS = reg.item("cedar_stairs", () ->
                 new BlockItem(FireflyBlocks.CEDAR_STAIRS.get(),
+                        defaultProp()));
+        CEDAR_TRAPDOOR = reg.item("cedar_trapdoor", () ->
+                new BlockItem(FireflyBlocks.CEDAR_TRAPDOOR.get(),
                         defaultProp()));
         CEDAR_WOOD = reg.item("cedar_wood", () ->
                 new BlockItem(FireflyBlocks.CEDAR_WOOD.get(),
