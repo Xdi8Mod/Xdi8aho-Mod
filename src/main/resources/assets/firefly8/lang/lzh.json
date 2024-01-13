@@ -28,8 +28,6 @@
   "itemGroup.firefly8.firefly8": "灯",
   "entity.firefly8.firefly": "螢",
 
-  "menu.firefly8.xdi8_table": "灯幻案",
-
   "block.firefly8.xdi8aho_portal_core": "灯門之心",
   "block.firefly8.xdi8aho_torch_top": "灯籠",
   "block.firefly8.xdi8aho_portal": "灯門",
@@ -48,20 +46,22 @@
   "block.firefly8.symbol_stone_nn": "紋：N（但創）",
   "block.firefly8.symbol_stone_bricks": "紋磚",
 
-  "block.firefly8.cedar_button": "红杉木按钮",
-  "block.firefly8.cedar_door": "红杉木门",
-  "block.firefly8.cedar_fence": "红杉木栅栏",
-  "block.firefly8.cedar_fence_gate": "红杉木栅栏门",
-  "block.firefly8.cedar_leaves": "红杉树叶",
-  "block.firefly8.cedar_log": "红杉原木",
-  "block.firefly8.stripped_cedar_log": "去皮红杉原木",
-  "block.firefly8.cedar_planks": "红杉木板",
-  "block.firefly8.cedar_pressure_plate": "红杉木压力板",
-  "block.firefly8.cedar_sign": "红杉木告示牌",
-  "block.firefly8.cedar_slab": "红杉木台阶",
-  "block.firefly8.cedar_stairs": "红杉木楼梯",
-  "block.firefly8.cedar_wood": "红杉木",
-  "block.firefly8.stripped_cedar_wood": "去皮红杉木",
+  "block.firefly8.cedar_button": "紅杉鈕",
+  "block.firefly8.cedar_door": "紅杉門",
+  "block.firefly8.cedar_fence": "紅杉檻",
+  "block.firefly8.cedar_fence_gate": "紅杉扉",
+  "block.firefly8.cedar_leaves": "紅杉葉",
+  "block.firefly8.cedar_log": "紅杉樁",
+  "block.firefly8.stripped_cedar_log": "既扡紅杉樁",
+  "block.firefly8.cedar_planks": "紅杉材",
+  "block.firefly8.cedar_pressure_plate": "紅杉踏板",
+  "block.firefly8.cedar_sapling": "紅杉秧",
+  "block.firefly8.cedar_sign": "紅杉牌",
+  "block.firefly8.cedar_slab": "紅杉版",
+  "block.firefly8.cedar_stairs": "紅杉階",
+  "block.firefly8.cedar_trapdoor": "紅杉窖門",
+  "block.firefly8.cedar_wood": "紅杉木",
+  "block.firefly8.stripped_cedar_wood": "既扡紅杉木",
 
   "commands.bindxdi8portal.success": "既設%s之門",
   "commands.bindxdi8portal.failure": "試設%1$s之門於%2$s之%3$s",
@@ -73,6 +73,7 @@
   "modmenu.summaryTranslation.firefly8": "灯\uDB87\uDC31 - 螢",
   "modmenu.descriptionTranslation.xdi8": "灯\uDB87\uDC31模組",
   "modmenu.summaryTranslation.xdi8": "灯\uDB87\uDC31",
+  "menu.firefly8.xdi8_table": "灯幻案",
 
   "advancements.firefly8.tinted_glass_bottle.title": "瓶中黑灯瞎\uDB87\uDC31",
   "advancements.firefly8.tinted_glass_bottle.description": "得蔽明瓶",
@@ -97,5 +98,11 @@
   "advancements.firefly8.xdi8_totem.title": "灯\uDB87\uDC31輝煌",
   "advancements.firefly8.xdi8_totem.description": "得灯",
   "advancements.firefly8.xdi8aho.title": "灯\uDB87\uDC31",
-  "advancements.firefly8.xdi8aho.description": "螢兮螢兮，携乎灯兮"
+  "advancements.firefly8.xdi8aho.description": "螢兮螢兮，携乎灯兮",
+
+  "biome.firefly8.frozen_peaks": "灯\uDB87\uDC31凍峰",
+  "biome.firefly8.jagged_peaks": "灯\uDB87\uDC31尖峰",
+  "biome.firefly8.meadow": "灯\uDB87\uDC31草地",
+  "biome.firefly8.plains": "灯\uDB87\uDC31原野",
+  "biome.firefly8.swamp": "灯\uDB87\uDC31濘澤"
 }

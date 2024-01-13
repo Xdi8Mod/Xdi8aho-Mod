@@ -44,7 +44,7 @@ allprojects {
     apply plugin: "io.github.juuxel.loom-vineflower"
     apply plugin: "maven-publish"
 
-    version = "1.18.2-2.0.0-beta2+build.${Constant.timestamp}"
+    version = "1.18.2-2.0.0-beta3+build.${Constant.timestamp}"
     group = "top.xdi8.mod"
     archivesBaseName = "Xdi8aho-Mod"
 
@@ -101,6 +101,10 @@ allprojects {
         }
     }
 
+    sourcesJar {
+        duplicatesStrategy = 'EXCLUDE'
+    }
+
     tasks.withType(JavaCompile.class).configureEach {
         options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
         options.release = 17
@@ -154,6 +158,7 @@ subprojects {
 
     sourcesJar {
         def commonSources = project(":").sourcesJar
+        duplicatesStrategy = 'EXCLUDE'
         dependsOn commonSources
         from commonSources.archiveFile.map { zipTree(it) }
     }
