@@ -11,6 +11,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.block.state.BlockState;
 import org.featurehouse.mcmod.spm.platform.api.client.BlockRenderTypes;
+import org.spongepowered.include.com.google.common.collect.ImmutableList;
 import top.xdi8.mod.firefly8.block.FireflyBlocks;
 import top.xdi8.mod.firefly8.client.TakeOnlyContainerScreen;
 import top.xdi8.mod.firefly8.client.Xdi8TableScreen;
@@ -33,13 +34,13 @@ public class FireflyClientSetup implements Runnable {
             BlockState blockState = ((BlockItem)itemStack.getItem()).getBlock().defaultBlockState();
             return Minecraft.getInstance().getBlockColors().getColor(blockState, null, null, i);
         }, FireflyBlocks.CEDAR_LEAVES);
-        MenuRegistry.registerScreenFactory(FireflyMenus.TAKE_ONLY_CHEST.get(),
-                TakeOnlyContainerScreen::new);
-        MenuRegistry.registerScreenFactory(FireflyMenus.XDI8_TABLE.get(),
-                Xdi8TableScreen::new);
-        BlockRenderTypes.register(RenderType.cutoutMipped(),
-                FireflyBlocks.XDI8AHO_PORTAL_TOP_BLOCK);
-        BlockRenderTypes.register(RenderType.cutout(),
-                FireflyBlocks.XDI8AHO_BACK_FIRE_BLOCK);
+        MenuRegistry.registerScreenFactory(FireflyMenus.TAKE_ONLY_CHEST.get(), TakeOnlyContainerScreen::new);
+        MenuRegistry.registerScreenFactory(FireflyMenus.XDI8_TABLE.get(), Xdi8TableScreen::new);
+        BlockRenderTypes.register(RenderType.cutoutMipped(), ImmutableList.of(
+                FireflyBlocks.XDI8AHO_PORTAL_TOP_BLOCK, FireflyBlocks.CEDAR_LEAVES
+        ));
+        BlockRenderTypes.register(RenderType.cutout(), ImmutableList.of(
+                FireflyBlocks.XDI8AHO_BACK_FIRE_BLOCK, FireflyBlocks.CEDAR_SAPLING, FireflyBlocks.CEDAR_TRAPDOOR
+        ));
     }
 }
