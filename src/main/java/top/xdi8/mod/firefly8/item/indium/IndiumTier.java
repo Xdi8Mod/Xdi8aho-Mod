@@ -42,7 +42,7 @@ public class IndiumTier implements Tier {
 
     @Override
     public int getEnchantmentValue() {
-        return 8;
+        return 14;
     }
 
     @Override
