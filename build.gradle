@@ -6,7 +6,7 @@ plugins {
     id "idea"
     id "java"
     id ("architectury-plugin") version "3.4-SNAPSHOT"
-    id ("dev.architectury.loom") version "1.1-SNAPSHOT"
+    id ("dev.architectury.loom") version "1.0-SNAPSHOT"
     //id 'org.jetbrains.kotlin.jvm' version '1.6.20'
     id ("com.github.johnrengelman.shadow") version "7.1.2" apply false
     id "maven-publish"
@@ -44,7 +44,7 @@ allprojects {
     apply plugin: "io.github.juuxel.loom-vineflower"
     apply plugin: "maven-publish"
 
-    version = "1.18.2-2.0.0-beta3+build.${Constant.timestamp}"
+    version = "1.18.2-2.0.0-beta4+build.${Constant.timestamp}"
     group = "top.xdi8.mod"
     archivesBaseName = "Xdi8aho-Mod"
 
