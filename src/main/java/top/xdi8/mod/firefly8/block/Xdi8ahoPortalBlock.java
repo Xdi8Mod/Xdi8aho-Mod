@@ -3,6 +3,7 @@ package top.xdi8.mod.firefly8.block;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -36,7 +37,12 @@ public class Xdi8ahoPortalBlock extends Block {
         if (!pEntity.isPassenger() && !pEntity.isVehicle() &&
                 pEntity.canChangeDimensions() && !entityExt.xdi8$isOnCooldown()) {
             ServerLevel level = (ServerLevel) pLevel;
-            Xdi8DimensionUtils.teleportToXdi8aho(level, pEntity, pPos);
+            if (pEntity instanceof ServerPlayer player){
+                Xdi8DimensionUtils.teleportPlayerToXdi8aho(level, player, pPos);
+            }
+            else {
+                Xdi8DimensionUtils.teleportToXdi8aho(level, pEntity);
+            }
             entityExt.xdi8$resetShortCooldown();
         }
     }
