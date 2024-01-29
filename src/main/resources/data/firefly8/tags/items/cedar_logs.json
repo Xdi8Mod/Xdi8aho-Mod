@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "firefly8:cedar_log",
+    "firefly8:cedar_wood",
+    "firefly8:stripped_cedar_log",
+    "firefly8:stripped_cedar_wood"
+  ]
+}

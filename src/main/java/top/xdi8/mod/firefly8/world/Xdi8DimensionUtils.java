@@ -15,44 +15,45 @@ import top.xdi8.mod.firefly8.block.FireflyBlocks;
 import top.xdi8.mod.firefly8.ext.IServerPlayerWithHiddenInventory;
 import top.xdi8.mod.firefly8.stats.FireflyStats;
 
-import java.util.Collection;
-import java.util.Collections;
-
 public class Xdi8DimensionUtils {
     private static final Logger LOGGER = LogUtils.getLogger();
-    private static final ResourceLocation P_LOCATION = new ResourceLocation("firefly8", "xdi8aho");
+    private static final ResourceLocation DIM_LOCATION = new ResourceLocation("firefly8", "xdi8aho");
     public static final ResourceKey<Level> XDI8AHO_DIM_KEY =
-            ResourceKey.create(Registry.DIMENSION_REGISTRY, P_LOCATION);
+            ResourceKey.create(Registry.DIMENSION_REGISTRY, DIM_LOCATION);
 
-    public static void teleportToXdi8aho(ServerLevel oldLevel, Entity entity, BlockPos portalPos) {
+    public static void teleportPlayerToXdi8aho(ServerLevel oldLevel, ServerPlayer entity, BlockPos portalPos) {
         var dim = oldLevel.getServer().getLevel(Xdi8DimensionUtils.XDI8AHO_DIM_KEY);
         if (dim != null) {
-            final Entity e = changeDimension(entity, dim, new Xdi8TeleporterImpl(oldLevel));
-            if (e instanceof ServerPlayer serverPlayer) {   // && e != null
-                IServerPlayerWithHiddenInventory ext = IServerPlayerWithHiddenInventory.xdi8$extend(serverPlayer);
-                //ext.xdi8$setPortal(oldLevel.dimension(), portalPos);
-                BlockPos thatPos = portalPos;
-                for (int i = 1; i < 16; i++) {
-                    thatPos = thatPos.above();
-                    if (oldLevel.getBlockState(thatPos).is(FireflyBlocks.XDI8AHO_PORTAL_TOP_BLOCK.get())) {
-                        ext.xdi8$setPortal(oldLevel.dimension(), thatPos);
-                        break;
-                    }
+            final ServerPlayer serverPlayer = (ServerPlayer) changeDimension(entity, dim, new Xdi8TeleporterImpl(oldLevel));
+            IServerPlayerWithHiddenInventory ext = IServerPlayerWithHiddenInventory.xdi8$extend(serverPlayer);
+            BlockPos thatPos = portalPos;
+            for (int i = 1; i < 16; i++) {
+                thatPos = thatPos.above();
+                if (oldLevel.getBlockState(thatPos).is(FireflyBlocks.XDI8AHO_PORTAL_TOP_BLOCK.get())) {
+                    ext.xdi8$setPortal(oldLevel.dimension(), thatPos);
+                    break;
                 }
-                serverPlayer.awardStat(FireflyStats.O2X_PORTALS_ENTERED.get());
             }
-        }
-        else
+            serverPlayer.awardStat(FireflyStats.O2X_PORTALS_ENTERED.get());
+        } else {
             LOGGER.error("Can't find dimension {} in current server", XDI8AHO_DIM_KEY);
+        }
     }
 
-    static final Collection<ResourceLocation> SPECIAL_RESPAWN =
-            Collections.singleton(P_LOCATION);
+    public static void teleportToXdi8aho(ServerLevel oldLevel, Entity entity) {
+        var dim = oldLevel.getServer().getLevel(Xdi8DimensionUtils.XDI8AHO_DIM_KEY);
+        if (dim != null && !entity.isPassenger() && !entity.isVehicle() && entity.canChangeDimensions()) {
+            changeDimension(entity, dim, new Xdi8TeleporterImpl(oldLevel));
+        } else {
+            LOGGER.error("Can't find dimension {} in current server", XDI8AHO_DIM_KEY);
+        }
+    }
 
     public static boolean canRedirectRespawn(Level level) {
-        return SPECIAL_RESPAWN.contains(level.dimension().location());
+        return DIM_LOCATION.equals(level.dimension().location());
     }
 
+    @SuppressWarnings("unused")
     @ExpectPlatform
     static Entity changeDimension(Entity e, ServerLevel xdi8Level, TeleportWrapper teleporter) {
         throw new AssertionError();
