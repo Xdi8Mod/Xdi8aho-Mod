@@ -120,7 +120,7 @@ final class PlayChannelImpl implements PlayChannel {
             return (NoArgPlayPacket) c.invoke(consumer);
         } catch (Throwable t) {
             if (clazz != null)
-                LOGGER.error("Bad lambda packet inner class found" + clazz, t);
+                LOGGER.error("Bad lambda packet inner class found: {}", clazz, t);
             else
                 LOGGER.error("Bad lambda packet inner class found. (Unknown class)", t);
             return (AlternativePlayPacketWrapper) consumer::accept;
