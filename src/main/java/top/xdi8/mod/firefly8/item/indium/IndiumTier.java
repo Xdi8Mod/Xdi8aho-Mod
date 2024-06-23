@@ -85,7 +85,7 @@ public class IndiumTier implements Tier {
 
     static void dropNuggets(@NotNull ItemStack pStack, @NotNull Level pLevel, @NotNull BlockState pState,
                             @NotNull BlockPos pPos, @NotNull LivingEntity pEntityLiving) {
-        if (pEntityLiving.getLevel().isClientSide()) return;
+        if (pLevel.isClientSide() || pState.getDestroySpeed(pLevel, pPos) == 0.0f) return;
         if (pEntityLiving instanceof Player player) {
             dropNuggets(((ServerLevel) pLevel), player, pStack, pState, Vec3.atCenterOf(pPos), null, LOOT_NUGGETS_MINE);
         }
@@ -97,5 +97,4 @@ public class IndiumTier implements Tier {
             dropNuggets(((ServerLevel) pAttacker.getLevel()), player, pStack, null, player.position(), pTarget, LOOT_NUGGETS_ATTACK);
         }
     }
-
 }
