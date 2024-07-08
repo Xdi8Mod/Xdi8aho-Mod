@@ -2,6 +2,7 @@ package top.xdi8.mod.firefly8.item;
 
 import dev.architectury.core.item.ArchitecturySpawnEggItem;
 import dev.architectury.registry.CreativeTabRegistry;
+import dev.architectury.registry.fuel.FuelRegistry;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.food.Foods;
@@ -21,8 +22,7 @@ import top.xdi8.mod.firefly8.util.InternalRegistryLogWrapper;
 public final class FireflyItems {
     public static final InternalRegistryLogWrapper LOG_WRAPPER = InternalRegistryLogWrapper.firefly8("items");
 
-    private FireflyItems() {
-    }
+    private FireflyItems() {}
 
     public static final CreativeModeTab TAB = CreativeTabRegistry.create(new ResourceLocation(
             "firefly8", "firefly8"), () -> FireflyItems.XDI8AHO_ICON.get().getDefaultInstance());
@@ -205,5 +205,10 @@ public final class FireflyItems {
 
     static Item.Properties defaultProp() {
         return new Item.Properties().tab(TAB);
+    }
+
+    public static void registerFuels(){
+        FuelRegistry.register(300, CEDAR_FENCE.get());
+        FuelRegistry.register(300, CEDAR_FENCE_GATE.get());
     }
 }
