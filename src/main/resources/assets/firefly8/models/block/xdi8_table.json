@@ -2,7 +2,7 @@
   "parent": "minecraft:block/enchanting_table",
   "textures": {
     "particle": "firefly8:block/xdi8_table_side",
-    "bottom": "firefly8:block/indium_block_texture",
+    "bottom": "firefly8:block/indium_block",
     "top": "firefly8:block/xdi8_table_top",
     "side": "firefly8:block/xdi8_table_side"
   }

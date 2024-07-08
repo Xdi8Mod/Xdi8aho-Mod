@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SS",
+    "SS"
+  ],
+  "key": {
+    "S": {
+      "item": "firefly8:symbol_stone"
+    }
+  },
+  "result": {
+    "count": 4,
+    "item": "firefly8:symbol_stone_bricks"
+  }
+}
