@@ -15,6 +15,5 @@ pluginManagement {
 }
 include("forge")
 include("fabric")
-//include("fabric:spm_fake")
 
 rootProject.name = 'Xdi8aho-Mod'
