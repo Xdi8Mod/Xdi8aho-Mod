@@ -44,7 +44,6 @@ public class FireflyNetwork {
         }));
     }
 
-    @Environment(EnvType.SERVER)
     public static void registerServerNetwork() {
         CHANNEL.registerC2S(C2S_RESPAWN, env -> env.queue(() -> {
             if (!(env.getPlayer() instanceof ServerPlayer oldPlayer)) return;

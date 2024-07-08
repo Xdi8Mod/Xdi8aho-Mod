@@ -11,6 +11,7 @@ import org.featurehouse.mcmod.spm.platform.api.reg.RegistryContainer;
 import top.xdi8.mod.firefly8.advancement.AdvancementLoadingContext;
 import top.xdi8.mod.firefly8.advancement.criteria.FireflyCriteria;
 import top.xdi8.mod.firefly8.block.FireflyBlocks;
+import top.xdi8.mod.firefly8.block.cedar.FireflyTreeFeatures;
 import top.xdi8.mod.firefly8.block.entity.FireflyBlockEntityTypes;
 import top.xdi8.mod.firefly8.block.structure.Xdi8PortalBasicDataLoader;
 import top.xdi8.mod.firefly8.command.FireflyCommands;
@@ -33,13 +34,10 @@ public class Firefly8 {
     public static void init() {
         activateRegistries();
         RegistryContainer.of("firefly8").subscribeModBus();
-
         // Item
         TintedPotionBrewingRecipe.register();
-
         // WorldGen
         FireflyMobBiomeGen.registerBiomeModifications();
-
         AdvancementLoadingContext.EVENT.register(VanillaAdvancements::patchTintedItem);
 
         ReloadListenerRegistry.register(PackType.SERVER_DATA, new Xdi8PortalBasicDataLoader());
@@ -69,9 +67,12 @@ public class Firefly8 {
         FireflyParticles.LOG_WRAPPER.run();
         // Menu
         FireflyMenus.LOG_WRAPPER.run();
+        // Tree Feature
+        FireflyTreeFeatures.LOG_WRAPPER.run();
     }
 
     public static void commonSetup() {
+        FireflyItems.registerFuels();
         // Letters
         LettersUtil.fireLetterRegistry();
         // Totem

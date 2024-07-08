@@ -2,6 +2,7 @@ package top.xdi8.mod.firefly8.item;
 
 import dev.architectury.core.item.ArchitecturySpawnEggItem;
 import dev.architectury.registry.CreativeTabRegistry;
+import dev.architectury.registry.fuel.FuelRegistry;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.food.Foods;
@@ -21,8 +22,7 @@ import top.xdi8.mod.firefly8.util.InternalRegistryLogWrapper;
 public final class FireflyItems {
     public static final InternalRegistryLogWrapper LOG_WRAPPER = InternalRegistryLogWrapper.firefly8("items");
 
-    private FireflyItems() {
-    }
+    private FireflyItems() {}
 
     public static final CreativeModeTab TAB = CreativeTabRegistry.create(new ResourceLocation(
             "firefly8", "firefly8"), () -> FireflyItems.XDI8AHO_ICON.get().getDefaultInstance());
@@ -70,9 +70,13 @@ public final class FireflyItems {
             STRIPPED_CEDAR_LOG,
             CEDAR_PLANKS,
             CEDAR_PRESSURE_PLATE,
+            CEDAR_SAPLING,
             CEDAR_SIGN,
             CEDAR_SLAB,
-            CEDAR_STAIRS;
+            CEDAR_STAIRS,
+            CEDAR_TRAPDOOR,
+            CEDAR_WOOD,
+            STRIPPED_CEDAR_WOOD;
 
     static {
         var reg = PlatformRegister.of("firefly8");
@@ -176,6 +180,9 @@ public final class FireflyItems {
         CEDAR_PRESSURE_PLATE = reg.item("cedar_pressure_plate", () ->
                 new BlockItem(FireflyBlocks.CEDAR_PRESSURE_PLATE.get(),
                         defaultProp()));
+        CEDAR_SAPLING = reg.item("cedar_sapling", () ->
+                new BlockItem(FireflyBlocks.CEDAR_SAPLING.get(),
+                        defaultProp()));
         CEDAR_SIGN = reg.item("cedar_sign", () ->
                 new BlockItem(FireflyBlocks.CEDAR_SIGN.get(),
                         defaultProp()));
@@ -185,9 +192,23 @@ public final class FireflyItems {
         CEDAR_STAIRS = reg.item("cedar_stairs", () ->
                 new BlockItem(FireflyBlocks.CEDAR_STAIRS.get(),
                         defaultProp()));
+        CEDAR_TRAPDOOR = reg.item("cedar_trapdoor", () ->
+                new BlockItem(FireflyBlocks.CEDAR_TRAPDOOR.get(),
+                        defaultProp()));
+        CEDAR_WOOD = reg.item("cedar_wood", () ->
+                new BlockItem(FireflyBlocks.CEDAR_WOOD.get(),
+                        defaultProp()));
+        STRIPPED_CEDAR_WOOD = reg.item("stripped_cedar_wood", () ->
+                new BlockItem(FireflyBlocks.STRIPPED_CEDAR_WOOD.get(),
+                        defaultProp()));
     }
 
     static Item.Properties defaultProp() {
         return new Item.Properties().tab(TAB);
+    }
+
+    public static void registerFuels(){
+        FuelRegistry.register(300, CEDAR_FENCE.get());
+        FuelRegistry.register(300, CEDAR_FENCE_GATE.get());
     }
 }

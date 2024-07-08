@@ -20,14 +20,11 @@ public class Firefly8Forge {
     public Firefly8Forge() {
         EventBuses.registerModEventBus("firefly8", FMLJavaModLoadingContext.get().getModEventBus());
         Firefly8.init();
-        System.out.println(Environment.get().getDist().equals(Dist.CLIENT) ? "This is client" : "This is server");
         if (Environment.get().getDist().equals(Dist.CLIENT)){
             FireflyNetwork.registerClientNetwork();
             registerParticles();
         }
-        if (Environment.get().getDist().equals(Dist.DEDICATED_SERVER)){
-            FireflyNetwork.registerServerNetwork();
-        }
+        FireflyNetwork.registerServerNetwork();
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -48,6 +45,7 @@ public class Firefly8Forge {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             event.enqueueWork(new FireflyClientSetup());
+            FireflyClientSetup.registerRenderTypes();
         }
     }
 }

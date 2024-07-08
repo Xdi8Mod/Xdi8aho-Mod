@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import org.featurehouse.mcmod.spm.platform.api.reg.PlatformRegister;
+import top.xdi8.mod.firefly8.block.cedar.CedarTreeGrower;
 import top.xdi8.mod.firefly8.block.symbol.SymbolStoneBlock;
 import top.xdi8.mod.firefly8.block.symbol.SymbolStoneNNBlock;
 import top.xdi8.mod.firefly8.block.symbol.Xdi8TableBlock;
@@ -27,6 +28,10 @@ public class FireflyBlocks {
 
     // From net.minecraft.world.level.block.Blocks
     private static boolean never(BlockState state, BlockGetter getter, BlockPos pos) {
+        return false;
+    }
+
+    private static boolean never(BlockState state, BlockGetter getter, BlockPos pos, EntityType<?> entity) {
         return false;
     }
 
@@ -56,9 +61,13 @@ public class FireflyBlocks {
             STRIPPED_CEDAR_LOG,
             CEDAR_PLANKS,
             CEDAR_PRESSURE_PLATE,
+            CEDAR_SAPLING,
             CEDAR_SIGN,
             CEDAR_SLAB,
             CEDAR_STAIRS,
+            CEDAR_TRAPDOOR,
+            CEDAR_WOOD,
+            STRIPPED_CEDAR_WOOD,
             CEDAR_WALL_SIGN;
 
     private static final PlatformRegister reg;
@@ -149,6 +158,12 @@ public class FireflyBlocks {
                                 .noCollission()
                                 .strength(0.5f)
                                 .sound(SoundType.WOOD)));
+        CEDAR_SAPLING = reg.block("cedar_sapling", () ->
+                new SaplingBlock(new CedarTreeGrower(), BlockBehaviour.Properties.of(Material.PLANT)
+                        .noCollission()
+                        .randomTicks()
+                        .instabreak()
+                        .sound(SoundType.GRASS)));
         CEDAR_SIGN = reg.block("cedar_sign", () ->
                 new StandingSignBlock(BlockBehaviour.Properties.of(Material.WOOD, cedarColor)
                         .noCollission()
@@ -165,12 +180,26 @@ public class FireflyBlocks {
                         BlockBehaviour.Properties.of(Material.WOOD, cedarColor)
                         .strength(2.0F, 3.0F)
                         .sound(SoundType.WOOD)));
+        CEDAR_TRAPDOOR = reg.block("cedar_trapdoor", () ->
+                new TrapDoorBlock(BlockBehaviour.Properties.of(Material.WOOD, cedarColor)
+                        .strength(3.0F)
+                        .sound(SoundType.WOOD)
+                        .noOcclusion()
+                        .isValidSpawn(FireflyBlocks::never)));
         CEDAR_WALL_SIGN = reg.block("cedar_wall_sign", () ->
                 new WallSignBlock(BlockBehaviour.Properties.of(Material.WOOD)
                         .noCollission()
                         .strength(1.0F)
                         .sound(SoundType.WOOD)
                         .dropsLike(CEDAR_SIGN.get()), cedarWood));
+        CEDAR_WOOD = reg.block("cedar_wood", () ->
+                new RotatedPillarBlock(BlockBehaviour.Properties.of(Material.WOOD, cedarColor)
+                        .strength(2.0f)
+                        .sound(SoundType.WOOD)));
+        STRIPPED_CEDAR_WOOD = reg.block("stripped_cedar_wood", () ->
+                new RotatedPillarBlock(BlockBehaviour.Properties.of(Material.WOOD, cedarColor)
+                        .strength(2.0f)
+                        .sound(SoundType.WOOD)));
         SYMBOL_STONE_NN = reg.block("symbol_stone_nn", SymbolStoneNNBlock::new);
     }
 

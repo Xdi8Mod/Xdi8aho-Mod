@@ -1,235 +1,271 @@
 {
   "parent": "recipes/root",
-  "rewards": {
-    "recipes": ["firefly8:symbol_stone_b", "firefly8:symbol_stone_p", "firefly8:symbol_stone_m", "firefly8:symbol_stone_w", "firefly8:symbol_stone_j", "firefly8:symbol_stone_q", "firefly8:symbol_stone_x", "firefly8:symbol_stone_y", "firefly8:symbol_stone_n", "firefly8:symbol_stone_z", "firefly8:symbol_stone_dx", "firefly8:symbol_stone_s", "firefly8:symbol_stone_r", "firefly8:symbol_stone_hx", "firefly8:symbol_stone_nx", "firefly8:symbol_stone_l", "firefly8:symbol_stone_d", "firefly8:symbol_stone_t", "firefly8:symbol_stone_g", "firefly8:symbol_stone_k", "firefly8:symbol_stone_h", "firefly8:symbol_stone_4", "firefly8:symbol_stone_5", "firefly8:symbol_stone_v", "firefly8:symbol_stone_fx", "firefly8:symbol_stone_7", "firefly8:symbol_stone_bx", "firefly8:symbol_stone_c", "firefly8:symbol_stone_f", "firefly8:symbol_stone_u", "firefly8:symbol_stone_a", "firefly8:symbol_stone_o", "firefly8:symbol_stone_e", "firefly8:symbol_stone_ex", "firefly8:symbol_stone_ax", "firefly8:symbol_stone_yx", "firefly8:symbol_stone_lx", "firefly8:symbol_stone_6", "firefly8:symbol_stone_2", "firefly8:symbol_stone_tx", "firefly8:symbol_stone_8", "firefly8:symbol_stone_3", "firefly8:symbol_stone_vx", "firefly8:symbol_stone_1", "firefly8:symbol_stone_i"]
-  },
-  "requirements": [
-    [
-      "material", "firefly8:symbol_stone_b", "firefly8:symbol_stone_p", "firefly8:symbol_stone_m", "firefly8:symbol_stone_w", "firefly8:symbol_stone_j", "firefly8:symbol_stone_q", "firefly8:symbol_stone_x", "firefly8:symbol_stone_y", "firefly8:symbol_stone_n", "firefly8:symbol_stone_z", "firefly8:symbol_stone_dx", "firefly8:symbol_stone_s", "firefly8:symbol_stone_r", "firefly8:symbol_stone_hx", "firefly8:symbol_stone_nx", "firefly8:symbol_stone_l", "firefly8:symbol_stone_d", "firefly8:symbol_stone_t", "firefly8:symbol_stone_g", "firefly8:symbol_stone_k", "firefly8:symbol_stone_h", "firefly8:symbol_stone_4", "firefly8:symbol_stone_5", "firefly8:symbol_stone_v", "firefly8:symbol_stone_fx", "firefly8:symbol_stone_7", "firefly8:symbol_stone_bx", "firefly8:symbol_stone_c", "firefly8:symbol_stone_f", "firefly8:symbol_stone_u", "firefly8:symbol_stone_a", "firefly8:symbol_stone_o", "firefly8:symbol_stone_e", "firefly8:symbol_stone_ex", "firefly8:symbol_stone_ax", "firefly8:symbol_stone_yx", "firefly8:symbol_stone_lx", "firefly8:symbol_stone_6", "firefly8:symbol_stone_2", "firefly8:symbol_stone_tx", "firefly8:symbol_stone_8", "firefly8:symbol_stone_3", "firefly8:symbol_stone_vx", "firefly8:symbol_stone_1", "firefly8:symbol_stone_i"
-    ]
-  ],
   "criteria": {
     "firefly8:symbol_stone_b": {
       "trigger": "recipe_unlocked",
       "conditions": {
         "recipe": "firefly8:symbol_stone_b"
       }
-    },"firefly8:symbol_stone_p": {
+    },
+    "firefly8:symbol_stone_p": {
       "trigger": "recipe_unlocked",
       "conditions": {
         "recipe": "firefly8:symbol_stone_p"
       }
-    },"firefly8:symbol_stone_m": {
+    },
+    "firefly8:symbol_stone_m": {
       "trigger": "recipe_unlocked",
       "conditions": {
         "recipe": "firefly8:symbol_stone_m"
       }
-    },"firefly8:symbol_stone_w": {
+    },
+    "firefly8:symbol_stone_w": {
       "trigger": "recipe_unlocked",
       "conditions": {
         "recipe": "firefly8:symbol_stone_w"
       }
-    },"firefly8:symbol_stone_j": {
+    },
+    "firefly8:symbol_stone_j": {
       "trigger": "recipe_unlocked",
       "conditions": {
         "recipe": "firefly8:symbol_stone_j"
       }
-    },"firefly8:symbol_stone_q": {
+    },
+    "firefly8:symbol_stone_q": {
       "trigger": "recipe_unlocked",
       "conditions": {
         "recipe": "firefly8:symbol_stone_q"
       }
-    },"firefly8:symbol_stone_x": {
+    },
+    "firefly8:symbol_stone_x": {
       "trigger": "recipe_unlocked",
       "conditions": {
         "recipe": "firefly8:symbol_stone_x"
       }
-    },"firefly8:symbol_stone_y": {
+    },
+    "firefly8:symbol_stone_y": {
       "trigger": "recipe_unlocked",
       "conditions": {
         "recipe": "firefly8:symbol_stone_y"
       }
-    },"firefly8:symbol_stone_n": {
+    },
+    "firefly8:symbol_stone_n": {
       "trigger": "recipe_unlocked",
       "conditions": {
         "recipe": "firefly8:symbol_stone_n"
       }
-    },"firefly8:symbol_stone_z": {
+    },
+    "firefly8:symbol_stone_z": {
       "trigger": "recipe_unlocked",
       "conditions": {
         "recipe": "firefly8:symbol_stone_z"
       }
-    },"firefly8:symbol_stone_dx": {
+    },
+    "firefly8:symbol_stone_dx": {
       "trigger": "recipe_unlocked",
       "conditions": {
         "recipe": "firefly8:symbol_stone_dx"
       }
-    },"firefly8:symbol_stone_s": {
+    },
+    "firefly8:symbol_stone_s": {
       "trigger": "recipe_unlocked",
       "conditions": {
         "recipe": "firefly8:symbol_stone_s"
       }
-    },"firefly8:symbol_stone_r": {
+    },
+    "firefly8:symbol_stone_r": {
       "trigger": "recipe_unlocked",
       "conditions": {
         "recipe": "firefly8:symbol_stone_r"
       }
-    },"firefly8:symbol_stone_hx": {
+    },
+    "firefly8:symbol_stone_hx": {
       "trigger": "recipe_unlocked",
       "conditions": {
         "recipe": "firefly8:symbol_stone_hx"
       }
-    },"firefly8:symbol_stone_nx": {
+    },
+    "firefly8:symbol_stone_nx": {
       "trigger": "recipe_unlocked",
       "conditions": {
         "recipe": "firefly8:symbol_stone_nx"
       }
-    },"firefly8:symbol_stone_l": {
+    },
+    "firefly8:symbol_stone_l": {
       "trigger": "recipe_unlocked",
       "conditions": {
         "recipe": "firefly8:symbol_stone_l"
       }
-    },"firefly8:symbol_stone_d": {
+    },
+    "firefly8:symbol_stone_d": {
       "trigger": "recipe_unlocked",
       "conditions": {
         "recipe": "firefly8:symbol_stone_d"
       }
-    },"firefly8:symbol_stone_t": {
+    },
+    "firefly8:symbol_stone_t": {
       "trigger": "recipe_unlocked",
       "conditions": {
         "recipe": "firefly8:symbol_stone_t"
       }
-    },"firefly8:symbol_stone_g": {
+    },
+    "firefly8:symbol_stone_g": {
       "trigger": "recipe_unlocked",
       "conditions": {
         "recipe": "firefly8:symbol_stone_g"
       }
-    },"firefly8:symbol_stone_k": {
+    },
+    "firefly8:symbol_stone_k": {
       "trigger": "recipe_unlocked",
       "conditions": {
         "recipe": "firefly8:symbol_stone_k"
       }
-    },"firefly8:symbol_stone_h": {
+    },
+    "firefly8:symbol_stone_h": {
       "trigger": "recipe_unlocked",
       "conditions": {
         "recipe": "firefly8:symbol_stone_h"
       }
-    },"firefly8:symbol_stone_4": {
+    },
+    "firefly8:symbol_stone_4": {
       "trigger": "recipe_unlocked",
       "conditions": {
         "recipe": "firefly8:symbol_stone_4"
       }
-    },"firefly8:symbol_stone_5": {
+    },
+    "firefly8:symbol_stone_5": {
       "trigger": "recipe_unlocked",
       "conditions": {
         "recipe": "firefly8:symbol_stone_5"
       }
-    },"firefly8:symbol_stone_v": {
+    },
+    "firefly8:symbol_stone_v": {
       "trigger": "recipe_unlocked",
       "conditions": {
         "recipe": "firefly8:symbol_stone_v"
       }
-    },"firefly8:symbol_stone_fx": {
+    },
+    "firefly8:symbol_stone_fx": {
       "trigger": "recipe_unlocked",
       "conditions": {
         "recipe": "firefly8:symbol_stone_fx"
       }
-    },"firefly8:symbol_stone_7": {
+    },
+    "firefly8:symbol_stone_7": {
       "trigger": "recipe_unlocked",
       "conditions": {
         "recipe": "firefly8:symbol_stone_7"
       }
-    },"firefly8:symbol_stone_bx": {
+    },
+    "firefly8:symbol_stone_bx": {
       "trigger": "recipe_unlocked",
       "conditions": {
         "recipe": "firefly8:symbol_stone_bx"
       }
-    },"firefly8:symbol_stone_c": {
+    },
+    "firefly8:symbol_stone_c": {
       "trigger": "recipe_unlocked",
       "conditions": {
         "recipe": "firefly8:symbol_stone_c"
       }
-    },"firefly8:symbol_stone_f": {
+    },
+    "firefly8:symbol_stone_f": {
       "trigger": "recipe_unlocked",
       "conditions": {
         "recipe": "firefly8:symbol_stone_f"
       }
-    },"firefly8:symbol_stone_u": {
+    },
+    "firefly8:symbol_stone_u": {
       "trigger": "recipe_unlocked",
       "conditions": {
         "recipe": "firefly8:symbol_stone_u"
       }
-    },"firefly8:symbol_stone_a": {
+    },
+    "firefly8:symbol_stone_a": {
       "trigger": "recipe_unlocked",
       "conditions": {
         "recipe": "firefly8:symbol_stone_a"
       }
-    },"firefly8:symbol_stone_o": {
+    },
+    "firefly8:symbol_stone_o": {
       "trigger": "recipe_unlocked",
       "conditions": {
         "recipe": "firefly8:symbol_stone_o"
       }
-    },"firefly8:symbol_stone_e": {
+    },
+    "firefly8:symbol_stone_e": {
       "trigger": "recipe_unlocked",
       "conditions": {
         "recipe": "firefly8:symbol_stone_e"
       }
-    },"firefly8:symbol_stone_ex": {
+    },
+    "firefly8:symbol_stone_ex": {
       "trigger": "recipe_unlocked",
       "conditions": {
         "recipe": "firefly8:symbol_stone_ex"
       }
-    },"firefly8:symbol_stone_ax": {
+    },
+    "firefly8:symbol_stone_ax": {
       "trigger": "recipe_unlocked",
       "conditions": {
         "recipe": "firefly8:symbol_stone_ax"
       }
-    },"firefly8:symbol_stone_yx": {
+    },
+    "firefly8:symbol_stone_yx": {
       "trigger": "recipe_unlocked",
       "conditions": {
         "recipe": "firefly8:symbol_stone_yx"
       }
-    },"firefly8:symbol_stone_lx": {
+    },
+    "firefly8:symbol_stone_lx": {
       "trigger": "recipe_unlocked",
       "conditions": {
         "recipe": "firefly8:symbol_stone_lx"
       }
-    },"firefly8:symbol_stone_6": {
+    },
+    "firefly8:symbol_stone_6": {
       "trigger": "recipe_unlocked",
       "conditions": {
         "recipe": "firefly8:symbol_stone_6"
       }
-    },"firefly8:symbol_stone_2": {
+    },
+    "firefly8:symbol_stone_2": {
       "trigger": "recipe_unlocked",
       "conditions": {
         "recipe": "firefly8:symbol_stone_2"
       }
-    },"firefly8:symbol_stone_tx": {
+    },
+    "firefly8:symbol_stone_tx": {
       "trigger": "recipe_unlocked",
       "conditions": {
         "recipe": "firefly8:symbol_stone_tx"
       }
-    },"firefly8:symbol_stone_8": {
+    },
+    "firefly8:symbol_stone_8": {
       "trigger": "recipe_unlocked",
       "conditions": {
         "recipe": "firefly8:symbol_stone_8"
       }
-    },"firefly8:symbol_stone_3": {
+    },
+    "firefly8:symbol_stone_3": {
       "trigger": "recipe_unlocked",
       "conditions": {
         "recipe": "firefly8:symbol_stone_3"
       }
-    },"firefly8:symbol_stone_vx": {
+    },
+    "firefly8:symbol_stone_vx": {
       "trigger": "recipe_unlocked",
       "conditions": {
         "recipe": "firefly8:symbol_stone_vx"
       }
-    },"firefly8:symbol_stone_1": {
+    },
+    "firefly8:symbol_stone_1": {
       "trigger": "recipe_unlocked",
       "conditions": {
         "recipe": "firefly8:symbol_stone_1"
       }
-    },"firefly8:symbol_stone_i": {
+    },
+    "firefly8:symbol_stone_i": {
       "trigger": "recipe_unlocked",
       "conditions": {
         "recipe": "firefly8:symbol_stone_i"
@@ -238,10 +274,115 @@
     "material": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
-        "items": [{
-          "items": ["firefly8:symbol_stone"]
-        }]
+        "items": [
+          {
+            "items": [
+              "firefly8:symbol_stone"
+            ]
+          }
+        ]
       }
     }
+  },
+  "requirements": [
+    [
+      "material",
+      "firefly8:symbol_stone_b",
+      "firefly8:symbol_stone_p",
+      "firefly8:symbol_stone_m",
+      "firefly8:symbol_stone_w",
+      "firefly8:symbol_stone_j",
+      "firefly8:symbol_stone_q",
+      "firefly8:symbol_stone_x",
+      "firefly8:symbol_stone_y",
+      "firefly8:symbol_stone_n",
+      "firefly8:symbol_stone_z",
+      "firefly8:symbol_stone_dx",
+      "firefly8:symbol_stone_s",
+      "firefly8:symbol_stone_r",
+      "firefly8:symbol_stone_hx",
+      "firefly8:symbol_stone_nx",
+      "firefly8:symbol_stone_l",
+      "firefly8:symbol_stone_d",
+      "firefly8:symbol_stone_t",
+      "firefly8:symbol_stone_g",
+      "firefly8:symbol_stone_k",
+      "firefly8:symbol_stone_h",
+      "firefly8:symbol_stone_4",
+      "firefly8:symbol_stone_5",
+      "firefly8:symbol_stone_v",
+      "firefly8:symbol_stone_fx",
+      "firefly8:symbol_stone_7",
+      "firefly8:symbol_stone_bx",
+      "firefly8:symbol_stone_c",
+      "firefly8:symbol_stone_f",
+      "firefly8:symbol_stone_u",
+      "firefly8:symbol_stone_a",
+      "firefly8:symbol_stone_o",
+      "firefly8:symbol_stone_e",
+      "firefly8:symbol_stone_ex",
+      "firefly8:symbol_stone_ax",
+      "firefly8:symbol_stone_yx",
+      "firefly8:symbol_stone_lx",
+      "firefly8:symbol_stone_6",
+      "firefly8:symbol_stone_2",
+      "firefly8:symbol_stone_tx",
+      "firefly8:symbol_stone_8",
+      "firefly8:symbol_stone_3",
+      "firefly8:symbol_stone_vx",
+      "firefly8:symbol_stone_1",
+      "firefly8:symbol_stone_i"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "firefly8:dark_symbol_stone",
+      "firefly8:symbol_stone_bricks",
+      "firefly8:symbol_stone_b",
+      "firefly8:symbol_stone_p",
+      "firefly8:symbol_stone_m",
+      "firefly8:symbol_stone_w",
+      "firefly8:symbol_stone_j",
+      "firefly8:symbol_stone_q",
+      "firefly8:symbol_stone_x",
+      "firefly8:symbol_stone_y",
+      "firefly8:symbol_stone_n",
+      "firefly8:symbol_stone_z",
+      "firefly8:symbol_stone_dx",
+      "firefly8:symbol_stone_s",
+      "firefly8:symbol_stone_r",
+      "firefly8:symbol_stone_hx",
+      "firefly8:symbol_stone_nx",
+      "firefly8:symbol_stone_l",
+      "firefly8:symbol_stone_d",
+      "firefly8:symbol_stone_t",
+      "firefly8:symbol_stone_g",
+      "firefly8:symbol_stone_k",
+      "firefly8:symbol_stone_h",
+      "firefly8:symbol_stone_4",
+      "firefly8:symbol_stone_5",
+      "firefly8:symbol_stone_v",
+      "firefly8:symbol_stone_fx",
+      "firefly8:symbol_stone_7",
+      "firefly8:symbol_stone_bx",
+      "firefly8:symbol_stone_c",
+      "firefly8:symbol_stone_f",
+      "firefly8:symbol_stone_u",
+      "firefly8:symbol_stone_a",
+      "firefly8:symbol_stone_o",
+      "firefly8:symbol_stone_e",
+      "firefly8:symbol_stone_ex",
+      "firefly8:symbol_stone_ax",
+      "firefly8:symbol_stone_yx",
+      "firefly8:symbol_stone_lx",
+      "firefly8:symbol_stone_6",
+      "firefly8:symbol_stone_2",
+      "firefly8:symbol_stone_tx",
+      "firefly8:symbol_stone_8",
+      "firefly8:symbol_stone_3",
+      "firefly8:symbol_stone_vx",
+      "firefly8:symbol_stone_1",
+      "firefly8:symbol_stone_i"
+    ]
   }
 }

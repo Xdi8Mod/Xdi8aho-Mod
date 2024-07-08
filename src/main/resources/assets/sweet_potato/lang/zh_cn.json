@@ -1,6 +1,5 @@
 {
   "mod.sweet_potato": "烤地瓜",
-
   "item.sweet_potato.purple_potato": "紫薯",
   "item.sweet_potato.red_potato": "红薯",
   "item.sweet_potato.white_potato": "白薯",
@@ -17,7 +16,6 @@
   "item.sweet_potato.enchanted_potato": "附魔马铃薯",
   "item.sweet_potato.enchanted_beetroot_seeds": "附魔甜菜种子",
   "item.sweet_potato.treating_bowl": "许愿碗",
-
   "block.sweet_potato.purple_potatoes": "紫薯",
   "block.sweet_potato.red_potatoes": "红薯",
   "block.sweet_potato.white_potatoes": "白薯",
@@ -37,35 +35,29 @@
   "block.sweet_potato.enchanted_jungle_leaves": "附魔丛林树叶",
   "block.sweet_potato.enchanted_oak_leaves": "附魔橡树树叶",
   "block.sweet_potato.enchanted_spruce_leaves": "附魔云杉树叶",
-  "block.sweet_potato.enchanted_wheat": "附魔小麦",
+  "block.sweet_potato.enchanted_wheat": "附魔小麦作物",
   "block.sweet_potato.enchanted_carrots": "附魔胡萝卜",
   "block.sweet_potato.enchanted_potatoes": "附魔马铃薯",
   "block.sweet_potato.enchanted_beetroots": "附魔甜菜根",
-
   "subtitles.block.sweet_potato.agroforestry_table.finish": "农林台：升级",
   "subtitles.block.sweet_potato.grinder.grind": "研磨器：研磨",
   "subtitles.block.sweet_potato.magic_cube.activate": "魔法锅：激活",
   "subtitles.block.sweet_potato.magic_cube.deactivate": "魔法锅：失效",
   "subtitles.block.sweet_potato.magic_cube.ambient": "魔法锅：轰鸣",
-
   "advancement.husbandry.sweet_potato.get_sweet_potato.title": "香甜软糯",
   "advancement.husbandry.sweet_potato.get_sweet_potato.description": "获得地瓜",
   "advancement.nether.sweet_potato.get_magic_cube.title": "灵魂魔法",
   "advancement.nether.sweet_potato.get_magic_cube.description": "获得魔法锅",
-
   "container.sweet_potato.magic_cube": "魔法锅",
   "container.sweet_potato.seed_updating": "升级作物",
   "container.sweet_potato.grinding": "研磨",
   "container.grinding.ingredientData": "已添加 %f 份原料",
-
   "stat.sweet_potato.interact_with_grinder": "与研磨器互动次数",
   "stat.sweet_potato.interact_with_agroforestry_table": "与农林台互动次数",
   "stat.sweet_potato.crop_upgraded": "升级作物次数",
   "stat.sweet_potato.sweet_potato_eaten": "吃掉的地瓜数",
   "stat.sweet_potato.interact_with_magic_cube": "与魔法锅互动次数",
-
   "tooltip.sweet_potato.enchanted_sweet_potato.effects": "效果： ",
-
   "block.sweet_potato.enchanted_tubers": "附魔块茎作物",
   "block.sweet_potato.enchanted_crops": "附魔粮食作物",
   "block.sweet_potato.enchanted_sapling": "附魔树苗",
