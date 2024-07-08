@@ -36,7 +36,7 @@ public class Xdi8DimensionUtils {
             }
             serverPlayer.awardStat(FireflyStats.O2X_PORTALS_ENTERED.get());
         } else {
-            LOGGER.error("Can't find dimension {} in current server", XDI8AHO_DIM_KEY);
+            logError();
         }
     }
 
@@ -45,12 +45,18 @@ public class Xdi8DimensionUtils {
         if (dim != null && !entity.isPassenger() && !entity.isVehicle() && entity.canChangeDimensions()) {
             changeDimension(entity, dim, new Xdi8TeleporterImpl(oldLevel));
         } else {
-            LOGGER.error("Can't find dimension {} in current server", XDI8AHO_DIM_KEY);
+            logError();
         }
     }
 
     public static boolean canRedirectRespawn(Level level) {
-        return DIM_LOCATION.equals(level.dimension().location());
+        // TODO: Fix the bug
+        // return DIM_LOCATION.equals(level.dimension().location());
+        return false;
+    }
+
+    private static void logError(){
+        LOGGER.error("Can't find dimension {} in current server", XDI8AHO_DIM_KEY);
     }
 
     @SuppressWarnings("unused")

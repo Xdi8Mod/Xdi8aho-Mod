@@ -34,13 +34,10 @@ public class Firefly8 {
     public static void init() {
         activateRegistries();
         RegistryContainer.of("firefly8").subscribeModBus();
-
         // Item
         TintedPotionBrewingRecipe.register();
-
         // WorldGen
         FireflyMobBiomeGen.registerBiomeModifications();
-
         AdvancementLoadingContext.EVENT.register(VanillaAdvancements::patchTintedItem);
 
         ReloadListenerRegistry.register(PackType.SERVER_DATA, new Xdi8PortalBasicDataLoader());
@@ -75,6 +72,7 @@ public class Firefly8 {
     }
 
     public static void commonSetup() {
+        FireflyItems.registerFuels();
         // Letters
         LettersUtil.fireLetterRegistry();
         // Totem
