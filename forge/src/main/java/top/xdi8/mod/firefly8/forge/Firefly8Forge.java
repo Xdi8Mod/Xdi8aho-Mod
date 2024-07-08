@@ -2,8 +2,6 @@ package top.xdi8.mod.firefly8.forge;
 
 import dev.architectury.platform.forge.EventBuses;
 import dev.architectury.registry.client.particle.ParticleProviderRegistry;
-import dev.architectury.registry.client.rendering.RenderTypeRegistry;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -13,7 +11,6 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.forgespi.Environment;
 import top.xdi8.mod.firefly8.Firefly8;
 import top.xdi8.mod.firefly8.FireflyClientSetup;
-import top.xdi8.mod.firefly8.block.FireflyBlocks;
 import top.xdi8.mod.firefly8.client.FireflyParticle;
 import top.xdi8.mod.firefly8.network.FireflyNetwork;
 import top.xdi8.mod.firefly8.particle.FireflyParticles;
@@ -48,9 +45,7 @@ public class Firefly8Forge {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             event.enqueueWork(new FireflyClientSetup());
-            RenderTypeRegistry.register(RenderType.cutoutMipped(), FireflyBlocks.XDI8AHO_PORTAL_TOP_BLOCK.get(), FireflyBlocks.CEDAR_LEAVES.get());
-            RenderTypeRegistry.register(RenderType.cutout(), FireflyBlocks.XDI8AHO_BACK_FIRE_BLOCK.get(), FireflyBlocks.CEDAR_SAPLING.get(),
-                    FireflyBlocks.CEDAR_TRAPDOOR.get(), FireflyBlocks.CEDAR_DOOR.get());
+            FireflyClientSetup.registerRenderTypes();
         }
     }
 }

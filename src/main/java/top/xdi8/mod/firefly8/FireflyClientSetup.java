@@ -34,8 +34,12 @@ public class FireflyClientSetup implements Runnable {
         }, FireflyBlocks.CEDAR_LEAVES);
         MenuRegistry.registerScreenFactory(FireflyMenus.TAKE_ONLY_CHEST.get(), TakeOnlyContainerScreen::new);
         MenuRegistry.registerScreenFactory(FireflyMenus.XDI8_TABLE.get(), Xdi8TableScreen::new);
-        RenderTypeRegistry.register(RenderType.cutoutMipped(), FireflyBlocks.XDI8AHO_PORTAL_TOP_BLOCK.get(), FireflyBlocks.CEDAR_LEAVES.get());
+        registerRenderTypes();
+    }
+
+    public static void registerRenderTypes(){
+        RenderTypeRegistry.register(RenderType.cutoutMipped(), FireflyBlocks.CEDAR_LEAVES.get());
         RenderTypeRegistry.register(RenderType.cutout(), FireflyBlocks.XDI8AHO_BACK_FIRE_BLOCK.get(), FireflyBlocks.CEDAR_SAPLING.get(),
-                FireflyBlocks.CEDAR_TRAPDOOR.get(), FireflyBlocks.CEDAR_DOOR.get());
+                FireflyBlocks.CEDAR_TRAPDOOR.get(), FireflyBlocks.CEDAR_DOOR.get(), FireflyBlocks.XDI8AHO_PORTAL_TOP_BLOCK.get());
     }
 }
