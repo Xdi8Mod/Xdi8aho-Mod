@@ -1,6 +1,17 @@
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
+
 plugins {
     id "architectury-plugin" version "3.4-SNAPSHOT"
     id "dev.architectury.loom" version "1.7-SNAPSHOT" apply false
+    id 'io.github.juuxel.loom-vineflower' version '1.11.0' apply false  // add vineflower, see https://github.com/Juuxel/loom-vineflower
+}
+
+//apply from : 'https://featurehouse.github.io/resources/18/06/953b4d/e2d196c3f97701c23ca7d34ce2ed2576a86fab019e7a2009b2b94d/kff-3.3.2.gradle'
+class Constant {
+    static final LocalDateTime now = LocalDateTime.now(ZoneId.of('+8'))
+    static final String timestamp = "${DateTimeFormatter.ofPattern("yyMMdd.HHmm").format(now)}"
 }
 
 architectury {
@@ -9,6 +20,7 @@ architectury {
 
 subprojects {
     apply plugin: "dev.architectury.loom"
+    apply plugin: "io.github.juuxel.loom-vineflower"  // add vineflower
 
     loom {
         silentMojangMappingsLicense()
@@ -32,7 +44,7 @@ allprojects {
         archivesName = rootProject.archives_base_name
     }
 
-    version = rootProject.mod_version
+    version = "1.18.2-2.0.0+build.${Constant.timestamp}"
     group = rootProject.maven_group
 
     repositories {
@@ -43,7 +55,7 @@ allprojects {
         // for more information about repositories.
     }
 
-    tasks.withType(JavaCompile) {
+    tasks.withType(JavaCompile).configureEach {
         options.encoding = "UTF-8"
         options.release = 21
     }
