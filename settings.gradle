@@ -1,3 +1,4 @@
+//file:noinspection GroovyAssignabilityCheck
 pluginManagement {
     repositories {
         maven {
@@ -8,12 +9,13 @@ pluginManagement {
             name = 'Aliyun Gradle Plugins'
             url = 'https://maven.aliyun.com/repository/gradle-plugin'
         }
-        maven { url = 'https://maven.minecraftforge.net' }
+        maven { url = 'https://maven.neoforged.net/releases' }
         maven { url "https://maven.fabricmc.net/" }
         maven { url "https://maven.architectury.dev/" }
     }
 }
-include("forge")
+include("common")
+include("neoforge")
 include("fabric")
 
 rootProject.name = 'Xdi8aho-Mod'

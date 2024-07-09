@@ -1,3 +1,4 @@
+//file:noinspection GroovyAssignabilityCheck
 plugins {
     id "com.github.johnrengelman.shadow" version "7.1.2"
 }
@@ -46,7 +47,7 @@ shadowJar {
 
 remapJar {
     injectAccessWidener = true
-    input.set shadowJar.archiveFile
+    //input.set shadowJar.archiveFile
     dependsOn shadowJar
 }
 

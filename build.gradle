@@ -1,11 +1,14 @@
+//file:noinspection GroovyAssignabilityCheck
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
 plugins {
+    id "java"
+    id "maven-publish"
     id "architectury-plugin" version "3.4-SNAPSHOT"
     id "dev.architectury.loom" version "1.7-SNAPSHOT" apply false
-    id 'io.github.juuxel.loom-vineflower' version '1.11.0' apply false  // add vineflower, see https://github.com/Juuxel/loom-vineflower
+    id "io.github.juuxel.loom-vineflower" version "1.11.0" apply false  // add vineflower, see https://github.com/Juuxel/loom-vineflower
 }
 
 //apply from : 'https://featurehouse.github.io/resources/18/06/953b4d/e2d196c3f97701c23ca7d34ce2ed2576a86fab019e7a2009b2b94d/kff-3.3.2.gradle'
@@ -14,13 +17,17 @@ class Constant {
     static final String timestamp = "${DateTimeFormatter.ofPattern("yyMMdd.HHmm").format(now)}"
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
 architectury {
     minecraft = rootProject.minecraft_version
 }
 
 subprojects {
     apply plugin: "dev.architectury.loom"
-    apply plugin: "io.github.juuxel.loom-vineflower"  // add vineflower
 
     loom {
         silentMojangMappingsLicense()
@@ -28,10 +35,10 @@ subprojects {
 
     dependencies {
         minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
-        // The following line declares the mojmap mappings, you may use other mappings as well
-        mappings loom.officialMojangMappings()
-        // The following line declares the yarn mappings you may select this one as well.
-        // mappings "net.fabricmc:yarn:1.20.1+build.10:v2"
+        mappings loom.layered {
+            officialMojangMappings()
+            parchment("org.parchmentmc.data:parchment-${rootProject.minecraft_version}:${rootProject.parchment_version}")
+        }
     }
 }
 
@@ -48,11 +55,10 @@ allprojects {
     group = rootProject.maven_group
 
     repositories {
-        // Add repositories to retrieve artifacts from in here.
-        // You should only use this when depending on other mods because
-        // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
-        // See https://docs.gradle.org/current/userguide/declaring_repositories.html
-        // for more information about repositories.
+        maven {
+            name = 'ParchmentMC'
+            url = 'https://maven.parchmentmc.org'
+        }
     }
 
     tasks.withType(JavaCompile).configureEach {

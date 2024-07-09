@@ -11,10 +11,10 @@
 
   "depends": {
     "fabricloader": ">=0.15.0",
-    "fabric": ">=0.77.0",
-    "architectury": ">=9.0",
-    "java": ">=17",
-    "minecraft": ">=1.20"
+    "fabric": ">=0.97.0",
+    "architectury": ">=13.0",
+    "java": ">=21",
+    "minecraft": ">=1.21"
   },
   "entrypoints": {
     "main": [
@@ -31,7 +31,7 @@
   ],
   "mixins": [
     "mixins.firefly-fabric.json",
-    "sweet_potato.mixins.json",
+    "mixins.sweet_potato.json",
     "mixins.firefly8-main.json"
   ],
   "custom": {

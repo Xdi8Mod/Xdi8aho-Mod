@@ -1,0 +1,69 @@
+modLoader="javafml"
+loaderVersion="[21,)"
+license="GPL-3.0-or-later with Minecraft exception"
+issueTrackerURL="https://github.com/Xdi8Mod/Xdi8Aho-Mod/issues"
+
+[[mods]]
+    modId="xdi8"
+    version="${version}"
+    displayName="Xdi8 Aho"
+    credits="Thanks to Shidinn community for insipiration and a lot more"
+    authors="Xdi8Mod,teddyxlandlee,QWERTY770"
+    description="Xdi8 Aho Mod"
+    displayURL="https://modrinth.com/mod/xdi8aho-mod"
+
+[[mods]]
+    modId="xdi8_fonts"
+    version="${version}"
+    displayName="Xdi8 Aho Fonts"
+    credits="Thanks to Shidinn community for insipiration and a lot more"
+    authors="Xdi8Mod,teddyxlandlee,QWERTY770"
+    description="Xdi8 Aho Language Fonts support"
+    displayURL="https://modrinth.com/mod/xdi8aho-mod"
+
+[[mods]]
+    modId="firefly8"
+    version="${version}"
+    displayName="Firefly"
+    credits="Thanks to Shidinn community for insipiration and a lot more"
+    authors="Xdi8Mod,teddyxlandlee,QWERTY770,7oH_1fT"
+    description="""Firefly, carry light,
+In the night, blink his eye,
+Just to make his future bright."""
+    displayURL="https://modrinth.com/mod/xdi8aho-mod"
+    #logoFile=
+
+[[mods]]
+    modId="sweet_potato"
+    version="${version}"
+    displayName="Sweet Potato Reborn"
+    credits="See sweet_potato:credits.json for more info"
+    authors="Pigeonia Featurehouse"
+    description='Combination of Agromagic'
+    #logoFile=
+
+[[mixins]]
+    config1="mixins.xdi8-fonts.json"
+    config2="mixins.sweet_potato.json"
+    config3="mixins.firefly8-main.json"
+    config4="mixins.firefly-forge.json"
+
+[[dependencies.xdi8]]
+    modId="neoforge"
+    type="required"
+    versionRange="[21,)"
+    ordering="NONE"
+    side="BOTH"
+# Here's another dependency
+[[dependencies.xdi8]]
+    modId="minecraft"
+    type="required"
+    versionRange="[1.21,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.xdi8]]
+    modId="architectury"
+    type="required"
+    versionRange="[13.0,)"
+    ordering="NONE"
+    side="BOTH"

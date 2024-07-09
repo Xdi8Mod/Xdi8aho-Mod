@@ -1,24 +1,19 @@
+//file:noinspection GroovyAssignabilityCheck
 plugins {
     id "com.github.johnrengelman.shadow" version "7.1.2"
 }
 
+repositories {
+    maven { url "https://maven.neoforged.net/releases/" }
+}
+
 architectury {
     platformSetupLoomIde()
-    forge()
+    neoForge()
 }
 
 loom {
     accessWidenerPath = project(":common").loom.accessWidenerPath
-
-    forge {
-        convertAccessWideners = true
-        extraAccessWideners.add loom.accessWidenerPath.get().asFile.name
-
-        mixinConfig 'mixins.xdi8-fonts.json'
-        mixinConfig 'sweet_potato.mixins.json'
-        mixinConfig 'mixins.firefly8-main.json'
-        mixinConfig 'mixins.firefly-forge.json'
-    }
 }
 
 configurations {
@@ -30,9 +25,8 @@ configurations {
 }
 
 dependencies {
-    forge "net.minecraftforge:forge:${rootProject.forge_version}"
-    // Remove the next line if you don't want to depend on the API
-    modApi "dev.architectury:architectury-forge:${rootProject.architectury_version}"
+    neoForge "net.neoforged:neoforge:${rootProject.neoforge_version}"
+    modApi "dev.architectury:architectury-neoforge:${rootProject.architectury_version}"
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
@@ -55,7 +49,7 @@ shadowJar {
 }
 
 remapJar {
-    input.set shadowJar.archiveFile
+    //input.set shadowJar.archiveFile
     dependsOn shadowJar
 }
 
