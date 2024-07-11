@@ -17,7 +17,6 @@ import top.xdi8.mod.firefly8.client.Xdi8TableScreen;
 import top.xdi8.mod.firefly8.entity.FireflyEntityTypes;
 import top.xdi8.mod.firefly8.screen.FireflyMenus;
 
-//@Mod.EventBusSubscriber(modid = "firefly8", value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class FireflyClientSetup implements Runnable {
     @Override
     public void run() {

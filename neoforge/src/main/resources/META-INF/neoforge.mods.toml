@@ -4,15 +4,6 @@ license="GPL-3.0-or-later with Minecraft exception"
 issueTrackerURL="https://github.com/Xdi8Mod/Xdi8Aho-Mod/issues"
 
 [[mods]]
-    modId="xdi8"
-    version="${version}"
-    displayName="Xdi8 Aho"
-    credits="Thanks to Shidinn community for insipiration and a lot more"
-    authors="Xdi8Mod,teddyxlandlee,QWERTY770"
-    description="Xdi8 Aho Mod"
-    displayURL="https://modrinth.com/mod/xdi8aho-mod"
-
-[[mods]]
     modId="xdi8_fonts"
     version="${version}"
     displayName="Xdi8 Aho Fonts"
@@ -41,6 +32,15 @@ Just to make his future bright."""
     authors="Pigeonia Featurehouse"
     description='Combination of Agromagic'
     #logoFile=
+
+#[[mods]]
+#    modId="xdi8"
+#    version="${version}"
+#    displayName="Xdi8 Aho"
+#    credits="Thanks to Shidinn community for insipiration and a lot more"
+#    authors="Xdi8Mod,teddyxlandlee,QWERTY770"
+#    description="Xdi8 Aho Mod"
+#    displayURL="https://modrinth.com/mod/xdi8aho-mod"
 
 [[mixins]]
     config1="mixins.xdi8-fonts.json"

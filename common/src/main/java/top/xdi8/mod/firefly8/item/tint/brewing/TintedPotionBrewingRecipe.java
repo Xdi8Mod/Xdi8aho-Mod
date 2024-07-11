@@ -9,6 +9,7 @@ import java.util.Set;
 import java.util.function.Supplier;
 
 public class TintedPotionBrewingRecipe {
+    // TODO: rewrite
     public static final Set<Supplier<Item>> INGREDIENTS
             = Set.of(FireflyItems.TINTED_POTION, FireflyItems.TINTED_LINGERING_POTION,
                 FireflyItems.TINTED_SPLASH_POTION, FireflyItems.TINTED_GLASS_BOTTLE);

@@ -18,12 +18,12 @@ import net.minecraft.world.level.levelgen.feature.trunkplacers.GiantTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import top.xdi8.mod.firefly8.block.FireflyBlocks;
 import top.xdi8.mod.firefly8.util.InternalRegistryLogWrapper;
-import top.xdi8.mod.firefly8.util.SimpleStateProviderNew;
+import top.xdi8.mod.firefly8.util.SimpleStateProviderTool;
 
 public class FireflyTreeFeatures {
     public static final InternalRegistryLogWrapper LOG_WRAPPER = InternalRegistryLogWrapper.firefly8("tree_features");
-    public static SimpleStateProviderNew CEDAR_LOG = new SimpleStateProviderNew(FireflyBlocks.CEDAR_LOG);
-    public static SimpleStateProviderNew CEDAR_LEAVES = new SimpleStateProviderNew(FireflyBlocks.CEDAR_LEAVES);
+    public static SimpleStateProviderTool CEDAR_LOG = new SimpleStateProviderTool(FireflyBlocks.CEDAR_LOG);
+    public static SimpleStateProviderTool CEDAR_LEAVES = new SimpleStateProviderTool(FireflyBlocks.CEDAR_LEAVES);
     public static final Holder<ConfiguredFeature<TreeConfiguration, ?>> CEDAR = FeatureUtils.register("cedar",
             Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(CEDAR_LOG,
                     new StraightTrunkPlacer(7, 3, 2), CEDAR_LEAVES,

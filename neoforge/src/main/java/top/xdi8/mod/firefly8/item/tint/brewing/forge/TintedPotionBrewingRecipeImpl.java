@@ -2,9 +2,11 @@ package top.xdi8.mod.firefly8.item.tint.brewing.forge;
 
 import com.mojang.logging.LogUtils;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
-import net.minecraftforge.common.brewing.IBrewingRecipe;
-import net.minecraftforge.common.brewing.VanillaBrewingRecipe;
+//import net.neoforged.common.brewing.BrewingRecipeRegistry;
+//import net.neoforged.common.brewing.IBrewingRecipe;
+//import net.neoforged.common.brewing.VanillaBrewingRecipe;
+import net.neoforged.neoforge.common.brewing.BrewingRecipe;
+import net.neoforged.neoforge.common.brewing.IBrewingRecipe;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import top.xdi8.mod.firefly8.item.tint.ItemTinting;
@@ -14,10 +16,9 @@ import top.xdi8.mod.firefly8.item.tint.brewing.TintedPotionBrewingRecipe;
  * <p>Register tinted potion for corresponding vanilla
  * ones.</p>
  * TODO: Support other types
- * @see VanillaBrewingRecipe
+ * @see BrewingRecipe
  */
-public class TintedPotionBrewingRecipeImpl extends VanillaBrewingRecipe
-        implements IBrewingRecipe {
+public class TintedPotionBrewingRecipeImpl extends BrewingRecipe {
     public static void register() {
         BrewingRecipeRegistry.addRecipe(new TintedPotionBrewingRecipeImpl());
     }

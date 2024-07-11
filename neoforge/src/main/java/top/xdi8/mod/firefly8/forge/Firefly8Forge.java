@@ -1,14 +1,13 @@
 package top.xdi8.mod.firefly8.forge;
 
-import dev.architectury.platform.forge.EventBuses;
 import dev.architectury.registry.client.particle.ParticleProviderRegistry;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.forgespi.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforgespi.Environment;
 import top.xdi8.mod.firefly8.Firefly8;
 import top.xdi8.mod.firefly8.FireflyClientSetup;
 import top.xdi8.mod.firefly8.client.FireflyParticle;
@@ -18,7 +17,7 @@ import top.xdi8.mod.firefly8.particle.FireflyParticles;
 @Mod("firefly8")
 public class Firefly8Forge {
     public Firefly8Forge() {
-        EventBuses.registerModEventBus("firefly8", FMLJavaModLoadingContext.get().getModEventBus());
+        //EventBus.register("firefly8", FMLJavaModLoadingContext.get().getModEventBus());
         Firefly8.init();
         if (Environment.get().getDist().equals(Dist.CLIENT)){
             FireflyNetwork.registerClientNetwork();
@@ -40,7 +39,7 @@ public class Firefly8Forge {
                 });
     }
 
-    @Mod.EventBusSubscriber(value = Dist.CLIENT, modid = "firefly8", bus = Mod.EventBusSubscriber.Bus.MOD)
+    @EventBusSubscriber(value = Dist.CLIENT, modid = "firefly8", bus = EventBusSubscriber.Bus.MOD)
     public static final class ClientSetup {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
