@@ -17,7 +17,7 @@ import top.xdi8.mod.firefly8.client.Xdi8TableScreen;
 import top.xdi8.mod.firefly8.entity.FireflyEntityTypes;
 import top.xdi8.mod.firefly8.screen.FireflyMenus;
 
-public class FireflyClientSetup implements Runnable {
+public class Firefly8Client implements Runnable {
     @Override
     public void run() {
         EntityRenderers.register(FireflyEntityTypes.FIREFLY.get(), NoopRenderer::new);

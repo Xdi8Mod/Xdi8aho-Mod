@@ -8,8 +8,10 @@ import java.util.Collection;
 import java.util.function.Supplier;
 
 /**
+ * Use dev.architectury.registry.client.rendering.ColorHandlerRegistry instead!
  * @apiNote This must be wrapped in a client initialization event
  */
+@Deprecated
 public final class BlockRenderTypes {
     public static void register(RenderType type, Collection<Supplier<Block>> blocks) {
         for (var b : blocks)

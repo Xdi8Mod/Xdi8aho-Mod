@@ -9,9 +9,10 @@ import org.featurehouse.mcmod.spm.advancement.BalancedDietHelper;
 import org.featurehouse.mcmod.spm.platform.api.reg.RegistryContainer;
 import org.featurehouse.mcmod.spm.resource.magicalenchantment.MagicalEnchantmentLoader;
 import top.xdi8.mod.firefly8.advancement.AdvancementLoadingContext;
+import top.xdi8.mod.firefly8.util.ResourceLocationTool;
 
-public class SPMFabricImpl implements ModInitializer {
-    private static final ResourceLocation BALANCED_DIET = new ResourceLocation("husbandry/balanced_diet");
+public class SPMFabric implements ModInitializer {
+    private static final ResourceLocation BALANCED_DIET = ResourceLocationTool.withDefaultNamespace("husbandry/balanced_diet");
 
     @Override
     public void onInitialize() {

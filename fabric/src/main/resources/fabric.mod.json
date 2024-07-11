@@ -19,7 +19,7 @@
   "entrypoints": {
     "main": [
       "top.xdi8.mod.firefly8.fabric.Firefly8Fabric",
-      "org.featurehouse.mcmod.spm.platform.fabric.SPMFabricImpl"
+      "org.featurehouse.mcmod.spm.platform.fabric.SPMFabric"
     ],
     "client": [
       "top.xdi8.mod.firefly8.fabric.FireflyClientFabric",

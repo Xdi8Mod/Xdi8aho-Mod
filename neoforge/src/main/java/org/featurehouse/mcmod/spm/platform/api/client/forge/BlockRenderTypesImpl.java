@@ -5,6 +5,7 @@ import net.minecraft.world.level.block.Block;
 
 import java.util.function.Supplier;
 
+@Deprecated
 public class BlockRenderTypesImpl {
     public static void register(RenderType type, Supplier<Block> block) {
         net.minecraft.client.renderer.ItemBlockRenderTypes.setRenderLayer(block.get(), type);

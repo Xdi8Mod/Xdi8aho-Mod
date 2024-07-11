@@ -7,9 +7,10 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforgespi.Environment;
 import top.xdi8.mod.firefly8.Firefly8;
-import top.xdi8.mod.firefly8.FireflyClientSetup;
+import top.xdi8.mod.firefly8.Firefly8Client;
 import top.xdi8.mod.firefly8.client.FireflyParticle;
 import top.xdi8.mod.firefly8.network.FireflyNetwork;
 import top.xdi8.mod.firefly8.particle.FireflyParticles;
@@ -43,8 +44,16 @@ public class Firefly8Forge {
     public static final class ClientSetup {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
-            event.enqueueWork(new FireflyClientSetup());
-            FireflyClientSetup.registerRenderTypes();
+            event.enqueueWork(new Firefly8Client());
+            Firefly8Client.registerRenderTypes();
+        }
+    }
+
+    @EventBusSubscriber(modid = "firefly8", bus = EventBusSubscriber.Bus.MOD)
+    public static final class CommonSetup {
+        @SubscribeEvent
+        public static void onCommonSetup(FMLCommonSetupEvent event) {
+            event.enqueueWork(Firefly8::commonSetup);
         }
     }
 }
