@@ -3,7 +3,7 @@ package top.xdi8.mod.firefly8.mixin.forge;
 import com.google.gson.JsonObject;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.critereon.DeserializationContext;
-import net.minecraftforge.common.crafting.conditions.ICondition;
+import net.neoforged.common.crafting.conditions.ICondition;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

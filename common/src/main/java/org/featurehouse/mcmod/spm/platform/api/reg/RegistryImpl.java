@@ -6,6 +6,7 @@ import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.Util;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleType;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.TagKey;
@@ -25,14 +26,13 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
+import top.xdi8.mod.firefly8.util.ResourceLocationTool;
 
 import java.util.Collection;
 import java.util.Set;
 import java.util.function.Supplier;
 
-final class RegistryImpl implements PlatformRegisterWrapper {
-    //static RegistryImpl getInstance() { return INSTANCE; }
-
+public final class RegistryImpl implements PlatformRegisterWrapper {
     RegistryImpl(String modId) {
         this.modId = modId;
         this.registryContainer = RegistryContainer.of(modId);
@@ -43,7 +43,7 @@ final class RegistryImpl implements PlatformRegisterWrapper {
 
     @Override
     public ResourceLocation id(String id) {
-        return new ResourceLocation(modId, id);
+        return ResourceLocationTool.create(modId, id);
     }
 
     @Override
@@ -59,7 +59,7 @@ final class RegistryImpl implements PlatformRegisterWrapper {
     @Override
     public <E extends BlockEntity> RegistrySupplier<BlockEntityType<E>> blockEntity(String id, BlockEntityType.BlockEntitySupplier<E> supplier, Collection<Supplier<Block>> blocks) {
         return registryContainer.blockEntity.register(id, () -> {
-            ResourceLocation location = new ResourceLocation(modId, id);
+            ResourceLocation location = id(id);
             Type<?> type = Util.fetchChoiceType(References.BLOCK_ENTITY, location.toString());
             assert type != null;
             return BlockEntityType.Builder.of(supplier, blocks.stream().map(Supplier::get).toArray(Block[]::new)).build(type);
@@ -94,12 +94,12 @@ final class RegistryImpl implements PlatformRegisterWrapper {
 
     @Override
     public TagKey<Item> itemTag(String id) {
-        return TagKey.create(Registry.ITEM_REGISTRY, id(id));
+        return TagKey.create(Registries.ITEM, id(id));
     }
 
     @Override
     public TagKey<Block> blockTag(String id) {
-        return TagKey.create(Registry.BLOCK_REGISTRY, id(id));
+        return TagKey.create(Registries.BLOCK, id(id));
     }
 
     @Override
@@ -109,7 +109,7 @@ final class RegistryImpl implements PlatformRegisterWrapper {
 
     @Override
     public RegistrySupplier<SoundEvent> sound(String id) {
-        return registryContainer.sound.register(id, () -> new SoundEvent(id(id)));
+        return registryContainer.sound.register(id, () -> SoundEvent.createVariableRangeEvent(id(id)));
     }
 
     @Override
@@ -119,8 +119,7 @@ final class RegistryImpl implements PlatformRegisterWrapper {
 
     @Override
     public RegistrySupplier<PoiType> poiType(String id, int maxTickets, int validRange, Supplier<Set<BlockState>> matchingStatesSup) {
-        return registryContainer.poiType.register(id, () -> new PoiType(id(id).toString(),
-                matchingStatesSup.get(), maxTickets, validRange));
+        return registryContainer.poiType.register(id, () -> new PoiType(matchingStatesSup.get(), maxTickets, validRange));
     }
 
     @Override
@@ -131,4 +130,4 @@ final class RegistryImpl implements PlatformRegisterWrapper {
     static final RegistryImpl SPM = new RegistryImpl(org.featurehouse.mcmod.spm.SPMMain.MODID);
 }
 
-non-sealed interface PlatformRegisterWrapper extends PlatformRegister {}
+interface PlatformRegisterWrapper extends PlatformRegister {}

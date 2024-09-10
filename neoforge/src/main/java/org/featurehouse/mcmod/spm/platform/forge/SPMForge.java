@@ -23,7 +23,6 @@ public class SPMForge {
     private static final ResourceLocation BALANCED_DIET = ResourceLocationTool.withDefaultNamespace("husbandry/balanced_diet");
 
     public SPMForge() {
-        //EventBuses.registerModEventBus(SPMMain.MODID, FMLJavaModLoadingContext.get().getModEventBus());
         SPMMain.getLogger().info("SPM initializing!");  // Don't you dare delete this line!
         RegistryContainer.of(SPMMain.MODID).subscribeModBus();
         AdvancementLoadingContext.EVENT.register(ctx -> {

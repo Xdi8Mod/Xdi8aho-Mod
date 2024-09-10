@@ -4,7 +4,7 @@ import dev.architectury.core.item.ArchitecturySpawnEggItem;
 import dev.architectury.registry.CreativeTabRegistry;
 import dev.architectury.registry.fuel.FuelRegistry;
 import dev.architectury.registry.registries.RegistrySupplier;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
@@ -24,8 +24,8 @@ public final class FireflyItems {
 
     private FireflyItems() {}
 
-    public static final CreativeModeTab TAB = CreativeTabRegistry.create(new ResourceLocation(
-            "firefly8", "firefly8"), () -> FireflyItems.XDI8AHO_ICON.get().getDefaultInstance());
+    public static final CreativeModeTab TAB = CreativeTabRegistry.create(Component.translatable("itemGroup.firefly8.firefly8"),
+            () -> FireflyItems.XDI8AHO_ICON.get().getDefaultInstance());
 
     public static final RegistrySupplier<Item>
             INDIUM_INGOT,

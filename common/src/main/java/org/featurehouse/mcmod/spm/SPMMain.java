@@ -60,20 +60,20 @@ public class SPMMain {
 	// Items
 	public static final Supplier<Item> PEEL;
 
-		// Baked Potatoes
+	// Baked Potatoes
 	public static final Supplier<Item> BAKED_PURPLE_POTATO;
 	public static final Supplier<Item> BAKED_RED_POTATO;
 	public static final Supplier<Item> BAKED_WHITE_POTATO;
-		// Raw Potatoes
+	// Raw Potatoes
 	public static final Supplier<Item> PURPLE_POTATO;
 	public static final Supplier<Item> RED_POTATO;
 	public static final Supplier<Item> WHITE_POTATO;
-		// Enchanted Potatoes
+	// Enchanted Potatoes
 	public static final Supplier<Item> ENCHANTED_PURPLE_POTATO;
 	public static final Supplier<Item> ENCHANTED_RED_POTATO;
 	public static final Supplier<Item> ENCHANTED_WHITE_POTATO;
 
-		// Misc
+	// Misc
 	public static final Supplier<Item> POTATO_POWDER;
 	public static final Supplier<Item> XMAS_TREATING_BOWL;
 
@@ -83,7 +83,7 @@ public class SPMMain {
 
 	public static final Supplier<Block> SEED_UPDATER;
 
-		// Crops
+	// Crops
 	public static final Supplier<Block> PURPLE_POTATO_CROP;
 	public static final Supplier<Block> RED_POTATO_CROP;
 	public static final Supplier<Block> WHITE_POTATO_CROP;
@@ -142,7 +142,7 @@ public class SPMMain {
 	// Tree Decorator Types
 	public static final Supplier<TreeDecoratorType<GrassDecorator>> GRASS_DECORATOR_TYPE;
 
-	//@Override
+	// @Override
 	public void onInitialize() {
 		getLogger().info("Successfully loaded Sweet Potato Mod!");
 		ComposterHelper.register();

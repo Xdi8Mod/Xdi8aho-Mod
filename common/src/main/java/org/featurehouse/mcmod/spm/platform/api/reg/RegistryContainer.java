@@ -3,6 +3,7 @@ package org.featurehouse.mcmod.spm.platform.api.reg;
 import dev.architectury.registry.registries.DeferredRegister;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleType;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
@@ -24,18 +25,18 @@ public final class RegistryContainer {
     private RegistryContainer(String modId) {
         this.modId = Objects.requireNonNull(modId);
 
-        block = ofModRegistry(Registry.BLOCK_REGISTRY);
-        item = ofModRegistry(Registry.ITEM_REGISTRY);
-        blockEntity = ofModRegistry(Registry.BLOCK_ENTITY_TYPE_REGISTRY);
-        recipeSerializer = ofModRegistry(Registry.RECIPE_SERIALIZER_REGISTRY);
-        menu = ofModRegistry(Registry.MENU_REGISTRY);
-        sound = ofModRegistry(Registry.SOUND_EVENT_REGISTRY);
-        particleType = ofModRegistry(Registry.PARTICLE_TYPE_REGISTRY);
-        entityType = ofModRegistry(Registry.ENTITY_TYPE_REGISTRY);
-        stat = ofModRegistry(Registry.CUSTOM_STAT_REGISTRY);
-        recipeType = ofModRegistry(Registry.RECIPE_TYPE_REGISTRY);
-        treeDecoratorType = ofModRegistry(Registry.TREE_DECORATOR_TYPE_REGISTRY);
-        poiType = ofModRegistry(Registry.POINT_OF_INTEREST_TYPE_REGISTRY);
+        block = ofModRegistry(Registries.BLOCK);
+        item = ofModRegistry(Registries.ITEM);
+        blockEntity = ofModRegistry(Registries.BLOCK_ENTITY_TYPE);
+        recipeSerializer = ofModRegistry(Registries.RECIPE_SERIALIZER);
+        menu = ofModRegistry(Registries.MENU);
+        sound = ofModRegistry(Registries.SOUND_EVENT);
+        particleType = ofModRegistry(Registries.PARTICLE_TYPE);
+        entityType = ofModRegistry(Registries.ENTITY_TYPE);
+        stat = ofModRegistry(Registries.CUSTOM_STAT);
+        recipeType = ofModRegistry(Registries.RECIPE_TYPE);
+        treeDecoratorType = ofModRegistry(Registries.TREE_DECORATOR_TYPE);
+        poiType = ofModRegistry(Registries.POINT_OF_INTEREST_TYPE);
     }
 
     public final String modId;
@@ -50,7 +51,6 @@ public final class RegistryContainer {
     public final DeferredRegister<SoundEvent> sound;
     public final DeferredRegister<ParticleType<?>> particleType;
     public final DeferredRegister<EntityType<?>> entityType;
-
     public final DeferredRegister<ResourceLocation> stat;
     public final DeferredRegister<RecipeType<?>> recipeType;
     public final DeferredRegister<TreeDecoratorType<?>> treeDecoratorType;

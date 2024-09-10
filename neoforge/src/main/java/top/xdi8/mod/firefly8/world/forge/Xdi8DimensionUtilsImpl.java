@@ -2,8 +2,6 @@ package top.xdi8.mod.firefly8.world.forge;
 
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.level.portal.PortalInfo;
-import net.minecraftforge.common.util.ITeleporter;
 import org.jetbrains.annotations.Nullable;
 import top.xdi8.mod.firefly8.ext.IPortalCooldownEntity;
 import top.xdi8.mod.firefly8.world.TeleportWrapper;

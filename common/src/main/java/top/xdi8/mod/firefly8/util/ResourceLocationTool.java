@@ -2,7 +2,7 @@ package top.xdi8.mod.firefly8.util;
 
 import net.minecraft.resources.ResourceLocation;
 
-public abstract class ResourceLocationTool {
+public class ResourceLocationTool {
     // For compatibility between 1.21 and older versions.
     public static ResourceLocation create(String namespace, String path){
         return ResourceLocation.fromNamespaceAndPath(namespace, path);

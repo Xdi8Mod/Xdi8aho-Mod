@@ -20,6 +20,6 @@ public class InternalRegistryLogWrapper implements Runnable {
     }
 
     public static InternalRegistryLogWrapper firefly8(String s) {
-        return new InternalRegistryLogWrapper(new ResourceLocation("firefly8", s));
+        return new InternalRegistryLogWrapper(ResourceLocationTool.create("firefly8", s));
     }
 }

@@ -12,10 +12,11 @@ import org.featurehouse.mcmod.spm.platform.api.network.PlayChannel;
 import top.xdi8.mod.firefly8.advancement.criteria.FireflyCriteria;
 import top.xdi8.mod.firefly8.ext.IServerPlayerWithHiddenInventory;
 import top.xdi8.mod.firefly8.stats.FireflyStats;
+import top.xdi8.mod.firefly8.util.ResourceLocationTool;
 
 public class FireflyNetwork {
     public static final PlayChannel CHANNEL = PlayChannel.create(
-            new ResourceLocation("firefly8", "main-5.0"));
+            ResourceLocationTool.create("firefly8", "main-5.0"));
 
     public static final int S2C_DIE_INDEED = 0x2000;
     public static final int S2C_PREPARE_RESPAWN = 0x3000;

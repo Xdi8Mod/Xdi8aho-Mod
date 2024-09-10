@@ -7,6 +7,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import top.xdi8.mod.firefly8.core.totem.TotemAbilityPredicate;
+import top.xdi8.mod.firefly8.util.ResourceLocationTool;
 
 public class GetXdi8TotemTrigger extends SimpleCriterionTrigger<GetXdi8TotemTrigger.TriggerInstance> {
     @Override
@@ -38,7 +39,7 @@ public class GetXdi8TotemTrigger extends SimpleCriterionTrigger<GetXdi8TotemTrig
         }
     }
 
-    static final ResourceLocation THE_ID = new ResourceLocation("firefly8", "get_xdi8_totem");
+    static final ResourceLocation THE_ID = ResourceLocationTool.create("firefly8", "get_xdi8_totem");
 
     @Override
     public @NotNull ResourceLocation getId() {

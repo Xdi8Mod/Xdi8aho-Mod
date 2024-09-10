@@ -16,7 +16,7 @@ public class SPMFabric implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        SPMMain.getLogger().debug("Loading SPM...");
+        SPMMain.getLogger().info("SPM initializing!");
         RegistryContainer.of(SPMMain.MODID).subscribeModBus();
         AdvancementLoadingContext.EVENT.register(ctx -> {
             if (BALANCED_DIET.equals(ctx.id)) {

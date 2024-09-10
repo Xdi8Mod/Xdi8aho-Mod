@@ -2,14 +2,14 @@ package org.featurehouse.mcmod.spm.advancement;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.advancements.critereon.ConsumeItemTrigger;
-import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.ItemPredicate;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import org.featurehouse.mcmod.spm.SPMMain;
 import top.xdi8.mod.firefly8.advancement.AdvancementLoadingContext;
+import top.xdi8.mod.firefly8.util.ResourceLocationTool;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 public final class BalancedDietHelper {
@@ -30,9 +30,9 @@ public final class BalancedDietHelper {
 
         for (int i = 0; i < itemListSize; ++i) {
             String reqId = "sweet_potato:balanced_diet__food/" + i;
-            ctx.addCriterion(new ResourceLocation(reqId),
-                    new ConsumeItemTrigger.TriggerInstance(EntityPredicate.Composite.ANY,
-                            ItemPredicate.Builder.item().of(itemList.get(i).get()).build()));
+            ctx.addCriterion(ResourceLocationTool.create(reqId),
+                    new ConsumeItemTrigger.TriggerInstance(Optional.empty(),
+                            Optional.of(ItemPredicate.Builder.item().of(itemList.get(i).get()).build())));
             requirementsNew[i] = new String[] {reqId};
         }
         ctx.setRequirements(requirementsNew);

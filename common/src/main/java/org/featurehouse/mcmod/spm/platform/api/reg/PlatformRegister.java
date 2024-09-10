@@ -5,6 +5,7 @@ import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.stats.StatType;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -26,8 +27,7 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.function.Supplier;
 
-public sealed interface PlatformRegister
-        permits PlatformRegisterWrapper {
+public interface PlatformRegister {
     static PlatformRegister of(String modId) { return new RegistryImpl(modId); }
 
     ResourceLocation id(String id);

@@ -1,13 +1,12 @@
 package top.xdi8.mod.firefly8.advancement.criteria;
 
 import com.google.gson.JsonObject;
-import net.minecraft.advancements.critereon.AbstractCriterionTriggerInstance;
-import net.minecraft.advancements.critereon.DeserializationContext;
 import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import org.jetbrains.annotations.NotNull;
+import top.xdi8.mod.firefly8.util.ResourceLocationTool;
 
 public class SimpleDieInXdi8ahoTrigger extends SimpleCriterionTrigger<SimpleDieInXdi8ahoTrigger.TriggerInstance> {
     @Override
@@ -31,5 +30,5 @@ public class SimpleDieInXdi8ahoTrigger extends SimpleCriterionTrigger<SimpleDieI
         }
     }
 
-    private static final ResourceLocation THE_ID = new ResourceLocation("firefly8", "die_in_xdi8aho");
+    private static final ResourceLocation THE_ID = ResourceLocationTool.create("firefly8", "die_in_xdi8aho");
 }

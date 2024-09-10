@@ -9,11 +9,9 @@ public final class FireflyStats {
     private static final PlatformRegister reg = PlatformRegister.of("firefly8");
     public static final InternalRegistryLogWrapper LOG_WRAPPER = InternalRegistryLogWrapper.firefly8("stats");
 
-    public static final RegistrySupplier<ResourceLocation>
-            INTERACT_WITH_XDI8_TABLE = reg.customStat("interact_with_xdi8_table");
+    public static final RegistrySupplier<ResourceLocation> INTERACT_WITH_XDI8_TABLE = reg.customStat("interact_with_xdi8_table");
     public static final RegistrySupplier<ResourceLocation> SYMBOL_STONES_CARVED = reg.customStat("symbol_stones_carved");
-    public static final RegistrySupplier<ResourceLocation>//O2X_PORTALS_ACTIVATED = createStat("o2x_portals_activated"),
-            O2X_PORTALS_ENTERED = reg.customStat("o2x_portals_entered");
+    public static final RegistrySupplier<ResourceLocation> O2X_PORTALS_ENTERED = reg.customStat("o2x_portals_entered");
     public static final RegistrySupplier<ResourceLocation> X2O_PORTALS_ENTERED = reg.customStat("x2o_portals_entered");
     public static final RegistrySupplier<ResourceLocation> FAKE_DEAD = reg.customStat("fake_dead_from_xdi8");
     public static final RegistrySupplier<ResourceLocation> INDIUM_NUGGETS_DROPPED = reg.customStat("indium_nuggets_dropped");
