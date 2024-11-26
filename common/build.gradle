@@ -1,5 +1,6 @@
+//file:noinspection GroovyAssignabilityCheck
 architectury {
-    common("fabric", "neoforge")
+    common rootProject.enabled_platforms.split(',')
 }
 
 loom {

@@ -24,15 +24,6 @@ Just to make his future bright."""
     displayURL="https://modrinth.com/mod/xdi8aho-mod"
     #logoFile=
 
-[[mods]]
-    modId="sweet_potato"
-    version="${version}"
-    displayName="Sweet Potato Reborn"
-    credits="See sweet_potato:credits.json for more info"
-    authors="Pigeonia Featurehouse"
-    description='Combination of Agromagic'
-    #logoFile=
-
 #[[mods]]
 #    modId="xdi8"
 #    version="${version}"
@@ -44,26 +35,25 @@ Just to make his future bright."""
 
 [[mixins]]
     config1="mixins.xdi8-fonts.json"
-    config2="mixins.sweet_potato.json"
     config3="mixins.firefly8-main.json"
     config4="mixins.firefly-forge.json"
 
-[[dependencies.xdi8]]
+[[dependencies.firefly8]]
     modId="neoforge"
     type="required"
-    versionRange="[21,)"
+    versionRange="[21.2.0,)"
     ordering="NONE"
     side="BOTH"
 # Here's another dependency
-[[dependencies.xdi8]]
+[[dependencies.firefly8]]
     modId="minecraft"
     type="required"
-    versionRange="[1.21,)"
+    versionRange="[1.21.2,)"
     ordering="NONE"
     side="BOTH"
-[[dependencies.xdi8]]
+[[dependencies.firefly8]]
     modId="architectury"
     type="required"
-    versionRange="[13.0,)"
+    versionRange="[14.0,)"
     ordering="NONE"
     side="BOTH"

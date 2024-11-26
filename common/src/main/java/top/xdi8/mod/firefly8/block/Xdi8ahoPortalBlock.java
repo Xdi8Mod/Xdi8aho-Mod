@@ -10,23 +10,16 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.MaterialColor;
 import org.jetbrains.annotations.NotNull;
 import top.xdi8.mod.firefly8.ext.IPortalCooldownEntity;
 import top.xdi8.mod.firefly8.world.Xdi8DimensionUtils;
 
 /** @see net.minecraft.world.level.block.NetherPortalBlock */
 public class Xdi8ahoPortalBlock extends Block {
-
-    public Xdi8ahoPortalBlock() {
-        super(Properties.of(Material.PORTAL, MaterialColor.GOLD)
-                .lightLevel(s->11)
-                .strength(-1)
-                .noCollission()
-                .sound(SoundType.AMETHYST)
-        );
+    public Xdi8ahoPortalBlock(Properties properties) {
+        super(properties);
     }
 
     @SuppressWarnings("deprecation")

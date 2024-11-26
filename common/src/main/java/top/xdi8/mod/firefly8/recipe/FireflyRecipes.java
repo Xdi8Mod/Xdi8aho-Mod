@@ -4,7 +4,7 @@ import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import org.featurehouse.mcmod.spm.platform.api.reg.PlatformRegister;
-import top.xdi8.mod.firefly8.util.InternalRegistryLogWrapper;
+import io.github.qwerty770.mcmod.spmreborn.api.InternalRegistryLogWrapper;
 
 public class FireflyRecipes {
     private static final PlatformRegister reg = PlatformRegister.of("firefly8");

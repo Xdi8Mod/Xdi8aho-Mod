@@ -7,7 +7,6 @@ import dev.architectury.registry.ReloadListenerRegistry;
 import dev.architectury.registry.level.entity.EntityAttributeRegistry;
 import net.minecraft.server.packs.PackType;
 import org.apache.commons.lang3.mutable.MutableBoolean;
-import org.featurehouse.mcmod.spm.platform.api.reg.RegistryContainer;
 import top.xdi8.mod.firefly8.advancement.AdvancementLoadingContext;
 import top.xdi8.mod.firefly8.advancement.criteria.FireflyCriteria;
 import top.xdi8.mod.firefly8.block.FireflyBlocks;
@@ -31,9 +30,9 @@ import top.xdi8.mod.firefly8.world.Xdi8PoiTypes;
 import top.xdi8.mod.firefly8.world.death.PlayerDeathListener;
 
 public class Firefly8 {
+    public static String MODID = "firefly8";
     public static void init() {
         activateRegistries();
-        RegistryContainer.of("firefly8").subscribeModBus();
         // Item
         TintedPotionBrewingRecipe.register();
         // WorldGen

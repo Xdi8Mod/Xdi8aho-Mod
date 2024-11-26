@@ -21,6 +21,7 @@ import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
@@ -45,12 +46,8 @@ public class Xdi8ahoPortalTopBlock extends BaseEntityBlock {
     public static final IntegerProperty FIREFLY_COUNT =
             IntegerProperty.create("fireflies", 0, MAX_FIREFLY_COUNT);
 
-    public Xdi8ahoPortalTopBlock() {
-        super(Properties.of(Material.STONE, MaterialColor.GOLD)
-                .strength(8F, 800F)
-                .requiresCorrectToolForDrops()
-                .lightLevel(bs -> bs.getValue(FIREFLY_COUNT) * 3)
-        );
+    public Xdi8ahoPortalTopBlock(BlockBehaviour.Properties properties) {
+        super(properties);
         this.registerDefaultState(this.getStateDefinition().any().setValue(FIREFLY_COUNT, 0));
     }
 

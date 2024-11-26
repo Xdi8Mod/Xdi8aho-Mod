@@ -3,7 +3,7 @@ package top.xdi8.mod.firefly8.stats;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.resources.ResourceLocation;
 import org.featurehouse.mcmod.spm.platform.api.reg.PlatformRegister;
-import top.xdi8.mod.firefly8.util.InternalRegistryLogWrapper;
+import io.github.qwerty770.mcmod.spmreborn.api.InternalRegistryLogWrapper;
 
 public final class FireflyStats {
     private static final PlatformRegister reg = PlatformRegister.of("firefly8");

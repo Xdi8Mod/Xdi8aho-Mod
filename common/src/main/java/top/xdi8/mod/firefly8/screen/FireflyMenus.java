@@ -3,7 +3,7 @@ package top.xdi8.mod.firefly8.screen;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.world.inventory.MenuType;
 import org.featurehouse.mcmod.spm.platform.api.reg.PlatformRegister;
-import top.xdi8.mod.firefly8.util.InternalRegistryLogWrapper;
+import io.github.qwerty770.mcmod.spmreborn.api.InternalRegistryLogWrapper;
 
 public class FireflyMenus {
     private static final PlatformRegister reg = PlatformRegister.of("firefly8");

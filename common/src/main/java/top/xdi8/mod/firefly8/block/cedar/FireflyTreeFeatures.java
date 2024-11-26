@@ -1,6 +1,7 @@
 package top.xdi8.mod.firefly8.block.cedar;
 
 import com.google.common.collect.ImmutableList;
+import io.github.qwerty770.mcmod.spmreborn.api.SimpleStateProviderTool;
 import net.minecraft.core.Holder;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.util.valueproviders.ConstantInt;
@@ -17,8 +18,7 @@ import net.minecraft.world.level.levelgen.feature.treedecorators.AlterGroundDeco
 import net.minecraft.world.level.levelgen.feature.trunkplacers.GiantTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import top.xdi8.mod.firefly8.block.FireflyBlocks;
-import top.xdi8.mod.firefly8.util.InternalRegistryLogWrapper;
-import top.xdi8.mod.firefly8.util.SimpleStateProviderTool;
+import io.github.qwerty770.mcmod.spmreborn.api.InternalRegistryLogWrapper;
 
 public class FireflyTreeFeatures {
     public static final InternalRegistryLogWrapper LOG_WRAPPER = InternalRegistryLogWrapper.firefly8("tree_features");

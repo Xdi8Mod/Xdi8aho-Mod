@@ -17,7 +17,7 @@ import top.xdi8.mod.firefly8.item.indium.*;
 import top.xdi8.mod.firefly8.item.symbol.SymbolStoneBlockItem;
 import top.xdi8.mod.firefly8.item.symbol.Xdi8TotemItem;
 import top.xdi8.mod.firefly8.item.tint.*;
-import top.xdi8.mod.firefly8.util.InternalRegistryLogWrapper;
+import io.github.qwerty770.mcmod.spmreborn.api.InternalRegistryLogWrapper;
 
 public final class FireflyItems {
     public static final InternalRegistryLogWrapper LOG_WRAPPER = InternalRegistryLogWrapper.firefly8("items");

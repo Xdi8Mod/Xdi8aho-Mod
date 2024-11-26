@@ -4,7 +4,7 @@ import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.level.block.Block;
 import org.featurehouse.mcmod.spm.platform.api.reg.PlatformRegister;
 import top.xdi8.mod.firefly8.block.FireflyBlocks;
-import top.xdi8.mod.firefly8.util.InternalRegistryLogWrapper;
+import io.github.qwerty770.mcmod.spmreborn.api.InternalRegistryLogWrapper;
 
 import java.util.function.Supplier;
 import java.util.stream.Collectors;

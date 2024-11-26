@@ -11,19 +11,17 @@
 
   "depends": {
     "fabricloader": ">=0.15.0",
-    "fabric": ">=0.97.0",
-    "architectury": ">=13.0",
-    "java": ">=21",
-    "minecraft": ">=1.21"
+    "fabric-api": ">=0.102.2",
+    "architectury": ">=14.0",
+    "minecraft": ">=1.21.2",
+    "java": ">=21"
   },
   "entrypoints": {
     "main": [
-      "top.xdi8.mod.firefly8.fabric.Firefly8Fabric",
-      "org.featurehouse.mcmod.spm.platform.fabric.SPMFabric"
+      "top.xdi8.mod.firefly8.fabric.Firefly8Fabric"
     ],
     "client": [
-      "top.xdi8.mod.firefly8.fabric.FireflyClientFabric",
-      "org.featurehouse.mcmod.spm.platform.fabric.SPMClientFabric"
+      "top.xdi8.mod.firefly8.fabric.FireflyClientFabric"
     ]
   },
   "authors": [
@@ -31,7 +29,6 @@
   ],
   "mixins": [
     "mixins.firefly-fabric.json",
-    "mixins.sweet_potato.json",
     "mixins.firefly8-main.json"
   ],
   "custom": {

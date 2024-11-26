@@ -5,7 +5,6 @@ import java.time.format.DateTimeFormatter
 
 plugins {
     id "java"
-    id "maven-publish"
     id "architectury-plugin" version "3.4-SNAPSHOT"
     id "dev.architectury.loom" version "1.7-SNAPSHOT" apply false
     id "io.github.juuxel.loom-vineflower" version "1.11.0" apply false  // add vineflower, see https://github.com/Juuxel/loom-vineflower
@@ -15,11 +14,6 @@ plugins {
 class Constant {
     static final LocalDateTime now = LocalDateTime.now(ZoneId.of('+8'))
     static final String timestamp = "${DateTimeFormatter.ofPattern("yyMMdd.HHmm").format(now)}"
-}
-
-java {
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
 }
 
 architectury {
@@ -37,8 +31,9 @@ subprojects {
         minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
         mappings loom.layered {
             officialMojangMappings()
-            parchment("org.parchmentmc.data:parchment-${rootProject.minecraft_version}:${rootProject.parchment_version}")
+            parchment("org.parchmentmc.data:parchment-1.21:${rootProject.parchment_version}")
         }
+        implementation "org.slf4j:slf4j-api"
     }
 }
 
@@ -51,7 +46,7 @@ allprojects {
         archivesName = rootProject.archives_base_name
     }
 
-    version = "1.18.2-2.0.0+build.${Constant.timestamp}"
+    version = "1.21.3-3.0.0+build.${Constant.timestamp}"
     group = rootProject.maven_group
 
     repositories {
@@ -68,5 +63,7 @@ allprojects {
 
     java {
         withSourcesJar()
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 }

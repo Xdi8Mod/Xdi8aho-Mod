@@ -4,7 +4,7 @@ import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.featurehouse.mcmod.spm.platform.api.reg.PlatformRegister;
 import top.xdi8.mod.firefly8.block.FireflyBlocks;
-import top.xdi8.mod.firefly8.util.InternalRegistryLogWrapper;
+import io.github.qwerty770.mcmod.spmreborn.api.InternalRegistryLogWrapper;
 
 import java.util.Collections;
 
