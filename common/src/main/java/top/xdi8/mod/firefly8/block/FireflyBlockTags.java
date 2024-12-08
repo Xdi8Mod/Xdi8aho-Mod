@@ -10,5 +10,4 @@ public class FireflyBlockTags {
     public static final TagKey<Block> PORTAL_CORE = reg.blockTag("portal/core");
     public static final TagKey<Block> CENTER_PILLAR = reg.blockTag("portal/center_pillar");
     public static final TagKey<Block> BACK_PORTAL_FIRE_PLACEABLE = reg.blockTag("back_portal_fire_placeable");
-
 }

@@ -2,6 +2,7 @@ package top.xdi8.mod.firefly8.core.totem;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
+import io.github.qwerty770.mcmod.xdi8.api.ResourceLocationTool;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.ApiStatus;
 import top.xdi8.mod.firefly8.core.letters.event.Xdi8RegistryEvents;
@@ -31,7 +32,7 @@ public final class TotemAbilities {
 
     // Default
     static {
-        MAP.put(new ResourceLocation("firefly8", "xdi8"), (level, player, hand) -> {
+        MAP.put(ResourceLocationTool.create("firefly8", "xdi8"), (level, player, hand) -> {
             // Placeholder
             return Optional.empty();
         });

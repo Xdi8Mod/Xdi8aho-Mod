@@ -1,6 +1,6 @@
-package io.github.qwerty770.mcmod.spmreborn.api;
+package io.github.qwerty770.mcmod.xdi8.api;
 
-import io.github.qwerty770.mcmod.spmreborn.util.annotation.StableApi;
+import io.github.qwerty770.mcmod.xdi8.util.annotation.StableApi;
 import net.minecraft.resources.ResourceLocation;
 
 @SuppressWarnings("unused")

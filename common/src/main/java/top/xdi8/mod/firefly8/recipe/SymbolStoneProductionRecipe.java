@@ -2,6 +2,7 @@ package top.xdi8.mod.firefly8.recipe;
 
 import com.google.gson.JsonObject;
 import dev.architectury.core.AbstractRecipeSerializer;
+import io.github.qwerty770.mcmod.xdi8.api.ResourceLocationTool;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -61,7 +62,7 @@ public record SymbolStoneProductionRecipe(ResourceLocation id, KeyedLetter lette
         @Override
         public SymbolStoneProductionRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
             final String letter = GsonHelper.getAsString(pSerializedRecipe, "letter");
-            final KeyedLetter keyedLetter = LettersUtil.byId(new ResourceLocation(letter));
+            final KeyedLetter keyedLetter = LettersUtil.byId(ResourceLocationTool.create(letter));
             final int weight = GsonHelper.getAsInt(pSerializedRecipe, "weight");
             return new SymbolStoneProductionRecipe(pRecipeId, keyedLetter, weight);
         }
@@ -69,7 +70,7 @@ public record SymbolStoneProductionRecipe(ResourceLocation id, KeyedLetter lette
         @Override
         public SymbolStoneProductionRecipe fromNetwork(ResourceLocation pRecipeId, FriendlyByteBuf pBuffer) {
             final String letter = pBuffer.readUtf();
-            final KeyedLetter keyedLetter = LettersUtil.byId(new ResourceLocation(letter));
+            final KeyedLetter keyedLetter = LettersUtil.byId(ResourceLocationTool.create(letter));
             final int weight = pBuffer.readInt();
             return new SymbolStoneProductionRecipe(pRecipeId, keyedLetter, weight);
         }

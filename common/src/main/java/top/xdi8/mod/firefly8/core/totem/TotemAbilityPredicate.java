@@ -4,8 +4,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
+import io.github.qwerty770.mcmod.xdi8.api.ResourceLocationTool;
 import net.minecraft.advancements.critereon.ItemPredicate;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Contract;
@@ -30,7 +30,7 @@ public interface TotemAbilityPredicate {
             List<TotemAbility> list = new ArrayList<>();
             for (JsonElement e : arr) {
                 final String s = GsonHelper.convertToString(e, "totem");
-                final TotemAbility totemAbility = TotemAbilities.byId(new ResourceLocation(s)).orElseThrow(() ->
+                final TotemAbility totemAbility = TotemAbilities.byId(ResourceLocationTool.create(s)).orElseThrow(() ->
                         new IllegalArgumentException("Invalid totem id: " + s));
                 list.add(totemAbility);
             }

@@ -5,7 +5,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -61,7 +62,7 @@ public class TintedFireflyBottleItem extends Item {
         }
         final int prevCount = rootTag.size();
         if (prevCount >= MAX_FIREFLY_COUNT) {
-            pPlayer.displayClientMessage(new TranslatableComponent("item.firefly8.tinted_firefly_bottle.too_many"), true);
+            pPlayer.displayClientMessage(Component.translatable("item.firefly8.tinted_firefly_bottle.too_many"), true);
             return false;
         } else {
             firefly.unRide();
@@ -94,7 +95,7 @@ public class TintedFireflyBottleItem extends Item {
             if (airPos.isEmpty()) {
                 return InteractionResultHolder.pass(itemStack);
             }
-            final Either<ItemStack, TranslatableComponent> res = spawnFirefly(
+            final Either<ItemStack, MutableComponent> res = spawnFirefly(
                     pLevel, itemStack, pPlayer, pUsedHand, Vec3.atCenterOf(airPos.get()));
             if (res.left().isPresent()) {
                 pPlayer.awardStat(FireflyStats.FIREFLIES_RELEASED.get());
@@ -116,16 +117,16 @@ public class TintedFireflyBottleItem extends Item {
     }
 
     @NotNull
-    static Either<ItemStack, TranslatableComponent> spawnFirefly(@NotNull Level level,
-                                                                 @NotNull ItemStack stack,
-                                                                 @NotNull Player player,
-                                                                 @NotNull InteractionHand hand,
-                                                                 @NotNull Vec3 spawnPos) {
+    static Either<ItemStack, MutableComponent> spawnFirefly(@NotNull Level level,
+                                                            @NotNull ItemStack stack,
+                                                            @NotNull Player player,
+                                                            @NotNull InteractionHand hand,
+                                                            @NotNull Vec3 spawnPos) {
         if (!level.isClientSide()) {
             ListTag fireflyList = stack.getOrCreateTag().getList("Fireflies", Tag.TAG_COMPOUND);
             if (fireflyList.isEmpty()) {
                 player.setItemInHand(hand, new ItemStack(FireflyItems.TINTED_GLASS_BOTTLE.get()));
-                return Either.right(new TranslatableComponent("item.firefly8.tinted_firefly_bottle.empty"));
+                return Either.right(Component.translatable("item.firefly8.tinted_firefly_bottle.empty"));
             }
             CompoundTag fireflyTag = fireflyList.getCompound(fireflyList.size() - 1);
             FireflyEntity fireflyEntity = FireflyEntity.create(level);

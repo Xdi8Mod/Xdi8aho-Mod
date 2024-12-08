@@ -1,10 +1,10 @@
 package top.xdi8.mod.firefly8.block.entity;
 
+import io.github.qwerty770.mcmod.xdi8.util.tick.ITickable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import org.featurehouse.mcmod.spm.util.tick.ITickable;
 import top.xdi8.mod.firefly8.block.FireflyBlockTags;
 import top.xdi8.mod.firefly8.block.FireflyBlocks;
 import top.xdi8.mod.firefly8.block.Xdi8ahoPortalTopBlock;

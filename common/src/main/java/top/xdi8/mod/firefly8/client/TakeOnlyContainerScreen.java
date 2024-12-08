@@ -2,6 +2,7 @@ package top.xdi8.mod.firefly8.client;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import io.github.qwerty770.mcmod.xdi8.api.ResourceLocationTool;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.MenuAccess;
 import net.minecraft.client.renderer.GameRenderer;
@@ -37,5 +38,5 @@ public class TakeOnlyContainerScreen extends AbstractContainerScreen<TakeOnlyChe
         this.blit(pPoseStack, i, j + 6 * 18 + 17, 0, 126, this.imageWidth, 96);
     }
 
-    private static final ResourceLocation BACKGROUND = new ResourceLocation("textures/gui/container/generic_54.png");
+    private static final ResourceLocation BACKGROUND = ResourceLocationTool.create("textures/gui/container/generic_54.png");
 }

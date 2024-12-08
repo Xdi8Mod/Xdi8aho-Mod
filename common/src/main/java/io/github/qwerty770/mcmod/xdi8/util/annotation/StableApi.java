@@ -1,4 +1,4 @@
-package io.github.qwerty770.mcmod.spmreborn.util.annotation;
+package io.github.qwerty770.mcmod.xdi8.util.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

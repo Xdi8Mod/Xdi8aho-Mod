@@ -22,7 +22,7 @@ abstract class AddTintedDragonBreathMixin {
     private static void hackBootstrap(CallbackInfo ci) {
         getContainerMixes().add(new PotionBrewing.Mix<>(
                 Items.SPLASH_POTION,
-                Ingredient.of(FireflyItemTags.TINTED_DRAGON_BREATH),
+                Ingredient.of(FireflyItemTags.TINTED_DRAGON_BREATH.stream()),
                 Items.LINGERING_POTION
         ));
     }

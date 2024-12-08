@@ -87,10 +87,10 @@ public class Xdi8TableMenu extends AbstractContainerMenu {
             ItemStack slotItem = slot.getItem();
             stack = slotItem.copy();
             if (index > 4) {    // in player inventory
-                if (slotItem.is(FireflyItemTags.TOTEM)) {
+                if (slotItem.is(FireflyItemTags.TOTEM.tagKey())) {
                     if (!this.moveItemStackTo(slotItem, 0, 1, false))
                         return ItemStack.EMPTY;
-                } else if (slotItem.is(FireflyItemTags.SYMBOL_STONES)) {
+                } else if (slotItem.is(FireflyItemTags.SYMBOL_STONES.tagKey())) {
                     if (!this.moveItemStackTo(slotItem, 1, 5, false))
                         return ItemStack.EMPTY;
                 } else if (index < 32) {    // main inv

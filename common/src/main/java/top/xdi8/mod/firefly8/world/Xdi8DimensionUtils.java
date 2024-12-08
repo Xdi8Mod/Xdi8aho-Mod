@@ -17,7 +17,7 @@ import top.xdi8.mod.firefly8.stats.FireflyStats;
 
 public class Xdi8DimensionUtils {
     private static final Logger LOGGER = LogUtils.getLogger();
-    private static final ResourceLocation DIM_LOCATION = new ResourceLocation("firefly8", "xdi8aho");
+    private static final ResourceLocation DIM_LOCATION = ResourceLocationTool.create("firefly8", "xdi8aho");
     public static final ResourceKey<Level> XDI8AHO_DIM_KEY =
             ResourceKey.create(Registry.DIMENSION_REGISTRY, DIM_LOCATION);
 

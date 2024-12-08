@@ -1,7 +1,7 @@
-package io.github.qwerty770.mcmod.spmreborn.util.registries;
+package io.github.qwerty770.mcmod.xdi8.util.registries;
 
 import dev.architectury.registry.registries.RegistrySupplier;
-import io.github.qwerty770.mcmod.spmreborn.util.annotation.StableApi;
+import io.github.qwerty770.mcmod.xdi8.util.annotation.StableApi;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.BlockGetter;

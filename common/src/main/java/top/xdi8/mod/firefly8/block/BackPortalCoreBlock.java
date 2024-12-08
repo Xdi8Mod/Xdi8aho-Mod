@@ -1,26 +1,37 @@
 package top.xdi8.mod.firefly8.block;
 
+import com.mojang.serialization.MapCodec;
+import io.github.qwerty770.mcmod.xdi8.lib.blockentity.AbstractBlockWithEntity;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.MaterialColor;
-import org.featurehouse.mcmod.spm.lib.block.entity.TickableEntityBlock;
 import org.jetbrains.annotations.NotNull;
 import top.xdi8.mod.firefly8.block.entity.BackPortalCoreBlockEntity;
 import top.xdi8.mod.firefly8.block.entity.FireflyBlockEntityTypes;
 
-public class BackPortalCoreBlock extends TickableEntityBlock<BackPortalCoreBlockEntity> {
+// TODO org.featurehouse.mcmod.spm.lib.block.entity.TickableEntityBlock
+public class BackPortalCoreBlock extends AbstractBlockWithEntity<BackPortalCoreBlockEntity> {
     public static final BooleanProperty IS_VALID = BooleanProperty.create("valid");
-    public BackPortalCoreBlock() {
-        super(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_LIGHT_GRAY)
-                .strength(10F, 800F)
-                .requiresCorrectToolForDrops());
+
+    public BackPortalCoreBlock(BlockBehaviour.Properties properties) {
+        super(properties);
         this.registerDefaultState(this.defaultBlockState().setValue(IS_VALID, false));
+    }
+
+    @Override
+    protected @NotNull MapCodec<? extends BaseEntityBlock> codec() {
+        return simpleCodec(BackPortalCoreBlock::new);
+    }
+
+    @Override
+    protected boolean blockEntityPredicate(BlockEntity blockEntity) {
+        return blockEntity instanceof BackPortalCoreBlockEntity;
     }
 
     @Override

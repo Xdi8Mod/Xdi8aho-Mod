@@ -1,4 +1,4 @@
-package io.github.qwerty770.mcmod.spmreborn.api;
+package io.github.qwerty770.mcmod.xdi8.api;
 
 import com.mojang.logging.LogUtils;
 import net.minecraft.resources.ResourceLocation;

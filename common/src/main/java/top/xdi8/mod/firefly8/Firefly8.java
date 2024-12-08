@@ -18,6 +18,7 @@ import top.xdi8.mod.firefly8.core.letters.LettersUtil;
 import top.xdi8.mod.firefly8.core.totem.TotemAbilities;
 import top.xdi8.mod.firefly8.entity.FireflyEntity;
 import top.xdi8.mod.firefly8.entity.FireflyEntityTypes;
+import top.xdi8.mod.firefly8.item.FireflyItemTags;
 import top.xdi8.mod.firefly8.item.FireflyItems;
 import top.xdi8.mod.firefly8.item.tint.advanceent.VanillaAdvancements;
 import top.xdi8.mod.firefly8.item.tint.brewing.TintedPotionBrewingRecipe;
@@ -26,7 +27,7 @@ import top.xdi8.mod.firefly8.recipe.FireflyRecipes;
 import top.xdi8.mod.firefly8.screen.FireflyMenus;
 import top.xdi8.mod.firefly8.stats.FireflyStats;
 import top.xdi8.mod.firefly8.world.FireflyMobBiomeGen;
-import top.xdi8.mod.firefly8.world.Xdi8PoiTypes;
+import top.xdi8.mod.firefly8.world.FireflyPoiTypes;
 import top.xdi8.mod.firefly8.world.death.PlayerDeathListener;
 
 public class Firefly8 {
@@ -53,9 +54,10 @@ public class Firefly8 {
         // Block
         FireflyBlocks.LOG_WRAPPER.run();
         FireflyBlockEntityTypes.LOG_WRAPPER.run();
-        Xdi8PoiTypes.LOG_WRAPPER.run();
+        FireflyPoiTypes.LOG_WRAPPER.run();
         // Item
         FireflyItems.LOG_WRAPPER.run();
+        FireflyItemTags.LOG_WRAPPER.run();
         // Entity
         FireflyEntityTypes.LOG_WRAPPER.run();
         // Recipe

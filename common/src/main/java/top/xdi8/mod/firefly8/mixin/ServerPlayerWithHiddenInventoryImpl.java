@@ -1,12 +1,12 @@
 package top.xdi8.mod.firefly8.mixin;
 
+import io.github.qwerty770.mcmod.xdi8.api.ResourceLocationTool;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -42,7 +42,7 @@ abstract class ServerPlayerWithHiddenInventoryImpl extends Player implements ISe
         if (pCompound.contains("firefly8:portalData", 10)) {
             var tag = pCompound.getCompound("firefly8:portalData");
             xdi8$portalDimension = ResourceKey.create(
-                    Registry.DIMENSION_REGISTRY, new ResourceLocation(tag.getString("Dimension")));
+                    Registry.DIMENSION_REGISTRY, ResourceLocationTool.create(tag.getString("Dimension")));
             BlockPos.CODEC.decode(NbtOps.INSTANCE, tag.get("Pos"))
                     .resultOrPartial(IServerPlayerWithHiddenInventory.LOGGER::error)
                     .ifPresentOrElse(p -> xdi8$portalPosition = p.getFirst(),

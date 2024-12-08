@@ -1,13 +1,13 @@
-package io.github.qwerty770.mcmod.spmreborn.util.registries;
+package io.github.qwerty770.mcmod.xdi8.util.registries;
 
 import com.mojang.datafixers.types.Type;
 import com.mojang.serialization.MapCodec;
 import dev.architectury.registry.menu.MenuRegistry;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
-import io.github.qwerty770.mcmod.spmreborn.api.ResourceLocationTool;
-import io.github.qwerty770.mcmod.spmreborn.util.annotation.StableApi;
-import io.github.qwerty770.mcmod.spmreborn.util.tag.TagContainer;
+import io.github.qwerty770.mcmod.xdi8.api.ResourceLocationTool;
+import io.github.qwerty770.mcmod.xdi8.util.annotation.StableApi;
+import io.github.qwerty770.mcmod.xdi8.util.tag.TagContainer;
 import net.minecraft.Util;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentType;
@@ -35,8 +35,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
-import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunction;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
 import top.xdi8.mod.firefly8.Firefly8;
@@ -48,11 +46,6 @@ import java.util.function.Supplier;
 @SuppressWarnings("unused")
 @StableApi
 public abstract class RegistryHelper {
-    // Update to Minecraft 1.20
-    // 2023/10/30: net.minecraft.core.Registry -> net.minecraft.core.registries.BuiltInRegistries.XXX
-    // 2023/12/16: Use DeferredRegister for cross-platform support
-    // 2023/12/16: Rewrite the whole class (mark PlatformRegister, RegistryContainer and RegistryImpl as deprecated)
-
     private static final List<DeferredRegister<?>> modRegistries = new ArrayList<>();
     public static final DeferredRegister<Block> blockRegistry = ofModRegistry(Registries.BLOCK);
     public static final DeferredRegister<Item> itemRegistry = ofModRegistry(Registries.ITEM);
@@ -67,7 +60,6 @@ public abstract class RegistryHelper {
     public static final DeferredRegister<ParticleType<?>> particleTypeRegistry = ofModRegistry(Registries.PARTICLE_TYPE);
     public static final DeferredRegister<EntityType<?>> entityTypeRegistry = ofModRegistry(Registries.ENTITY_TYPE);
     public static final DeferredRegister<ResourceLocation> statRegistry = ofModRegistry(Registries.CUSTOM_STAT);
-    public static final DeferredRegister<TreeDecoratorType<?>> treeDecoratorTypeRegistry = ofModRegistry(Registries.TREE_DECORATOR_TYPE);
     public static final DeferredRegister<PoiType> poiTypeRegistry = ofModRegistry(Registries.POINT_OF_INTEREST_TYPE);
     public static final DeferredRegister<LootItemFunctionType<?>> lootFunctionRegistry = ofModRegistry(Registries.LOOT_FUNCTION_TYPE);
     public static final DeferredRegister<CreativeModeTab> creativeTabRegistry = ofModRegistry(Registries.CREATIVE_MODE_TAB);
@@ -145,7 +137,6 @@ public abstract class RegistryHelper {
         return menuRegistry.register(id, () -> new MenuType<>(factory, FeatureFlags.VANILLA_SET));
     }
 
-    // Update to Minecraft 1.20 -- 2023/12/3
     public static <H extends AbstractContainerMenu> RegistrySupplier<MenuType<H>> extendedMenuType(String id, MenuRegistry.ExtendedMenuTypeFactory<H> factory) {
         return menuRegistry.register(id, () -> MenuRegistry.ofExtended(factory));
     }
@@ -175,10 +166,6 @@ public abstract class RegistryHelper {
     }
 
     public static ResourceLocation stat(String id) { return stat(id, StatFormatter.DEFAULT); }
-
-    public static <P extends TreeDecorator> RegistrySupplier<TreeDecoratorType<P>> treeDecoratorType(String id, Supplier<MapCodec<P>> codecGetter) {
-        return treeDecoratorTypeRegistry.register(id, () -> new TreeDecoratorType<>(codecGetter.get()));
-    }
 
     public static RegistrySupplier<PoiType> poiType(String id, int maxTickets, int validRange, Supplier<Set<BlockState>> matchingStatesSup) {
         return poiTypeRegistry.register(id, () -> new PoiType(matchingStatesSup.get(), maxTickets, validRange));

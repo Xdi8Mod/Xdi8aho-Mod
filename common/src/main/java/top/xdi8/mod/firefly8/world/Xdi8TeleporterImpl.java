@@ -59,7 +59,7 @@ public class Xdi8TeleporterImpl implements TeleportWrapper {
         PoiManager poiManager = destWorld.getPoiManager();
         poiManager.ensureLoadedAndValid(destWorld, pos, REGEN_SCALE);
         var poiRecord = poiManager.getInSquare(
-                        poiType -> Objects.equals(poiType, Xdi8PoiTypes.XDI8_EXIT_PORTAL.get()),
+                        poiType -> Objects.equals(poiType, FireflyPoiTypes.XDI8_EXIT_PORTAL.get()),
                         pos, REGEN_SCALE, PoiManager.Occupancy.ANY)
                 .filter(rec -> border.isWithinBounds(rec.getPos()))
                 .min(Comparator.<PoiRecord>comparingDouble(rec -> rec.getPos().distSqr(pos))

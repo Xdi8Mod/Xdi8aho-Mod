@@ -1,8 +1,8 @@
 package top.xdi8.mod.firefly8.block;
 
+import io.github.qwerty770.mcmod.xdi8.util.tick.ITickable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -28,7 +28,6 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.phys.BlockHitResult;
-import org.featurehouse.mcmod.spm.util.tick.ITickable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Range;
 import top.xdi8.mod.firefly8.block.entity.FireflyBlockEntityTypes;
@@ -95,7 +94,6 @@ public class Xdi8ahoPortalTopBlock extends BaseEntityBlock {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public void onPlace(@NotNull BlockState pState, @NotNull Level pLevel,
                         @NotNull BlockPos pPos, @NotNull BlockState pOldState, boolean pIsMoving) {
         if (pLevel.isClientSide()) return;
@@ -114,7 +112,6 @@ public class Xdi8ahoPortalTopBlock extends BaseEntityBlock {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public void onRemove(@NotNull BlockState pState, @NotNull Level pLevel,
                          @NotNull BlockPos pPos, @NotNull BlockState pNewState, boolean pIsMoving) {
         // invalid portal
@@ -149,7 +146,6 @@ public class Xdi8ahoPortalTopBlock extends BaseEntityBlock {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     @NotNull
     public InteractionResult use(@NotNull BlockState pState, @NotNull Level pLevel,
                                  @NotNull BlockPos pPos, @NotNull Player pPlayer,
@@ -189,7 +185,7 @@ public class Xdi8ahoPortalTopBlock extends BaseEntityBlock {
         return new MenuProvider() {
             @Override
             public @NotNull Component getDisplayName() {
-                return new TranslatableComponent("item.firefly8.bundler");  // Old Inventory
+                return Component.translatable("item.firefly8.bundler");  // Old Inventory
             }
 
             @Override

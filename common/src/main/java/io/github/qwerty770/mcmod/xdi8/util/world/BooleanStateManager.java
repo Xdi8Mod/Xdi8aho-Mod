@@ -1,0 +1,25 @@
+package io.github.qwerty770.mcmod.xdi8.util.world;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.state.properties.Property;
+import org.jetbrains.annotations.NotNull;
+
+public abstract class BooleanStateManager implements Runnable {
+    protected final Property<Boolean> property;
+
+    public BooleanStateManager(Property<Boolean> property) {
+        this.property = property;
+    }
+
+    public abstract void run();
+
+    protected static BlockPos[] calcPos(@NotNull BlockPos original) {
+        BlockPos downPos = original.below();
+        return new BlockPos[] {
+                downPos,
+                downPos.east(), downPos.south(), downPos.west(), downPos.north(),
+                downPos.east().north(), downPos.east().south(),
+                downPos.west().north(), downPos.west().south()
+        };
+    }
+}

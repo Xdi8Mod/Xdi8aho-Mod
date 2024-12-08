@@ -1,5 +1,6 @@
 package top.xdi8.mod.firefly8.item.indium;
 
+import io.github.qwerty770.mcmod.xdi8.api.ResourceLocationTool;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -50,8 +51,8 @@ public class IndiumTier implements Tier {
         return Ingredient.of(FireflyItems.INDIUM_INGOT.get());
     }
 
-    public static final ResourceLocation LOOT_NUGGETS_ATTACK = new ResourceLocation("firefly8", "misc/indium_nuggets_attack");
-    public static final ResourceLocation LOOT_NUGGETS_MINE = new ResourceLocation("firefly8", "misc/indium_nuggets_mine");
+    public static final ResourceLocation LOOT_NUGGETS_ATTACK = ResourceLocationTool.create("firefly8", "misc/indium_nuggets_attack");
+    public static final ResourceLocation LOOT_NUGGETS_MINE = ResourceLocationTool.create("firefly8", "misc/indium_nuggets_mine");
 
     private static void dropNuggets(ServerLevel level, Player player,
                                     ItemStack tool, @Nullable BlockState blockState,

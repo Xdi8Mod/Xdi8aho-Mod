@@ -1,4 +1,4 @@
-package io.github.qwerty770.mcmod.spmreborn.util.tag;
+package io.github.qwerty770.mcmod.xdi8.util.tag;
 
 import com.google.common.collect.Iterators;
 import net.minecraft.core.Holder;

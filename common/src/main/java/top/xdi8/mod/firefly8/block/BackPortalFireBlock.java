@@ -11,9 +11,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseFireBlock;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
@@ -25,13 +23,8 @@ import java.util.Random;
 public final class BackPortalFireBlock extends Block {
     private static final VoxelShape DOWN_AABB = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 1.0D, 16.0D);
 
-    public BackPortalFireBlock() {
-        super(Properties.of(Material.FIRE)
-                .instabreak()
-                .noCollission()
-                .sound(SoundType.WOOL)
-                .lightLevel((bs) -> 15)
-        );
+    public BackPortalFireBlock(Properties properties) {
+        super(properties);
     }
 
     @Override
@@ -45,7 +38,6 @@ public final class BackPortalFireBlock extends Block {
                                          @NotNull BlockPos pPos, @NotNull BlockState pState) {}
 
     @Override
-    @SuppressWarnings("deprecation")
     public @NotNull VoxelShape getShape(@NotNull BlockState pState, @NotNull BlockGetter pLevel,
                                         @NotNull BlockPos pPos, @NotNull CollisionContext pContext) {
         return DOWN_AABB;
@@ -71,7 +63,6 @@ public final class BackPortalFireBlock extends Block {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public void entityInside(@NotNull BlockState pState, @NotNull Level pLevel,
                              @NotNull BlockPos pPos, @NotNull Entity pEntity) {
         if (pLevel.isClientSide()) return;

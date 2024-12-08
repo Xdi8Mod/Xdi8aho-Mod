@@ -1,8 +1,8 @@
 package top.xdi8.mod.firefly8.item.symbol;
 
+import io.github.qwerty770.mcmod.xdi8.api.ResourceLocationTool;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -36,7 +36,7 @@ public class Xdi8TotemItem extends Item {
     public static TotemAbility getAbility(ItemStack stackIn) {
         final String s = stackIn.getOrCreateTag().getString("Totem");
         if (s.isBlank()) return null;
-        return TotemAbilities.byId(new ResourceLocation(s)).orElse(null);
+        return TotemAbilities.byId(ResourceLocationTool.create(s)).orElse(null);
     }
 
     @Override
@@ -55,9 +55,9 @@ public class Xdi8TotemItem extends Item {
     public void appendHoverText(@NotNull ItemStack pStack, @Nullable Level pLevel, @NotNull List<Component> pTooltipComponents, @NotNull TooltipFlag pIsAdvanced) {
         @Nullable TotemAbility ability = getAbility(pStack);
         if (ability != null) {
-            MutableComponent e = new TranslatableComponent("xdi8.totem.attribute");
-            e = e.append(new TranslatableComponent("xdi8.totem.attribute." + ability.getId()));
-            pTooltipComponents.add(e);
+            MutableComponent component = Component.translatable("xdi8.totem.attribute");
+            component = component.append(Component.translatable("xdi8.totem.attribute." + ability.getId()));
+            pTooltipComponents.add(component);
         }
     }
 

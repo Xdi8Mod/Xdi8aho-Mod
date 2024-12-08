@@ -3,7 +3,7 @@ package top.xdi8.mod.firefly8.particle;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.particles.SimpleParticleType;
 import org.featurehouse.mcmod.spm.platform.api.reg.PlatformRegister;
-import io.github.qwerty770.mcmod.spmreborn.api.InternalRegistryLogWrapper;
+import io.github.qwerty770.mcmod.xdi8.api.InternalRegistryLogWrapper;
 
 public class FireflyParticles {
     public static final InternalRegistryLogWrapper LOG_WRAPPER = InternalRegistryLogWrapper.firefly8("particles");

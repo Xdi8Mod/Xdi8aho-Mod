@@ -1,5 +1,6 @@
 package top.xdi8.mod.firefly8.core.letters;
 
+import io.github.qwerty770.mcmod.xdi8.api.ResourceLocationTool;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.Arrays;
@@ -63,7 +64,7 @@ public enum DefaultXdi8Letters implements KeyedLetter {
         this.lowercase = lowercase;
         this.uppercase = lowercase - 0x60;
         this.middleCase = lowercase + 0x60;
-        this.resourceLocation = new ResourceLocation("firefly8", id);
+        this.resourceLocation = ResourceLocationTool.create("firefly8", id);
     }
 
     static final Map<ResourceLocation, KeyedLetter> BY_ID =

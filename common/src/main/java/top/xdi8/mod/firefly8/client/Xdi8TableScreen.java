@@ -2,10 +2,10 @@ package top.xdi8.mod.firefly8.client;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import io.github.qwerty770.mcmod.xdi8.api.ResourceLocationTool;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.entity.player.Inventory;
@@ -39,7 +39,7 @@ public class Xdi8TableScreen extends AbstractContainerScreen<Xdi8TableMenu> {
                     176, 0,
                     34, 16);
         }
-        FormattedCharSequence cs = new TranslatableComponent("gui.ok").getVisualOrderText();
+        FormattedCharSequence cs = Component.translatable("gui.ok").getVisualOrderText();
         final int width1 = (font.width(cs)) >> 1;
         final int start = leftPos + 129 + 17 - width1;
         font.draw(pPoseStack, cs, start, topPos + 40, 0xffffff);
@@ -65,7 +65,7 @@ public class Xdi8TableScreen extends AbstractContainerScreen<Xdi8TableMenu> {
         return super.mouseClicked(pMouseX, pMouseY, pButton);
     }
 
-    private static final ResourceLocation THE_BG = new ResourceLocation("firefly8",
+    private static final ResourceLocation THE_BG = ResourceLocationTool.create("firefly8",
             "textures/menu/xdi8_table.png");
 
     private boolean isOnButton(double mouseX, double mouseY) {

@@ -1,6 +1,7 @@
 package top.xdi8.mod.firefly8.block.structure;
 
 import com.mojang.logging.LogUtils;
+import io.github.qwerty770.mcmod.xdi8.api.ResourceLocationTool;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -19,7 +20,7 @@ public final class Xdi8PortalBasicDataLoader
         extends SimplePreparableReloadListener<Reader>
         implements KeyedReloadListener {
     private static final ResourceLocation PATH_BASIC = 
-            new ResourceLocation("firefly8", "xdi8_portal_data.txt");
+            ResourceLocationTool.create("firefly8", "xdi8_portal_data.txt");
     private static final Logger LOGGER = LogUtils.getLogger();
     
     /*** Performs any reloading that can be done off-thread, such as file IO */
@@ -44,6 +45,6 @@ public final class Xdi8PortalBasicDataLoader
 
     @Override
     public ResourceLocation getId() {
-        return new ResourceLocation("firefly8", "portal_base");
+        return ResourceLocationTool.create("firefly8", "portal_base");
     }
 }

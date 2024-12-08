@@ -1,7 +1,7 @@
-package io.github.qwerty770.mcmod.spmreborn.api;
+package io.github.qwerty770.mcmod.xdi8.api;
 
 import dev.architectury.registry.registries.RegistrySupplier;
-import io.github.qwerty770.mcmod.spmreborn.util.annotation.StableApi;
+import io.github.qwerty770.mcmod.xdi8.util.annotation.StableApi;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.Block;
@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 @StableApi
 public class SimpleStateProviderTool extends SimpleStateProvider {
     // This class is created to avoid NullPointerException "Registry Object not present".
-    // For the usage of this, see io.github.qwerty770.mcmod.spmreborn.world.tree.SweetPotatoTreeFeatures (also used in Xdi8Aho Mod 1.21+)
+    // For the usage of this, see top.xdi8.mod.firefly8.block.cedar.FireflyTreeFeatures
     private final RegistrySupplier<Block> blockSupplier;
 
     public SimpleStateProviderTool(RegistrySupplier<Block> supplier) {

@@ -1,6 +1,7 @@
 package top.xdi8.mod.firefly8.item.tint.advanceent;
 
 import com.google.common.collect.ImmutableMap;
+import io.github.qwerty770.mcmod.xdi8.api.ResourceLocationTool;
 import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.advancements.critereon.*;
 import net.minecraft.resources.ResourceLocation;
@@ -17,9 +18,9 @@ import java.util.UUID;
 import java.util.function.Supplier;
 
 public class VanillaAdvancements {
-    private static final ResourceLocation SAFELY_HARVEST_HONEY = new ResourceLocation("husbandry/safely_harvest_honey");
-    private static final ResourceLocation DRAGON_BREATH = new ResourceLocation("end/dragon_breath");
-    private static final ResourceLocation BALANCED_DIET = new ResourceLocation("husbandry/balanced_diet");
+    private static final ResourceLocation SAFELY_HARVEST_HONEY = ResourceLocationTool.create("husbandry/safely_harvest_honey");
+    private static final ResourceLocation DRAGON_BREATH = ResourceLocationTool.create("end/dragon_breath");
+    private static final ResourceLocation BALANCED_DIET = ResourceLocationTool.create("husbandry/balanced_diet");
     private static final TagKey<Block> BEEHIVES_TAG = BlockTags.BEEHIVES;
 
     private static final Map<ResourceLocation, UUID> TO_UUID = ImmutableMap.of(
@@ -34,14 +35,14 @@ public class VanillaAdvancements {
                             .setBlock(BlockPredicate.Builder.block().of(BEEHIVES_TAG).build())
                             .build(),
                     ItemPredicate.Builder.item()
-                            .of(FireflyItemTags.TINTED_HONEY_BOTTLES)
+                            .of(FireflyItemTags.TINTED_HONEY_BOTTLES.registry())
                             .build()
             ),
             DRAGON_BREATH, () -> new InventoryChangeTrigger.TriggerInstance(
                     EntityPredicate.Composite.ANY,
                     MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY,
                     new ItemPredicate[]{ItemPredicate.Builder.item()
-                            .of(FireflyItemTags.TINTED_DRAGON_BREATH)
+                            .of(FireflyItemTags.TINTED_DRAGON_BREATH.registry(), FireflyItemTags.TINTED_DRAGON_BREATH.tagKey())
                             .build()}
             )
     );
@@ -55,7 +56,7 @@ public class VanillaAdvancements {
         }
         if (!TO_UUID.containsKey(id)) return;
         String[][] req = context.getRequirements();
-        ResourceLocation reqId = new ResourceLocation("firefly8",
+        ResourceLocation reqId = ResourceLocationTool.create("firefly8",
                 TO_UUID.get(id).toString());
         context.addCriterion(reqId, TO_TRIGGER.get(id).get());
         String[] instance = req[0], newInstance = Arrays.copyOf(instance, instance.length+1);
@@ -72,7 +73,7 @@ public class VanillaAdvancements {
         for (int i = 0; i < requirements.length; i++) {
             String[] as = requirements[i];
             if (Arrays.asList(as).contains("honey_bottle")) {
-                context.addCriterion(new ResourceLocation("firefly8:05f921ae-5f96-410d-bcce-bf20d57e5d1a"),
+                context.addCriterion(ResourceLocationTool.create("firefly8:05f921ae-5f96-410d-bcce-bf20d57e5d1a"),
                         consumeItemTrigger(FireflyItemTags.TINTED_HONEY_BOTTLES));
                 String[] nas = Arrays.copyOf(as, as.length + 1);
                 nas[as.length] = "firefly8:05f921ae-5f96-410d-bcce-bf20d57e5d1a";

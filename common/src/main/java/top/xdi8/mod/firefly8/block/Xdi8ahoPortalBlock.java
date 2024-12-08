@@ -9,8 +9,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import top.xdi8.mod.firefly8.ext.IPortalCooldownEntity;
@@ -22,7 +20,6 @@ public class Xdi8ahoPortalBlock extends Block {
         super(properties);
     }
 
-    @SuppressWarnings("deprecation")
     public void entityInside(@NotNull BlockState pState, @NotNull Level pLevel,
                              @NotNull BlockPos pPos, @NotNull Entity pEntity) {
         if (pLevel.isClientSide()) return;
@@ -42,7 +39,6 @@ public class Xdi8ahoPortalBlock extends Block {
 
     @Override
     @NotNull
-    @SuppressWarnings("deprecation")
     public BlockState updateShape(@NotNull BlockState pState,
                                   @NotNull Direction pDirection, @NotNull BlockState pNeighborState,
                                   @NotNull LevelAccessor pLevel, @NotNull BlockPos pCurrentPos,

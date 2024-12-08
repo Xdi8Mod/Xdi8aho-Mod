@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import dev.architectury.core.AbstractRecipeSerializer;
+import io.github.qwerty770.mcmod.xdi8.api.ResourceLocationTool;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -40,7 +41,7 @@ public record TotemRecipe(ResourceLocation id,
         if (containerSize <= lettersSize)
             return false;
         final ItemStack totem = pContainer.getItem(0);
-        if (!totem.is(FireflyItemTags.TOTEM))
+        if (!totem.is(FireflyItemTags.TOTEM.tagKey()))
             return false;
         if (Xdi8TotemItem.getAbility(totem) != null)
             return false;
@@ -116,10 +117,10 @@ public record TotemRecipe(ResourceLocation id,
             List<KeyedLetter> letterList = new ArrayList<>();
             for (JsonElement e : letters) {
                 String letter = GsonHelper.convertToString(e, "letter");
-                final KeyedLetter keyedLetter = LettersUtil.byId(new ResourceLocation(letter));
+                final KeyedLetter keyedLetter = LettersUtil.byId(ResourceLocationTool.create(letter));
                 letterList.add(keyedLetter);
             }
-            TotemAbility totemAbility = TotemAbilities.byId(new ResourceLocation(ability))
+            TotemAbility totemAbility = TotemAbilities.byId(ResourceLocationTool.create(ability))
                     .orElseThrow(() -> new IllegalArgumentException("Invalid totem ability: " + ability));
             return new TotemRecipe(pRecipeId, letterList, totemAbility);
         }
@@ -127,14 +128,14 @@ public record TotemRecipe(ResourceLocation id,
         @Override
         public @NotNull TotemRecipe fromNetwork(ResourceLocation pRecipeId, FriendlyByteBuf buf) {
             final String ability = buf.readUtf();
-            TotemAbility totemAbility = TotemAbilities.byId(new ResourceLocation(ability))
+            TotemAbility totemAbility = TotemAbilities.byId(ResourceLocationTool.create(ability))
                     .orElseThrow(() -> new IllegalArgumentException("Invalid totem ability: " + ability));
 
             final int lettersSize = buf.readInt();
             List<KeyedLetter> letterList = new ArrayList<>(lettersSize);
             for (int i = 0; i < lettersSize; i++) {
                 String letter = buf.readUtf();
-                final KeyedLetter keyedLetter = LettersUtil.byId(new ResourceLocation(letter));
+                final KeyedLetter keyedLetter = LettersUtil.byId(ResourceLocationTool.create(letter));
                 letterList.add(keyedLetter);
             }
             return new TotemRecipe(pRecipeId, letterList, totemAbility);

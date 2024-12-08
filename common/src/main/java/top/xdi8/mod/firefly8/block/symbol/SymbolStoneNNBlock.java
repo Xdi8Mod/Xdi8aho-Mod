@@ -1,7 +1,6 @@
 package top.xdi8.mod.firefly8.block.symbol;
 
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.BlockGetter;
@@ -30,6 +29,6 @@ public class SymbolStoneNNBlock extends Block {
     public void appendHoverText(@NotNull ItemStack pStack, @Nullable BlockGetter pLevel,
                                 @NotNull List<Component> pTooltip, @NotNull TooltipFlag pFlag) {
         super.appendHoverText(pStack, pLevel, pTooltip, pFlag);
-        pTooltip.add(new TranslatableComponent("block.firefly8.symbol_stone_nn"));
+        pTooltip.add(Component.translatable("block.firefly8.symbol_stone_nn"));
     }
 }

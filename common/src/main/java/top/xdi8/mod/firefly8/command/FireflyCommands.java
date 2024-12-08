@@ -10,7 +10,7 @@ import net.minecraft.commands.arguments.DimensionArgument;
 import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.commands.arguments.coordinates.BlockPosArgument;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
@@ -58,7 +58,7 @@ public final class FireflyCommands {
         private static int execute(Collection<ServerPlayer> players, CommandSourceStack stack) {
             final int count = players.size();
             if (count == 0) {
-                stack.sendFailure(new TranslatableComponent("commands.unbindxdi8portal.0"));
+                stack.sendFailure(Component.translatable("commands.unbindxdi8portal.0"));
                 return 0;
             }
 
@@ -66,11 +66,11 @@ public final class FireflyCommands {
                 final IServerPlayerWithHiddenInventory ext = IServerPlayerWithHiddenInventory.xdi8$extend(player);
                 ext.xdi8$setPortal(null, BlockPos.ZERO);
                 if (count == 1) {
-                    stack.sendSuccess(new TranslatableComponent("commands.unbindxdi8portal.1", player.getDisplayName()), true);
+                    stack.sendSuccess(() -> Component.translatable("commands.unbindxdi8portal.1", player.getDisplayName()), true);
                 }
             }
             if (count != 1) {
-                stack.sendSuccess(new TranslatableComponent("commands.unbindxdi8portal.more", count), true);
+                stack.sendSuccess(() -> Component.translatable("commands.unbindxdi8portal.more", count), true);
             }
             return 1;
         }
@@ -91,10 +91,10 @@ public final class FireflyCommands {
             final IServerPlayerWithHiddenInventory playerExt = IServerPlayerWithHiddenInventory.xdi8$extend(player);
             if (playerExt.xdi8$validatePortal(level, pos)) {
                 playerExt.xdi8$setPortal(level, pos);
-                stack.sendSuccess(new TranslatableComponent("commands.bindxdi8portal.success", player.getDisplayName()), true);
+                stack.sendSuccess(() -> Component.translatable("commands.bindxdi8portal.success", player.getDisplayName()), true);
                 return 1;
             } else {
-                stack.sendFailure(new TranslatableComponent("commands.bindxdi8portal.failure", player.getDisplayName(), level.location(), pos.toShortString()));
+                stack.sendFailure(Component.translatable("commands.bindxdi8portal.failure", player.getDisplayName(), level.location(), pos.toShortString()));
                 return 0;
             }
         }

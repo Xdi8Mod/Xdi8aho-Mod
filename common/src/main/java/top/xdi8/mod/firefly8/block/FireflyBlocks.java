@@ -10,13 +10,16 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
+import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
 import top.xdi8.mod.firefly8.block.cedar.CedarTreeGrower;
 import top.xdi8.mod.firefly8.block.symbol.SymbolStoneBlock;
 import top.xdi8.mod.firefly8.block.symbol.SymbolStoneNNBlock;
 import top.xdi8.mod.firefly8.block.symbol.Xdi8TableBlock;
-import io.github.qwerty770.mcmod.spmreborn.api.InternalRegistryLogWrapper;
+import io.github.qwerty770.mcmod.xdi8.api.InternalRegistryLogWrapper;
 
-import static io.github.qwerty770.mcmod.spmreborn.util.registries.RegistryHelper.*;
+import static io.github.qwerty770.mcmod.xdi8.util.registries.BlockUtils.createLeaves;
+import static io.github.qwerty770.mcmod.xdi8.util.registries.RegistryHelper.*;
 import static top.xdi8.mod.firefly8.block.Xdi8ahoPortalTopBlock.FIREFLY_COUNT;
 
 public class FireflyBlocks {
@@ -73,18 +76,34 @@ public class FireflyBlocks {
                         .requiresCorrectToolForDrops());
         XDI8AHO_PORTAL_TOP_BLOCK = block("xdi8aho_torch_top", Xdi8ahoPortalTopBlock::new,
                 BlockBehaviour.Properties.of()
+                        .mapColor(MapColor.GOLD)
                         .strength(8F, 800F)
                         .requiresCorrectToolForDrops()
                         .lightLevel(bs -> bs.getValue(FIREFLY_COUNT) * 3));
         XDI8AHO_PORTAL_BLOCK = block("xdi8aho_portal", Xdi8ahoPortalBlock::new,
                 BlockBehaviour.Properties.of()
+                        .mapColor(MapColor.GOLD)
                         .lightLevel(s->11)
                         .strength(-1)
                         .noCollission()
                         .sound(SoundType.AMETHYST));
-        XDI8AHO_BACK_PORTAL_CORE_BLOCK = reg.block("xdi8aho_back_portal_core", BackPortalCoreBlock::new);
-        XDI8AHO_BACK_FIRE_BLOCK = reg.block("xdi8aho_back_portal_fire", BackPortalFireBlock::new);
-        XDI8_TABLE = reg.block("xdi8_table", Xdi8TableBlock::new);
+        XDI8AHO_BACK_PORTAL_CORE_BLOCK = block("xdi8aho_back_portal_core", BackPortalCoreBlock::new,
+                BlockBehaviour.Properties.of()
+                        .mapColor(MapColor.COLOR_LIGHT_GRAY)
+                        .strength(10F, 800F)
+                        .requiresCorrectToolForDrops());
+        XDI8AHO_BACK_FIRE_BLOCK = block("xdi8aho_back_portal_fire", BackPortalFireBlock::new,
+                BlockBehaviour.Properties.of()
+                        .mapColor(MapColor.FIRE)
+                        .replaceable()
+                        .instabreak()
+                        .noCollission()
+                        .sound(SoundType.WOOL)
+                        .lightLevel((bs) -> 15));
+        XDI8_TABLE = block("xdi8_table", Xdi8TableBlock::new,
+                BlockBehaviour.Properties.of()
+                        .requiresCorrectToolForDrops()
+                        .strength(3.5F, 6.0F));
         SymbolStoneBlock.registerAll((id, sup) -> block(id, sup::get));
         DARK_SYMBOL_STONE = ofDefaultBlock("dark_symbol_stone",
                 BlockBehaviour.Properties.of()
@@ -112,18 +131,11 @@ public class FireflyBlocks {
                 new FenceBlock(BlockBehaviour.Properties.of()
                         .strength(2.0f, 3.0f)
                         .sound(SoundType.WOOD)));
-        CEDAR_FENCE_GATE = reg.block("cedar_fence_gate", () ->
-                new FenceGateBlock(BlockBehaviour.Properties.of(Material.WOOD, cedarColor)
+        CEDAR_FENCE_GATE = block("cedar_fence_gate", () ->
+                new FenceGateBlock(BlockBehaviour.Properties.of()
                         .strength(2.0f, 3.0f)
                         .sound(SoundType.WOOD)));
-        CEDAR_LEAVES = reg.block("cedar_leaves", () ->
-                new LeavesBlock(BlockBehaviour.Properties.of(Material.LEAVES)
-                        .strength(0.2F)
-                        .randomTicks()
-                        .sound(SoundType.GRASS).noOcclusion()
-                        .isValidSpawn(FireflyBlocks::ocelotOrParrot)
-                        .isSuffocating(FireflyBlocks::never)
-                        .isViewBlocking(FireflyBlocks::never)));
+        CEDAR_LEAVES = createLeaves("cedar_leaves");
         CEDAR_LOG = reg.block("cedar_log", () ->
                 new RotatedPillarBlock(BlockBehaviour.Properties.of(Material.WOOD, (state) ->
                                 state.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? cedarColor : MaterialColor.PODZOL)
