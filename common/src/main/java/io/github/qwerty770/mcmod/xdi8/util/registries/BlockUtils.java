@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
+import top.xdi8.mod.firefly8.block.FireflyBlocks;
 
 // Added on 2023/11/26 after deleting io.github.qwerty770.mcmod.spmreborn.util.objsettings.BlockSettings
 // Update to Minecraft 1.21.3 -- 2024/11/22  Update block properties
@@ -43,6 +44,10 @@ public class BlockUtils {
     public static final BlockBehaviour.Properties crop = BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY);
     public static final BlockBehaviour.Properties grass = BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY);
 
+    public static BlockBehaviour.Properties woodenBlock() {
+        return BlockBehaviour.Properties.of().mapColor(FireflyBlocks.redwoodColor).instrument(NoteBlockInstrument.BASS).ignitedByLava().sound(SoundType.WOOD);
+    }
+
     public static BlockBehaviour.Properties createFunctionalBlock(float hardness, float blastResistance) {
         return BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).sound(SoundType.WOOD).destroyTime(hardness).explosionResistance(blastResistance).requiresCorrectToolForDrops();
     }
@@ -51,6 +56,7 @@ public class BlockUtils {
     private static Boolean ocelotOrParrot(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, EntityType<?> entityType) {
         return entityType == EntityType.OCELOT || entityType == EntityType.PARROT;
     }
+
     private static Boolean never(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
         return false;
     }

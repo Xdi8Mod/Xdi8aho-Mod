@@ -10,7 +10,7 @@ import org.apache.commons.lang3.mutable.MutableBoolean;
 import top.xdi8.mod.firefly8.advancement.AdvancementLoadingContext;
 import top.xdi8.mod.firefly8.advancement.criteria.FireflyCriteria;
 import top.xdi8.mod.firefly8.block.FireflyBlocks;
-import top.xdi8.mod.firefly8.block.cedar.FireflyTreeFeatures;
+import top.xdi8.mod.firefly8.block.redwood.FireflyTreeFeatures;
 import top.xdi8.mod.firefly8.block.entity.FireflyBlockEntityTypes;
 import top.xdi8.mod.firefly8.block.structure.Xdi8PortalBasicDataLoader;
 import top.xdi8.mod.firefly8.command.FireflyCommands;

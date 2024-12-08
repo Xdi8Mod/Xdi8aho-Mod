@@ -1,12 +1,12 @@
 package top.xdi8.mod.firefly8.block.symbol;
 
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.MapColor;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -14,29 +14,20 @@ import top.xdi8.mod.firefly8.core.letters.KeyedLetter;
 import top.xdi8.mod.firefly8.core.letters.LettersUtil;
 
 import java.util.*;
-import java.util.function.BiConsumer;
-import java.util.function.Supplier;
+import java.util.function.Function;
 
 public class SymbolStoneBlock extends Block implements KeyedLetter.Provider {
     private final KeyedLetter letter;
 
-    public SymbolStoneBlock(KeyedLetter letter) {
-        super(Properties.of(Material.STONE, MaterialColor.COLOR_LIGHT_GRAY)
-                .requiresCorrectToolForDrops()
-                .strength(1.5F, 8.0F)
-        );
+    public SymbolStoneBlock(BlockBehaviour.Properties properties, KeyedLetter letter) {
+        super(properties);
         this.letter = letter;
     }
 
     @Override
-    public @NotNull String getDescriptionId() {
-        return "block.firefly8.symbol_stone";
-    }
-
-    @Override
-    public void appendHoverText(@NotNull ItemStack pStack, @Nullable BlockGetter pLevel,
-                                @NotNull List<Component> pTooltip, @NotNull TooltipFlag pFlag) {
-        super.appendHoverText(pStack, pLevel, pTooltip, pFlag);
+    public void appendHoverText(@NotNull ItemStack stack, @Nullable Item.TooltipContext context,
+                                @NotNull List<Component> tooltip, @NotNull TooltipFlag flag) {
+        super.appendHoverText(stack, context, tooltip, flag);
         if (letter.isNull()) return;
         List<String> sb = new ArrayList<>();
         if (letter.hasUppercase()) sb.add(Character.toString(letter.uppercase()));
@@ -44,7 +35,7 @@ public class SymbolStoneBlock extends Block implements KeyedLetter.Provider {
         if (letter.hasLowercase()) sb.add(Character.toString(letter.lowercase()));
         String s = join(sb.iterator(), " ");
         if (!s.isBlank()) {
-            pTooltip.add(Component.translatable("block.firefly8.symbol_stone.letter", s));
+            tooltip.add(Component.translatable("block.firefly8.symbol_stone.letter", s));
         }
     }
 
@@ -59,24 +50,29 @@ public class SymbolStoneBlock extends Block implements KeyedLetter.Provider {
     }
 
     @ApiStatus.Internal
-    public static void registerAll(BiConsumer<String /*id*/, Supplier<? extends Block>> registry) {
-        registry.accept("symbol_stone", () -> {
-            var block = new SymbolStoneBlock(KeyedLetter.empty());
+    public static void registerAll(Consumer3<String, Function<BlockBehaviour.Properties, Block>, BlockBehaviour.Properties> registry) {
+        BlockBehaviour.Properties properties1 = Properties.of()
+                .overrideDescription("block.firefly8.symbol_stone")
+                .mapColor(MapColor.COLOR_LIGHT_GRAY)
+                .requiresCorrectToolForDrops()
+                .strength(1.5F, 8.0F);
+        registry.accept("symbol_stone", (properties) -> {
+            var block = new SymbolStoneBlock(properties, KeyedLetter.empty());
             LETTER_TO_BLOCK.put(KeyedLetter.empty(), block);
             return block;
-        });
+        }, properties1);
         LettersUtil.forEach((key, letter) -> {
             if (letter.isNull()) return;
-            Supplier<Block> sup = () -> {
-                var block = new SymbolStoneBlock(letter);
+            Function<BlockBehaviour.Properties, Block> sup = (properties) -> {
+                var block = new SymbolStoneBlock(properties, letter);
                 LETTER_TO_BLOCK.put(letter, block);
                 return block;
             };
             if ("firefly8".equals(key.getNamespace())) {
-                registry.accept("symbol_stone_" + key.getPath(), sup);
+                registry.accept("symbol_stone_" + key.getPath(), sup, properties1);
             } else {
                 registry.accept("symbol_stone_" + key.getNamespace() +
-                        "__" + key.getPath(), sup);
+                        "__" + key.getPath(), sup, properties1);
             }
         });
     }
@@ -89,7 +85,8 @@ public class SymbolStoneBlock extends Block implements KeyedLetter.Provider {
     }
 
     // from plexus-utils
-    private static String join(Iterator<?> iterator, String separator ) {
+    @SuppressWarnings("SameParameterValue")
+    private static String join(Iterator<?> iterator, String separator) {
         if ( separator == null ) {
             separator = "";
         }
@@ -101,5 +98,9 @@ public class SymbolStoneBlock extends Block implements KeyedLetter.Provider {
             }
         }
         return buf.toString();
+    }
+
+    public interface Consumer3<T1, T2, T3>{
+        void accept(T1 t1, T2 t2, T3 t3);
     }
 }

@@ -1,4 +1,4 @@
-package top.xdi8.mod.firefly8.block.cedar;
+package top.xdi8.mod.firefly8.block.redwood;
 
 import com.google.common.collect.ImmutableList;
 import io.github.qwerty770.mcmod.xdi8.api.SimpleStateProviderTool;
@@ -7,6 +7,7 @@ import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.grower.TreeGrower;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
@@ -19,6 +20,9 @@ import net.minecraft.world.level.levelgen.feature.trunkplacers.GiantTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import top.xdi8.mod.firefly8.block.FireflyBlocks;
 import io.github.qwerty770.mcmod.xdi8.api.InternalRegistryLogWrapper;
+
+import java.util.Optional;
+import java.util.function.Supplier;
 
 public class FireflyTreeFeatures {
     public static final InternalRegistryLogWrapper LOG_WRAPPER = InternalRegistryLogWrapper.firefly8("tree_features");
@@ -41,4 +45,7 @@ public class FireflyTreeFeatures {
                     new MegaPineFoliagePlacer(ConstantInt.of(0), ConstantInt.of(0), UniformInt.of(3, 7)),
                     new TwoLayersFeatureSize(1, 1, 2))
                     .decorators(ImmutableList.of(new AlterGroundDecorator(BlockStateProvider.simple(Blocks.PODZOL)))).build());
+
+    public static final Supplier<TreeGrower> CEDAR_TREE_GROWER = () -> new TreeGrower("firefly8_redwood",
+            0.4F, Optional.of(MEGA_CEDAR), Optional.of(MEGA_CEDAR_PINE), Optional.of(CEDAR), Optional.empty(), Optional.empty(), Optional.empty())
 }

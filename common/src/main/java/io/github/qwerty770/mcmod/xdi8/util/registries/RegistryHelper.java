@@ -84,6 +84,10 @@ public abstract class RegistryHelper {
         return blockRegistry.register(resourceKey.location(), () -> function.apply(properties.setId(resourceKey)));
     }
 
+    public static RegistrySupplier<Block> defaultBlock(String id, BlockBehaviour.Properties prop) {
+        return block(id, Block::new, prop);
+    }
+
     public static <I extends Item> RegistrySupplier<I> item(String id, Function<Item.Properties, I> function, Item.Properties properties) {
         return item(itemId(id), function, properties);
     }

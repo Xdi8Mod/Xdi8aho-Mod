@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 @StableApi
 public class SimpleStateProviderTool extends SimpleStateProvider {
     // This class is created to avoid NullPointerException "Registry Object not present".
-    // For the usage of this, see top.xdi8.mod.firefly8.block.cedar.FireflyTreeFeatures
+    // For the usage of this, see top.xdi8.mod.firefly8.block.redwood.FireflyTreeFeatures
     private final RegistrySupplier<Block> blockSupplier;
 
     public SimpleStateProviderTool(RegistrySupplier<Block> supplier) {

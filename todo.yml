@@ -5,5 +5,11 @@ Need rewriting:
         top.xdi8.mod.firefly8.mixin.forge.AdvancementsMixin
         top.xdi8.mod.firefly8.mixin.forge.ServerPlayerCapacityMixin
         top.xdi8.mod.firefly8.mixin.forge.ServerPlayerCapacityMixin
-    All platforms:
-        top.xdi8.mod.firefly8.item.tint.brewing.TintedPotionBrewingRecipe
+    Rename cedar -> Redwood:
+        Block registry
+        Tree Grower Code
+        Block state
+        Language file
+        Block model
+        Block texture
+        DataFixer

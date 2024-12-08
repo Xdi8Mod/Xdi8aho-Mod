@@ -12,29 +12,21 @@ import top.xdi8.mod.firefly8.item.FireflyItems;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.BiConsumer;
-import java.util.function.Supplier;
+import java.util.function.Function;
 import java.util.stream.Stream;
 
 public class SymbolStoneBlockItem extends BlockItem implements KeyedLetter.Provider {
     private final KeyedLetter letter;
 
-    SymbolStoneBlockItem(KeyedLetter letter) {
-        this(letter, new Properties()
-                .rarity(Rarity.UNCOMMON)
-                .tab(FireflyItems.TAB)
-        );
-    }
-
-    public SymbolStoneBlockItem(KeyedLetter letter, Properties pProperties) {
-        super(SymbolStoneBlock.fromLetter(letter), pProperties);
+    public SymbolStoneBlockItem(KeyedLetter letter, Properties properties) {
+        super(SymbolStoneBlock.fromLetter(letter), properties);
         this.letter = letter;
     }
 
     @Override
     public void onDestroyed(@NotNull ItemEntity pItemEntity) {
         ItemUtils.onContainerDestroyed(pItemEntity, Stream.of(
-                new ItemStack(FireflyItems.DARK_SYMBOL_STONE.get(), pItemEntity.getItem().getCount())));
+                new ItemStack(FireflyItems.DARK_SYMBOL_STONE.get(), pItemEntity.getItem().getCount())).toList());
     }
 
     public SymbolStoneBlockItem withLetter(KeyedLetter letter) {
@@ -48,24 +40,27 @@ public class SymbolStoneBlockItem extends BlockItem implements KeyedLetter.Provi
     }
 
     @ApiStatus.Internal
-    public static void registerAll(BiConsumer<String, Supplier<? extends Item>> registry) {
-        registry.accept("symbol_stone", () -> {
-            var item = new SymbolStoneBlockItem(KeyedLetter.empty(), new Properties().tab(FireflyItems.TAB));
+    public static void registerAll(SymbolStoneBlock.Consumer3<String, Function<Item.Properties, Item>, Item.Properties> registry) {
+        Item.Properties properties1 = new Properties()
+                .rarity(Rarity.UNCOMMON)
+                .arch$tab(FireflyItems.TAB);
+        registry.accept("symbol_stone", (properties) -> {
+            var item = new SymbolStoneBlockItem(KeyedLetter.empty(), properties);
             LETTER_TO_ITEM.put(KeyedLetter.empty(), item);
             return item;
-        });
+        }, properties1);
         LettersUtil.forEach((key, letter) -> {
             if (letter.isNull()) return;
-            Supplier<Item> sup = () -> {
-                var item = new SymbolStoneBlockItem(letter);
+            Function<Item.Properties, Item> sup = (properties) -> {
+                var item = new SymbolStoneBlockItem(letter, properties);
                 LETTER_TO_ITEM.put(letter, item);
                 return item;
             };
             if ("firefly8".equals(key.getNamespace())) {
-                registry.accept("symbol_stone_" + key.getPath(), sup);
+                registry.accept("symbol_stone_" + key.getPath(), sup, properties1);
             } else {
                 registry.accept("symbol_stone_" + key.getNamespace() +
-                        "__" + key.getPath(), sup);
+                        "__" + key.getPath(), sup, properties1);
             }
         });
     }
