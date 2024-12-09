@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "sugar",
+  "ingredients": [
+    "#firefly8:tinted_honey_bottles"
+  ],
+  "result": {
+    "id": "minecraft:sugar",
+    "count": 3
+  }
+}

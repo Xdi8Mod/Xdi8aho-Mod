@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "iii",
+    " s ",
+    " s "
+  ],
+  "key": {
+    "i": "firefly8:indium_ingot",
+    "s": "#c:sticks"
+  },
+  "result": {
+    "id": "firefly8:indium_pickaxe",
+    "count": 1
+  }
+}

@@ -41,9 +41,7 @@ public class SymbolStoneBlockItem extends BlockItem implements KeyedLetter.Provi
 
     @ApiStatus.Internal
     public static void registerAll(SymbolStoneBlock.Consumer3<String, Function<Item.Properties, Item>, Item.Properties> registry) {
-        Item.Properties properties1 = new Properties()
-                .rarity(Rarity.UNCOMMON)
-                .arch$tab(FireflyItems.TAB);
+        Item.Properties properties1 = new Properties().rarity(Rarity.UNCOMMON).arch$tab(FireflyItems.TAB);
         registry.accept("symbol_stone", (properties) -> {
             var item = new SymbolStoneBlockItem(KeyedLetter.empty(), properties);
             LETTER_TO_ITEM.put(KeyedLetter.empty(), item);

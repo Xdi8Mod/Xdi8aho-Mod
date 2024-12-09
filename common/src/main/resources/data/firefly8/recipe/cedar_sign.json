@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_sign",
+  "pattern": [
+    "###",
+    "###",
+    " X "
+  ],
+  "key": {
+    "#": "firefly8:cedar_planks",
+    "X": "minecraft:stick"
+  },
+  "result": {
+    "id": "firefly8:cedar_sign",
+    "count": 3
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_stairs",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": "firefly8:cedar_planks"
+  },
+  "result": {
+    "id": "firefly8:cedar_stairs",
+    "count": 4
+  }
+}

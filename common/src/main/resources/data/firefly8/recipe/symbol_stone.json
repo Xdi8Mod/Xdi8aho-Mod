@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "III",
+    "IDI",
+    "III"
+  ],
+  "key": {
+    "I": "minecraft:stone",
+    "D": "firefly8:indium_ingot"
+  },
+  "result": {
+    "id": "firefly8:symbol_stone",
+    "count": 8
+  }
+}

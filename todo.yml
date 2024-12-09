@@ -5,6 +5,8 @@ Need rewriting:
         top.xdi8.mod.firefly8.mixin.forge.AdvancementsMixin
         top.xdi8.mod.firefly8.mixin.forge.ServerPlayerCapacityMixin
         top.xdi8.mod.firefly8.mixin.forge.ServerPlayerCapacityMixin
+    Fabric only:
+        Everything except the main class
     Rename cedar -> Redwood:
         Block registry
         Tree Grower Code

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "yy",
+    "yy"
+  ],
+  "key": {
+    "y": "#firefly8:honey_bottles"
+  },
+  "result": {
+    "id": "minecraft:honey_block"
+  }
+}

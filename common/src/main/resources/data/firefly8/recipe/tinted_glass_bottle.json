@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "# #",
+    " # "
+  ],
+  "group": "firefly8:tinted_glass_bottles",
+  "key": {
+    "#": "minecraft:tinted_glass"
+  },
+  "result": {
+    "id": "firefly8:tinted_glass_bottle",
+    "count": 3
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [{
+    "item": "minecraft:honey_bottle"
+  }, {
+    "item": "minecraft:amethyst_shard"
+  }, {
+    "item": "minecraft:amethyst_shard"
+  }],
+  "result": {
+    "id": "firefly8:tinted_honey_bottle",
+    "count": 1
+  },
+  "group": "firefly8:tinted_honey_bottles"
+}

@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "III",
+    "IGI",
+    "III"
+  ],
+  "key": {
+    "I": "#c:gold_nuggets",
+    "G": "#c:glowstone_dusts"
+  },
+  "result": {
+    "id": "firefly8:xdi8aho_torch_top"
+  }
+}

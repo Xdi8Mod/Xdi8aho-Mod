@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " &",
+    "/ "
+  ],
+  "key": {
+    "&": "firefly8:indium_ingot",
+    "/": "#c:sticks"
+  },
+  "result": {
+    "id": "firefly8:indium_chisel"
+  }
+}

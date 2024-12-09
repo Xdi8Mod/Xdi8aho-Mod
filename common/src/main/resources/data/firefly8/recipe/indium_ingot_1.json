@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "firefly8:indium_block"
+  ],
+  "group": "firefly8:indium_ingot",
+  "result": {
+    "id": "firefly8:indium_ingot",
+    "count": 9
+  }
+}

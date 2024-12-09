@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_fence",
+  "pattern": [
+    "W#W",
+    "W#W"
+  ],
+  "key": {
+    "W": "firefly8:cedar_planks",
+    "#": "minecraft:stick"
+  },
+  "result": {
+    "id": "firefly8:cedar_fence",
+    "count": 3
+  }
+}
