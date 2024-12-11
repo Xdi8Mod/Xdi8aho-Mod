@@ -78,7 +78,7 @@ public class TintedGlassBottleItem extends BottleItem {
                     releaseBeesAndResetHoneyLevel(level, state, blockPos, player);
                 } else resetHoneyLevel(level, state, blockPos);
             }
-            return InteractionResult.sidedSuccess(level.isClientSide);
+            return level.isClientSide ? InteractionResult.SUCCESS : InteractionResult.CONSUME;
         }
         return super.useOn(pContext);
     }
@@ -130,7 +130,7 @@ public class TintedGlassBottleItem extends BottleItem {
         if (!(pTarget instanceof FireflyEntity firefly)){
             return InteractionResult.PASS;
         }
-        Level level = pPlayer.getLevel();
+        Level level = pPlayer.level();
         ItemStack stack = pPlayer.getItemInHand(pUsedHand);
         ItemStack resultStack = new ItemStack(FireflyItems.TINTED_FIREFLY_BOTTLE.get(), 1);
         if (TintedFireflyBottleItem.bottleFirefly(resultStack, pPlayer, level, firefly)) {

@@ -1,5 +1,6 @@
 package top.xdi8.mod.firefly8.block;
 
+import com.mojang.serialization.MapCodec;
 import io.github.qwerty770.mcmod.xdi8.util.tick.ITickable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -25,8 +26,6 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Range;
@@ -51,22 +50,29 @@ public class Xdi8ahoPortalTopBlock extends BaseEntityBlock {
     }
 
     @Override
+    protected @NotNull MapCodec<? extends BaseEntityBlock> codec() {
+        return simpleCodec(Xdi8ahoPortalTopBlock::new);
+    }
+
+    @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
         pBuilder.add(FIREFLY_COUNT);
     }
 
-    /** When placing the torchlight, checking the base & the pillar */
+    /**
+     * When placing the torchlight, checking the base & the pillar
+     */
     public static PortalTopBlockEntity.PortalStatus getPortalHeight(BlockGetter level, BlockPos thisPos, boolean checkBasement) {
         int heightCount = 1;
         int status = PortalTopBlockEntity.PortalStatus.ofStateStatus(level.getBlockState(thisPos.below()));
         if (status == PortalTopBlockEntity.PortalStatus.UNACTIVATED)
             return PortalTopBlockEntity.PortalStatus.empty();
-        for (int y = thisPos.getY() - 2 ;; y--) {
+        for (int y = thisPos.getY() - 2; ; y--) {
             if (heightCount > PORTAL_MAX_HEIGHT) return PortalTopBlockEntity.PortalStatus.empty();
 
             final BlockPos thatPos = thisPos.atY(y);
             final BlockState blockState = level.getBlockState(thatPos);
-            if (blockState.is(FireflyBlockTags.PORTAL_CORE)) {
+            if (blockState.is(FireflyBlockTags.PORTAL_CORE.tagKey())) {
                 if (heightCount < PORTAL_MIN_HEIGHT) return PortalTopBlockEntity.PortalStatus.empty();
                 return !checkBasement || isPortalBaseValid(level, thatPos) ?
                         new PortalTopBlockEntity.PortalStatus(status, heightCount) :
@@ -83,40 +89,38 @@ public class Xdi8ahoPortalTopBlock extends BaseEntityBlock {
         return Xdi8PortalBasicData.getInstance().fits(level, corePos);
     }
 
-    public static void fillPortalBlocks(Level level, BlockPos topPos,
-                                         @Range(from = PORTAL_MIN_HEIGHT, to = PORTAL_MAX_HEIGHT)
-                                         int portalHeight) {
-        final int minY = topPos.getY() - portalHeight;
-        for (int y = topPos.getY() - 1; y >= minY; y--) {
-            BlockPos walkPos = topPos.atY(y);
+    public static void fillPortalBlocks(Level level, BlockPos topos,
+                                        @Range(from = PORTAL_MIN_HEIGHT, to = PORTAL_MAX_HEIGHT)
+                                        int portalHeight) {
+        final int minY = topos.getY() - portalHeight;
+        for (int y = topos.getY() - 1; y >= minY; y--) {
+            BlockPos walkPos = topos.atY(y);
             level.setBlockAndUpdate(walkPos, FireflyBlocks.XDI8AHO_PORTAL_BLOCK.get().defaultBlockState());
         }
     }
 
     @Override
-    public void onPlace(@NotNull BlockState pState, @NotNull Level pLevel,
-                        @NotNull BlockPos pPos, @NotNull BlockState pOldState, boolean pIsMoving) {
-        if (pLevel.isClientSide()) return;
-        if (pState.getValue(FIREFLY_COUNT) <= 0) return;
-        processPortal(pLevel, pPos, true);
+    public void onPlace(@NotNull BlockState state, @NotNull Level level,
+                        @NotNull BlockPos pos, @NotNull BlockState oldState, boolean isMoving) {
+        if (level.isClientSide()) return;
+        if (state.getValue(FIREFLY_COUNT) <= 0) return;
+        processPortal(level, pos, true);
     }
 
     public static void processPortal(Level level, BlockPos pos, boolean checkBasement) {
         final var portalHeight = getPortalHeight(level, pos, checkBasement);
         switch (portalHeight.status()) {
-            case PortalTopBlockEntity.PortalStatus.UNACTIVATED ->
-                    removePortal(level, pos);
-            case PortalTopBlockEntity.PortalStatus.READY ->
-                    fillPortalBlocks(level, pos, portalHeight.height());
+            case PortalTopBlockEntity.PortalStatus.UNACTIVATED -> removePortal(level, pos);
+            case PortalTopBlockEntity.PortalStatus.READY -> fillPortalBlocks(level, pos, portalHeight.height());
         }
     }
 
     @Override
-    public void onRemove(@NotNull BlockState pState, @NotNull Level pLevel,
-                         @NotNull BlockPos pPos, @NotNull BlockState pNewState, boolean pIsMoving) {
+    public void onRemove(@NotNull BlockState state, @NotNull Level level,
+                         @NotNull BlockPos pos, @NotNull BlockState newState, boolean isMoving) {
         // invalid portal
-        if (!pNewState.is(pState.getBlock())) {
-            removePortal(pLevel, pPos);
+        if (!newState.is(state.getBlock())) {
+            removePortal(level, pos);
         }
     }
 
@@ -131,8 +135,8 @@ public class Xdi8ahoPortalTopBlock extends BaseEntityBlock {
     }
 
     @Override
-    public PortalTopBlockEntity newBlockEntity(@NotNull BlockPos pPos, @NotNull BlockState pState) {
-        return new PortalTopBlockEntity(pPos, pState);
+    public PortalTopBlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
+        return new PortalTopBlockEntity(pos, state);
     }
 
     @Override
@@ -146,34 +150,32 @@ public class Xdi8ahoPortalTopBlock extends BaseEntityBlock {
     }
 
     @Override
-    @NotNull
-    public InteractionResult use(@NotNull BlockState pState, @NotNull Level pLevel,
-                                 @NotNull BlockPos pPos, @NotNull Player pPlayer,
-                                 @NotNull InteractionHand pHand, @NotNull BlockHitResult pHit) {
-        if (!pLevel.isClientSide()) {
-            final int fireflyCount = pState.getValue(FIREFLY_COUNT);
+    public @NotNull InteractionResult useItemOn(@NotNull ItemStack stack, @NotNull BlockState state, @NotNull Level level,
+                                                @NotNull BlockPos pos, @NotNull Player player, @NotNull InteractionHand hand,
+                                                @NotNull BlockHitResult hitResult) {
+        if (!level.isClientSide()) {
+            final int fireflyCount = state.getValue(FIREFLY_COUNT);
             if (fireflyCount < MAX_FIREFLY_COUNT) {
-                ItemStack stack = pPlayer.getItemInHand(pHand);
                 if (!stack.is(FireflyItems.TINTED_FIREFLY_BOTTLE.get()) && !stack.is(FireflyItems.FIREFLY_SPAWN_EGG.get())) {
-                    stack = pPlayer.getItemInHand(oppositeHand(pHand));
+                    stack = player.getItemInHand(oppositeHand(hand));
                 }
                 if (stack.is(FireflyItems.TINTED_FIREFLY_BOTTLE.get())) {
                     if (TintedFireflyBottleItem.removeFirefly(stack)) {
-                        pLevel.setBlockAndUpdate(pPos, pState.setValue(FIREFLY_COUNT, fireflyCount + 1));
-                        pLevel.playSound(null, pPos, SoundEvents.AMETHYST_CLUSTER_PLACE, SoundSource.BLOCKS, 1.0f, 1.0f);
-                        processPortal(pLevel, pPos, false);
+                        level.setBlockAndUpdate(pos, state.setValue(FIREFLY_COUNT, fireflyCount + 1));
+                        level.playSound(null, pos, SoundEvents.AMETHYST_CLUSTER_PLACE, SoundSource.BLOCKS, 1.0f, 1.0f);
+                        processPortal(level, pos, false);
                         return InteractionResult.CONSUME;
                     }
                 } else if (stack.is(FireflyItems.FIREFLY_SPAWN_EGG.get())) {
-                    pLevel.setBlockAndUpdate(pPos, pState.setValue(FIREFLY_COUNT, fireflyCount + 1));
-                    pLevel.playSound(null, pPos, SoundEvents.AMETHYST_CLUSTER_PLACE, SoundSource.BLOCKS, 1.0f, 1.0f);
-                    processPortal(pLevel, pPos, false);
+                    level.setBlockAndUpdate(pos, state.setValue(FIREFLY_COUNT, fireflyCount + 1));
+                    level.playSound(null, pos, SoundEvents.AMETHYST_CLUSTER_PLACE, SoundSource.BLOCKS, 1.0f, 1.0f);
+                    processPortal(level, pos, false);
                     return InteractionResult.CONSUME;
                 }
             }
 
-            if (((IServerPlayerWithHiddenInventory)pPlayer).xdi8$validatePortal()) {
-                pPlayer.openMenu(menuProvider());
+            if (((IServerPlayerWithHiddenInventory) player).xdi8$validatePortal()) {
+                player.openMenu(menuProvider());
                 return InteractionResult.CONSUME;
             } else return InteractionResult.PASS;
         }
@@ -189,17 +191,15 @@ public class Xdi8ahoPortalTopBlock extends BaseEntityBlock {
             }
 
             @Override
-            public @NotNull AbstractContainerMenu createMenu(int pContainerId, @NotNull Inventory pInventory, @NotNull Player pPlayer) {
-                IPlayerWithHiddenInventory extPlayer = IPlayerWithHiddenInventory.xdi8$extend(pPlayer);
-                //return ChestMenu.sixRows(pContainerId, pInventory, extPlayer.xdi8$getPortalInv());
-                return new TakeOnlyChestMenu(pContainerId, pInventory, extPlayer.xdi8$getPortalInv());
+            public @NotNull AbstractContainerMenu createMenu(int containerId, @NotNull Inventory inventory, @NotNull Player player) {
+                IPlayerWithHiddenInventory extPlayer = IPlayerWithHiddenInventory.xdi8$extend(player);
+                return new TakeOnlyChestMenu(containerId, inventory, extPlayer.xdi8$getPortalInv());
             }
         };
     }
 
     @Override
-    public MenuProvider getMenuProvider(@NotNull BlockState pState, @NotNull Level pLevel,
-                                        @NotNull BlockPos pPos) {
+    public MenuProvider getMenuProvider(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos) {
         return menuProvider();
     }
 

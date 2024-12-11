@@ -18,7 +18,6 @@ import top.xdi8.mod.firefly8.particle.FireflyParticles;
 @Mod("firefly8")
 public class Firefly8Forge {
     public Firefly8Forge() {
-        // EventBus.register("firefly8", FMLJavaModLoadingContext.get().getModEventBus());
         Firefly8.init();
         if (Environment.get().getDist().equals(Dist.CLIENT)){
             FireflyNetwork.registerClientNetwork();

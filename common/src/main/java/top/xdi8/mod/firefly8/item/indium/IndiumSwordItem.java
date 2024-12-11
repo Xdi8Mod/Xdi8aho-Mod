@@ -10,20 +10,20 @@ import org.jetbrains.annotations.NotNull;
 
 public class IndiumSwordItem extends SwordItem {
     public IndiumSwordItem(Properties pProperties) {
-        super(new IndiumTier(), 3, -2.4F, pProperties.durability(36));
+        super(IndiumToolMaterial.INDIUM, 3, -2.4F, pProperties.durability(36));
     }
 
     @Override
     public boolean hurtEnemy(@NotNull ItemStack pStack, @NotNull LivingEntity pTarget, @NotNull LivingEntity pAttacker) {
         if (!super.hurtEnemy(pStack, pTarget, pAttacker)) return false;
-        IndiumTier.dropNuggets(pStack, pTarget, pAttacker);
+        IndiumToolMaterial.dropNuggets(pStack, pTarget, pAttacker);
         return true;
     }
 
     @Override
     public boolean mineBlock(@NotNull ItemStack pStack, @NotNull Level pLevel, @NotNull BlockState pState, @NotNull BlockPos pPos, @NotNull LivingEntity pEntityLiving) {
         if (!super.mineBlock(pStack, pLevel, pState, pPos, pEntityLiving)) return false;
-        IndiumTier.dropNuggets(pStack, pLevel, pState, pPos, pEntityLiving);
+        IndiumToolMaterial.dropNuggets(pStack, pLevel, pState, pPos, pEntityLiving);
         return true;
     }
 }

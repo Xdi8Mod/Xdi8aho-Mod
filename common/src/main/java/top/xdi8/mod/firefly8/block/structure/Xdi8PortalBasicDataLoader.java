@@ -7,7 +7,6 @@ import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimplePreparableReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
-import org.featurehouse.mcmod.spm.platform.api.resource.KeyedReloadListener;
 import org.slf4j.Logger;
 
 import java.io.BufferedReader;
@@ -16,9 +15,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 
-public final class Xdi8PortalBasicDataLoader
-        extends SimplePreparableReloadListener<Reader>
-        implements KeyedReloadListener {
+public final class Xdi8PortalBasicDataLoader extends SimplePreparableReloadListener<Reader> {
     private static final ResourceLocation PATH_BASIC = 
             ResourceLocationTool.create("firefly8", "xdi8_portal_data.txt");
     private static final Logger LOGGER = LogUtils.getLogger();
@@ -26,10 +23,11 @@ public final class Xdi8PortalBasicDataLoader
     /*** Performs any reloading that can be done off-thread, such as file IO */
     @Override
     protected Reader prepare(ResourceManager pResourceManager, ProfilerFiller pProfiler) {
-        try (Resource resource = pResourceManager.getResource(PATH_BASIC)) {
-            return new BufferedReader(new InputStreamReader(resource.getInputStream(), StandardCharsets.UTF_8));
+        try {
+            Resource resource = pResourceManager.getResource(PATH_BASIC).orElseThrow(IOException::new);
+            return new BufferedReader(new InputStreamReader(resource.open(), StandardCharsets.UTF_8));
         } catch (IOException e) {
-            LOGGER.error("Can't load " + PATH_BASIC, e);
+            LOGGER.error("Can't load {}", PATH_BASIC, e);
         }
         return Reader.nullReader();
     }
@@ -43,7 +41,6 @@ public final class Xdi8PortalBasicDataLoader
         }
     }
 
-    @Override
     public ResourceLocation getId() {
         return ResourceLocationTool.create("firefly8", "portal_base");
     }

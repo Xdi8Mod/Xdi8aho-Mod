@@ -18,7 +18,7 @@ public class MixinBaseFireBlock {
             method = "getState(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/block/state/BlockState;"
     )
     private static void onGetState(BlockGetter level, BlockPos pPos, CallbackInfoReturnable<BlockState> cir) {
-        if (level.getBlockState(pPos.below()).is(FireflyBlockTags.BACK_PORTAL_FIRE_PLACEABLE)) {
+        if (level.getBlockState(pPos.below()).is(FireflyBlockTags.BACK_PORTAL_FIRE_PLACEABLE.tagKey())) {
             cir.setReturnValue(FireflyBlocks.XDI8AHO_BACK_FIRE_BLOCK.get().defaultBlockState());
         }
     }

@@ -46,7 +46,7 @@ public class Xdi8ahoPortalBlock extends Block {
         if (pDirection.getAxis() == Direction.Axis.Y) {
             if (!pNeighborState.is(FireflyBlocks.XDI8AHO_PORTAL_BLOCK.get()) &&
                 !pNeighborState.is(FireflyBlocks.XDI8AHO_PORTAL_TOP_BLOCK.get()) &&
-                !pNeighborState.is(FireflyBlockTags.PORTAL_CORE)) {
+                !pNeighborState.is(FireflyBlockTags.PORTAL_CORE.tagKey())) {
                 return Blocks.AIR.defaultBlockState();
             }
         }

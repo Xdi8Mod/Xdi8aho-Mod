@@ -52,12 +52,12 @@ public class Xdi8TotemItem extends Item {
     }
 
     @Override
-    public void appendHoverText(@NotNull ItemStack pStack, @Nullable Level pLevel, @NotNull List<Component> pTooltipComponents, @NotNull TooltipFlag pIsAdvanced) {
-        @Nullable TotemAbility ability = getAbility(pStack);
+    public void appendHoverText(@NotNull ItemStack stack, @NotNull Item.TooltipContext context, @NotNull List<Component> tooltipComponents, @NotNull TooltipFlag tooltipFlag) {
+        @Nullable TotemAbility ability = getAbility(stack);
         if (ability != null) {
             MutableComponent component = Component.translatable("xdi8.totem.attribute");
             component = component.append(Component.translatable("xdi8.totem.attribute." + ability.getId()));
-            pTooltipComponents.add(component);
+            tooltipComponents.add(component);
         }
     }
 

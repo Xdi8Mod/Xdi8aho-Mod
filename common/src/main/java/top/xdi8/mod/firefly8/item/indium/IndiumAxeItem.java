@@ -13,25 +13,26 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
 import org.jetbrains.annotations.NotNull;
 import top.xdi8.mod.firefly8.block.FireflyBlocks;
 
 public class IndiumAxeItem extends AxeItem {
     public IndiumAxeItem(Properties pProperties) {
-        super(new IndiumTier(), 6.0F, -3.2F, pProperties.durability(54));
+        super(IndiumToolMaterial.INDIUM, 6.0F, -3.2F, pProperties.durability(54));
     }
 
     @Override
     public boolean hurtEnemy(@NotNull ItemStack pStack, @NotNull LivingEntity pTarget, @NotNull LivingEntity pAttacker) {
         if (!super.hurtEnemy(pStack, pTarget, pAttacker)) return false;
-        IndiumTier.dropNuggets(pStack, pTarget, pAttacker);
+        IndiumToolMaterial.dropNuggets(pStack, pTarget, pAttacker);
         return true;
     }
 
     @Override
     public boolean mineBlock(@NotNull ItemStack pStack, @NotNull Level pLevel, @NotNull BlockState pState, @NotNull BlockPos pPos, @NotNull LivingEntity pEntityLiving) {
         if (!super.mineBlock(pStack, pLevel, pState, pPos, pEntityLiving)) return false;
-        IndiumTier.dropNuggets(pStack, pLevel, pState, pPos, pEntityLiving);
+        IndiumToolMaterial.dropNuggets(pStack, pLevel, pState, pPos, pEntityLiving);
         return true;
     }
 
@@ -39,14 +40,13 @@ public class IndiumAxeItem extends AxeItem {
     public @NotNull InteractionResult useOn(UseOnContext context){
         Level level = context.getLevel();
         BlockPos blockPos = context.getClickedPos();
-        Player player = context.getPlayer();
         BlockState blockState = level.getBlockState(blockPos);
-        ItemStack itemStack = context.getItemInHand();
-        BlockState newState;
         if (blockState.getBlock() != FireflyBlocks.CEDAR_WOOD.get() && blockState.getBlock() != FireflyBlocks.CEDAR_LOG.get()){
             return super.useOn(context);
         }
         else {
+            Player player = context.getPlayer();
+            BlockState newState;
             level.playSound(player, blockPos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0f, 1.0f);
             if (blockState.getBlock() == FireflyBlocks.CEDAR_WOOD.get()){
                 newState = FireflyBlocks.STRIPPED_CEDAR_WOOD.get().defaultBlockState();
@@ -54,14 +54,16 @@ public class IndiumAxeItem extends AxeItem {
             else {
                 newState = FireflyBlocks.STRIPPED_CEDAR_LOG.get().defaultBlockState();
             }
+            ItemStack itemStack = context.getItemInHand();
             if (player instanceof ServerPlayer) {
                 CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger((ServerPlayer)player, blockPos, itemStack);
             }
             level.setBlock(blockPos, newState, 11);
+            level.gameEvent(GameEvent.BLOCK_CHANGE, blockPos, GameEvent.Context.of(player, newState));
             if (player != null) {
-                itemStack.hurtAndBreak(1, player, player2 -> player2.broadcastBreakEvent(context.getHand()));
+                itemStack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(context.getHand()));
             }
-            return InteractionResult.sidedSuccess(level.isClientSide);
+            return level.isClientSide ? InteractionResult.SUCCESS : InteractionResult.CONSUME;
         }
     }
 }

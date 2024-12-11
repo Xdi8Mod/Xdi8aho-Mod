@@ -13,8 +13,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class BundlerItem extends Item {
-    public BundlerItem() {
-        super(new Properties().stacksTo(1));
+    public BundlerItem(Properties properties) {
+        super(properties);
     }
 
     protected List<ItemStack> readItemsInside(@NotNull ItemStack stack) {

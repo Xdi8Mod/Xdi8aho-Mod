@@ -16,13 +16,12 @@ import org.jetbrains.annotations.NotNull;
 import top.xdi8.mod.firefly8.item.FireflyItems;
 
 public class TintedHoneyBottleItem extends Item {
-    public TintedHoneyBottleItem(Properties p_41346_) {
-        super(p_41346_);
+    public TintedHoneyBottleItem(Properties properties) {
+        super(properties);
     }
 
     /**
      * Overwriting it cuz mixins should be avoided.
-     * @see HoneyBottleItem#finishUsingItem(ItemStack, Level, LivingEntity)
      */
     @Override
     public @NotNull ItemStack finishUsingItem(@NotNull ItemStack pStack, @NotNull Level pLevel, @NotNull LivingEntity pEntityLiving) {

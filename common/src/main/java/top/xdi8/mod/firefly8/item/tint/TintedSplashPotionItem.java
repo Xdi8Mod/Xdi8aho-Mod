@@ -1,12 +1,11 @@
 package top.xdi8.mod.firefly8.item.tint;
 
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SplashPotionItem;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -16,17 +15,12 @@ public class TintedSplashPotionItem extends SplashPotionItem {
     }
 
     @Override
-    public void appendHoverText(@NotNull ItemStack pStack, @Nullable Level pLevel, @NotNull List<Component> pTooltip, @NotNull TooltipFlag pFlag) {
+    public void appendHoverText(@NotNull ItemStack stack, @NotNull Item.TooltipContext context, @NotNull List<Component> tooltipComponents, @NotNull TooltipFlag tooltipFlag) {
         // NO-OP: YOU CANNOT SEE ANYTHING INSIDE
     }
 
     @Override
     public boolean isFoil(@NotNull ItemStack pStack) {
         return true;
-    }
-
-    @Override
-    public @NotNull String getDescriptionId(@NotNull ItemStack pStack) {
-        return getDescriptionId();  // as default
     }
 }

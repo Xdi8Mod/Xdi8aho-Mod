@@ -29,10 +29,6 @@ public class SymbolStoneBlockItem extends BlockItem implements KeyedLetter.Provi
                 new ItemStack(FireflyItems.DARK_SYMBOL_STONE.get(), pItemEntity.getItem().getCount())).toList());
     }
 
-    public SymbolStoneBlockItem withLetter(KeyedLetter letter) {
-        return fromLetter(letter);
-    }
-
     @NotNull
     @Override
     public KeyedLetter letter() {

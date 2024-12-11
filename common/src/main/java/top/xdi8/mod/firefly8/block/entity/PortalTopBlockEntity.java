@@ -33,7 +33,7 @@ public class PortalTopBlockEntity extends BlockEntity implements ITickable {
         }
 
         public static int ofStateStatus(BlockState state) {
-            if (state.is(FireflyBlockTags.CENTER_PILLAR)) return READY;
+            if (state.is(FireflyBlockTags.CENTER_PILLAR.tagKey())) return READY;
             if (state.is(FireflyBlocks.XDI8AHO_PORTAL_BLOCK.get())) return ACTIVATED;
             return UNACTIVATED;
         }

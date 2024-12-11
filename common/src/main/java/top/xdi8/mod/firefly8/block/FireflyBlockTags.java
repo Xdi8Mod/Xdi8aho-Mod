@@ -1,13 +1,20 @@
 package top.xdi8.mod.firefly8.block;
 
-import net.minecraft.tags.TagKey;
+import io.github.qwerty770.mcmod.xdi8.api.InternalRegistryLogWrapper;
+import io.github.qwerty770.mcmod.xdi8.util.tag.TagContainer;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.Block;
-import org.featurehouse.mcmod.spm.platform.api.reg.PlatformRegister;
+
+import static io.github.qwerty770.mcmod.xdi8.util.registries.RegistryHelper.id;
 
 public class FireflyBlockTags {
-    private static final PlatformRegister reg = PlatformRegister.of("firefly8");
-    public static final TagKey<Block> FIREFLIES_CAN_RELEASE = reg.blockTag("fireflies_can_release");
-    public static final TagKey<Block> PORTAL_CORE = reg.blockTag("portal/core");
-    public static final TagKey<Block> CENTER_PILLAR = reg.blockTag("portal/center_pillar");
-    public static final TagKey<Block> BACK_PORTAL_FIRE_PLACEABLE = reg.blockTag("back_portal_fire_placeable");
+    public static final InternalRegistryLogWrapper LOG_WRAPPER = InternalRegistryLogWrapper.firefly8("block_tags");
+    public static final TagContainer<Block> FIREFLIES_CAN_RELEASE = blockTag("fireflies_can_release");
+    public static final TagContainer<Block> PORTAL_CORE = blockTag("portal/core");
+    public static final TagContainer<Block> CENTER_PILLAR = blockTag("portal/center_pillar");
+    public static final TagContainer<Block> BACK_PORTAL_FIRE_PLACEABLE = blockTag("back_portal_fire_placeable");
+
+    private static TagContainer<Block> blockTag(String id) {
+        return TagContainer.register(id(id), BuiltInRegistries.BLOCK);
+    }
 }

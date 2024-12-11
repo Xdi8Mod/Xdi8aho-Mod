@@ -1,9 +1,12 @@
 package top.xdi8.mod.firefly8.block;
 
 import dev.architectury.registry.registries.RegistrySupplier;
+import io.github.qwerty770.mcmod.xdi8.api.ResourceLocationTool;
 import io.github.qwerty770.mcmod.xdi8.util.registries.RegistryHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
@@ -19,6 +22,8 @@ import top.xdi8.mod.firefly8.block.symbol.SymbolStoneNNBlock;
 import top.xdi8.mod.firefly8.block.symbol.Xdi8TableBlock;
 import io.github.qwerty770.mcmod.xdi8.api.InternalRegistryLogWrapper;
 
+import java.util.Optional;
+
 import static io.github.qwerty770.mcmod.xdi8.util.registries.BlockUtils.createLeaves;
 import static io.github.qwerty770.mcmod.xdi8.util.registries.BlockUtils.woodenBlock;
 import static io.github.qwerty770.mcmod.xdi8.util.registries.RegistryHelper.*;
@@ -28,8 +33,8 @@ public class FireflyBlocks {
     public static final InternalRegistryLogWrapper LOG_WRAPPER = InternalRegistryLogWrapper.firefly8("blocks");
     // TODO: rename cedar -> redwood
     public static final MapColor redwoodColor = MapColor.COLOR_RED;
-    public static final BlockSetType redwoodSet = BlockSetType.register(new BlockSetType("redwood"));
-    public static final WoodType redwoodType = WoodType.register(new WoodType("redwood", redwoodSet));
+    public static final BlockSetType redwoodSet = BlockSetType.register(new BlockSetType("xdi8_redwood"));
+    public static final WoodType redwoodType = WoodType.register(new WoodType("xdi8_redwood", redwoodSet));
 
     public static final RegistrySupplier<Block> XDI8AHO_PORTAL_CORE_BLOCK;
     public static final RegistrySupplier<Block> XDI8AHO_PORTAL_TOP_BLOCK;
@@ -64,18 +69,18 @@ public class FireflyBlocks {
 
     static {
         INDIUM_BLOCK = defaultBlock("indium_block", BlockBehaviour.Properties.of()
-                        .strength(1.0F, 6.0F)
-                        .requiresCorrectToolForDrops());
+                .strength(1.0F, 6.0F)
+                .requiresCorrectToolForDrops());
         INDIUM_ORE_BLOCK = defaultBlock("indium_ore", BlockBehaviour.Properties.of()
-                        .strength(3.0F, 3.0F)
-                        .requiresCorrectToolForDrops());
+                .strength(3.0F, 3.0F)
+                .requiresCorrectToolForDrops());
         DEEPSLATE_INDIUM_ORE_BLOCK = defaultBlock("deepslate_indium_ore", BlockBehaviour.Properties.of()
-                        .strength(4.5F, 3.0F)
-                        .requiresCorrectToolForDrops()
-                        .sound(SoundType.DEEPSLATE));
+                .strength(4.5F, 3.0F)
+                .requiresCorrectToolForDrops()
+                .sound(SoundType.DEEPSLATE));
         XDI8AHO_PORTAL_CORE_BLOCK = defaultBlock("xdi8aho_portal_core", BlockBehaviour.Properties.of()
-                        .strength(10F, 1200F)
-                        .requiresCorrectToolForDrops());
+                .strength(10F, 1200F)
+                .requiresCorrectToolForDrops());
         XDI8AHO_PORTAL_TOP_BLOCK = block("xdi8aho_torch_top", Xdi8ahoPortalTopBlock::new,
                 BlockBehaviour.Properties.of()
                         .mapColor(MapColor.GOLD)
@@ -85,7 +90,7 @@ public class FireflyBlocks {
         XDI8AHO_PORTAL_BLOCK = block("xdi8aho_portal", Xdi8ahoPortalBlock::new,
                 BlockBehaviour.Properties.of()
                         .mapColor(MapColor.GOLD)
-                        .lightLevel(s->11)
+                        .lightLevel(s -> 11)
                         .strength(-1)
                         .noCollission()
                         .sound(SoundType.AMETHYST));
@@ -118,7 +123,7 @@ public class FireflyBlocks {
                         .requiresCorrectToolForDrops()
                         .sound(SoundType.STONE));
         CEDAR_BUTTON = block("cedar_button",
-                (properties) -> new ButtonBlock(redwoodSet,30, properties),
+                (properties) -> new ButtonBlock(redwoodSet, 30, properties),
                 BlockBehaviour.Properties.of()
                         .noCollission()
                         .strength(0.5F)
@@ -141,7 +146,7 @@ public class FireflyBlocks {
                 woodenBlock().strength(2.0F));
         CEDAR_PLANKS = defaultBlock("cedar_planks",
                 woodenBlock().strength(2.0F, 3.0F));
-        CEDAR_PRESSURE_PLATE = block("cedar_pressure_plate", 
+        CEDAR_PRESSURE_PLATE = block("cedar_pressure_plate",
                 (properties) -> new PressurePlateBlock(redwoodSet, properties),
                 woodenBlock().forceSolidOn().noCollission().strength(0.5f).pushReaction(PushReaction.DESTROY));
         CEDAR_SAPLING = block("cedar_sapling",
@@ -153,34 +158,21 @@ public class FireflyBlocks {
                         .randomTicks()
                         .pushReaction(PushReaction.DESTROY)
                         .sound(SoundType.GRASS));
-        CEDAR_SIGN = block("cedar_sign", () ->
-                new StandingSignBlock(BlockBehaviour.Properties.of(Material.WOOD, redwoodColor)
-                        .noCollission()
-                        .strength(1.0F)
-                        .sound(SoundType.WOOD), cedarWood));
-        CEDAR_SLAB = block("cedar_slab", () ->
-                new SlabBlock(BlockBehaviour.Properties.of(Material.WOOD, redwoodColor)
-                        .strength(2.0F, 3.0F)
-                        .sound(SoundType.WOOD)));
-        CEDAR_STAIRS = block("cedar_stairs", () ->
-                new StairBlock(CEDAR_PLANKS.isPresent() ? CEDAR_PLANKS.get().defaultBlockState() : new Block(BlockBehaviour.Properties.of(Material.WOOD, redwoodColor)
-                        .strength(2.0F, 3.0F)
-                        .sound(SoundType.WOOD)).defaultBlockState(),
-                        BlockBehaviour.Properties.of(Material.WOOD, redwoodColor)
-                        .strength(2.0F, 3.0F)
-                        .sound(SoundType.WOOD)));
-        CEDAR_TRAPDOOR = block("cedar_trapdoor", () ->
-                new TrapDoorBlock(BlockBehaviour.Properties.of(Material.WOOD, redwoodColor)
-                        .strength(3.0F)
-                        .sound(SoundType.WOOD)
-                        .noOcclusion()
-                        .isValidSpawn(FireflyBlocks::never)));
+        CEDAR_SIGN = block("cedar_sign",
+                (properties) -> new StandingSignBlock(redwoodType, properties),
+                woodenBlock().forceSolidOn().noCollission().strength(1.0F));
+        CEDAR_SLAB = block("cedar_slab", SlabBlock::new,
+                woodenBlock().strength(2.0F, 3.0F));
+        CEDAR_STAIRS = block("cedar_stairs",
+                (properties) -> new StairBlock(CEDAR_PLANKS.get().defaultBlockState(), properties),
+                woodenBlock().strength(2.0F, 3.0F));
+        CEDAR_TRAPDOOR = block("cedar_trapdoor",
+                (properties) -> new TrapDoorBlock(redwoodSet, properties),
+                woodenBlock().noOcclusion().strength(3.0F).isValidSpawn(FireflyBlocks::never));
         CEDAR_WALL_SIGN = block("cedar_wall_sign",
-                new WallSignBlock(BlockBehaviour.Properties.of()
-                        .noCollission()
-                        .strength(1.0F)
-                        .sound(SoundType.WOOD)
-                        .dropsLike(CEDAR_SIGN.get()), cedarWood));
+                (properties) -> new WallSignBlock(redwoodType, properties),
+                woodenBlock().overrideLootTable(Optional.of(ResourceKey.create(Registries.LOOT_TABLE, ResourceLocationTool.create("firefly8:block/cedar_sign"))))
+                        .overrideDescription("block.firefly8.cedar_sign").forceSolidOn().noCollission().strength(1.0F));
         CEDAR_WOOD = block("cedar_wood", RotatedPillarBlock::new,
                 woodenBlock().strength(2.0F));
         STRIPPED_CEDAR_WOOD = block("stripped_cedar_wood", RotatedPillarBlock::new,
@@ -192,7 +184,6 @@ public class FireflyBlocks {
                         .strength(1.5F, 8.0F)
                         .requiresCorrectToolForDrops());
     }
-
 
 
     private static boolean never(BlockState state, BlockGetter getter, BlockPos pos, EntityType<?> entity) {

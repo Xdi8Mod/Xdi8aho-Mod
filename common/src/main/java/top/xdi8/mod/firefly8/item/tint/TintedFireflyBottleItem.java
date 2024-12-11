@@ -42,7 +42,7 @@ public class TintedFireflyBottleItem extends Item {
         if (!(pTarget instanceof FireflyEntity firefly)) {
             return InteractionResult.PASS;
         }
-        Level level = pPlayer.getLevel();
+        Level level = pPlayer.level();
         if (level.isClientSide()) return InteractionResult.SUCCESS;
         ItemStack stack = pPlayer.getItemInHand(pUsedHand);
         bottleFirefly(stack, pPlayer, level, firefly);
@@ -89,7 +89,7 @@ public class TintedFireflyBottleItem extends Item {
                                                            @NotNull InteractionHand pUsedHand) {
         final BlockState playerStandOn = pLevel.getBlockState(pPlayer.blockPosition().below());
         final ItemStack itemStack = pPlayer.getItemInHand(pUsedHand);
-        if (playerStandOn.is(FireflyBlockTags.FIREFLIES_CAN_RELEASE)) {
+        if (playerStandOn.is(FireflyBlockTags.FIREFLIES_CAN_RELEASE.tagKey())) {
             final BlockPos playerHeadPos = pPlayer.eyeBlockPosition();
             final Optional<BlockPos> airPos = getNearAirPos(pLevel, playerHeadPos);
             if (airPos.isEmpty()) {

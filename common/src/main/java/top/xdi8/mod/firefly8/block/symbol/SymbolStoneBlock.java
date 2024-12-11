@@ -39,10 +39,6 @@ public class SymbolStoneBlock extends Block implements KeyedLetter.Provider {
         }
     }
 
-    public SymbolStoneBlock withLetter(KeyedLetter letter) {
-        return fromLetter(letter);
-    }
-
     @NotNull
     @Override
     public KeyedLetter letter() {

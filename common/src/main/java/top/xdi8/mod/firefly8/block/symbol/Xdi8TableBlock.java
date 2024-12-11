@@ -3,7 +3,6 @@ package top.xdi8.mod.firefly8.block.symbol;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleMenuProvider;
@@ -36,12 +35,11 @@ public class Xdi8TableBlock extends Block {
     }
 
     @Override
-    public @NotNull InteractionResult use(@NotNull BlockState pState,
+    public @NotNull InteractionResult useWithoutItem(@NotNull BlockState pState,
                                           @NotNull Level pLevel,
                                           @NotNull BlockPos pPos,
                                           @NotNull Player pPlayer,
-                                          @NotNull InteractionHand pHand,
-                                          @NotNull BlockHitResult pHit) {
+                                          @NotNull BlockHitResult pHitResult) {
         if (pLevel.isClientSide()) return InteractionResult.SUCCESS;
         pPlayer.openMenu(pState.getMenuProvider(pLevel, pPos));
         pPlayer.awardStat(FireflyStats.INTERACT_WITH_XDI8_TABLE.get());

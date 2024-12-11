@@ -34,9 +34,7 @@ public class Firefly8 {
     public static String MODID = "firefly8";
     public static void init() {
         activateRegistries();
-        // Item
         TintedPotionBrewingRecipe.register();
-        // WorldGen
         FireflyMobBiomeGen.registerBiomeModifications();
         AdvancementLoadingContext.EVENT.register(VanillaAdvancements::patchTintedItem);
 

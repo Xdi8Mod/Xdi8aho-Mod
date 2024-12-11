@@ -41,15 +41,8 @@ public class BlockUtils {
                         .isRedstoneConductor(BlockUtils::never));
     }
 
-    public static final BlockBehaviour.Properties crop = BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY);
-    public static final BlockBehaviour.Properties grass = BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY);
-
     public static BlockBehaviour.Properties woodenBlock() {
         return BlockBehaviour.Properties.of().mapColor(FireflyBlocks.redwoodColor).instrument(NoteBlockInstrument.BASS).ignitedByLava().sound(SoundType.WOOD);
-    }
-
-    public static BlockBehaviour.Properties createFunctionalBlock(float hardness, float blastResistance) {
-        return BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).sound(SoundType.WOOD).destroyTime(hardness).explosionResistance(blastResistance).requiresCorrectToolForDrops();
     }
 
     // private methods from net.minecraft.world.level.block.Blocks

@@ -2,8 +2,10 @@ package top.xdi8.mod.firefly8.block.structure;
 
 import io.github.qwerty770.mcmod.xdi8.api.ResourceLocationTool;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
+import net.minecraft.core.Holder;
 import net.minecraft.core.Vec3i;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
@@ -11,10 +13,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Reader;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 import java.util.function.Predicate;
 
 public class Xdi8PortalBasicData {
@@ -26,13 +25,13 @@ public class Xdi8PortalBasicData {
 
     private static Predicate<BlockState> fromId(String id) {
         if (id.startsWith("#")) {
-            TagKey<Block> tagKey = TagKey.create(Registry.BLOCK_REGISTRY,
+        TagKey<Block> tagKey = TagKey.create(Registries.BLOCK,
                     ResourceLocationTool.create(id.substring(1)));
             return blockState -> blockState.is(tagKey);
         }
-        Block block = Registry.BLOCK.get(ResourceLocationTool.create(id));
-        Objects.requireNonNull(block, () -> "Block " + id + " is invalid");
-        return blockState -> blockState.is(block);
+        Optional<Holder.Reference<Block>> block = BuiltInRegistries.BLOCK.get(ResourceLocationTool.create(id));
+        if (block.isEmpty()) throw new NullPointerException("Block " + id + " is invalid");
+        return blockState -> blockState.is(block.get().value());
     }
 
     public boolean fits(BlockGetter level, BlockPos pos) {
