@@ -62,7 +62,7 @@ public class TintedPotionItem extends PotionItem {
             }
         }
 
-        pLevel.gameEvent(pEntityLiving, GameEvent.DRINKING_FINISH, pEntityLiving.eyeBlockPosition());
+        pLevel.gameEvent(pEntityLiving, GameEvent.DRINK, pEntityLiving.position());
         return pStack;
     }
 

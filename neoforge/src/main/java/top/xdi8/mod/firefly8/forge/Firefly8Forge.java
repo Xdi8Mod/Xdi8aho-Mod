@@ -8,6 +8,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.registries.RegisterEvent;
 import net.neoforged.neoforgespi.Environment;
 import top.xdi8.mod.firefly8.Firefly8;
 import top.xdi8.mod.firefly8.Firefly8Client;
@@ -53,6 +54,15 @@ public class Firefly8Forge {
         @SubscribeEvent
         public static void onCommonSetup(FMLCommonSetupEvent event) {
             event.enqueueWork(Firefly8::commonSetup);
+        }
+
+        private static boolean registered = false;
+        @SubscribeEvent
+        public static void register(RegisterEvent event){
+            if (!registered){
+                Firefly8.activateRegistries();
+                registered = true;
+            }
         }
     }
 }

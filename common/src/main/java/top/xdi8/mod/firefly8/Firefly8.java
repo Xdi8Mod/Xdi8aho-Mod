@@ -5,6 +5,7 @@ import dev.architectury.event.events.common.CommandRegistrationEvent;
 import dev.architectury.event.events.common.EntityEvent;
 import dev.architectury.registry.ReloadListenerRegistry;
 import dev.architectury.registry.level.entity.EntityAttributeRegistry;
+import io.github.qwerty770.mcmod.xdi8.util.registries.RegistryHelper;
 import net.minecraft.server.packs.PackType;
 import org.apache.commons.lang3.mutable.MutableBoolean;
 import top.xdi8.mod.firefly8.advancement.AdvancementLoadingContext;
@@ -21,7 +22,6 @@ import top.xdi8.mod.firefly8.entity.FireflyEntityTypes;
 import top.xdi8.mod.firefly8.item.FireflyItemTags;
 import top.xdi8.mod.firefly8.item.FireflyItems;
 import top.xdi8.mod.firefly8.item.tint.advanceent.VanillaAdvancements;
-import top.xdi8.mod.firefly8.item.tint.brewing.TintedPotionBrewingRecipe;
 import top.xdi8.mod.firefly8.particle.FireflyParticles;
 import top.xdi8.mod.firefly8.recipe.FireflyRecipes;
 import top.xdi8.mod.firefly8.screen.FireflyMenus;
@@ -33,8 +33,6 @@ import top.xdi8.mod.firefly8.world.death.PlayerDeathListener;
 public class Firefly8 {
     public static String MODID = "firefly8";
     public static void init() {
-        activateRegistries();
-        TintedPotionBrewingRecipe.register();
         FireflyMobBiomeGen.registerBiomeModifications();
         AdvancementLoadingContext.EVENT.register(VanillaAdvancements::patchTintedItem);
 
@@ -45,10 +43,10 @@ public class Firefly8 {
             return mb.isTrue() ? EventResult.interruptFalse() : EventResult.pass();
         }));
         EntityAttributeRegistry.register(FireflyEntityTypes.FIREFLY, FireflyEntity::createAttributes);
-        CommandRegistrationEvent.EVENT.register(FireflyCommands::init);
+        CommandRegistrationEvent.EVENT.register((dispatcher, registry, selection) -> FireflyCommands.init(dispatcher, selection));
     }
 
-    private static void activateRegistries() {
+    public static void activateRegistries() {
         // Block
         FireflyBlocks.LOG_WRAPPER.run();
         FireflyBlockEntityTypes.LOG_WRAPPER.run();
@@ -68,6 +66,8 @@ public class Firefly8 {
         FireflyMenus.LOG_WRAPPER.run();
         // Tree Feature
         FireflyTreeFeatures.LOG_WRAPPER.run();
+        // All registries
+        RegistryHelper.registerAll();
     }
 
     public static void commonSetup() {

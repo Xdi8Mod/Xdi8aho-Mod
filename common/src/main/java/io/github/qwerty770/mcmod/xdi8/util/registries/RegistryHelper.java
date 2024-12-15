@@ -149,11 +149,11 @@ public abstract class RegistryHelper {
         return () -> SoundEvent.createVariableRangeEvent(id(id));
     }
 
-    public <P extends ParticleType<?>> RegistrySupplier<P> particleType(String id, Supplier<P> particleTypeSup) {
+    public static  <P extends ParticleType<?>> RegistrySupplier<P> particleType(String id, Supplier<P> particleTypeSup) {
         return particleTypeRegistry.register(id, particleTypeSup);
     }
 
-    public <E extends Entity> RegistrySupplier<EntityType<E>> entityType(String id, Supplier<EntityType.Builder<E>> builder) {
+    public static  <E extends Entity> RegistrySupplier<EntityType<E>> entityType(String id, Supplier<EntityType.Builder<E>> builder) {
         return entityTypeRegistry.register(id, () -> builder.get().build(ResourceKey.create(Registries.ENTITY_TYPE, id(id))));
     }
 

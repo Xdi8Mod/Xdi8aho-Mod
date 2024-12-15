@@ -3,7 +3,6 @@ package top.xdi8.mod.firefly8.item.tint;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableBiMap;
-import net.minecraft.core.Holder;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -39,13 +38,13 @@ public final class ItemTinting {
     public static ItemStack tint(ItemStack stack) {
         Item item = TINT_MAP.get(stack.getItem());
         if (item == null) return stack.copy();
-        return new ItemStack(Holder.direct(item), stack.getCount(), stack.getComponentsPatch());
+        return new ItemStack(item.arch$holder(), stack.getCount(), stack.getComponentsPatch());
     }
 
     public static ItemStack unTint(ItemStack stack) {
         Item item = TINT_MAP.inverse().get(stack.getItem());
         if (item == null) return stack.copy();
-        return new ItemStack(Holder.direct(item), stack.getCount(), stack.getComponentsPatch());
+        return new ItemStack(item.arch$holder(), stack.getCount(), stack.getComponentsPatch());
     }
 
     public static boolean shouldTint(ItemStack stack) {
