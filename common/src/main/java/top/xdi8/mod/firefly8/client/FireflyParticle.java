@@ -14,8 +14,7 @@ public class FireflyParticle extends TextureSheetParticle {
 
     @Override
     protected int getLightColor(float pPartialTick) {
-        //return (int)(alpha * 15) << 4;
-        return 15 << 4; // TODO test visibility
+        return 240; // TODO test visibility
     }
 
     @Override

@@ -8,7 +8,6 @@ import org.jetbrains.annotations.ApiStatus;
 import top.xdi8.mod.firefly8.core.letters.event.Xdi8RegistryEvents;
 
 import java.util.Optional;
-import java.util.function.BiConsumer;
 
 public final class TotemAbilities {
     private static final BiMap<ResourceLocation, TotemAbility> MAP = HashBiMap.create();
@@ -19,10 +18,6 @@ public final class TotemAbilities {
 
     public static Optional<ResourceLocation> getId(TotemAbility ability) {
         return Optional.ofNullable(MAP.inverse().get(ability));
-    }
-
-    public static void forEach(BiConsumer<ResourceLocation, TotemAbility> action) {
-        MAP.forEach(action);
     }
 
     @ApiStatus.Internal

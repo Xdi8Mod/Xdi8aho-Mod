@@ -3,8 +3,10 @@ package top.xdi8.mod.firefly8.entity;
 import it.unimi.dsi.fastutil.objects.Object2LongLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2LongMap;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageSource;
@@ -23,6 +25,7 @@ import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.Vec3;
@@ -43,10 +46,15 @@ import java.util.stream.Collectors;
 public class FireflyEntity extends PathfinderMob implements FlyingAnimal {
     private int lightTime;
     private final Object2LongMap<UUID> ownerMap = new Object2LongLinkedOpenHashMap<>();
-    protected Object2LongMap<UUID> getOwnerMap() { return ownerMap; }
 
-    public static FireflyEntity create(Level level) { return new FireflyEntity(FireflyEntityTypes.FIREFLY.get(), level); }
-    
+    protected Object2LongMap<UUID> getOwnerMap() {
+        return ownerMap;
+    }
+
+    public static FireflyEntity create(Level level) {
+        return new FireflyEntity(FireflyEntityTypes.FIREFLY.get(), level);
+    }
+
     protected FireflyEntity(EntityType<FireflyEntity> entityType, Level level) {
         super(entityType, level);
         this.moveControl = new FlyingMoveControl(this, 20, false);
@@ -59,7 +67,7 @@ public class FireflyEntity extends PathfinderMob implements FlyingAnimal {
     @Nonnull
     public Collection<Player> getOwners() {
         return getOwnerMap().keySet().stream()
-                .flatMap(uuid -> Optional.ofNullable(level.getPlayerByUUID(uuid)).stream())
+                .flatMap(uuid -> Optional.ofNullable(this.level().getPlayerByUUID(uuid)).stream())
                 .collect(Collectors.toUnmodifiableSet());
     }
 
@@ -68,7 +76,7 @@ public class FireflyEntity extends PathfinderMob implements FlyingAnimal {
     }
 
     @Override
-    public boolean canBeLeashed(@NotNull Player pPlayer) {
+    public boolean canBeLeashed() {
         return false;   // ambient mob
     }
 
@@ -93,10 +101,9 @@ public class FireflyEntity extends PathfinderMob implements FlyingAnimal {
     }
 
     private boolean shouldDamage() {
-        if (this.level.isDay()) {
-            float brightness = this.getBrightness();
-            BlockPos blockpos = new BlockPos(this.getX(), this.getEyeY(), this.getZ());
-            return brightness > 0.5F && this.level.canSeeSky(blockpos);
+        if (this.level().isDay()) {
+            BlockPos blockpos = new BlockPos((int) this.getX(), (int) this.getEyeY(), (int) this.getZ());
+            return this.level().getBrightness(LightLayer.SKY, blockpos) > 0.5F && this.level().canSeeSky(blockpos);
         }
         return false;
     }
@@ -104,15 +111,15 @@ public class FireflyEntity extends PathfinderMob implements FlyingAnimal {
     @Override
     public void tick() {
         super.tick();
-        final Level level = this.getLevel();
+        final Level level = this.level();
         if (level.isClientSide()) {
             if (this.lightTime-- <= 0 && this.random.nextInt(8) == 0) {
                 this.lightTime = 100;
-                this.level.addParticle(FireflyParticles.FIREFLY.get(), this.getX(), this.getY(), this.getZ(), 0, 0, 0);
+                this.level().addParticle(FireflyParticles.FIREFLY.get(), this.getX(), this.getY(), this.getZ(), 0, 0, 0);
             }
         } else {
             if (this.shouldDamage()) {
-                this.hurt(DamageSource.ON_FIRE, 0.5F);
+                this.hurtServer((ServerLevel) level, this.damageSources().onFire(), 0.5F);
             }
         }
 
@@ -128,29 +135,27 @@ public class FireflyEntity extends PathfinderMob implements FlyingAnimal {
     /**
      * Returns true if this entity should push and be pushed by other entities when colliding.
      */
+    @Override
     public boolean isPushable() {
         return false;
     }
 
+    @Override
     protected void doPush(@NotNull Entity pEntity) {
     }
 
+    @Override
     protected void pushEntities() {
     }
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(2, new FleeSunGoal(this, 1.0));
+        this.goalSelector.addGoal(2, new FleeSunGoal(this, 1.0));  // TODO: check
         this.goalSelector.addGoal(4, new AbstractFollowPlayerGoal.FollowOwner(this));
         this.goalSelector.addGoal(5, new AbstractFollowPlayerGoal.Randomly(this));
         this.goalSelector.addGoal(5, new Wandering());
         this.goalSelector.addGoal(5, new FloatGoal(this));
         // this.goalSelector.addGoal(2, new RestrictSunGoal(this));
-    }
-
-    @Override
-    protected void customServerAiStep() {
-        super.customServerAiStep();
     }
 
     @Override
@@ -189,12 +194,7 @@ public class FireflyEntity extends PathfinderMob implements FlyingAnimal {
 
     @Override
     public boolean isFlying() {
-        return !this.isOnGround();
-    }
-
-    @Override
-    public @NotNull MobType getMobType() {
-        return super.getMobType();
+        return !this.onGround();
     }
 
     protected void jumpInLiquid(@NotNull TagKey<Fluid> pFluidTag) {
@@ -224,9 +224,9 @@ public class FireflyEntity extends PathfinderMob implements FlyingAnimal {
         public void start() {
             Vec3 vec3 = this.findPos();
             if (vec3 != null) {
-                FireflyEntity.this.navigation.moveTo(FireflyEntity.this.navigation.createPath(new BlockPos(vec3), 1), 0.3D);
+                FireflyEntity.this.navigation.moveTo(FireflyEntity.this.navigation.createPath(
+                        new BlockPos(new Vec3i((int) vec3.x, (int) vec3.y, (int) vec3.z)), 1), 0.3D);
             }
-
         }
 
         @Nullable

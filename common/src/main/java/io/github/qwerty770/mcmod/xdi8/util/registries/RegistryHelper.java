@@ -164,8 +164,6 @@ public abstract class RegistryHelper {
     public static ResourceLocation stat(String id, StatFormatter statFormatter) {
         ResourceLocation id2 = id(id);
         statRegistry.register(id, () -> id2);
-        // TODO: Update the next line
-        // Stats.CUSTOM.get(id2, statFormatter);
         return id2;
     }
 

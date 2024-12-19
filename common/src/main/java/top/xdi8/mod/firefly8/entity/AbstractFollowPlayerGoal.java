@@ -94,7 +94,7 @@ public sealed abstract class AbstractFollowPlayerGoal extends Goal {
                     .toList();
             return switch (players.size()) {
                 case 0 -> null;
-                case 1 -> players.get(0);
+                case 1 -> players.getFirst();
                 default -> players.get(self.getRandom().nextInt(players.size()));
             };
         }
@@ -111,7 +111,7 @@ public sealed abstract class AbstractFollowPlayerGoal extends Goal {
 
         @Override
         protected @Nullable LivingEntity whomToFollow() {
-            List<Player> list = self.getLevel().getEntitiesOfClass(Player.class,
+            List<Player> list = self.level().getEntitiesOfClass(Player.class,
                     self.getBoundingBox().inflate(16.0D, 16.0D, 16.0D));
             return list.stream().filter(player -> player.distanceToSqr(self) < 16.0D)
                     .findFirst().orElse(null);
