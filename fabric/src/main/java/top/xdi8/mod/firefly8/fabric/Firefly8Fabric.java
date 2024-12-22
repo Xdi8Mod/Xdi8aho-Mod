@@ -2,8 +2,12 @@ package top.xdi8.mod.firefly8.fabric;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistryBuilder;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import top.xdi8.mod.firefly8.Firefly8;
+import top.xdi8.mod.firefly8.item.FireflyItemTags;
 import top.xdi8.mod.firefly8.network.FireflyNetwork;
 
 public class Firefly8Fabric implements ModInitializer {
@@ -12,9 +16,17 @@ public class Firefly8Fabric implements ModInitializer {
         Firefly8.activateRegistries();
         Firefly8.init();
         Firefly8.commonSetup();
+        registerBrewingRecipes();
         if (FabricLoader.getInstance().getEnvironmentType().equals(EnvType.CLIENT)){
             FireflyNetwork.registerClientNetwork();
         }
         FireflyNetwork.registerServerNetwork();
+    }
+
+    private static void registerBrewingRecipes(){
+        FabricBrewingRecipeRegistryBuilder.BUILD.register((builder -> builder.registerItemRecipe(
+                Items.SPLASH_POTION,
+                Ingredient.of(FireflyItemTags.TINTED_DRAGON_BREATH.entries()),
+                Items.LINGERING_POTION)));
     }
 }

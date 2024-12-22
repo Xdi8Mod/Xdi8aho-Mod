@@ -12,7 +12,7 @@ import top.xdi8.mod.firefly8.block.FireflyBlockTags;
 import top.xdi8.mod.firefly8.block.FireflyBlocks;
 
 @Mixin(BaseFireBlock.class)
-public class MixinBaseFireBlock {
+public class BaseFireBlockMixin {
     @Inject(
             at = @At("HEAD"), cancellable = true,
             method = "getState(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/block/state/BlockState;"

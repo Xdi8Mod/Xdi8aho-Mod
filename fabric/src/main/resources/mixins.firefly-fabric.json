@@ -5,7 +5,6 @@
   "package": "top.xdi8.mod.firefly8.mixin.fabric",
   "mixins": [
     "AdvancementsMixin",
-    "ServerPlayerCapacityMixin",
-    "AddTintedDragonBreathMixin"
+    "ServerPlayerCapacityMixin"
   ]
 }

@@ -1,4 +1,4 @@
-package top.xdi8.mod.firefly8.mixin;
+package top.xdi8.mod.firefly8.mixin.brewing;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.core.BlockPos;
@@ -16,7 +16,7 @@ import top.xdi8.mod.firefly8.item.tint.ItemTinting;
 import top.xdi8.mod.firefly8.item.tint.brewing.TintedPotionBrewingRecipe;
 
 @Mixin(BrewingStandBlockEntity.class)
-public class MixinBrewingStandBlockEntity {
+public class BrewingStandBlockEntityMixin {
     @Inject(method = "isBrewable", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/alchemy/PotionBrewing;hasMix(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemStack;)Z"),
             cancellable = true)
     private static void isBrewable(PotionBrewing potionBrewing, NonNullList<ItemStack> items, CallbackInfoReturnable<Boolean> cir,

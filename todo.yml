@@ -1,6 +1,5 @@
 Need rewriting:
     Forge only:
-        top.xdi8.mod.firefly8.item.tint.brewing.forge.TintedPotionBrewingRecipeImpl
         top.xdi8.mod.firefly8.mixin.forge.AddTintedDragonBreathMixin
         top.xdi8.mod.firefly8.mixin.forge.AdvancementsMixin
         top.xdi8.mod.firefly8.mixin.forge.ServerPlayerCapacityMixin

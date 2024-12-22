@@ -5,6 +5,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mojang.logging.LogUtils;
+import io.github.qwerty770.mcmod.xdi8.api.ResourceLocationTool;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
@@ -12,7 +13,6 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.GsonHelper;
 import net.neoforged.fml.common.Mod;
 import org.slf4j.Logger;
-import top.xdi8.mod.firefly8.util.ResourceLocationTool;
 
 import java.awt.*;
 import java.io.BufferedReader;

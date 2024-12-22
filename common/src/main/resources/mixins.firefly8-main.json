@@ -4,11 +4,11 @@
   "required": true,
   "package": "top.xdi8.mod.firefly8.mixin",
   "mixins": [
-    "MixinBrewingStandBlockEntity",
     "MixinEntityBaseTick",
     "PlayerWithHiddenInventoryImpl",
     "ServerPlayerWithHiddenInventoryImpl",
-    "fire.MixinBaseFireBlock"
+    "brewing.BrewingStandBlockEntityMixin",
+    "fire.BaseFireBlockMixin"
   ],
   "client": [
   ]
