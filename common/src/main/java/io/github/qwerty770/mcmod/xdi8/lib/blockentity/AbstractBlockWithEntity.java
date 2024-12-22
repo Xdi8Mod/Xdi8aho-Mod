@@ -27,9 +27,11 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
 @ApiStatus.Experimental
+@ParametersAreNonnullByDefault
 public abstract class AbstractBlockWithEntity<E extends BlockEntity & ITickable> extends BaseEntityBlock {
     protected abstract boolean blockEntityPredicate(BlockEntity blockEntity);
 

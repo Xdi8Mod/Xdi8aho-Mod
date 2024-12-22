@@ -34,7 +34,7 @@ public class Xdi8TableMenu extends AbstractContainerMenu {
     public Xdi8TableMenu(int id, Inventory inv, ContainerLevelAccess levelAccess) {
         super(FireflyMenus.XDI8_TABLE.get(), id);
         this.inventory = inv;
-        this.level = inv.player.getLevel();
+        this.level = inv.player.level();
         this.levelAccess = levelAccess;
 
         // MID -> UP, LEFT, DOWN, RIGHT
@@ -129,7 +129,7 @@ public class Xdi8TableMenu extends AbstractContainerMenu {
             levelAccess.execute((l, p) ->
                     l.playSound(null, p, SPMMain.AGROFORESTRY_TABLE_FINISH.get(),
                             SoundSource.BLOCKS, 1.0F, l.getRandom().nextFloat() * 0.1F + 0.9F));
-            if (!player.getLevel().isClientSide()) {
+            if (!player.level().isClientSide()) {
                 FireflyCriteria.GET_XDI8_TOTEM.trigger((ServerPlayer) player, assemble);
             }
             player.awardStat(FireflyStats.TOTEMS_ENCHANTED.get());

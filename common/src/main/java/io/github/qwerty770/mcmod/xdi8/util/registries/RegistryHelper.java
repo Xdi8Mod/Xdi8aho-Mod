@@ -43,6 +43,8 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import static net.minecraft.stats.Stats.CUSTOM;
+
 @SuppressWarnings("unused")
 @StableApi
 public abstract class RegistryHelper {
@@ -161,13 +163,13 @@ public abstract class RegistryHelper {
         return TagContainer.register(id(id), BuiltInRegistries.ITEM);
     }
 
-    public static ResourceLocation stat(String id, StatFormatter statFormatter) {
+    public static RegistrySupplier<ResourceLocation> stat(String id, StatFormatter statFormatter) {
         ResourceLocation id2 = id(id);
-        statRegistry.register(id, () -> id2);
-        return id2;
+        CUSTOM.get(id2, statFormatter);
+        return statRegistry.register(id, () -> id2);
     }
 
-    public static ResourceLocation stat(String id) { return stat(id, StatFormatter.DEFAULT); }
+    public static RegistrySupplier<ResourceLocation> stat(String id) { return stat(id, StatFormatter.DEFAULT); }
 
     public static RegistrySupplier<PoiType> poiType(String id, int maxTickets, int validRange, Supplier<Set<BlockState>> matchingStatesSup) {
         return poiTypeRegistry.register(id, () -> new PoiType(matchingStatesSup.get(), maxTickets, validRange));

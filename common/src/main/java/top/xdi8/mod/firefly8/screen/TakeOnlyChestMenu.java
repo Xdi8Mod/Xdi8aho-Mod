@@ -40,7 +40,7 @@ public class TakeOnlyChestMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(@NotNull Player pPlayer) {
-        return pPlayer.getLevel().isClientSide() ||
+        return pPlayer.level().isClientSide() ||
                 ((IServerPlayerWithHiddenInventory) pPlayer).xdi8$validatePortal();
     }
 
