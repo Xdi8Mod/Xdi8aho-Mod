@@ -1,11 +1,11 @@
 package top.xdi8.mod.firefly8.item.symbol;
 
 import io.github.qwerty770.mcmod.xdi8.api.ResourceLocationTool;
+import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -15,40 +15,37 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import top.xdi8.mod.firefly8.core.totem.TotemAbilities;
 import top.xdi8.mod.firefly8.core.totem.TotemAbility;
+import top.xdi8.mod.firefly8.item.FireflyDataComponentTypes;
 
 import java.util.List;
-import java.util.Optional;
 
 public class Xdi8TotemItem extends Item {
     public Xdi8TotemItem(Properties pProperties) {
         super(pProperties);
     }
 
-    public static ItemStack withTotemAbility(ItemStack stackIn, TotemAbility ability) {
-        ItemStack stack = stackIn.copy();
-        final Optional<ResourceLocation> id = TotemAbilities.getId(ability);
-        id.ifPresent(resourceLocation ->
-                stack.getOrCreateTag().putString("Totem", resourceLocation.toString()));
+    public static ItemStack withTotemAbility(ItemStack stack, TotemAbility ability) {
+        TotemAbilities.getId(ability).ifPresent(location -> stack.applyComponents(
+                DataComponentMap.builder().set(FireflyDataComponentTypes.TOTEM.get(), location.toString()).build()));
         return stack;
     }
 
     @Nullable
-    public static TotemAbility getAbility(ItemStack stackIn) {
-        final String s = stackIn.getOrCreateTag().getString("Totem");
-        if (s.isBlank()) return null;
+    public static TotemAbility getAbility(ItemStack stack) {
+        final String s = stack.get(FireflyDataComponentTypes.TOTEM.get());
+        if (s == null || s.isBlank()) return null;
         return TotemAbilities.byId(ResourceLocationTool.create(s)).orElse(null);
     }
 
     @Override
-    public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level pLevel, @NotNull Player pPlayer, @NotNull InteractionHand pUsedHand) {
+    public @NotNull InteractionResult use(@NotNull Level pLevel, @NotNull Player pPlayer, @NotNull InteractionHand pUsedHand) {
         final ItemStack item = pPlayer.getItemInHand(pUsedHand);
         final TotemAbility ability = getAbility(item);
-        if (ability == null) return InteractionResultHolder.pass(item);
+        if (ability == null) return InteractionResult.PASS;
         if (!pLevel.isClientSide()) {
-            return ability.activate(pLevel, pPlayer, pUsedHand)
-                    .map(InteractionResultHolder::consume)
-                    .orElseGet(() -> InteractionResultHolder.pass(item));
-        } return InteractionResultHolder.success(item);
+            return ability.activate(pLevel, pPlayer, pUsedHand).isPresent() ? InteractionResult.CONSUME : InteractionResult.PASS;
+        }
+        return InteractionResult.SUCCESS.heldItemTransformedTo(item);
     }
 
     @Override

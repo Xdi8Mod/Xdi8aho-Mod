@@ -11,6 +11,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.component.Consumables;
 import top.xdi8.mod.firefly8.block.FireflyBlocks;
 import top.xdi8.mod.firefly8.entity.FireflyEntityTypes;
 import top.xdi8.mod.firefly8.item.indium.*;
@@ -20,13 +21,15 @@ import top.xdi8.mod.firefly8.item.tint.*;
 import io.github.qwerty770.mcmod.xdi8.api.InternalRegistryLogWrapper;
 
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 import static io.github.qwerty770.mcmod.xdi8.util.registries.RegistryHelper.*;
 
 public final class FireflyItems {
     public static final InternalRegistryLogWrapper LOG_WRAPPER = InternalRegistryLogWrapper.firefly8("items");
 
-    private FireflyItems() {}
+    private FireflyItems() {
+    }
 
     public static final CreativeModeTab TAB = CreativeTabRegistry.create(Component.translatable("itemGroup.firefly8.firefly8"),
             () -> FireflyItems.XDI8AHO_ICON.get().getDefaultInstance());
@@ -95,34 +98,35 @@ public final class FireflyItems {
         DEEPSLATE_INDIUM_ORE_BLOCK = blockItem("deepslate_indium_ore", FireflyBlocks.DEEPSLATE_INDIUM_ORE_BLOCK, defaultProp());
         SYMBOL_STONE_BRICKS = blockItem("symbol_stone_bricks", FireflyBlocks.SYMBOL_STONE_BRICKS, defaultProp());
 
-        XDI8AHO_ICON = item("xdi8aho",Xdi8TotemItem::new);
+        XDI8AHO_ICON = item("xdi8aho", Xdi8TotemItem::new);
         FIREFLY_SPAWN_EGG = item("firefly_spawn_egg", (properties) ->
                 new ArchitecturySpawnEggItem(FireflyEntityTypes.FIREFLY,
                         0x000000, 0x00f500,
                         properties), defaultProp());
         XDI8AHO_PORTAL_CORE_BLOCK = blockItem("xdi8aho_portal_core", FireflyBlocks.XDI8AHO_PORTAL_CORE_BLOCK, defaultProp());
-        XDI8AHO_PORTAL_TOP_BLOCK = blockItem("xdi8aho_torch_top",FireflyBlocks.XDI8AHO_PORTAL_TOP_BLOCK, defaultProp());
-        XDI8AHO_BACK_PORTAL_CORE_BLOCK = blockItem("xdi8aho_back_portal_core",FireflyBlocks.XDI8AHO_BACK_PORTAL_CORE_BLOCK, defaultProp());
-        XDI8_TABLE = blockItem("xdi8_table",FireflyBlocks.XDI8_TABLE, defaultProp());
+        XDI8AHO_PORTAL_TOP_BLOCK = blockItem("xdi8aho_torch_top", FireflyBlocks.XDI8AHO_PORTAL_TOP_BLOCK, defaultProp());
+        XDI8AHO_BACK_PORTAL_CORE_BLOCK = blockItem("xdi8aho_back_portal_core", FireflyBlocks.XDI8AHO_BACK_PORTAL_CORE_BLOCK, defaultProp());
+        XDI8_TABLE = blockItem("xdi8_table", FireflyBlocks.XDI8_TABLE, defaultProp());
 
         // Bottles
         TINTED_GLASS_BOTTLE = item("tinted_glass_bottle", TintedGlassBottleItem::new);
         TINTED_POTION = item("tinted_potion", TintedPotionItem::new);
-        TINTED_HONEY_BOTTLE = item("tinted_honey_bottle", TintedHoneyBottleItem::new, defaultProp()
-                        .craftRemainder(TINTED_GLASS_BOTTLE.get())
-                        .food(Foods.HONEY_BOTTLE)
-                        .stacksTo(16));
+        TINTED_HONEY_BOTTLE = item("tinted_honey_bottle", TintedHoneyBottleItem::new, () -> defaultProp()
+                .craftRemainder(TINTED_GLASS_BOTTLE.get())
+                .food(Foods.HONEY_BOTTLE, Consumables.HONEY_BOTTLE)
+                .usingConvertsTo(TINTED_GLASS_BOTTLE.get())
+                .stacksTo(16));
         TINTED_SPLASH_POTION = item("tinted_splash_potion", TintedSplashPotionItem::new);
         TINTED_LINGERING_POTION = item("tinted_lingering_potion", TintedLingeringPotionItem::new);
-        TINTED_DRAGON_BREATH = defaultItem("tinted_dragon_breath", defaultProp()
-                        .craftRemainder(TINTED_GLASS_BOTTLE.get())
-                        .rarity(Rarity.UNCOMMON));
+        TINTED_DRAGON_BREATH = item("tinted_dragon_breath", Item::new, () -> defaultProp()
+                .craftRemainder(TINTED_GLASS_BOTTLE.get())
+                .rarity(Rarity.UNCOMMON));
         TINTED_FIREFLY_BOTTLE = item("tinted_firefly_bottle", TintedFireflyBottleItem::new, defaultProp().stacksTo(1));
 
         BUNDLER = item("bundler", BundlerItem::new, defaultProp().stacksTo(1));
         SymbolStoneBlockItem.registerAll(RegistryHelper::item);
-        DARK_SYMBOL_STONE = blockItem("dark_symbol_stone", FireflyBlocks.DARK_SYMBOL_STONE,defaultProp().fireResistant());
-        SYMBOL_STONE_NN = blockItem("symbol_stone_nn", FireflyBlocks.SYMBOL_STONE_NN,defaultProp().rarity(Rarity.UNCOMMON));
+        DARK_SYMBOL_STONE = blockItem("dark_symbol_stone", FireflyBlocks.DARK_SYMBOL_STONE, defaultProp().fireResistant());
+        SYMBOL_STONE_NN = blockItem("symbol_stone_nn", FireflyBlocks.SYMBOL_STONE_NN, defaultProp().rarity(Rarity.UNCOMMON));
 
         CEDAR_BUTTON = blockItem("cedar_button", FireflyBlocks.CEDAR_BUTTON, defaultProp());
         CEDAR_DOOR = blockItem("cedar_door", FireflyBlocks.CEDAR_DOOR, defaultProp());
@@ -155,6 +159,10 @@ public final class FireflyItems {
     }
 
     static <I extends Item> RegistrySupplier<I> item(String id, Function<Item.Properties, I> function, Item.Properties properties) {
+        return RegistryHelper.item(id, function, properties);
+    }
+
+    static <I extends Item> RegistrySupplier<I> item(String id, Function<Item.Properties, I> function, Supplier<Item.Properties> properties) {
         return RegistryHelper.item(id, function, properties);
     }
 

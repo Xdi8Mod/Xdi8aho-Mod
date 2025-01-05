@@ -94,6 +94,11 @@ public abstract class RegistryHelper {
         return item(itemId(id), function, properties);
     }
 
+    public static <I extends Item> RegistrySupplier<I> item(String id, Function<Item.Properties, I> function, Supplier<Item.Properties> properties) {
+        ResourceKey<Item> key = itemId(id);
+        return itemRegistry.register(key.location(), () -> function.apply(properties.get().setId(key)));
+    }
+
     public static <I extends Item> RegistrySupplier<I> item(ResourceKey<Item> resourceKey, Function<Item.Properties, I> function, Item.Properties properties) {
         return itemRegistry.register(resourceKey.location(), () -> function.apply(properties.setId(resourceKey)));
     }

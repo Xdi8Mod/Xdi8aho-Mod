@@ -15,7 +15,6 @@ import org.jetbrains.annotations.NotNull;
 import top.xdi8.mod.firefly8.block.entity.BackPortalCoreBlockEntity;
 import top.xdi8.mod.firefly8.block.entity.FireflyBlockEntityTypes;
 
-// TODO org.featurehouse.mcmod.spm.lib.block.entity.TickableEntityBlock
 public class BackPortalCoreBlock extends AbstractBlockWithEntity<BackPortalCoreBlockEntity> {
     public static final BooleanProperty IS_VALID = BooleanProperty.create("valid");
 
@@ -30,7 +29,7 @@ public class BackPortalCoreBlock extends AbstractBlockWithEntity<BackPortalCoreB
     }
 
     @Override
-    protected boolean blockEntityPredicate(BlockEntity blockEntity) {
+    protected boolean blockEntityPredicate(@NotNull BlockEntity blockEntity) {
         return blockEntity instanceof BackPortalCoreBlockEntity;
     }
 

@@ -28,7 +28,7 @@ public final class TotemAbilities {
     // Default
     static {
         MAP.put(ResourceLocationTool.create("firefly8", "xdi8"), (level, player, hand) -> {
-            // Placeholder
+            // TODO Placeholder
             return Optional.empty();
         });
     }

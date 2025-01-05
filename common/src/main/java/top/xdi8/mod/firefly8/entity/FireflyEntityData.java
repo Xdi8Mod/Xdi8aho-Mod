@@ -12,13 +12,20 @@ public final class FireflyEntityData {
     public static final long OWNER_TIME = 72000L;   // 1h
 
     public static void saveToTag(CompoundTag tag, FireflyEntity firefly) {
+        // Added "Silent", "NoGravity" and "Glowing" tags in Minecraft 1.21+
         tag.putBoolean("NoAi", firefly.isNoAi());
+        tag.putBoolean("Silent", firefly.isSilent());
+        tag.putBoolean("NoGravity", firefly.isNoGravity());
+        tag.putBoolean("Glowing", firefly.hasGlowingTag());
         tag.putBoolean("Invulnerable", firefly.isInvulnerable());
         tag.put("OwnerData", serializeOwners(firefly.getOwnerMap()));
     }
 
     public static void loadFromTag(FireflyEntity firefly, CompoundTag tag) {
         if (tag.contains("NoAi", Tag.TAG_BYTE)) firefly.setNoAi(tag.getBoolean("NoAi"));
+        if (tag.contains("Silent")) firefly.setSilent(tag.getBoolean("Silent"));
+        if (tag.contains("NoGravity")) firefly.setNoGravity(tag.getBoolean("NoGravity"));
+        if (tag.contains("Glowing")) firefly.setGlowingTag(tag.getBoolean("Glowing"));
         if (tag.contains("Invulnerable", Tag.TAG_BYTE)) firefly.setInvulnerable(tag.getBoolean("Invulnerable"));
         if (tag.contains("OwnerData", Tag.TAG_LIST))
             deserializeOwners(firefly.getOwnerMap(), tag.getList("OwnerData", Tag.TAG_COMPOUND));
