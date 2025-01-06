@@ -31,8 +31,9 @@ public final class FireflyItems {
     private FireflyItems() {
     }
 
-    public static final CreativeModeTab TAB = CreativeTabRegistry.create(Component.translatable("itemGroup.firefly8.firefly8"),
+    public static final CreativeModeTab FIREFLY8_TAB = CreativeTabRegistry.create(Component.translatable("itemGroup.firefly8.firefly8"),
             () -> FireflyItems.XDI8AHO_ICON.get().getDefaultInstance());
+    public static final RegistrySupplier<CreativeModeTab> FIREFLY8_TAB_SUPPLIER = creativeModeTab("firefly8_items", FIREFLY8_TAB);
 
     public static final RegistrySupplier<Item> INDIUM_INGOT;
     public static final RegistrySupplier<Item> INDIUM_NUGGET;
@@ -147,7 +148,7 @@ public final class FireflyItems {
     }
 
     static Item.Properties defaultProp() {
-        return new Item.Properties().arch$tab(TAB);
+        return new Item.Properties().arch$tab(FIREFLY8_TAB_SUPPLIER);
     }
 
     static RegistrySupplier<Item> item(String id) {

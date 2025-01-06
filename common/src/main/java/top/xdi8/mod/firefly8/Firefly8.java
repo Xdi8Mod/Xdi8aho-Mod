@@ -8,8 +8,10 @@ import dev.architectury.registry.level.entity.EntityAttributeRegistry;
 import io.github.qwerty770.mcmod.xdi8.util.registries.RegistryHelper;
 import net.minecraft.server.packs.PackType;
 import org.apache.commons.lang3.mutable.MutableBoolean;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import top.xdi8.mod.firefly8.advancement.AdvancementLoadingContext;
-import top.xdi8.mod.firefly8.advancement.criteria.FireflyCriteria;
+import top.xdi8.mod.firefly8.advancement.FireflyCustomAdvancements;
 import top.xdi8.mod.firefly8.block.FireflyBlocks;
 import top.xdi8.mod.firefly8.block.redwood.FireflyTreeFeatures;
 import top.xdi8.mod.firefly8.block.entity.FireflyBlockEntityTypes;
@@ -32,6 +34,8 @@ import top.xdi8.mod.firefly8.world.death.PlayerDeathListener;
 
 public class Firefly8 {
     public static String MODID = "firefly8";
+    public static final Logger LOGGER = LoggerFactory.getLogger("Firefly8");
+
     public static void init() {
         FireflyMobBiomeGen.registerBiomeModifications();
         AdvancementLoadingContext.EVENT.register(VanillaAdvancements::patchTintedItem);
@@ -54,16 +58,18 @@ public class Firefly8 {
         // Item
         FireflyItems.LOG_WRAPPER.run();
         FireflyItemTags.LOG_WRAPPER.run();
-        // Entity
-        FireflyEntityTypes.LOG_WRAPPER.run();
         // Recipe
         FireflyRecipes.LOG_WRAPPER.run();
-        // Stats
-        FireflyStats.LOG_WRAPPER.run();
-        // Particle
-        FireflyParticles.LOG_WRAPPER.run();
         // Menu
         FireflyMenus.LOG_WRAPPER.run();
+        // Particle
+        FireflyParticles.LOG_WRAPPER.run();
+        // Entity
+        FireflyEntityTypes.LOG_WRAPPER.run();
+        // Stats
+        FireflyStats.LOG_WRAPPER.run();
+        // Criteria
+        FireflyCustomAdvancements.LOG_WRAPPER.run();
         // Tree Feature
         FireflyTreeFeatures.LOG_WRAPPER.run();
         // All registries
@@ -76,7 +82,5 @@ public class Firefly8 {
         LettersUtil.fireLetterRegistry();
         // Totem
         TotemAbilities.fireRegistry();
-        // Criteria
-        FireflyCriteria.init();
     }
 }

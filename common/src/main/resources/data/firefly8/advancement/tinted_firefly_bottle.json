@@ -1,6 +1,6 @@
 {
   "display": {
-    "title":{
+    "title": {
       "translate": "advancements.firefly8.tinted_firefly_bottle.title"
     },
     "description": {
@@ -19,9 +19,13 @@
     "get_bottle": {
       "trigger": "inventory_changed",
       "conditions": {
-        "items": [{
-          "items": [ "firefly8:tinted_firefly_bottle" ]
-        }]
+        "items": [
+          {
+            "items": [
+              "firefly8:tinted_firefly_bottle"
+            ]
+          }
+        ]
       }
     }
   },

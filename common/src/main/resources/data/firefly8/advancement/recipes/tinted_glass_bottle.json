@@ -10,13 +10,15 @@
     "material": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
-        "items": [{
-          "items": [
-            "minecraft:amethyst_shard",
-            "glass_bottle",
-            "tinted_glass"
-          ]
-        }]
+        "items": [
+          {
+            "items": [
+              "minecraft:amethyst_shard",
+              "glass_bottle",
+              "tinted_glass"
+            ]
+          }
+        ]
       }
     },
     "recipe1": {

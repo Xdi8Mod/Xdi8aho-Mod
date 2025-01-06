@@ -17,7 +17,6 @@ public interface TotemAbility {
     Optional<ItemStack> activate(Level level, Player player, InteractionHand hand);
 
     default ResourceLocation getId() {
-        return TotemAbilities.getId(this).orElseThrow(() ->
-                new IllegalStateException("Trying to get id from unregistered TotemAbility"));
+        return TotemAbilities.getId(this).orElseThrow(() -> new IllegalStateException("Trying to get id from unregistered TotemAbility"));
     }
 }

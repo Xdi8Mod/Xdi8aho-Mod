@@ -2,6 +2,7 @@ package top.xdi8.mod.firefly8.mixin;
 
 import net.minecraft.world.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -15,6 +16,7 @@ public class MixinEntityBaseTick implements IPortalCooldownEntity {
         xdi8$processCooldown();
     }
 
+    @Unique
     private int xdi8$portalCooldown;
 
     @Override

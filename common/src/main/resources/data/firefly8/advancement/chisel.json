@@ -1,6 +1,6 @@
 {
   "display": {
-    "title":{
+    "title": {
       "translate": "advancements.firefly8.chisel.title"
     },
     "description": {
@@ -19,9 +19,13 @@
     "get_chisel": {
       "trigger": "inventory_changed",
       "conditions": {
-        "items": [{
-          "items": [ "firefly8:indium_chisel" ]
-        }]
+        "items": [
+          {
+            "items": [
+              "firefly8:indium_chisel"
+            ]
+          }
+        ]
       }
     }
   },

@@ -9,9 +9,13 @@
     "get_indium": {
       "trigger": "inventory_changed",
       "conditions": {
-        "items": [{
-          "items": [ "firefly8:indium_ingot" ]
-        }]
+        "items": [
+          {
+            "items": [
+              "firefly8:indium_ingot"
+            ]
+          }
+        ]
       }
     },
     "recipe": {
@@ -21,8 +25,10 @@
       }
     }
   },
-  "requirements": [[
-    "get_indium",
-    "recipe"
-  ]]
+  "requirements": [
+    [
+      "get_indium",
+      "recipe"
+    ]
+  ]
 }

@@ -14,14 +14,16 @@
     "get_indium": {
       "trigger": "inventory_changed",
       "conditions": {
-        "items": [{
-          "items": [
-            "firefly8:indium_block",
-            "firefly8:indium_nugget",
-            "firefly8:indium_ore",
-            "firefly8:deepslate_indium_ore"
-          ]
-        }]
+        "items": [
+          {
+            "items": [
+              "firefly8:indium_block",
+              "firefly8:indium_nugget",
+              "firefly8:indium_ore",
+              "firefly8:deepslate_indium_ore"
+            ]
+          }
+        ]
       }
     },
     "recipe0": {
@@ -61,9 +63,15 @@
       }
     }
   },
-  "requirements": [[
-    "get_indium",
-    "recipe0", "recipe1", "recipe2",
-    "recipe3", "recipe4", "recipe5"
-  ]]
+  "requirements": [
+    [
+      "get_indium",
+      "recipe0",
+      "recipe1",
+      "recipe2",
+      "recipe3",
+      "recipe4",
+      "recipe5"
+    ]
+  ]
 }

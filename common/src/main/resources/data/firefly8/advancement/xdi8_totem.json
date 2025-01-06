@@ -17,9 +17,18 @@
   "parent": "firefly8:enter_xdi8",
   "criteria": {
     "get_ingot": {
-      "trigger": "firefly8:get_xdi8_totem",
+      "trigger": "minecraft:inventory_changed",
       "conditions": {
-        "totem": "firefly8:xdi8"
+        "items": [
+          {
+            "items": [
+              "firefly8:xdi8aho"
+            ],
+            "components": {
+
+            }
+          }
+        ]
       }
     }
   },

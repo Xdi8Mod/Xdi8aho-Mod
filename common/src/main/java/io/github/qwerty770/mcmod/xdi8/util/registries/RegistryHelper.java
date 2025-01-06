@@ -1,7 +1,7 @@
 package io.github.qwerty770.mcmod.xdi8.util.registries;
 
 import com.mojang.datafixers.types.Type;
-import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.Codec;
 import dev.architectury.registry.menu.MenuRegistry;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
@@ -9,6 +9,8 @@ import io.github.qwerty770.mcmod.xdi8.api.ResourceLocationTool;
 import io.github.qwerty770.mcmod.xdi8.util.annotation.StableApi;
 import io.github.qwerty770.mcmod.xdi8.util.tag.TagContainer;
 import net.minecraft.Util;
+import net.minecraft.advancements.CriterionTrigger;
+import net.minecraft.advancements.critereon.ItemSubPredicate;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.particles.ParticleType;
@@ -35,8 +37,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.storage.loot.functions.LootItemFunction;
-import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
 import top.xdi8.mod.firefly8.Firefly8;
 
 import java.util.*;
@@ -58,12 +58,12 @@ public abstract class RegistryHelper {
     public static final DeferredRegister<RecipeSerializer<?>> recipeSerializerRegistry = ofModRegistry(Registries.RECIPE_SERIALIZER);
     public static final DeferredRegister<RecipeType<?>> recipeTypeRegistry = ofModRegistry(Registries.RECIPE_TYPE);
     public static final DeferredRegister<MenuType<?>> menuRegistry = ofModRegistry(Registries.MENU);
-    public static final DeferredRegister<SoundEvent> soundRegistry = ofModRegistry(Registries.SOUND_EVENT);
     public static final DeferredRegister<ParticleType<?>> particleTypeRegistry = ofModRegistry(Registries.PARTICLE_TYPE);
     public static final DeferredRegister<EntityType<?>> entityTypeRegistry = ofModRegistry(Registries.ENTITY_TYPE);
     public static final DeferredRegister<ResourceLocation> statRegistry = ofModRegistry(Registries.CUSTOM_STAT);
     public static final DeferredRegister<PoiType> poiTypeRegistry = ofModRegistry(Registries.POINT_OF_INTEREST_TYPE);
-    public static final DeferredRegister<LootItemFunctionType<?>> lootFunctionRegistry = ofModRegistry(Registries.LOOT_FUNCTION_TYPE);
+    public static final DeferredRegister<ItemSubPredicate.Type<?>> itemSubPredicateRegistry = ofModRegistry(Registries.ITEM_SUB_PREDICATE_TYPE);
+    public static final DeferredRegister<CriterionTrigger<?>> criterionTriggerRegistry = ofModRegistry(Registries.TRIGGER_TYPE);
     public static final DeferredRegister<CreativeModeTab> creativeTabRegistry = ofModRegistry(Registries.CREATIVE_MODE_TAB);
 
     public static ResourceLocation id(String id) {
@@ -180,8 +180,12 @@ public abstract class RegistryHelper {
         return poiTypeRegistry.register(id, () -> new PoiType(matchingStatesSup.get(), maxTickets, validRange));
     }
 
-    public static <T extends LootItemFunction> RegistrySupplier<LootItemFunctionType<T>> lootFunction(String id, MapCodec<T> codec) {
-        return lootFunctionRegistry.register(id, () -> new LootItemFunctionType<>(codec));
+    public static <T extends ItemSubPredicate> RegistrySupplier<ItemSubPredicate.Type<T>> itemSubPredicateType(String id, Codec<T> codec) {
+        return itemSubPredicateRegistry.register(id, () -> new ItemSubPredicate.Type<>(codec));
+    }
+
+    public static <T extends CriterionTrigger<?>> RegistrySupplier<T> criterionTrigger(String id, Supplier<T> trigger) {
+        return criterionTriggerRegistry.register(id, trigger);
     }
 
     public static RegistrySupplier<CreativeModeTab> creativeModeTab(String id, CreativeModeTab tab){

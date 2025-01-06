@@ -1,6 +1,6 @@
 {
   "display": {
-    "title":{
+    "title": {
       "translate": "advancements.firefly8.indium_ingot.title"
     },
     "description": {
@@ -19,9 +19,13 @@
     "get_ingot": {
       "trigger": "inventory_changed",
       "conditions": {
-        "items": [{
-          "items": [ "firefly8:indium_ingot" ]
-        }]
+        "items": [
+          {
+            "items": [
+              "firefly8:indium_ingot"
+            ]
+          }
+        ]
       }
     }
   },

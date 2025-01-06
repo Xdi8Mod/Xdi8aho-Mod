@@ -1,13 +1,13 @@
 package top.xdi8.mod.firefly8.entity;
 
-import com.mojang.logging.LogUtils;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.player.Player;
 import org.jetbrains.annotations.Nullable;
-import org.slf4j.Logger;
 
 import java.util.List;
+
+import static top.xdi8.mod.firefly8.Firefly8.LOGGER;
 
 /**
  * @see net.minecraft.world.entity.ai.goal.FollowMobGoal
@@ -15,7 +15,6 @@ import java.util.List;
  * @see net.minecraft.world.entity.ai.goal.FollowParentGoal
  */
 public sealed abstract class AbstractFollowPlayerGoal extends Goal {
-    static final Logger LOGGER = LogUtils.getLogger();
     protected final FireflyEntity self;
     private final double speedModifier;
     @Nullable

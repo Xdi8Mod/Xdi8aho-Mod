@@ -17,8 +17,7 @@
   },
   "criteria": {
     "consumed_item": {
-      "trigger": "minecraft:consume_item",
-      "conditions": {}
+      "trigger": "minecraft:consume_item"
     }
   },
   "requirements": [
