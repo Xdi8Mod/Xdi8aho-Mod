@@ -10,7 +10,6 @@ import net.minecraft.server.packs.PackType;
 import org.apache.commons.lang3.mutable.MutableBoolean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import top.xdi8.mod.firefly8.advancement.AdvancementLoadingContext;
 import top.xdi8.mod.firefly8.advancement.FireflyCustomAdvancements;
 import top.xdi8.mod.firefly8.block.FireflyBlocks;
 import top.xdi8.mod.firefly8.block.redwood.FireflyTreeFeatures;
@@ -23,7 +22,6 @@ import top.xdi8.mod.firefly8.entity.FireflyEntity;
 import top.xdi8.mod.firefly8.entity.FireflyEntityTypes;
 import top.xdi8.mod.firefly8.item.FireflyItemTags;
 import top.xdi8.mod.firefly8.item.FireflyItems;
-import top.xdi8.mod.firefly8.item.tint.advanceent.VanillaAdvancements;
 import top.xdi8.mod.firefly8.particle.FireflyParticles;
 import top.xdi8.mod.firefly8.recipe.FireflyRecipes;
 import top.xdi8.mod.firefly8.screen.FireflyMenus;
@@ -38,8 +36,6 @@ public class Firefly8 {
 
     public static void init() {
         FireflyMobBiomeGen.registerBiomeModifications();
-        AdvancementLoadingContext.EVENT.register(VanillaAdvancements::patchTintedItem);
-
         ReloadListenerRegistry.register(PackType.SERVER_DATA, new Xdi8PortalBasicDataLoader());
         EntityEvent.LIVING_DEATH.register(((entity, source) -> {
             MutableBoolean mb = new MutableBoolean();

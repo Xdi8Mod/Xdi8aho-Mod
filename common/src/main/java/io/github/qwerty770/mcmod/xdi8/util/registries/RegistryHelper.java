@@ -58,6 +58,7 @@ public abstract class RegistryHelper {
     public static final DeferredRegister<RecipeSerializer<?>> recipeSerializerRegistry = ofModRegistry(Registries.RECIPE_SERIALIZER);
     public static final DeferredRegister<RecipeType<?>> recipeTypeRegistry = ofModRegistry(Registries.RECIPE_TYPE);
     public static final DeferredRegister<MenuType<?>> menuRegistry = ofModRegistry(Registries.MENU);
+    public static final DeferredRegister<SoundEvent> soundRegistry = ofModRegistry(Registries.SOUND_EVENT);
     public static final DeferredRegister<ParticleType<?>> particleTypeRegistry = ofModRegistry(Registries.PARTICLE_TYPE);
     public static final DeferredRegister<EntityType<?>> entityTypeRegistry = ofModRegistry(Registries.ENTITY_TYPE);
     public static final DeferredRegister<ResourceLocation> statRegistry = ofModRegistry(Registries.CUSTOM_STAT);
@@ -153,7 +154,7 @@ public abstract class RegistryHelper {
     }
 
     public static Supplier<SoundEvent> sound(String id) {
-        return () -> SoundEvent.createVariableRangeEvent(id(id));
+        return soundRegistry.register(id, () -> SoundEvent.createVariableRangeEvent(id(id)));
     }
 
     public static  <P extends ParticleType<?>> RegistrySupplier<P> particleType(String id, Supplier<P> particleTypeSup) {

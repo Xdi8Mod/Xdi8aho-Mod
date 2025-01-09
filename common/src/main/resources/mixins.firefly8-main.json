@@ -7,6 +7,8 @@
     "MixinEntityBaseTick",
     "PlayerWithHiddenInventoryImpl",
     "ServerPlayerWithHiddenInventoryImpl",
+    "advancement.VanillaHusbandryAdvancementMixin",
+    "advancement.VanillaTheEndAdvancementMixin",
     "brewing.BrewingStandBlockEntityMixin",
     "fire.BaseFireBlockMixin"
   ],

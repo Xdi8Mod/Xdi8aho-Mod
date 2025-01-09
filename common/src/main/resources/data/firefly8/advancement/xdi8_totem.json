@@ -24,8 +24,12 @@
             "items": [
               "firefly8:xdi8aho"
             ],
-            "components": {
-
+            "predicates": {
+              "firefly8:totem_ability": {
+                "totems": [
+                  "firefly8:xdi8"
+                ]
+              }
             }
           }
         ]

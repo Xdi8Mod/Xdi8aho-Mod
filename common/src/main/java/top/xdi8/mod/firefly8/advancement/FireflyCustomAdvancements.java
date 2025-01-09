@@ -3,7 +3,6 @@ package top.xdi8.mod.firefly8.advancement;
 import dev.architectury.registry.registries.RegistrySupplier;
 import io.github.qwerty770.mcmod.xdi8.api.InternalRegistryLogWrapper;
 import net.minecraft.advancements.critereon.ItemSubPredicate;
-import top.xdi8.mod.firefly8.core.totem.TotemAbilityPredicate;
 
 import static io.github.qwerty770.mcmod.xdi8.util.registries.RegistryHelper.criterionTrigger;
 import static io.github.qwerty770.mcmod.xdi8.util.registries.RegistryHelper.itemSubPredicateType;

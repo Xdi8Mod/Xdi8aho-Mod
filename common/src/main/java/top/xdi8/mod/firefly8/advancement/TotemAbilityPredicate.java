@@ -1,4 +1,4 @@
-package top.xdi8.mod.firefly8.core.totem;
+package top.xdi8.mod.firefly8.advancement;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -9,6 +9,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import top.xdi8.mod.firefly8.Firefly8;
+import top.xdi8.mod.firefly8.core.totem.TotemAbilities;
+import top.xdi8.mod.firefly8.core.totem.TotemAbility;
 import top.xdi8.mod.firefly8.item.FireflyDataComponentTypes;
 
 import java.util.ArrayList;
@@ -43,6 +45,6 @@ public record TotemAbilityPredicate(List<TotemAbility> totemAbilities) implement
 
     @Override
     public boolean matches(ItemStack stack, String value) {
-        return totemAbilities.contains(TotemAbilities.byId(ResourceLocationTool.create(value)).orElse(null));
+        return TotemAbilities.byId(ResourceLocationTool.create(value)).filter(totemAbilities::contains).isPresent();
     }
 }
