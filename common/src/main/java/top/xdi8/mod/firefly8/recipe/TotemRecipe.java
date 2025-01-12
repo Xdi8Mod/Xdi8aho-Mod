@@ -1,26 +1,23 @@
 package top.xdi8.mod.firefly8.recipe;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import dev.architectury.core.AbstractRecipeSerializer;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.github.qwerty770.mcmod.xdi8.api.ResourceLocationTool;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
-import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import top.xdi8.mod.firefly8.core.letters.KeyedLetter;
 import top.xdi8.mod.firefly8.core.letters.LettersUtil;
 import top.xdi8.mod.firefly8.core.totem.TotemAbilities;
 import top.xdi8.mod.firefly8.core.totem.TotemAbility;
 import top.xdi8.mod.firefly8.item.FireflyItemTags;
-import top.xdi8.mod.firefly8.item.FireflyItems;
 import top.xdi8.mod.firefly8.item.symbol.SymbolStoneBlockItem;
 import top.xdi8.mod.firefly8.item.symbol.Xdi8TotemItem;
 
@@ -29,104 +26,88 @@ import java.util.ArrayList;
 import java.util.List;
 
 @ParametersAreNonnullByDefault
-public record TotemRecipe(ResourceLocation id,
-                          List<KeyedLetter> letters, TotemAbility ability) implements Recipe<Container> {
-    /**
-     * Used to check if a recipe matches current crafting inventory
-     */
+public class TotemRecipe implements Recipe<TotemRecipeInput> {
+    public Ingredient input;
+    public List<KeyedLetter> letters;
+    public TotemAbility ability;
+    private @Nullable PlacementInfo placementInfo;
+
+    public TotemRecipe(List<KeyedLetter> letters, TotemAbility ability){
+        this.letters = letters;
+        this.ability = ability;
+    }
+
+    public static TotemRecipe fromStrings(List<String> letters, String ability){
+        return new TotemRecipe(letters.stream().map((letter) -> LettersUtil.byId(ResourceLocationTool.create(letter))).toList(),
+                TotemAbilities.byId(ResourceLocationTool.create(ability)).orElseThrow(() -> new IllegalArgumentException("Invalid totem ability: " + ability)));
+    }
+
     @Override
-    public boolean matches(Container pContainer, Level pLevel) {
-        final int containerSize = pContainer.getContainerSize();
-        final int lettersSize = letters().size();
-        if (containerSize <= lettersSize)
+    public boolean matches(TotemRecipeInput input, Level level) {
+        final int inputSize = input.size();
+        final int lettersSize = letters.size();
+        if (inputSize <= lettersSize)
             return false;
-        final ItemStack totem = pContainer.getItem(0);
+        final ItemStack totem = input.getItem(0);
         if (!totem.is(FireflyItemTags.TOTEM.tagKey()))
             return false;
         if (Xdi8TotemItem.getAbility(totem) != null)
             return false;
 
-        for (int i = 1; i < containerSize; i++) {
+        for (int i = 1; i < inputSize; i++) {
             if (i > lettersSize) { // more slots than specified
-                if (!pContainer.getItem(i).isEmpty()) return false;
+                if (!input.getItem(i).isEmpty()) return false;
                 else continue;
             }
-            KeyedLetter letter = letters().get(i-1);
+            KeyedLetter letter = letters.get(i-1);
             if (!letter.isNull()) {
                 SymbolStoneBlockItem matchingItem = SymbolStoneBlockItem.fromLetter(letter);
-                if (!pContainer.getItem(i).is(matchingItem))
-                    return false;
+                if (!input.getItem(i).is(matchingItem)) return false;
             } else {
-                if (!pContainer.getItem(i).isEmpty())
-                    return false;
+                if (!input.getItem(i).isEmpty()) return false;
             }
         }
         return true;
     }
 
-    private ItemStack assemble(ItemStack item) {
-        return Xdi8TotemItem.withTotemAbility(item, ability());
-    }
-
-    /**
-     * Returns an Item that is the result of this recipe
-     */
     @Override
-    public @NotNull ItemStack assemble(Container pContainer) {
-        return assemble(pContainer.getItem(0).copy());
-    }
-
-    /**
-     * Used to determine if this recipe can fit in a grid of the given width/height
-     */
-    @Override
-    public boolean canCraftInDimensions(int pWidth, int pHeight) {
-        return true;
-    }
-
-    /**
-     * Get the result of this recipe, usually for display purposes (e.g. recipe book). If your recipe has more than one
-     * possible result (e.g. it's dynamic and depends on its inputs), then return an empty stack.
-     */
-    @Override
-    public @NotNull ItemStack getResultItem() {
-        return assemble(FireflyItems.XDI8AHO_ICON.get().getDefaultInstance());
+    public @NotNull ItemStack assemble(TotemRecipeInput input, HolderLookup.Provider registries) {
+        return Xdi8TotemItem.withTotemAbility(input.getItem(0).copy(), ability);
     }
 
     @Override
-    public @NotNull ResourceLocation getId() {
-        return id;
-    }
-
-    @Override
-    public @NotNull RecipeSerializer<?> getSerializer() {
-        return FireflyRecipes.TOTEM_S.get();
+    public @NotNull RecipeSerializer<? extends Recipe<TotemRecipeInput>> getSerializer() {
+        return FireflyRecipes.TOTEM_SERIALIZER.get();
     }
 
     @Override
     public @NotNull RecipeType<TotemRecipe> getType() {
-        return FireflyRecipes.TOTEM_T.get();
+        return FireflyRecipes.TOTEM_TYPE.get();
     }
 
-    public static class Serializer extends AbstractRecipeSerializer<TotemRecipe> {
-        @Override
-        public @NotNull TotemRecipe fromJson(ResourceLocation pRecipeId, JsonObject obj) {
-            final JsonArray letters = GsonHelper.getAsJsonArray(obj, "letters");
-            final String ability = GsonHelper.getAsString(obj, "ability");
-
-            List<KeyedLetter> letterList = new ArrayList<>();
-            for (JsonElement e : letters) {
-                String letter = GsonHelper.convertToString(e, "letter");
-                final KeyedLetter keyedLetter = LettersUtil.byId(ResourceLocationTool.create(letter));
-                letterList.add(keyedLetter);
-            }
-            TotemAbility totemAbility = TotemAbilities.byId(ResourceLocationTool.create(ability))
-                    .orElseThrow(() -> new IllegalArgumentException("Invalid totem ability: " + ability));
-            return new TotemRecipe(pRecipeId, letterList, totemAbility);
+    @Override
+    public @NotNull PlacementInfo placementInfo() {
+        if (this.placementInfo == null) {
+            this.placementInfo = PlacementInfo.create(this.input);
         }
+        return this.placementInfo;
+    }
 
-        @Override
-        public @NotNull TotemRecipe fromNetwork(ResourceLocation pRecipeId, FriendlyByteBuf buf) {
+    @Override
+    public @NotNull RecipeBookCategory recipeBookCategory() {
+        return FireflyRecipes.TOTEM_CATEGORY.get();
+    }
+
+    public static class Serializer implements RecipeSerializer<TotemRecipe> {
+        private static final MapCodec<TotemRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) ->
+                instance.group(Codec.STRING.listOf().fieldOf("letters").forGetter((arg) ->
+                                arg.letters.stream().map((letter -> letter.id().toString())).toList()),
+                               Codec.STRING.fieldOf("ability").forGetter((arg) -> arg.ability.getId().toString()))
+                        .apply(instance, TotemRecipe::fromStrings));
+        private static final StreamCodec<RegistryFriendlyByteBuf, TotemRecipe> STREAM_CODEC =
+                StreamCodec.of(Serializer::toNetwork, Serializer::fromNetwork);
+
+        public static @NotNull TotemRecipe fromNetwork(RegistryFriendlyByteBuf buf) {
             final String ability = buf.readUtf();
             TotemAbility totemAbility = TotemAbilities.byId(ResourceLocationTool.create(ability))
                     .orElseThrow(() -> new IllegalArgumentException("Invalid totem ability: " + ability));
@@ -138,13 +119,12 @@ public record TotemRecipe(ResourceLocation id,
                 final KeyedLetter keyedLetter = LettersUtil.byId(ResourceLocationTool.create(letter));
                 letterList.add(keyedLetter);
             }
-            return new TotemRecipe(pRecipeId, letterList, totemAbility);
+            return new TotemRecipe(letterList, totemAbility);
         }
 
-        @Override
-        public void toNetwork(FriendlyByteBuf buf, TotemRecipe recipe) {
-            buf.writeUtf(recipe.ability().getId().toString());
-            List<String> letters = recipe.letters().stream()
+        public static void toNetwork(RegistryFriendlyByteBuf buf, @NotNull TotemRecipe recipe) {
+            buf.writeUtf(recipe.ability.getId().toString());
+            List<String> letters = recipe.letters.stream()
                     .map(KeyedLetter::id)
                     .map(ResourceLocation::toString)
                     .toList();
@@ -152,6 +132,16 @@ public record TotemRecipe(ResourceLocation id,
             for (String letter : letters) {
                 buf.writeUtf(letter);
             }
+        }
+
+        @Override
+        public @NotNull MapCodec<TotemRecipe> codec() {
+            return CODEC;
+        }
+
+        @Override
+        public @NotNull StreamCodec<RegistryFriendlyByteBuf, TotemRecipe> streamCodec() {
+            return STREAM_CODEC;
         }
     }
 }

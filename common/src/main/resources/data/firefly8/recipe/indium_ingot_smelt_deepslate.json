@@ -1,10 +1,10 @@
 {
   "type": "minecraft:smelting",
   "group": "firefly8:indium_ingot",
-  "ingredient": {
-    "item": "firefly8:deepslate_indium_ore"
+  "ingredient": "firefly8:deepslate_indium_ore",
+  "result": {
+    "id": "firefly8:indium_ingot"
   },
-  "result": "firefly8:indium_ingot",
   "experience": 1.0,
   "cookingtime": 200
 }

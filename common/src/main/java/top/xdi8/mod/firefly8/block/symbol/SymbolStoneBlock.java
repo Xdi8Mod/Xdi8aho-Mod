@@ -1,6 +1,7 @@
 package top.xdi8.mod.firefly8.block.symbol;
 
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -10,6 +11,7 @@ import net.minecraft.world.level.material.MapColor;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import top.xdi8.mod.firefly8.Firefly8;
 import top.xdi8.mod.firefly8.core.letters.KeyedLetter;
 import top.xdi8.mod.firefly8.core.letters.LettersUtil;
 
@@ -64,12 +66,7 @@ public class SymbolStoneBlock extends Block implements KeyedLetter.Provider {
                 LETTER_TO_BLOCK.put(letter, block);
                 return block;
             };
-            if ("firefly8".equals(key.getNamespace())) {
-                registry.accept("symbol_stone_" + key.getPath(), sup, properties1);
-            } else {
-                registry.accept("symbol_stone_" + key.getNamespace() +
-                        "__" + key.getPath(), sup, properties1);
-            }
+            registry.accept(getBlockId(key), sup, properties1);
         });
     }
 
@@ -78,6 +75,11 @@ public class SymbolStoneBlock extends Block implements KeyedLetter.Provider {
         final SymbolStoneBlock block = LETTER_TO_BLOCK.get(letter);
         if (block == null) return LETTER_TO_BLOCK.get(KeyedLetter.empty());
         return block;
+    }
+
+    public static String getBlockId(ResourceLocation key){
+        if (Firefly8.MODID.equals(key.getNamespace())) return "symbol_stone_" + key.getPath();
+        else return "symbol_stone_" + key.getNamespace() + "__" + key.getPath();
     }
 
     // from plexus-utils

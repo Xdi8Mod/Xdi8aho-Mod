@@ -1,7 +1,9 @@
 package top.xdi8.mod.firefly8.item.indium;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.behavior.ShufflingList;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -33,7 +35,7 @@ public class IndiumChiselItem extends Item {
             if (recipeList.equals(recipes)) return shufflingList;
             recipeList = recipes;
             shufflingList = new ShufflingList<>();
-            recipes.forEach(rcp -> shufflingList.add(rcp.letter(), rcp.weight()));
+            recipes.forEach(rcp -> shufflingList.add(rcp.letter, rcp.weight));
             return shufflingList;
         }
     }
@@ -47,8 +49,11 @@ public class IndiumChiselItem extends Item {
         Player player = pContext.getPlayer();
         if (player == null) return InteractionResult.PASS;
         if (level.getBlockState(clickedPos).is(SymbolStoneBlock.fromLetter(KeyedLetter.empty()))) {
-            stack.hurtAndBreak(1, pContext.getPlayer(), (p) -> p.broadcastBreakEvent(pContext.getHand()));
-            List<SymbolStoneProductionRecipe> recipeList = level.getRecipeManager().getAllRecipesFor(FireflyRecipes.PRODUCE_T.get());
+            stack.hurtAndBreak(1, pContext.getPlayer(), LivingEntity.getSlotForHand(pContext.getHand()));
+            List<SymbolStoneProductionRecipe> recipeList = ((ServerLevel) level).recipeAccess().getRecipes().stream()
+                    .filter((recipeHolder) -> recipeHolder.value().getType() == FireflyRecipes.PRODUCE_TYPE.get())
+                    .map((recipeHolder) -> (SymbolStoneProductionRecipe) recipeHolder.value())
+                    .toList();
             ShufflingList<KeyedLetter> list = ShuffleCache.getShufflingList(recipeList);
             KeyedLetter resultLetter = list.shuffle().stream().findFirst().orElseGet(KeyedLetter::empty);
             SymbolStoneBlock resultBlock = SymbolStoneBlock.fromLetter(resultLetter);

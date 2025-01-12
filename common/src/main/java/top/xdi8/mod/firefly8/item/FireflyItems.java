@@ -27,10 +27,6 @@ import static io.github.qwerty770.mcmod.xdi8.util.registries.RegistryHelper.*;
 
 public final class FireflyItems {
     public static final InternalRegistryLogWrapper LOG_WRAPPER = InternalRegistryLogWrapper.firefly8("items");
-
-    private FireflyItems() {
-    }
-
     public static final CreativeModeTab FIREFLY8_TAB = CreativeTabRegistry.create(Component.translatable("itemGroup.firefly8.firefly8"),
             () -> FireflyItems.XDI8AHO_ICON.get().getDefaultInstance());
     public static final RegistrySupplier<CreativeModeTab> FIREFLY8_TAB_SUPPLIER = creativeModeTab("firefly8_items", FIREFLY8_TAB);

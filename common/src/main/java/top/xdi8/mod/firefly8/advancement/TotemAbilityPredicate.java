@@ -32,7 +32,7 @@ public record TotemAbilityPredicate(List<TotemAbility> totemAbilities) implement
                 ResourceLocation location = ability.getId();
                 list.add(location.toString());
             } catch (IllegalStateException exception) {
-                Firefly8.LOGGER.error(exception.getMessage());
+                Firefly8.LOGGER.error(exception.toString());
             }
         }
         return list;
@@ -44,7 +44,7 @@ public record TotemAbilityPredicate(List<TotemAbility> totemAbilities) implement
     }
 
     @Override
-    public boolean matches(ItemStack stack, String value) {
+    public boolean matches(@NotNull ItemStack stack, @NotNull String value) {
         return TotemAbilities.byId(ResourceLocationTool.create(value)).filter(totemAbilities::contains).isPresent();
     }
 }
