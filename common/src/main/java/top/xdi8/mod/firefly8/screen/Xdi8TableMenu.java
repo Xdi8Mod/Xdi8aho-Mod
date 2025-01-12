@@ -1,7 +1,7 @@
 package top.xdi8.mod.firefly8.screen;
 
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundSource;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -9,48 +9,38 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
-import org.featurehouse.mcmod.spm.SPMMain;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import top.xdi8.mod.firefly8.advancement.criteria.FireflyCriteria;
 import top.xdi8.mod.firefly8.block.FireflyBlocks;
+import top.xdi8.mod.firefly8.core.letters.KeyedLetter;
 import top.xdi8.mod.firefly8.item.FireflyItemTags;
+import top.xdi8.mod.firefly8.item.symbol.SymbolStoneBlockItem;
 import top.xdi8.mod.firefly8.recipe.FireflyRecipes;
 import top.xdi8.mod.firefly8.recipe.TotemRecipe;
+import top.xdi8.mod.firefly8.recipe.TotemRecipeInput;
 import top.xdi8.mod.firefly8.stats.FireflyStats;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 public class Xdi8TableMenu extends AbstractContainerMenu {
     private final ContainerLevelAccess levelAccess;
-    private final Inventory inventory;
     private final Level level;
     private final SimpleContainer container = new SimpleContainer(5);
     @Nullable
-    private TotemRecipe totemRecipe;
+    private RecipeHolder<TotemRecipe> totemRecipe;
 
     public Xdi8TableMenu(int id, Inventory inv, ContainerLevelAccess levelAccess) {
         super(FireflyMenus.XDI8_TABLE.get(), id);
-        this.inventory = inv;
         this.level = inv.player.level();
         this.levelAccess = levelAccess;
 
         // MID -> UP, LEFT, DOWN, RIGHT
-        this.addSlot(new Slot(container, 0, 80, 35) {
-            @Override
-            public void onTake(@NotNull Player pPlayer, @NotNull ItemStack pStack) {
-                if (totemRecipe != null) {
-                    pPlayer.awardRecipes(Collections.singleton(totemRecipe));
-                }
-            }
-
-            @Override
-            public int getMaxStackSize() {
-                return 1;
-            }
-        });
+        this.addSlot(new TotemSlot(container, 0, 80, 35));
         this.addSlot(new Slot(container, 1, 80, 11));
         this.addSlot(new Slot(container, 2, 56, 35));
         this.addSlot(new Slot(container, 3, 80, 59));
@@ -59,13 +49,13 @@ public class Xdi8TableMenu extends AbstractContainerMenu {
         // ButtonUnpressedTex = (176, 0)
         // ButtonPressedTex = (176, 16)
         int k;
-        for(k = 0; k < 3; ++k) {
-            for(int j = 0; j < 9; ++j) {
+        for (k = 0; k < 3; ++k) {
+            for (int j = 0; j < 9; ++j) {
                 this.addSlot(new Slot(inv, j + k * 9 + 9, 8 + j * 18, 84 + k * 18));
             }
         }
 
-        for(k = 0; k < 9; ++k) {
+        for (k = 0; k < 9; ++k) {
             this.addSlot(new Slot(inv, k, 8 + k * 18, 142));
         }
     }
@@ -116,22 +106,37 @@ public class Xdi8TableMenu extends AbstractContainerMenu {
         return stack;
     }
 
+    private TotemRecipeInput createRecipeInput() {
+        List<KeyedLetter> letters = new ArrayList<>();
+        for (int i = 1; i <= 4; ++i) {
+            ItemStack stack = slots.get(i).getItem();
+            if (stack.is(FireflyItemTags.SYMBOL_STONES.tagKey())) {
+                if (stack.getItem() instanceof SymbolStoneBlockItem item) {
+                    letters.add(item.letter());
+                }
+            }
+        }
+        return new TotemRecipeInput(this.slots.getFirst().getItem(), letters);
+    }
+
     private void confirm(Player player) {
-        final Optional<TotemRecipe> recipe = this.level.getRecipeManager().getRecipeFor(FireflyRecipes.TOTEM_T.get(), container, level);
-        if (recipe.isPresent()) {
-            //container.clearContent();
-            final TotemRecipe totemRecipe = recipe.get();
-            final ItemStack assemble = totemRecipe.assemble(container);
-            this.totemRecipe = totemRecipe;
+        TotemRecipeInput input = createRecipeInput();
+        Optional<RecipeHolder<TotemRecipe>> recipeHolder;
+        if (this.level instanceof ServerLevel serverLevel) {
+            recipeHolder = serverLevel.recipeAccess().getRecipeFor(FireflyRecipes.TOTEM_TYPE.get(), input, serverLevel);
+        } else {
+            recipeHolder = Optional.empty();
+        }
+
+        if (recipeHolder.isPresent()) {
+            this.totemRecipe = recipeHolder.get();
+            final TotemRecipe totemRecipe = this.totemRecipe.value();
+            final ItemStack assemble = totemRecipe.assemble(input, this.level.registryAccess());
             container.setItem(0, assemble);
             for (int i = 1; i < 5; i++)
                 container.getItem(i).shrink(1);
-            levelAccess.execute((l, p) ->
-                    l.playSound(null, p, SPMMain.AGROFORESTRY_TABLE_FINISH.get(),
-                            SoundSource.BLOCKS, 1.0F, l.getRandom().nextFloat() * 0.1F + 0.9F));
-            if (!player.level().isClientSide()) {
-                FireflyCriteria.GET_XDI8_TOTEM.trigger((ServerPlayer) player, assemble);
-            }
+            // TODO add sound
+            // levelAccess.execute((l, p) -> l.playSound(null, p, SPMMain.AGROFORESTRY_TABLE_FINISH.get(), SoundSource.BLOCKS, 1.0F, l.getRandom().nextFloat() * 0.1F + 0.9F));
             player.awardStat(FireflyStats.TOTEMS_ENCHANTED.get());
             broadcastChanges();
         }
@@ -146,11 +151,21 @@ public class Xdi8TableMenu extends AbstractContainerMenu {
         return false;
     }
 
-    public Inventory getInventory() {
-        return inventory;
-    }
+    private class TotemSlot extends Slot {
+        public TotemSlot(Container container, int slot, int x, int y) {
+            super(container, slot, x, y);
+        }
 
-    public SimpleContainer getContainer() {
-        return container;
+        @Override
+        public void onTake(@NotNull Player pPlayer, @NotNull ItemStack pStack) {
+            if (totemRecipe != null) {
+                pPlayer.awardRecipes(Collections.singleton(totemRecipe));
+            }
+        }
+
+        @Override
+        public int getMaxStackSize() {
+            return 1;
+        }
     }
 }
