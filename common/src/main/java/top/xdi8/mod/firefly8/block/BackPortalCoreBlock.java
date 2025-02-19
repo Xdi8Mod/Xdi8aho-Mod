@@ -1,7 +1,7 @@
 package top.xdi8.mod.firefly8.block;
 
 import com.mojang.serialization.MapCodec;
-import io.github.qwerty770.mcmod.xdi8.lib.blockentity.AbstractBlockWithEntity;
+import io.github.qwerty770.mcmod.xdi8.entity.AbstractBlockWithEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;

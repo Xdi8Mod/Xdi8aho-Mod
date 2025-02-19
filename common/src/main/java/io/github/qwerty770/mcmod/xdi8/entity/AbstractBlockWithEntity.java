@@ -1,4 +1,4 @@
-package io.github.qwerty770.mcmod.xdi8.lib.blockentity;
+package io.github.qwerty770.mcmod.xdi8.entity;
 
 import com.google.common.collect.ImmutableList;
 import io.github.qwerty770.mcmod.xdi8.util.tick.ITickable;

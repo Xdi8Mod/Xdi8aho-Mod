@@ -165,6 +165,10 @@ public abstract class RegistryHelper {
         return entityTypeRegistry.register(id, () -> builder.get().build(ResourceKey.create(Registries.ENTITY_TYPE, id(id))));
     }
 
+    public static TagContainer<Block> blockTag(String id) {
+        return TagContainer.register(id(id), BuiltInRegistries.BLOCK);
+    }
+
     public static TagContainer<Item> itemTag(String id) {
         return TagContainer.register(id(id), BuiltInRegistries.ITEM);
     }
