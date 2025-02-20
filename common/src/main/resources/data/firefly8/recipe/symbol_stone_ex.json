@@ -1,5 +1,10 @@
 {
- "type": "firefly8:produce_symbol",
- "letter": "firefly8:ex",
- "weight": 100
+  "type": "firefly8:produce_symbol",
+  "letter": "firefly8:ex",
+  "weight": [
+    {
+      "block": "#firefly8:bonus_blocks_ex",
+      "weight": 2.25
+    }
+  ]
 }
