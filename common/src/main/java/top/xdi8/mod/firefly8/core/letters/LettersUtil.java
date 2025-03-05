@@ -9,9 +9,7 @@ import top.xdi8.mod.firefly8.core.letters.event.Xdi8RegistryEvents;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.BiConsumer;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public final class LettersUtil {
@@ -33,20 +31,9 @@ public final class LettersUtil {
     }
 
     public static void forEach(BiConsumer<ResourceLocation, KeyedLetter> action) {
-        for (var id : ID_LIST)
+        for (var id : ID_LIST) {
             action.accept(id, LETTER_MAP.get(id));
-    }
-
-    public static <T> Optional<T> idToResource(KeyedLetter letter,
-                                               Function<ResourceLocation, Optional<T>> resourceMapper) {
-        if (letter.isNull()) return Optional.empty();
-        return resourceMapper.apply(letter.id());
-    }
-
-    public static <T> Optional<T> letterToResource(KeyedLetter letter,
-                                                   Function<KeyedLetter, Optional<T>> resourceMapper) {
-        if (letter.isNull()) return Optional.empty();
-        return resourceMapper.apply(letter);
+        }
     }
 
     @ApiStatus.Internal

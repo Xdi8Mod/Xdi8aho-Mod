@@ -1,4 +1,4 @@
-package top.xdi8.mod.firefly8.block.redwood;
+package top.xdi8.mod.firefly8.world;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;

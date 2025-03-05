@@ -1,4 +1,4 @@
-package top.xdi8.mod.firefly8.mixin.advancement;
+package top.xdi8.mod.firefly8.mixin;
 
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.critereon.ConsumeItemTrigger;

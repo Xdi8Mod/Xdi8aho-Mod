@@ -9,8 +9,8 @@ import top.xdi8.mod.firefly8.item.symbol.SymbolStoneBlockItem;
 import java.util.List;
 
 public class TotemRecipeInput implements RecipeInput {
-    public ItemStack totem;
-    public List<KeyedLetter> letters;
+    public final ItemStack totem;
+    public final List<KeyedLetter> letters;
     private final int inputSize;
 
     public TotemRecipeInput(ItemStack totem, List<KeyedLetter> letters){

@@ -32,8 +32,8 @@ import org.jetbrains.annotations.Range;
 import top.xdi8.mod.firefly8.block.entity.FireflyBlockEntityTypes;
 import top.xdi8.mod.firefly8.block.entity.PortalTopBlockEntity;
 import top.xdi8.mod.firefly8.block.structure.Xdi8PortalBasicData;
-import top.xdi8.mod.firefly8.ext.IPlayerWithHiddenInventory;
-import top.xdi8.mod.firefly8.ext.IServerPlayerWithHiddenInventory;
+// import top.xdi8.mod.firefly8.ext.IPlayerWithHiddenInventory;
+// import top.xdi8.mod.firefly8.ext.IServerPlayerWithHiddenInventory;
 import top.xdi8.mod.firefly8.item.FireflyItems;
 import top.xdi8.mod.firefly8.item.tint.TintedFireflyBottleItem;
 import top.xdi8.mod.firefly8.screen.TakeOnlyChestMenu;
@@ -173,8 +173,8 @@ public class Xdi8ahoPortalTopBlock extends BaseEntityBlock {
                     return InteractionResult.CONSUME;
                 }
             }
-
-            if (((IServerPlayerWithHiddenInventory) player).xdi8$validatePortal()) {
+            if (false) {  // TODO
+                // if (((IServerPlayerWithHiddenInventory) player).xdi8$validatePortal()) {
                 player.openMenu(menuProvider());
                 return InteractionResult.CONSUME;
             } else return InteractionResult.PASS;
@@ -192,8 +192,10 @@ public class Xdi8ahoPortalTopBlock extends BaseEntityBlock {
 
             @Override
             public @NotNull AbstractContainerMenu createMenu(int containerId, @NotNull Inventory inventory, @NotNull Player player) {
-                IPlayerWithHiddenInventory extPlayer = IPlayerWithHiddenInventory.xdi8$extend(player);
-                return new TakeOnlyChestMenu(containerId, inventory, extPlayer.xdi8$getPortalInv());
+                // TODO
+                // IPlayerWithHiddenInventory extPlayer = IPlayerWithHiddenInventory.xdi8$extend(player);
+                return new TakeOnlyChestMenu(containerId, inventory, player.getInventory());
+                // return new TakeOnlyChestMenu(containerId, inventory, extPlayer.xdi8$getPortalInv());
             }
         };
     }

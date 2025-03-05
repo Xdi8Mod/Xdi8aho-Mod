@@ -30,9 +30,9 @@ import java.util.NoSuchElementException;
 
 @ParametersAreNonnullByDefault
 public class SymbolStoneProductionRecipe implements Recipe<SingleRecipeInput> {
-    public Ingredient input;
-    public KeyedLetter letter;
-    public List<WeightEntry> weight;
+    public final Ingredient input;
+    public final KeyedLetter letter;
+    public final List<WeightEntry> weight;
     private @Nullable PlacementInfo placementInfo;
 
     public SymbolStoneProductionRecipe(KeyedLetter letter, List<WeightEntry> weight) {

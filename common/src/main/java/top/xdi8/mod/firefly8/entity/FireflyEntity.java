@@ -163,7 +163,7 @@ public class FireflyEntity extends PathfinderMob implements FlyingAnimal {
         var navigation = new FlyingPathNavigation(this, pLevel);
         navigation.setCanOpenDoors(false);
         navigation.setCanFloat(false);
-        navigation.setCanPassDoors(true);
+        // TODO navigation.setCanPassDoors(true);
         return navigation;
     }
 

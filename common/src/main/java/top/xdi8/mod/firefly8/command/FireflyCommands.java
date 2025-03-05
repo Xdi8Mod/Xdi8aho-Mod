@@ -14,7 +14,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
-import top.xdi8.mod.firefly8.ext.IServerPlayerWithHiddenInventory;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -63,8 +62,8 @@ public final class FireflyCommands {
             }
 
             for (ServerPlayer player : players) {
-                final IServerPlayerWithHiddenInventory ext = IServerPlayerWithHiddenInventory.xdi8$extend(player);
-                ext.xdi8$setPortal(null, BlockPos.ZERO);
+                // final IServerPlayerWithHiddenInventory ext = IServerPlayerWithHiddenInventory.xdi8$extend(player);
+                // ext.xdi8$setPortal(null, BlockPos.ZERO);
                 if (count == 1) {
                     stack.sendSuccess(() -> Component.translatable("commands.unbindxdi8portal.1", player.getDisplayName()), true);
                 }
@@ -88,15 +87,15 @@ public final class FireflyCommands {
 
     private static final class BindXdi8PortalCommand {
         private static int execute(ResourceKey<Level> level, BlockPos pos, ServerPlayer player, CommandSourceStack stack) {
-            final IServerPlayerWithHiddenInventory playerExt = IServerPlayerWithHiddenInventory.xdi8$extend(player);
-            if (playerExt.xdi8$validatePortal(level, pos)) {
-                playerExt.xdi8$setPortal(level, pos);
+            //final IServerPlayerWithHiddenInventory playerExt = IServerPlayerWithHiddenInventory.xdi8$extend(player);
+            //if (playerExt.xdi8$validatePortal(level, pos)) {
+            //    playerExt.xdi8$setPortal(level, pos);
                 stack.sendSuccess(() -> Component.translatable("commands.bindxdi8portal.success", player.getDisplayName()), true);
                 return 1;
-            } else {
-                stack.sendFailure(Component.translatable("commands.bindxdi8portal.failure", player.getDisplayName(), level.location(), pos.toShortString()));
-                return 0;
-            }
+            //} else {
+            //    stack.sendFailure(Component.translatable("commands.bindxdi8portal.failure", player.getDisplayName(), level.location(), pos.toShortString()));
+            //    return 0;
+            //}
         }
 
         static int init0(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {

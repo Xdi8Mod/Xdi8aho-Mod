@@ -8,7 +8,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
-import top.xdi8.mod.firefly8.ext.IServerPlayerWithHiddenInventory;
+// import top.xdi8.mod.firefly8.ext.IServerPlayerWithHiddenInventory;
 
 public class TakeOnlyChestMenu extends AbstractContainerMenu {
     private final Inventory inventory;
@@ -40,8 +40,8 @@ public class TakeOnlyChestMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(@NotNull Player pPlayer) {
-        return pPlayer.level().isClientSide() ||
-                ((IServerPlayerWithHiddenInventory) pPlayer).xdi8$validatePortal();
+        return pPlayer.level().isClientSide();  // TODO
+        //        || ((IServerPlayerWithHiddenInventory) pPlayer).xdi8$validatePortal();
     }
 
     static final class TakeOnlySlot extends Slot {

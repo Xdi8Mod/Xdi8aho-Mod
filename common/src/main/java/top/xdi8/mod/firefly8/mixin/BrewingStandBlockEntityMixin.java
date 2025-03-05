@@ -1,4 +1,4 @@
-package top.xdi8.mod.firefly8.mixin.brewing;
+package top.xdi8.mod.firefly8.mixin;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.core.BlockPos;

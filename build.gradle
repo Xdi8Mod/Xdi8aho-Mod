@@ -1,19 +1,9 @@
 //file:noinspection GroovyAssignabilityCheck
-import java.time.LocalDateTime
-import java.time.ZoneId
-import java.time.format.DateTimeFormatter
-
 plugins {
-    id "java"
     id "architectury-plugin" version "3.4-SNAPSHOT"
-    id "dev.architectury.loom" version "1.7-SNAPSHOT" apply false
+    id "dev.architectury.loom" version "1.9-SNAPSHOT" apply false
+    id "com.modrinth.minotaur" version "2.+" apply false
     id "io.github.juuxel.loom-vineflower" version "1.11.0" apply false  // add vineflower, see https://github.com/Juuxel/loom-vineflower
-}
-
-//apply from : 'https://featurehouse.github.io/resources/18/06/953b4d/e2d196c3f97701c23ca7d34ce2ed2576a86fab019e7a2009b2b94d/kff-3.3.2.gradle'
-class Constant {
-    static final LocalDateTime now = LocalDateTime.now(ZoneId.of('+8'))
-    static final String timestamp = "${DateTimeFormatter.ofPattern("yyMMdd.HHmm").format(now)}"
 }
 
 architectury {
@@ -23,6 +13,10 @@ architectury {
 subprojects {
     apply plugin: "dev.architectury.loom"
 
+    base {
+        archivesName = rootProject.archives_base_name + "-" + project.name
+    }
+
     loom {
         silentMojangMappingsLicense()
     }
@@ -31,7 +25,7 @@ subprojects {
         minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
         mappings loom.layered {
             officialMojangMappings()
-            parchment("org.parchmentmc.data:parchment-1.21:${rootProject.parchment_version}")
+            parchment("org.parchmentmc.data:parchment-1.21.4:${rootProject.parchment_version}")
         }
         implementation "org.slf4j:slf4j-api"
     }
@@ -42,11 +36,8 @@ allprojects {
     apply plugin: "architectury-plugin"
     apply plugin: "maven-publish"
 
-    base {
-        archivesName = rootProject.archives_base_name
-    }
-
-    version = "1.21.3-3.0.0+build.${Constant.timestamp}"
+    archives_base_name = rootProject.archives_base_name
+    version = "${rootProject.minecraft_version}-${rootProject.mod_version}"
     group = rootProject.maven_group
 
     repositories {
@@ -65,5 +56,43 @@ allprojects {
         withSourcesJar()
         sourceCompatibility = JavaVersion.VERSION_21
         targetCompatibility = JavaVersion.VERSION_21
+    }
+}
+
+// From https://github.com/teddyxlandlee/end-poem-extension/blob/1.21-all/build.gradle
+subprojects {
+    if (System.getenv("MR_TOKEN")) {
+        apply plugin: 'com.modrinth.minotaur'
+        def modLoaders = project.mr_loader.toString().split(",") as List
+        modrinth {
+            token.set System.getenv("MR_TOKEN")
+            projectId.set "U8ElprVE"
+            versionNumber.set "${project.version}-${modLoaders[0]}"
+            versionName.set String.format(
+                    rootProject.mr_version_name_format.toString(),
+                    rootProject.mr_version_game_range,
+                    project.mr_loader_display,
+                    rootProject.mr_version_mod_abbr,
+                    rootProject.mod_version
+            )
+            changelog.set rootProject.mr_version_changelog
+            versionType.set rootProject.mr_version_type
+            gameVersions = rootProject.mr_version_game.toString().split(",") as List
+            loaders.set modLoaders
+            detectLoaders.set false
+            //autoAddDependsOn.set false
+
+            dependencies {
+                required.project 'architectury-api'
+                if (modLoaders.contains("fabric")) {
+                    required.project 'fabric-api'
+                }
+            }
+
+            uploadFile.set tasks.remapJar
+            additionalFiles = [tasks.remapSourcesJar]
+
+            debugMode = System.getenv("MR_DEBUG_MODE") == '1'
+        }
     }
 }

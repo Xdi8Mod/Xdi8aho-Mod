@@ -3,13 +3,14 @@ package top.xdi8.mod.firefly8;
 import dev.architectury.event.events.common.CommandRegistrationEvent;
 import dev.architectury.registry.ReloadListenerRegistry;
 import dev.architectury.registry.level.entity.EntityAttributeRegistry;
+import io.github.qwerty770.mcmod.xdi8.api.ResourceLocationTool;
 import io.github.qwerty770.mcmod.xdi8.util.registries.RegistryHelper;
 import net.minecraft.server.packs.PackType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import top.xdi8.mod.firefly8.advancement.FireflyCustomAdvancements;
 import top.xdi8.mod.firefly8.block.FireflyBlocks;
-import top.xdi8.mod.firefly8.block.redwood.FireflyTreeFeatures;
+import top.xdi8.mod.firefly8.world.FireflyTreeFeatures;
 import top.xdi8.mod.firefly8.block.entity.FireflyBlockEntityTypes;
 import top.xdi8.mod.firefly8.block.structure.Xdi8PortalBasicDataLoader;
 import top.xdi8.mod.firefly8.command.FireflyCommands;
@@ -27,15 +28,15 @@ import top.xdi8.mod.firefly8.world.FireflyMobBiomeGen;
 import top.xdi8.mod.firefly8.world.FireflyPoiTypes;
 
 public class Firefly8 {
-    public static String MODID = "firefly8";
+    public static final String MODID = "firefly8";
     public static final Logger LOGGER = LoggerFactory.getLogger("Firefly8");
 
     public static void init() {
         FireflyMobBiomeGen.registerBiomeModifications();
-        ReloadListenerRegistry.register(PackType.SERVER_DATA, new Xdi8PortalBasicDataLoader());
-        // EntityEvent.LIVING_DEATH.register();
+        ReloadListenerRegistry.register(PackType.SERVER_DATA, new Xdi8PortalBasicDataLoader(), ResourceLocationTool.create("firefly8:xdi8_portal_data"));
         EntityAttributeRegistry.register(FireflyEntityTypes.FIREFLY, FireflyEntity::createAttributes);
         CommandRegistrationEvent.EVENT.register((dispatcher, registry, selection) -> FireflyCommands.init(dispatcher, selection));
+        // EntityEvent.LIVING_DEATH.register();
     }
 
     public static void activateRegistries() {

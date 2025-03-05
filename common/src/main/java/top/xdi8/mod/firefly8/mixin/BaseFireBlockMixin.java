@@ -1,4 +1,4 @@
-package top.xdi8.mod.firefly8.mixin.fire;
+package top.xdi8.mod.firefly8.mixin;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;

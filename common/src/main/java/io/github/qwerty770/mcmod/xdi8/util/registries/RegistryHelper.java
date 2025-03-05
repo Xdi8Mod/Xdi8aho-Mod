@@ -175,7 +175,7 @@ public abstract class RegistryHelper {
 
     public static RegistrySupplier<ResourceLocation> stat(String id, StatFormatter statFormatter) {
         ResourceLocation id2 = id(id);
-        CUSTOM.get(id2, statFormatter);
+        // TODO CUSTOM.get(id2, statFormatter);
         return statRegistry.register(id, () -> id2);
     }
 

@@ -28,8 +28,8 @@ import java.util.List;
 @ParametersAreNonnullByDefault
 public class TotemRecipe implements Recipe<TotemRecipeInput> {
     public Ingredient input;
-    public List<KeyedLetter> letters;
-    public TotemAbility ability;
+    public final List<KeyedLetter> letters;
+    public final TotemAbility ability;
     private @Nullable PlacementInfo placementInfo;
 
     public TotemRecipe(List<KeyedLetter> letters, TotemAbility ability){

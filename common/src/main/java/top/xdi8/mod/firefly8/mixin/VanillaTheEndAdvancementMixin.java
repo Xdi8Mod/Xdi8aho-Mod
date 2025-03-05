@@ -1,4 +1,4 @@
-package top.xdi8.mod.firefly8.mixin.advancement;
+package top.xdi8.mod.firefly8.mixin;
 
 import net.minecraft.data.advancements.packs.VanillaTheEndAdvancements;
 import org.spongepowered.asm.mixin.Mixin;

@@ -27,7 +27,7 @@ public class SymbolStoneBlock extends Block implements KeyedLetter.Provider {
     }
 
     @Override
-    public void appendHoverText(@NotNull ItemStack stack, @Nullable Item.TooltipContext context,
+    public void appendHoverText(@NotNull ItemStack stack, Item.@NotNull TooltipContext context,
                                 @NotNull List<Component> tooltip, @NotNull TooltipFlag flag) {
         super.appendHoverText(stack, context, tooltip, flag);
         if (letter.isNull()) return;
