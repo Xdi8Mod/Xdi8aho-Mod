@@ -11,9 +11,9 @@
 
   "depends": {
     "fabricloader": ">=0.15.0",
-    "fabric-api": ">=0.102.2",
-    "architectury": ">=14.0",
-    "minecraft": ">=1.21.2",
+    "fabric-api": ">=0.107.0",
+    "architectury": ">=15.0",
+    "minecraft": ">=1.21.4",
     "java": ">=21"
   },
   "entrypoints": {
@@ -25,7 +25,7 @@
     ]
   },
   "authors": [
-    "Xdi8Mod", "teddyxlandlee", "QWERTY770", "7oH_1fT"
+    "teddyxlandlee", "QWERTY770", "Shidinn community"
   ],
   "mixins": [
     "mixins.firefly-fabric.json",
@@ -39,8 +39,5 @@
         "description": "Xdi8 Aho Mod"
       }
     }
-  },
-  "jars": [
-    { "file": "META-INF/spm_fake.jar" }
-  ]
+  }
 }

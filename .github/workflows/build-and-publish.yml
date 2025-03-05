@@ -1,0 +1,62 @@
+# From https://github.com/teddyxlandlee/end-poem-extension/blob/1.21-all/.github/workflows/build-and-publish.yml
+name: Build / Publish to Modrinth
+
+on:
+  push:
+    branches:
+      - 1.21.4
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: startsWith(github.event.head_commit.message, '[ci build]')
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Build with Gradle
+        run: ./gradlew build
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: |
+            'fabric/build/libs/*'
+            'forge/build/libs/*'
+          if-no-files-found: ignore
+
+  publish:
+    runs-on: ubuntu-latest
+    if: startsWith(github.event.head_commit.message, '[ci publish]')
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Set up Modrinth token
+        run: echo "MR_TOKEN=${{ secrets.MODRINTH_TOKEN }}" >> $GITHUB_ENV
+
+      - name: Publish to Modrinth
+        run: ./gradlew modrinth
+
+      - name: Upload publish artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: publish-artifacts
+          path: |
+            'fabric/build/libs/*'
+            'forge/build/libs/*'
+          if-no-files-found: ignore
