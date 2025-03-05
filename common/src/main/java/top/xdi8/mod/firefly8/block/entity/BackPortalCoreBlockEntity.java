@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import top.xdi8.mod.firefly8.block.BackPortalCoreBlock;
-import top.xdi8.mod.firefly8.world.Xdi8TeleporterImpl;
+import top.xdi8.mod.firefly8.world.FireflyTeleportHelper;
 
 import java.util.function.Supplier;
 
@@ -35,7 +35,7 @@ public class BackPortalCoreBlockEntity extends BlockEntity implements ITickable 
 
             private boolean isValid(Level level, BlockPos pos) {
                 BlockPos thatPos = pos.below(3);
-                for (Supplier<Block> blockSupplier : Xdi8TeleporterImpl.X2O_PORTAL_BASE) {
+                for (Supplier<Block> blockSupplier : FireflyTeleportHelper.BACK_PORTAL_BLOCKS.subList(0, 3)) {
                     if (!level.getBlockState(thatPos).is(blockSupplier.get())) return false;
                     thatPos = thatPos.above();
                 }

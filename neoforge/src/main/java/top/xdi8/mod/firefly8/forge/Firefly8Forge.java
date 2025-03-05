@@ -14,17 +14,16 @@ import net.neoforged.neoforgespi.Environment;
 import top.xdi8.mod.firefly8.Firefly8;
 import top.xdi8.mod.firefly8.Firefly8Client;
 import top.xdi8.mod.firefly8.item.FireflyItemTags;
-import top.xdi8.mod.firefly8.network.FireflyNetwork;
 
 @Mod("firefly8")
 public class Firefly8Forge {
     public Firefly8Forge() {
         Firefly8.init();
         if (Environment.get().getDist().equals(Dist.CLIENT)){
-            FireflyNetwork.registerClientNetwork();
+            // FireflyNetwork.registerClientNetwork();
             Firefly8Client.registerParticles();
         }
-        FireflyNetwork.registerServerNetwork();
+        // FireflyNetwork.registerServerNetwork();
     }
 
     @EventBusSubscriber(modid = "firefly8", bus = EventBusSubscriber.Bus.MOD)

@@ -1,13 +1,10 @@
 package top.xdi8.mod.firefly8;
 
-import dev.architectury.event.EventResult;
 import dev.architectury.event.events.common.CommandRegistrationEvent;
-import dev.architectury.event.events.common.EntityEvent;
 import dev.architectury.registry.ReloadListenerRegistry;
 import dev.architectury.registry.level.entity.EntityAttributeRegistry;
 import io.github.qwerty770.mcmod.xdi8.util.registries.RegistryHelper;
 import net.minecraft.server.packs.PackType;
-import org.apache.commons.lang3.mutable.MutableBoolean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import top.xdi8.mod.firefly8.advancement.FireflyCustomAdvancements;
@@ -28,7 +25,6 @@ import top.xdi8.mod.firefly8.screen.FireflyMenus;
 import top.xdi8.mod.firefly8.stats.FireflyStats;
 import top.xdi8.mod.firefly8.world.FireflyMobBiomeGen;
 import top.xdi8.mod.firefly8.world.FireflyPoiTypes;
-import top.xdi8.mod.firefly8.world.death.PlayerDeathListener;
 
 public class Firefly8 {
     public static String MODID = "firefly8";
@@ -37,11 +33,7 @@ public class Firefly8 {
     public static void init() {
         FireflyMobBiomeGen.registerBiomeModifications();
         ReloadListenerRegistry.register(PackType.SERVER_DATA, new Xdi8PortalBasicDataLoader());
-        EntityEvent.LIVING_DEATH.register(((entity, source) -> {
-            MutableBoolean mb = new MutableBoolean();
-            PlayerDeathListener.onPlayerDeath(entity, mb::setTrue);
-            return mb.isTrue() ? EventResult.interruptFalse() : EventResult.pass();
-        }));
+        // EntityEvent.LIVING_DEATH.register();
         EntityAttributeRegistry.register(FireflyEntityTypes.FIREFLY, FireflyEntity::createAttributes);
         CommandRegistrationEvent.EVENT.register((dispatcher, registry, selection) -> FireflyCommands.init(dispatcher, selection));
     }

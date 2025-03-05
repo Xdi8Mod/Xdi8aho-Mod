@@ -4,6 +4,5 @@
   "required": true,
   "package": "top.xdi8.mod.firefly8.mixin.forge",
   "mixins": [
-    "ServerPlayerCapacityMixin"
   ]
 }

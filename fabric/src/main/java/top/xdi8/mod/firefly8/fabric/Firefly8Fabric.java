@@ -8,7 +8,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import top.xdi8.mod.firefly8.Firefly8;
 import top.xdi8.mod.firefly8.item.FireflyItemTags;
-import top.xdi8.mod.firefly8.network.FireflyNetwork;
 
 public class Firefly8Fabric implements ModInitializer {
     @Override
@@ -18,9 +17,9 @@ public class Firefly8Fabric implements ModInitializer {
         Firefly8.commonSetup();
         registerBrewingRecipes();
         if (FabricLoader.getInstance().getEnvironmentType().equals(EnvType.CLIENT)){
-            FireflyNetwork.registerClientNetwork();
+            // FireflyNetwork.registerClientNetwork();
         }
-        FireflyNetwork.registerServerNetwork();
+        // FireflyNetwork.registerServerNetwork();
     }
 
     private static void registerBrewingRecipes(){

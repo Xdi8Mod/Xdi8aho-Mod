@@ -6,6 +6,7 @@ import io.github.qwerty770.mcmod.xdi8.api.InternalRegistryLogWrapper;
 
 import static io.github.qwerty770.mcmod.xdi8.util.registries.RegistryHelper.stat;
 
+@SuppressWarnings("unused")
 public final class FireflyStats {
     public static final InternalRegistryLogWrapper LOG_WRAPPER = InternalRegistryLogWrapper.firefly8("stats");
 
@@ -18,5 +19,4 @@ public final class FireflyStats {
     public static final RegistrySupplier<ResourceLocation> TOTEMS_ENCHANTED = stat("totems_enchanted");
     public static final RegistrySupplier<ResourceLocation> FIREFLIES_CAUGHT = stat("fireflies_caught");
     public static final RegistrySupplier<ResourceLocation> FIREFLIES_RELEASED = stat("fireflies_released");
-
 }

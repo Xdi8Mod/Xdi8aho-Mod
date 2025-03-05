@@ -92,6 +92,7 @@ public class IndiumChiselItem extends Item {
         for (int i = 0; i < letterList.size(); ++i) {
             array1[i] = 1;
         }
+        // Check 26 surrounding blocks
         for (int i = -1; i <= 1; ++i) {
             for (int j = -1; j <= 1; ++j) {
                 for (int k = -1; k <= 1; ++k) {

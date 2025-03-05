@@ -7,6 +7,7 @@ import net.minecraft.advancements.critereon.ItemSubPredicate;
 import static io.github.qwerty770.mcmod.xdi8.util.registries.RegistryHelper.criterionTrigger;
 import static io.github.qwerty770.mcmod.xdi8.util.registries.RegistryHelper.itemSubPredicateType;
 
+@SuppressWarnings("unused")
 public class FireflyCustomAdvancements {
     public static final InternalRegistryLogWrapper LOG_WRAPPER = InternalRegistryLogWrapper.firefly8("custom_advancements");
 
