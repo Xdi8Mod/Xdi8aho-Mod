@@ -21,7 +21,10 @@
       "top.xdi8.mod.firefly8.fabric.Firefly8Fabric"
     ],
     "client": [
-      "top.xdi8.mod.firefly8.fabric.FireflyClientFabric"
+      "top.xdi8.mod.firefly8.fabric.Firefly8ClientFabric"
+    ],
+    "fabric-datagen": [
+      "top.xdi8.mod.firefly8.fabric.ModDataGenFabric"
     ]
   },
   "authors": [

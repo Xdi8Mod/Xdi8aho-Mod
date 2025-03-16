@@ -97,9 +97,7 @@ public final class FireflyItems {
 
         XDI8AHO_ICON = item("xdi8aho", Xdi8TotemItem::new);
         FIREFLY_SPAWN_EGG = item("firefly_spawn_egg", (properties) ->
-                new ArchitecturySpawnEggItem(FireflyEntityTypes.FIREFLY,
-                        0x000000, 0x00f500,
-                        properties), defaultProp());
+                new ArchitecturySpawnEggItem(FireflyEntityTypes.FIREFLY, properties), defaultProp());
         XDI8AHO_PORTAL_CORE_BLOCK = blockItem("xdi8aho_portal_core", FireflyBlocks.XDI8AHO_PORTAL_CORE_BLOCK, defaultProp());
         XDI8AHO_PORTAL_TOP_BLOCK = blockItem("xdi8aho_torch_top", FireflyBlocks.XDI8AHO_PORTAL_TOP_BLOCK, defaultProp());
         XDI8AHO_BACK_PORTAL_CORE_BLOCK = blockItem("xdi8aho_back_portal_core", FireflyBlocks.XDI8AHO_BACK_PORTAL_CORE_BLOCK, defaultProp());

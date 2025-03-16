@@ -28,6 +28,7 @@ subprojects {
             parchment("org.parchmentmc.data:parchment-1.21.4:${rootProject.parchment_version}")
         }
         implementation "org.slf4j:slf4j-api"
+        implementation "com.google.code.findbugs:jsr305:3.0.2"
     }
 }
 

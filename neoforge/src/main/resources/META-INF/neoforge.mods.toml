@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[21,)"
+loaderVersion="[1,)"
 license="GPL-3.0-or-later with Minecraft exception"
 issueTrackerURL="https://github.com/Xdi8Mod/Xdi8Aho-Mod/issues"
 
@@ -34,9 +34,9 @@ Just to make his future bright."""
 #    displayURL="https://modrinth.com/mod/xdi8aho-mod"
 
 [[mixins]]
-    config1="mixins.xdi8-fonts.json"
-    config3="mixins.firefly8-main.json"
-    config4="mixins.firefly-forge.json"
+    config="mixins.xdi8-fonts.json"
+    config1="mixins.firefly8-main.json"
+    config2="mixins.firefly-forge.json"
 
 [[dependencies.firefly8]]
     modId="neoforge"
@@ -44,7 +44,6 @@ Just to make his future bright."""
     versionRange="[21.4.0,)"
     ordering="NONE"
     side="BOTH"
-# Here's another dependency
 [[dependencies.firefly8]]
     modId="minecraft"
     type="required"
