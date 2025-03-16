@@ -4,10 +4,10 @@
   "required": true,
   "package": "top.xdi8.mod.firefly8.mixin",
   "mixins": [
-    "advancement.VanillaHusbandryAdvancementMixin",
-    "advancement.VanillaTheEndAdvancementMixin",
-    "brewing.BrewingStandBlockEntityMixin",
-    "fire.BaseFireBlockMixin"
+    "VanillaHusbandryAdvancementMixin",
+    "VanillaTheEndAdvancementMixin",
+    "BrewingStandBlockEntityMixin",
+    "BaseFireBlockMixin"
   ],
   "client": [
   ]

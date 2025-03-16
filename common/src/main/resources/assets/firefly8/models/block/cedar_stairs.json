@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/stairs",
-  "textures": {
-    "bottom": "firefly8:block/cedar_planks",
-    "top": "firefly8:block/cedar_planks",
-    "side": "firefly8:block/cedar_planks"
-  }
-}
