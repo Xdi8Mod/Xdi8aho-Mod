@@ -33,6 +33,8 @@ public class ModDataGen {
         builder.add(SymbolStoneBlock.fromLetter(KeyedLetter.empty()));
         builder.add(FireflyBlocks.SYMBOL_STONE_BRICKS.get());
         builder.add(FireflyBlocks.SYMBOL_STONE_NN.get());
+        builder.add(FireflyBlocks.XDI8AHO_BACK_PORTAL_CORE_BLOCK.get());
+        builder.add(FireflyBlocks.XDI8AHO_PORTAL_CORE_BLOCK.get());
         return builder.build();
     }
 }

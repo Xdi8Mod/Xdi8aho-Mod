@@ -44,9 +44,9 @@ public class FireflyBlocks {
     public static final RegistrySupplier<Block> INDIUM_BLOCK;
     public static final RegistrySupplier<Block> INDIUM_ORE_BLOCK;
     public static final RegistrySupplier<Block> DEEPSLATE_INDIUM_ORE_BLOCK;
+    public static final RegistrySupplier<Block> XDI8_TABLE;
     public static final RegistrySupplier<Block> DARK_SYMBOL_STONE;
     public static final RegistrySupplier<Block> SYMBOL_STONE_BRICKS;
-    public static final RegistrySupplier<Block> XDI8_TABLE;
     public static final RegistrySupplier<Block> SYMBOL_STONE_NN;
 
     public static final RegistrySupplier<Block> CEDAR_BUTTON;
@@ -55,7 +55,6 @@ public class FireflyBlocks {
     public static final RegistrySupplier<Block> CEDAR_FENCE_GATE;
     public static final RegistrySupplier<Block> CEDAR_LEAVES;
     public static final RegistrySupplier<Block> CEDAR_LOG;
-    public static final RegistrySupplier<Block> STRIPPED_CEDAR_LOG;
     public static final RegistrySupplier<Block> CEDAR_PLANKS;
     public static final RegistrySupplier<Block> CEDAR_PRESSURE_PLATE;
     public static final RegistrySupplier<Block> CEDAR_SAPLING;
@@ -64,8 +63,10 @@ public class FireflyBlocks {
     public static final RegistrySupplier<Block> CEDAR_STAIRS;
     public static final RegistrySupplier<Block> CEDAR_TRAPDOOR;
     public static final RegistrySupplier<Block> CEDAR_WOOD;
-    public static final RegistrySupplier<Block> STRIPPED_CEDAR_WOOD;
     public static final RegistrySupplier<Block> CEDAR_WALL_SIGN;
+    public static final RegistrySupplier<Block> POTTED_CEDAR_SAPLING;
+    public static final RegistrySupplier<Block> STRIPPED_CEDAR_LOG;
+    public static final RegistrySupplier<Block> STRIPPED_CEDAR_WOOD;
 
     static {
         INDIUM_BLOCK = defaultBlock("indium_block", BlockBehaviour.Properties.of()
@@ -111,6 +112,7 @@ public class FireflyBlocks {
                 BlockBehaviour.Properties.of()
                         .requiresCorrectToolForDrops()
                         .strength(3.5F, 6.0F));
+
         SymbolStoneBlock.registerAll(RegistryHelper::block);
         DARK_SYMBOL_STONE = defaultBlock("dark_symbol_stone",
                 BlockBehaviour.Properties.of()
@@ -122,6 +124,13 @@ public class FireflyBlocks {
                         .strength(1.0F, 4.0F)
                         .requiresCorrectToolForDrops()
                         .sound(SoundType.STONE));
+        SYMBOL_STONE_NN = block("symbol_stone_nn", SymbolStoneNNBlock::new,
+                BlockBehaviour.Properties.of()
+                        .overrideDescription("block.firefly8.symbol_stone")
+                        .mapColor(MapColor.COLOR_LIGHT_GRAY)
+                        .strength(1.5F, 8.0F)
+                        .requiresCorrectToolForDrops());
+
         CEDAR_BUTTON = block("cedar_button",
                 (properties) -> new ButtonBlock(redwoodSet, 30, properties),
                 BlockBehaviour.Properties.of()
@@ -142,8 +151,6 @@ public class FireflyBlocks {
                 woodenBlock().mapColor((blockState) -> blockState.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ?
                                 redwoodColor : MapColor.PODZOL)
                         .strength(2.0F));
-        STRIPPED_CEDAR_LOG = block("stripped_cedar_log", RotatedPillarBlock::new,
-                woodenBlock().strength(2.0F));
         CEDAR_PLANKS = defaultBlock("cedar_planks",
                 woodenBlock().strength(2.0F, 3.0F));
         CEDAR_PRESSURE_PLATE = block("cedar_pressure_plate",
@@ -175,14 +182,12 @@ public class FireflyBlocks {
                         .overrideDescription("block.firefly8.cedar_sign").forceSolidOn().noCollission().strength(1.0F));
         CEDAR_WOOD = block("cedar_wood", RotatedPillarBlock::new,
                 woodenBlock().strength(2.0F));
+        POTTED_CEDAR_SAPLING = block("potted_cedar_sapling", properties -> new FlowerPotBlock(CEDAR_SAPLING.get(), properties),
+                BlockBehaviour.Properties.of().instabreak().noOcclusion().pushReaction(PushReaction.DESTROY));
+        STRIPPED_CEDAR_LOG = block("stripped_cedar_log", RotatedPillarBlock::new,
+                woodenBlock().strength(2.0F));
         STRIPPED_CEDAR_WOOD = block("stripped_cedar_wood", RotatedPillarBlock::new,
                 woodenBlock().strength(2.0F));
-        SYMBOL_STONE_NN = block("symbol_stone_nn", SymbolStoneNNBlock::new,
-                BlockBehaviour.Properties.of()
-                        .overrideDescription("block.firefly8.symbol_stone")
-                        .mapColor(MapColor.COLOR_LIGHT_GRAY)
-                        .strength(1.5F, 8.0F)
-                        .requiresCorrectToolForDrops());
     }
 
 
