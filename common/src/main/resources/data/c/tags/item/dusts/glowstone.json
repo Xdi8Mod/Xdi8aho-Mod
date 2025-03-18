@@ -2,9 +2,8 @@
   "replace": false,
   "values": [
     {
-      "id": "#forge:rods/wooden",
+      "id": "#forge:dusts/glowstone",
       "required": false
-    },
-    "stick"
+    }
   ]
 }

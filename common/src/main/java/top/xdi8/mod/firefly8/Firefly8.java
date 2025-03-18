@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import top.xdi8.mod.firefly8.advancement.FireflyCustomAdvancements;
 import top.xdi8.mod.firefly8.block.FireflyBlocks;
+import top.xdi8.mod.firefly8.item.FireflyDataComponentTypes;
 import top.xdi8.mod.firefly8.world.FireflyTreeFeatures;
 import top.xdi8.mod.firefly8.block.entity.FireflyBlockEntityTypes;
 import top.xdi8.mod.firefly8.block.structure.Xdi8PortalBasicDataLoader;
@@ -47,6 +48,7 @@ public class Firefly8 {
         // Item
         FireflyItems.LOG_WRAPPER.run();
         FireflyItemTags.LOG_WRAPPER.run();
+        FireflyDataComponentTypes.LOG_WRAPPER.run();
         // Recipe
         FireflyRecipes.LOG_WRAPPER.run();
         // Menu

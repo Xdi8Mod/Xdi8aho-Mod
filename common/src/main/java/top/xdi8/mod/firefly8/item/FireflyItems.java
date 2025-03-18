@@ -34,16 +34,16 @@ public final class FireflyItems {
     public static final RegistrySupplier<Item> INDIUM_INGOT;
     public static final RegistrySupplier<Item> INDIUM_NUGGET;
     public static final RegistrySupplier<Item> INDIUM_AXE;
+    public static final RegistrySupplier<Item> INDIUM_CHISEL;
     public static final RegistrySupplier<Item> INDIUM_HOE;
     public static final RegistrySupplier<Item> INDIUM_PICKAXE;
     public static final RegistrySupplier<Item> INDIUM_SHOVEL;
     public static final RegistrySupplier<Item> INDIUM_SWORD;
-    public static final RegistrySupplier<Item> INDIUM_CHISEL;
     public static final RegistrySupplier<BlockItem> INDIUM_BLOCK;
     public static final RegistrySupplier<BlockItem> INDIUM_ORE_BLOCK;
     public static final RegistrySupplier<BlockItem> DEEPSLATE_INDIUM_ORE_BLOCK;
-    public static final RegistrySupplier<BlockItem> SYMBOL_STONE_BRICKS;
 
+    public static final RegistrySupplier<Item> BUNDLER;
     public static final RegistrySupplier<Item> XDI8AHO_ICON;
     public static final RegistrySupplier<Item> FIREFLY_SPAWN_EGG;
 
@@ -61,7 +61,7 @@ public final class FireflyItems {
     public static final RegistrySupplier<Item> TINTED_FIREFLY_BOTTLE;
 
     public static final RegistrySupplier<BlockItem> DARK_SYMBOL_STONE;
-    public static final RegistrySupplier<Item> BUNDLER;
+    public static final RegistrySupplier<BlockItem> SYMBOL_STONE_BRICKS;
     public static final RegistrySupplier<BlockItem> SYMBOL_STONE_NN;
 
     public static final RegistrySupplier<BlockItem> CEDAR_BUTTON;
@@ -70,7 +70,6 @@ public final class FireflyItems {
     public static final RegistrySupplier<BlockItem> CEDAR_FENCE_GATE;
     public static final RegistrySupplier<BlockItem> CEDAR_LEAVES;
     public static final RegistrySupplier<BlockItem> CEDAR_LOG;
-    public static final RegistrySupplier<BlockItem> STRIPPED_CEDAR_LOG;
     public static final RegistrySupplier<BlockItem> CEDAR_PLANKS;
     public static final RegistrySupplier<BlockItem> CEDAR_PRESSURE_PLATE;
     public static final RegistrySupplier<BlockItem> CEDAR_SAPLING;
@@ -79,22 +78,24 @@ public final class FireflyItems {
     public static final RegistrySupplier<BlockItem> CEDAR_STAIRS;
     public static final RegistrySupplier<BlockItem> CEDAR_TRAPDOOR;
     public static final RegistrySupplier<BlockItem> CEDAR_WOOD;
+    public static final RegistrySupplier<BlockItem> POTTED_CEDAR_SAPLING;
+    public static final RegistrySupplier<BlockItem> STRIPPED_CEDAR_LOG;
     public static final RegistrySupplier<BlockItem> STRIPPED_CEDAR_WOOD;
 
     static {
         INDIUM_INGOT = item("indium_ingot");
         INDIUM_NUGGET = item("indium_nugget");
         INDIUM_AXE = item("indium_axe", IndiumAxeItem::new);
+        INDIUM_CHISEL = item("indium_chisel", IndiumChiselItem::new, defaultProp().durability(30));
         INDIUM_HOE = item("indium_hoe", IndiumHoeItem::new);
         INDIUM_PICKAXE = item("indium_pickaxe", IndiumPickaxeItem::new);
         INDIUM_SHOVEL = item("indium_shovel", IndiumShovelItem::new);
         INDIUM_SWORD = item("indium_sword", IndiumSwordItem::new);
-        INDIUM_CHISEL = item("indium_chisel", IndiumChiselItem::new, defaultProp().durability(30));
         INDIUM_BLOCK = blockItem("indium_block", FireflyBlocks.INDIUM_BLOCK, defaultProp());
         INDIUM_ORE_BLOCK = blockItem("indium_ore", FireflyBlocks.INDIUM_ORE_BLOCK, defaultProp());
         DEEPSLATE_INDIUM_ORE_BLOCK = blockItem("deepslate_indium_ore", FireflyBlocks.DEEPSLATE_INDIUM_ORE_BLOCK, defaultProp());
-        SYMBOL_STONE_BRICKS = blockItem("symbol_stone_bricks", FireflyBlocks.SYMBOL_STONE_BRICKS, defaultProp());
 
+        BUNDLER = item("bundler", BundlerItem::new, defaultProp().stacksTo(1));
         XDI8AHO_ICON = item("xdi8aho", Xdi8TotemItem::new);
         FIREFLY_SPAWN_EGG = item("firefly_spawn_egg", (properties) ->
                 new ArchitecturySpawnEggItem(FireflyEntityTypes.FIREFLY, properties), defaultProp());
@@ -118,9 +119,9 @@ public final class FireflyItems {
                 .rarity(Rarity.UNCOMMON));
         TINTED_FIREFLY_BOTTLE = item("tinted_firefly_bottle", TintedFireflyBottleItem::new, defaultProp().stacksTo(1));
 
-        BUNDLER = item("bundler", BundlerItem::new, defaultProp().stacksTo(1));
         SymbolStoneBlockItem.registerAll(RegistryHelper::item);
         DARK_SYMBOL_STONE = blockItem("dark_symbol_stone", FireflyBlocks.DARK_SYMBOL_STONE, defaultProp().fireResistant());
+        SYMBOL_STONE_BRICKS = blockItem("symbol_stone_bricks", FireflyBlocks.SYMBOL_STONE_BRICKS, defaultProp());
         SYMBOL_STONE_NN = blockItem("symbol_stone_nn", FireflyBlocks.SYMBOL_STONE_NN, defaultProp().rarity(Rarity.UNCOMMON));
 
         CEDAR_BUTTON = blockItem("cedar_button", FireflyBlocks.CEDAR_BUTTON, defaultProp());
@@ -129,7 +130,6 @@ public final class FireflyItems {
         CEDAR_FENCE_GATE = blockItem("cedar_fence_gate", FireflyBlocks.CEDAR_FENCE_GATE, defaultProp());
         CEDAR_LEAVES = blockItem("cedar_leaves", FireflyBlocks.CEDAR_LEAVES, defaultProp());
         CEDAR_LOG = blockItem("cedar_log", FireflyBlocks.CEDAR_LOG, defaultProp());
-        STRIPPED_CEDAR_LOG = blockItem("stripped_cedar_log", FireflyBlocks.STRIPPED_CEDAR_LOG, defaultProp());
         CEDAR_PLANKS = blockItem("cedar_planks", FireflyBlocks.CEDAR_PLANKS, defaultProp());
         CEDAR_PRESSURE_PLATE = blockItem("cedar_pressure_plate", FireflyBlocks.CEDAR_PRESSURE_PLATE, defaultProp());
         CEDAR_SAPLING = blockItem("cedar_sapling", FireflyBlocks.CEDAR_SAPLING, defaultProp());
@@ -138,6 +138,8 @@ public final class FireflyItems {
         CEDAR_STAIRS = blockItem("cedar_stairs", FireflyBlocks.CEDAR_STAIRS, defaultProp());
         CEDAR_TRAPDOOR = blockItem("cedar_trapdoor", FireflyBlocks.CEDAR_TRAPDOOR, defaultProp());
         CEDAR_WOOD = blockItem("cedar_wood", FireflyBlocks.CEDAR_WOOD, defaultProp());
+        POTTED_CEDAR_SAPLING = blockItem("potted_cedar_sapling", FireflyBlocks.POTTED_CEDAR_SAPLING, defaultProp());
+        STRIPPED_CEDAR_LOG = blockItem("stripped_cedar_log", FireflyBlocks.STRIPPED_CEDAR_LOG, defaultProp());
         STRIPPED_CEDAR_WOOD = blockItem("stripped_cedar_wood", FireflyBlocks.STRIPPED_CEDAR_WOOD, defaultProp());
     }
 

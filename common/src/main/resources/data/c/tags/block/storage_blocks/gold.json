@@ -4,7 +4,6 @@
     {
       "id": "#forge:storage_blocks/gold",
       "required": false
-    },
-    "minecraft:gold_block"
+    }
   ]
 }

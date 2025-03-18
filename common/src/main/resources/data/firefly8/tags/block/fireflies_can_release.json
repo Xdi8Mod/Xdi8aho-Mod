@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "#replaceable_plants",
+    "#replaceable_by_trees",
     "grass_block"
   ]
 }

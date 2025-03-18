@@ -22,6 +22,6 @@ public class FireflyDataComponentTypes {
             () -> new DataComponentType.Builder<List<ItemStack>>().persistent(ItemStack.CODEC.listOf())
                     .networkSynchronized(ItemStack.STREAM_CODEC.apply(ByteBufCodecs.list())).cacheEncoding().build());
     // "Fireflies" tag in 1.18.2
-    public static final RegistrySupplier<DataComponentType<CustomData>> FIREFLIES = componentType("Fireflies",
+    public static final RegistrySupplier<DataComponentType<CustomData>> FIREFLIES = componentType("fireflies",
             () -> new DataComponentType.Builder<CustomData>().persistent(CustomData.CODEC).networkSynchronized(CustomData.STREAM_CODEC).build());
 }

@@ -27,7 +27,7 @@ import java.util.List;
 
 @ParametersAreNonnullByDefault
 public class TotemRecipe implements Recipe<TotemRecipeInput> {
-    public Ingredient input;
+    // public Ingredient input;
     public final List<KeyedLetter> letters;
     public final TotemAbility ability;
     private @Nullable PlacementInfo placementInfo;
@@ -88,7 +88,7 @@ public class TotemRecipe implements Recipe<TotemRecipeInput> {
     @Override
     public @NotNull PlacementInfo placementInfo() {
         if (this.placementInfo == null) {
-            this.placementInfo = PlacementInfo.create(this.input);
+            this.placementInfo = PlacementInfo.create(Ingredient.of(FireflyItemTags.TOTEM.entries()));
         }
         return this.placementInfo;
     }

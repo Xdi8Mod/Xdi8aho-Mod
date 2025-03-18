@@ -2,10 +2,12 @@ package top.xdi8.mod.firefly8;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.data.BlockFamily;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import top.xdi8.mod.firefly8.block.FireflyBlocks;
 import top.xdi8.mod.firefly8.block.symbol.SymbolStoneBlock;
 import top.xdi8.mod.firefly8.core.letters.KeyedLetter;
+import top.xdi8.mod.firefly8.item.FireflyItems;
 
 import java.util.List;
 
@@ -35,6 +37,20 @@ public class ModDataGen {
         builder.add(FireflyBlocks.SYMBOL_STONE_NN.get());
         builder.add(FireflyBlocks.XDI8AHO_BACK_PORTAL_CORE_BLOCK.get());
         builder.add(FireflyBlocks.XDI8AHO_PORTAL_CORE_BLOCK.get());
+        return builder.build();
+    }
+
+    public static List<Item> getFlatItems(){
+        ImmutableList.Builder<Item> builder = ImmutableList.builder();
+        builder.add(FireflyItems.INDIUM_AXE.get());
+        builder.add(FireflyItems.INDIUM_CHISEL.get());
+        builder.add(FireflyItems.INDIUM_HOE.get());
+        builder.add(FireflyItems.INDIUM_INGOT.get());
+        builder.add(FireflyItems.INDIUM_NUGGET.get());
+        builder.add(FireflyItems.INDIUM_PICKAXE.get());
+        builder.add(FireflyItems.INDIUM_SHOVEL.get());
+        builder.add(FireflyItems.INDIUM_SWORD.get());
+        builder.add(FireflyItems.XDI8AHO_ICON.get());
         return builder.build();
     }
 }
