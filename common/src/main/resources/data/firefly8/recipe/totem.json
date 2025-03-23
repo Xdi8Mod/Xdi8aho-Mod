@@ -6,9 +6,9 @@
     " r "
   ],
   "key": {
-    "G": "#c:gold_ingots",
+    "G": "#c:ingots/gold",
     "*": "minecraft:diamond",
-    "r": "#c:redstone_dusts",
+    "r": "#c:dusts/redstone",
     "L": "minecraft:lapis_lazuli"
   },
   "result": {

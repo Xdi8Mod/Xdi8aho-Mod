@@ -1,14 +1,14 @@
 {
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 3140726,
+    "separation": 8,
+    "spacing": 20
+  },
   "structures": [
     {
       "structure": "firefly8:little_house",
       "weight": 1
     }
-  ],
-  "placement": {
-    "type": "minecraft:random_spread",
-    "spacing": 20,
-    "separation": 8,
-    "salt": 3140726
-  }
+  ]
 }

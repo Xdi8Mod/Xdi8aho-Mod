@@ -5,9 +5,9 @@
     "III"
   ],
   "key": {
-    "E": "#c:gold_blocks",
+    "E": "#c:storage_blocks/gold",
     "I": "firefly8:indium_block",
-    "R": "#c:redstone_blocks"
+    "R": "#c:storage_blocks/redstone"
   },
   "result": {
     "id": "firefly8:xdi8_table"

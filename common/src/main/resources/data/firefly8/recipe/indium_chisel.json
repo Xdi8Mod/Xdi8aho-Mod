@@ -6,7 +6,7 @@
   ],
   "key": {
     "&": "firefly8:indium_ingot",
-    "/": "#c:sticks"
+    "/": "#c:rods/wooden"
   },
   "result": {
     "id": "firefly8:indium_chisel"

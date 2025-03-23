@@ -1,18 +1,24 @@
 {
   "name": "firefly8:xdi8aho",
-  "has_skylight": true,
-  "has_ceiling": false,
-  "ultrawarm": false,
-  "natural": true,
-  "coordinate_scale": 1.0,
-  "piglin_safe": true,
+  "ambient_light": 0.1,
   "bed_works": true,
-  "respawn_anchor_works": false,
-  "has_raids": false,
-  "min_y": 0,
-  "height": 320,
-  "logical_height": 320,
-  "infiniburn": "#minecraft:infiniburn_overworld",
+  "coordinate_scale": 1.0,
   "effects": "minecraft:overworld",
-  "ambient_light": 0.1
+  "has_ceiling": false,
+  "has_raids": false,
+  "has_skylight": true,
+  "height": 384,
+  "infiniburn": "#minecraft:infiniburn_overworld",
+  "logical_height": 384,
+  "min_y": -64,
+  "monster_spawn_block_light_limit": 0,
+  "monster_spawn_light_level": {
+    "type": "minecraft:uniform",
+    "max_inclusive": 7,
+    "min_inclusive": 0
+  },
+  "natural": true,
+  "piglin_safe": true,
+  "respawn_anchor_works": false,
+  "ultrawarm": false
 }

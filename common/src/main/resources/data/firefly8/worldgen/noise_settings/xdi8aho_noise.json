@@ -1,123 +1,22 @@
 {
-  "sea_level": -64,
-  "disable_mob_generation": false,
-  "ore_veins_enabled": true,
   "aquifers_enabled": true,
-  "legacy_random_source": false,
   "default_block": {
     "Name": "minecraft:stone"
   },
   "default_fluid": {
+    "Name": "minecraft:water",
     "Properties": {
       "level": "0"
-    },
-    "Name": "minecraft:water"
-  },
-  "surface_rule": {
-    "type": "minecraft:sequence",
-    "sequence": [
-      {
-        "type": "minecraft:condition",
-        "if_true": {
-          "type": "minecraft:stone_depth",
-          "offset": 0,
-          "surface_type": "floor",
-          "add_surface_depth": false,
-          "secondary_depth_range": 0
-        },
-        "then_run": {
-          "type": "minecraft:condition",
-          "if_true": {
-            "type": "minecraft:water",
-            "offset": 0,
-            "surface_depth_multiplier": 0,
-            "add_stone_depth": false
-          },
-          "then_run": {
-            "type": "minecraft:block",
-            "result_state": {
-              "Name": "minecraft:grass_block",
-              "Properties": {
-                "snowy": "false"
-              }
-            }
-          }
-        }
-      },
-      {
-        "type": "minecraft:condition",
-        "if_true": {
-          "type": "minecraft:stone_depth",
-          "offset": 0,
-          "surface_type": "floor",
-          "add_surface_depth": true,
-          "secondary_depth_range": 0
-        },
-        "then_run": {
-          "type": "minecraft:block",
-          "result_state": {
-            "Name": "minecraft:dirt"
-          }
-        }
-      },
-      {
-        "type": "minecraft:block",
-        "result_state": {
-          "Name": "minecraft:stone"
-        }
-      }
-    ]
-  },
-  "spawn_target": [
-    {
-      "continentalness": [
-        -0.11,
-        1.0
-      ],
-      "depth": 0.0,
-      "erosion": [
-        -1.0,
-        1.0
-      ],
-      "humidity": [
-        -1.0,
-        1.0
-      ],
-      "offset": 0.0,
-      "temperature": [
-        -1.0,
-        1.0
-      ],
-      "weirdness": [
-        -1.0,
-        -0.16
-      ]
-    },
-    {
-      "continentalness": [
-        -0.11,
-        1.0
-      ],
-      "depth": 0.0,
-      "erosion": [
-        -1.0,
-        1.0
-      ],
-      "humidity": [
-        -1.0,
-        1.0
-      ],
-      "offset": 0.0,
-      "temperature": [
-        -1.0,
-        1.0
-      ],
-      "weirdness": [
-        0.16,
-        1.0
-      ]
     }
-  ],
+  },
+  "disable_mob_generation": false,
+  "legacy_random_source": false,
+  "noise": {
+    "height": 384,
+    "min_y": -64,
+    "size_horizontal": 1,
+    "size_vertical": 2
+  },
   "noise_router": {
     "barrier": {
       "type": "minecraft:noise",
@@ -126,13 +25,13 @@
       "y_scale": 0.5
     },
     "continents": "minecraft:overworld/continents",
-    "depth": 0,
+    "depth": "minecraft:overworld/depth",
     "erosion": "minecraft:overworld/erosion",
     "final_density": {
       "type": "minecraft:squeeze",
       "argument": {
         "type": "minecraft:mul",
-        "argument1": 0.8,
+        "argument1": 0.62334,
         "argument2": {
           "type": "minecraft:interpolated",
           "argument": {
@@ -145,9 +44,9 @@
                 "argument1": {
                   "type": "minecraft:y_clamped_gradient",
                   "from_value": 0.0,
-                  "from_y": 4,
+                  "from_y": -60,
                   "to_value": 1.0,
-                  "to_y": 32
+                  "to_y": -32
                 },
                 "argument2": {
                   "type": "minecraft:add",
@@ -186,10 +85,20 @@
       }
     },
     "fluid_level_floodedness": {
-      "type": "minecraft:noise",
-      "noise": "minecraft:aquifer_fluid_level_floodedness",
-      "xz_scale": 1.0,
-      "y_scale": 0.67
+      "type": "minecraft:mul",
+      "argument1": {
+        "type": "minecraft:y_clamped_gradient",
+        "from_value": -100.0,
+        "from_y": -32,
+        "to_value": 1.0,
+        "to_y": -20
+      },
+      "argument2": {
+        "type": "minecraft:noise",
+        "noise": "minecraft:aquifer_fluid_level_floodedness",
+        "xz_scale": 1.0,
+        "y_scale": 0.67
+      }
     },
     "fluid_level_spread": {
       "type": "minecraft:noise",
@@ -350,31 +259,133 @@
       }
     }
   },
-  "noise": {
-    "size_horizontal": 2,
-    "size_vertical": 1,
-    "top_slide": {
-      "target": -23.4375,
-      "size": 64,
-      "offset": -46
-    },
-    "bottom_slide": {
-      "target": -0.234375,
-      "size": 7,
-      "offset": 1
-    },
-    "min_y": 0,
-    "height": 320,
-    "sampling": {
-      "xz_scale": 2.0,
-      "y_scale": 1.0,
-      "xz_factor": 80.0,
-      "y_factor": 160.0
-    },
-    "terrain_shaper": {
+  "ore_veins_enabled": true,
+  "sea_level": -64,
+  "spawn_target": [
+    {
+      "continentalness": [
+        -0.11,
+        1.0
+      ],
+      "depth": 0.0,
+      "erosion": [
+        -1.0,
+        1.0
+      ],
+      "humidity": [
+        -1.0,
+        1.0
+      ],
       "offset": 0.0,
-      "factor": 0.0,
-      "jaggedness": 0.0
+      "temperature": [
+        -1.0,
+        1.0
+      ],
+      "weirdness": [
+        -1.0,
+        -0.16
+      ]
+    },
+    {
+      "continentalness": [
+        -0.11,
+        1.0
+      ],
+      "depth": 0.0,
+      "erosion": [
+        -1.0,
+        1.0
+      ],
+      "humidity": [
+        -1.0,
+        1.0
+      ],
+      "offset": 0.0,
+      "temperature": [
+        -1.0,
+        1.0
+      ],
+      "weirdness": [
+        0.16,
+        1.0
+      ]
     }
+  ],
+  "surface_rule": {
+    "type": "minecraft:sequence",
+    "sequence": [
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:stone_depth",
+          "offset": 0,
+          "surface_type": "floor",
+          "add_surface_depth": false,
+          "secondary_depth_range": 0
+        },
+        "then_run": {
+          "type": "minecraft:condition",
+          "if_true": {
+            "type": "minecraft:water",
+            "offset": 0,
+            "surface_depth_multiplier": 0,
+            "add_stone_depth": false
+          },
+          "then_run": {
+            "type": "minecraft:block",
+            "result_state": {
+              "Name": "minecraft:grass_block",
+              "Properties": {
+                "snowy": "false"
+              }
+            }
+          }
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:stone_depth",
+          "offset": 0,
+          "surface_type": "floor",
+          "add_surface_depth": true,
+          "secondary_depth_range": 0
+        },
+        "then_run": {
+          "type": "minecraft:block",
+          "result_state": {
+            "Name": "minecraft:dirt"
+          }
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:vertical_gradient",
+          "false_at_and_above": {
+            "absolute": 8
+          },
+          "random_name": "minecraft:deepslate",
+          "true_at_and_below": {
+            "absolute": 0
+          }
+        },
+        "then_run": {
+          "type": "minecraft:block",
+          "result_state": {
+            "Name": "minecraft:deepslate",
+            "Properties": {
+              "axis": "y"
+            }
+          }
+        }
+      },
+      {
+        "type": "minecraft:block",
+        "result_state": {
+          "Name": "minecraft:stone"
+        }
+      }
+    ]
   }
 }

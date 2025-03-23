@@ -2,10 +2,8 @@
   "type": "firefly8:xdi8aho",
   "generator": {
     "type": "minecraft:noise",
-    "seed": 0,
     "settings": "firefly8:xdi8aho_noise",
     "biome_source": {
-      "seed": 0,
       "type": "minecraft:multi_noise",
       "biomes": [
         {

@@ -7,7 +7,7 @@
   ],
   "key": {
     "i": "firefly8:indium_ingot",
-    "s": "#c:sticks"
+    "s": "#c:rods/wooden"
   },
   "result": {
     "id": "firefly8:indium_sword",

@@ -7,10 +7,10 @@
       "translate": "advancements.firefly8.enter_xdi8.description"
     },
     "icon": {
-      "item": "firefly8:xdi8aho_torch_top",
+      "id": "firefly8:xdi8aho_torch_top",
       "components": {
         "minecraft:block_state": {
-          "fireflies": 5
+          "fireflies": "5"
         }
       }
     },

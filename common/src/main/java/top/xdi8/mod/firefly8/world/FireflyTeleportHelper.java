@@ -37,7 +37,6 @@ public class FireflyTeleportHelper {
             FireflyBlocks.XDI8AHO_BACK_PORTAL_CORE_BLOCK,
             FireflyBlocks.XDI8AHO_BACK_FIRE_BLOCK
     );
-    // TODO: replace with indium block?
 
     private static final int REGEN_SCALE = 32;
 

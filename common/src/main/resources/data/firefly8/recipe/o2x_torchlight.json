@@ -6,8 +6,8 @@
     "III"
   ],
   "key": {
-    "I": "#c:gold_nuggets",
-    "G": "#c:glowstone_dusts"
+    "I": "#c:nuggets/gold",
+    "G": "#c:dusts/glowstone"
   },
   "result": {
     "id": "firefly8:xdi8aho_torch_top"

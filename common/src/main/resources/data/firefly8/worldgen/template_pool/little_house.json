@@ -1,5 +1,4 @@
 {
-  "name": "firefly8:little_house",
   "fallback": "minecraft:empty",
   "elements": [
     {
@@ -7,7 +6,7 @@
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "firefly8:little_house",
-        "projection": "rigid",
+        "projection": "terrain_matching",
         "processors": "minecraft:empty"
       }
     }

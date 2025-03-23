@@ -235,9 +235,10 @@
           ]
         },
         {
-          "type": "minecraft:item",
-          "weight": 10,
-          "name": "sweet_potato:enchanted_sapling",
+          "type": "minecraft:tag",
+          "weight": 60,
+          "name": "firefly8:spmreborn_compat/saplings",
+          "expand": true,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -331,48 +332,6 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 3,
-          "name": "sweet_potato:red_potato",
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 4,
-                "max": 6
-              }
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 3,
-          "name": "sweet_potato:purple_potato",
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 4,
-                "max": 6
-              }
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 3,
-          "name": "sweet_potato:white_potato",
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 4,
-                "max": 6
-              }
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
           "weight": 10,
           "name": "minecraft:baked_potato",
           "functions": [
@@ -380,6 +339,21 @@
               "function": "minecraft:set_count",
               "count": {
                 "min": 3,
+                "max": 6
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:tag",
+          "weight": 9,
+          "name": "firefly8:spmreborn_compat/raw_sweet_potatoes",
+          "expand": true,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 4,
                 "max": 6
               }
             }
