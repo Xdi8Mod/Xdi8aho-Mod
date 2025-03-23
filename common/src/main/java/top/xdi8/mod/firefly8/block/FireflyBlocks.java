@@ -36,17 +36,20 @@ public class FireflyBlocks {
     public static final BlockSetType redwoodSet = BlockSetType.register(new BlockSetType("xdi8_redwood"));
     public static final WoodType redwoodType = WoodType.register(new WoodType("xdi8_redwood", redwoodSet));
 
+    public static final RegistrySupplier<Block> INDIUM_BLOCK;
+    public static final RegistrySupplier<Block> INDIUM_ORE_BLOCK;
+    public static final RegistrySupplier<Block> DEEPSLATE_INDIUM_ORE_BLOCK;
     public static final RegistrySupplier<Block> XDI8AHO_PORTAL_CORE_BLOCK;
     public static final RegistrySupplier<Block> XDI8AHO_PORTAL_TOP_BLOCK;
     public static final RegistrySupplier<Block> XDI8AHO_PORTAL_BLOCK;
     public static final RegistrySupplier<Block> XDI8AHO_BACK_PORTAL_CORE_BLOCK;
     public static final RegistrySupplier<Block> XDI8AHO_BACK_FIRE_BLOCK;
-    public static final RegistrySupplier<Block> INDIUM_BLOCK;
-    public static final RegistrySupplier<Block> INDIUM_ORE_BLOCK;
-    public static final RegistrySupplier<Block> DEEPSLATE_INDIUM_ORE_BLOCK;
     public static final RegistrySupplier<Block> XDI8_TABLE;
+
     public static final RegistrySupplier<Block> DARK_SYMBOL_STONE;
     public static final RegistrySupplier<Block> SYMBOL_STONE_BRICKS;
+    public static final RegistrySupplier<Block> SYMBOL_STONE_BRICK_SLAB;
+    public static final RegistrySupplier<Block> SYMBOL_STONE_BRICK_STAIRS;
     public static final RegistrySupplier<Block> SYMBOL_STONE_NN;
 
     public static final RegistrySupplier<Block> CEDAR_BUTTON;
@@ -124,6 +127,17 @@ public class FireflyBlocks {
                         .strength(1.0F, 4.0F)
                         .requiresCorrectToolForDrops()
                         .sound(SoundType.STONE));
+        SYMBOL_STONE_BRICK_SLAB = block("symbol_stone_brick_slab", SlabBlock::new,
+                BlockBehaviour.Properties.of()
+                        .strength(2.0F, 3.0F)
+                        .requiresCorrectToolForDrops()
+                        .sound(SoundType.STONE));
+        SYMBOL_STONE_BRICK_STAIRS = block("symbol_stone_brick_stairs",
+                (properties) -> new StairBlock(SYMBOL_STONE_BRICKS.get().defaultBlockState(), properties),
+                BlockBehaviour.Properties.of()
+                        .strength(2.0F, 3.0F)
+                        .requiresCorrectToolForDrops()
+                        .sound(SoundType.STONE));
         SYMBOL_STONE_NN = block("symbol_stone_nn", SymbolStoneNNBlock::new,
                 BlockBehaviour.Properties.of()
                         .overrideDescription("block.firefly8.symbol_stone")
@@ -149,8 +163,7 @@ public class FireflyBlocks {
         CEDAR_LEAVES = createLeaves("cedar_leaves");
         CEDAR_LOG = block("cedar_log", RotatedPillarBlock::new,
                 woodenBlock().mapColor((blockState) -> blockState.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ?
-                                redwoodColor : MapColor.PODZOL)
-                        .strength(2.0F));
+                                redwoodColor : MapColor.PODZOL).strength(2.0F));
         CEDAR_PLANKS = defaultBlock("cedar_planks",
                 woodenBlock().strength(2.0F, 3.0F));
         CEDAR_PRESSURE_PLATE = block("cedar_pressure_plate",

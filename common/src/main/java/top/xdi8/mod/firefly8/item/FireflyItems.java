@@ -62,6 +62,8 @@ public final class FireflyItems {
 
     public static final RegistrySupplier<BlockItem> DARK_SYMBOL_STONE;
     public static final RegistrySupplier<BlockItem> SYMBOL_STONE_BRICKS;
+    public static final RegistrySupplier<BlockItem> SYMBOL_STONE_BRICK_SLAB;
+    public static final RegistrySupplier<BlockItem> SYMBOL_STONE_BRICK_STAIRS;
     public static final RegistrySupplier<BlockItem> SYMBOL_STONE_NN;
 
     public static final RegistrySupplier<BlockItem> CEDAR_BUTTON;
@@ -122,6 +124,8 @@ public final class FireflyItems {
         SymbolStoneBlockItem.registerAll(RegistryHelper::item);
         DARK_SYMBOL_STONE = blockItem("dark_symbol_stone", FireflyBlocks.DARK_SYMBOL_STONE, defaultProp().fireResistant());
         SYMBOL_STONE_BRICKS = blockItem("symbol_stone_bricks", FireflyBlocks.SYMBOL_STONE_BRICKS, defaultProp());
+        SYMBOL_STONE_BRICK_SLAB = blockItem("symbol_stone_brick_slab", FireflyBlocks.SYMBOL_STONE_BRICK_SLAB, defaultProp());
+        SYMBOL_STONE_BRICK_STAIRS = blockItem("symbol_stone_brick_stairs", FireflyBlocks.SYMBOL_STONE_BRICK_STAIRS, defaultProp());
         SYMBOL_STONE_NN = blockItem("symbol_stone_nn", FireflyBlocks.SYMBOL_STONE_NN, defaultProp().rarity(Rarity.UNCOMMON));
 
         CEDAR_BUTTON = blockItem("cedar_button", FireflyBlocks.CEDAR_BUTTON, defaultProp());

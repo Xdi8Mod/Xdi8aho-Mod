@@ -36,7 +36,8 @@ public class Firefly8Client implements Runnable {
     public static void registerRenderTypes(){
         RenderTypeRegistry.register(RenderType.cutoutMipped(), FireflyBlocks.CEDAR_LEAVES.get());
         RenderTypeRegistry.register(RenderType.cutout(), FireflyBlocks.XDI8AHO_BACK_FIRE_BLOCK.get(), FireflyBlocks.CEDAR_SAPLING.get(),
-                FireflyBlocks.CEDAR_TRAPDOOR.get(), FireflyBlocks.CEDAR_DOOR.get(), FireflyBlocks.XDI8AHO_PORTAL_TOP_BLOCK.get());
+                FireflyBlocks.CEDAR_TRAPDOOR.get(), FireflyBlocks.CEDAR_DOOR.get(), FireflyBlocks.XDI8AHO_PORTAL_TOP_BLOCK.get(),
+                FireflyBlocks.POTTED_CEDAR_SAPLING.get());
     }
 
     @Environment(EnvType.CLIENT)

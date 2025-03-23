@@ -55,7 +55,7 @@ public class IndiumAxeItem extends AxeItem {
             else {
                 newState = FireflyBlocks.STRIPPED_CEDAR_LOG.get().defaultBlockState();
             }
-            newState.setValue(RotatedPillarBlock.AXIS, blockState.getValue(RotatedPillarBlock.AXIS));
+            newState = newState.setValue(RotatedPillarBlock.AXIS, blockState.getValue(RotatedPillarBlock.AXIS));
             ItemStack itemStack = context.getItemInHand();
             if (player instanceof ServerPlayer) {
                 CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger((ServerPlayer)player, blockPos, itemStack);

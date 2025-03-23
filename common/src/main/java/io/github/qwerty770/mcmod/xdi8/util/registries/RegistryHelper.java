@@ -24,6 +24,7 @@ import net.minecraft.util.datafix.fixes.References;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
+import net.minecraft.world.entity.ai.village.poi.PoiTypes;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
@@ -42,8 +43,6 @@ import top.xdi8.mod.firefly8.Firefly8;
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.Supplier;
-
-import static net.minecraft.stats.Stats.CUSTOM;
 
 @SuppressWarnings("unused")
 @StableApi
@@ -109,7 +108,9 @@ public abstract class RegistryHelper {
     }
 
     public static RegistrySupplier<BlockItem> blockItem(String id, Supplier<Block> block2, Item.Properties properties) {
-        return itemRegistry.register(id, () -> new BlockItem(block2.get(), properties.setId(itemId(id)).useBlockDescriptionPrefix()));
+        RegistrySupplier<BlockItem> item = itemRegistry.register(id, () -> new BlockItem(block2.get(), properties.setId(itemId(id)).useBlockDescriptionPrefix()));
+        item.listen(item1 -> Item.BY_BLOCK.put(block2.get(), item1));
+        return item;
     }
 
     public static <T> RegistrySupplier<DataComponentType<T>> componentType(String id, Supplier<DataComponentType<T>> componentType){
@@ -182,7 +183,9 @@ public abstract class RegistryHelper {
     public static RegistrySupplier<ResourceLocation> stat(String id) { return stat(id, StatFormatter.DEFAULT); }
 
     public static RegistrySupplier<PoiType> poiType(String id, int maxTickets, int validRange, Supplier<Set<BlockState>> matchingStatesSup) {
-        return poiTypeRegistry.register(id, () -> new PoiType(matchingStatesSup.get(), maxTickets, validRange));
+        RegistrySupplier<PoiType> poi = poiTypeRegistry.register(id, () -> new PoiType(matchingStatesSup.get(), maxTickets, validRange));
+        poi.listen((poiType -> PoiTypes.registerBlockStates(poi, matchingStatesSup.get())));
+        return poi;
     }
 
     public static <T extends ItemSubPredicate> RegistrySupplier<ItemSubPredicate.Type<T>> itemSubPredicateType(String id, Codec<T> codec) {

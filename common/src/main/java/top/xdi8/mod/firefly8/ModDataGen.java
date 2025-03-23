@@ -12,7 +12,7 @@ import top.xdi8.mod.firefly8.item.FireflyItems;
 import java.util.List;
 
 public class ModDataGen {
-    public static BlockFamily FAMILY = new BlockFamily.Builder(FireflyBlocks.CEDAR_PLANKS.get())
+    public static BlockFamily REDWOOD_FAMILY = new BlockFamily.Builder(FireflyBlocks.CEDAR_PLANKS.get())
             .button(FireflyBlocks.CEDAR_BUTTON.get())
             .fence(FireflyBlocks.CEDAR_FENCE.get())
             .fenceGate(FireflyBlocks.CEDAR_FENCE_GATE.get())
@@ -26,17 +26,22 @@ public class ModDataGen {
             .recipeUnlockedBy("has_planks")
             .getFamily();
 
+    public static BlockFamily SYMBOL_STONE_FAMILY = new BlockFamily.Builder(FireflyBlocks.SYMBOL_STONE_BRICKS.get())
+            .slab(FireflyBlocks.SYMBOL_STONE_BRICK_SLAB.get())
+            .stairs(FireflyBlocks.SYMBOL_STONE_BRICK_STAIRS.get())
+            .recipeGroupPrefix("symbol_stone_bricks")
+            .getFamily();
+
     public static List<Block> getTrivialCubeBlocks(){
         ImmutableList.Builder<Block> builder = ImmutableList.builder();
         builder.add(FireflyBlocks.DARK_SYMBOL_STONE.get());
         builder.add(FireflyBlocks.DEEPSLATE_INDIUM_ORE_BLOCK.get());
         builder.add(FireflyBlocks.INDIUM_BLOCK.get());
         builder.add(FireflyBlocks.INDIUM_ORE_BLOCK.get());
-        builder.add(SymbolStoneBlock.fromLetter(KeyedLetter.empty()));
-        builder.add(FireflyBlocks.SYMBOL_STONE_BRICKS.get());
         builder.add(FireflyBlocks.SYMBOL_STONE_NN.get());
         builder.add(FireflyBlocks.XDI8AHO_BACK_PORTAL_CORE_BLOCK.get());
         builder.add(FireflyBlocks.XDI8AHO_PORTAL_CORE_BLOCK.get());
+        builder.add(SymbolStoneBlock.fromLetter(KeyedLetter.empty()));
         return builder.build();
     }
 
@@ -51,6 +56,30 @@ public class ModDataGen {
         builder.add(FireflyItems.INDIUM_SHOVEL.get());
         builder.add(FireflyItems.INDIUM_SWORD.get());
         builder.add(FireflyItems.XDI8AHO_ICON.get());
+        return builder.build();
+    }
+
+    public static List<Block> getDropSelfBlocks(){
+        ImmutableList.Builder<Block> builder = ImmutableList.builder();
+        builder.addAll(getTrivialCubeBlocks());
+        builder.add(FireflyBlocks.CEDAR_BUTTON.get());
+        builder.add(FireflyBlocks.CEDAR_DOOR.get());
+        builder.add(FireflyBlocks.CEDAR_FENCE.get());
+        builder.add(FireflyBlocks.CEDAR_FENCE_GATE.get());
+        builder.add(FireflyBlocks.CEDAR_LOG.get());
+        builder.add(FireflyBlocks.CEDAR_PLANKS.get());
+        builder.add(FireflyBlocks.CEDAR_PRESSURE_PLATE.get());
+        builder.add(FireflyBlocks.CEDAR_SAPLING.get());
+        builder.add(FireflyBlocks.CEDAR_SIGN.get());
+        builder.add(FireflyBlocks.CEDAR_STAIRS.get());
+        builder.add(FireflyBlocks.CEDAR_TRAPDOOR.get());
+        builder.add(FireflyBlocks.CEDAR_WOOD.get());
+        builder.add(FireflyBlocks.SYMBOL_STONE_BRICKS.get());
+        builder.add(FireflyBlocks.SYMBOL_STONE_BRICK_STAIRS.get());
+        builder.add(FireflyBlocks.STRIPPED_CEDAR_LOG.get());
+        builder.add(FireflyBlocks.STRIPPED_CEDAR_WOOD.get());
+        builder.add(FireflyBlocks.XDI8_TABLE.get());
+        builder.add(FireflyBlocks.XDI8AHO_PORTAL_TOP_BLOCK.get());
         return builder.build();
     }
 }
