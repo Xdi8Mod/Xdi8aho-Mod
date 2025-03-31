@@ -2,9 +2,9 @@ package top.xdi8.mod.firefly8.stats;
 
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.resources.ResourceLocation;
-import io.github.qwerty770.mcmod.xdi8.api.InternalRegistryLogWrapper;
+import io.github.qwerty770.mcmod.xdi8.registries.InternalRegistryLogWrapper;
 
-import static io.github.qwerty770.mcmod.xdi8.util.registries.RegistryHelper.stat;
+import static io.github.qwerty770.mcmod.xdi8.registries.RegistryHelper.stat;
 
 @SuppressWarnings("unused")
 public final class FireflyStats {

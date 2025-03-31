@@ -1,6 +1,6 @@
 package top.xdi8.mod.firefly8.item.indium;
 
-import io.github.qwerty770.mcmod.xdi8.util.tag.TagContainer;
+import io.github.qwerty770.mcmod.xdi8.tag.TagContainer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerLevel;

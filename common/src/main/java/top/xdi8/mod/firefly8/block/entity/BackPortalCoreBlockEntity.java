@@ -1,7 +1,7 @@
 package top.xdi8.mod.firefly8.block.entity;
 
-import io.github.qwerty770.mcmod.xdi8.util.tick.ITickable;
-import io.github.qwerty770.mcmod.xdi8.util.world.BooleanStateManager;
+import io.github.qwerty770.mcmod.xdi8.tick.ITickable;
+import io.github.qwerty770.mcmod.xdi8.world.BooleanStateManager;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;

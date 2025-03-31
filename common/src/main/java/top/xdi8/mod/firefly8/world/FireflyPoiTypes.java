@@ -6,12 +6,12 @@ import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import top.xdi8.mod.firefly8.block.FireflyBlocks;
-import io.github.qwerty770.mcmod.xdi8.api.InternalRegistryLogWrapper;
+import io.github.qwerty770.mcmod.xdi8.registries.InternalRegistryLogWrapper;
 
 import java.util.Set;
 import java.util.function.Supplier;
 
-import static io.github.qwerty770.mcmod.xdi8.util.registries.RegistryHelper.poiType;
+import static io.github.qwerty770.mcmod.xdi8.registries.RegistryHelper.poiType;
 
 public final class FireflyPoiTypes {
     public static final InternalRegistryLogWrapper LOG_WRAPPER = InternalRegistryLogWrapper.firefly8("poi_types");

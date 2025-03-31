@@ -1,4 +1,4 @@
-package io.github.qwerty770.mcmod.xdi8.util.annotation;
+package io.github.qwerty770.mcmod.xdi8.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -13,5 +13,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.CLASS)
 @Target({ElementType.PACKAGE, ElementType.FIELD, ElementType.METHOD, ElementType.TYPE})
 public @interface StableApi {
-    String since() default "1.21.3-3.0.0";
+    String since() default "1.21.4-3.0.0";
 }

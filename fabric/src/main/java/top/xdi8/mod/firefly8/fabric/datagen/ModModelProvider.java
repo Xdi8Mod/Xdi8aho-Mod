@@ -36,10 +36,6 @@ public class ModModelProvider extends FabricModelProvider {
     @Override
     public void generateItemModels(ItemModelGenerators itemModels) {
         itemModels.generateSpawnEgg(FireflyItems.FIREFLY_SPAWN_EGG.get(), 0x000000, 0x00f500);
-        itemModels.generatePotion(FireflyItems.TINTED_POTION.get());
-        itemModels.generatePotion(FireflyItems.TINTED_SPLASH_POTION.get());
-        itemModels.generatePotion(FireflyItems.TINTED_LINGERING_POTION.get());
-
         itemModels.generateFlatItem(FireflyItems.BUNDLER.get(), Items.BUNDLE, ModelTemplates.FLAT_ITEM);
         Item tinted_potion = FireflyItems.TINTED_POTION.get();
         itemModels.generateFlatItem(FireflyItems.TINTED_DRAGON_BREATH.get(), tinted_potion, ModelTemplates.FLAT_ITEM);

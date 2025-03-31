@@ -1,10 +1,10 @@
-package io.github.qwerty770.mcmod.xdi8.api;
+package io.github.qwerty770.mcmod.xdi8.registries;
 
-import io.github.qwerty770.mcmod.xdi8.util.annotation.StableApi;
+import io.github.qwerty770.mcmod.xdi8.annotation.StableApi;
 import net.minecraft.resources.ResourceLocation;
 
 @SuppressWarnings("unused")
-@StableApi
+@StableApi(since = "1.21.4-3.0.0-beta1")
 public class ResourceLocationTool {
     // For compatibility between 1.21 and older versions.
     public static ResourceLocation create(String namespace, String path){

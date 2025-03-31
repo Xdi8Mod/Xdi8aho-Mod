@@ -1,4 +1,4 @@
-package io.github.qwerty770.mcmod.xdi8.util.tick;
+package io.github.qwerty770.mcmod.xdi8.tick;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;

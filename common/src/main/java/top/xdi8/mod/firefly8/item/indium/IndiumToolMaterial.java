@@ -1,6 +1,6 @@
 package top.xdi8.mod.firefly8.item.indium;
 
-import io.github.qwerty770.mcmod.xdi8.api.ResourceLocationTool;
+import io.github.qwerty770.mcmod.xdi8.registries.ResourceLocationTool;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;

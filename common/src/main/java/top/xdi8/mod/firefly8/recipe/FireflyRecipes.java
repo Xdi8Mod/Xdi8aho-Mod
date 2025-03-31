@@ -4,9 +4,9 @@ import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.world.item.crafting.RecipeBookCategory;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
-import io.github.qwerty770.mcmod.xdi8.api.InternalRegistryLogWrapper;
+import io.github.qwerty770.mcmod.xdi8.registries.InternalRegistryLogWrapper;
 
-import static io.github.qwerty770.mcmod.xdi8.util.registries.RegistryHelper.*;
+import static io.github.qwerty770.mcmod.xdi8.registries.RegistryHelper.*;
 
 public class FireflyRecipes {
     public static final InternalRegistryLogWrapper LOG_WRAPPER = InternalRegistryLogWrapper.firefly8("recipes");

@@ -3,7 +3,7 @@ package top.xdi8.mod.firefly8.recipe;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import io.github.qwerty770.mcmod.xdi8.api.ResourceLocationTool;
+import io.github.qwerty770.mcmod.xdi8.registries.ResourceLocationTool;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;

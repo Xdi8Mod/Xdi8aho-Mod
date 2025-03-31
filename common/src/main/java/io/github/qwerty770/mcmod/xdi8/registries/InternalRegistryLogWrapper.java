@@ -1,4 +1,4 @@
-package io.github.qwerty770.mcmod.xdi8.api;
+package io.github.qwerty770.mcmod.xdi8.registries;
 
 import com.mojang.logging.LogUtils;
 import net.minecraft.resources.ResourceLocation;

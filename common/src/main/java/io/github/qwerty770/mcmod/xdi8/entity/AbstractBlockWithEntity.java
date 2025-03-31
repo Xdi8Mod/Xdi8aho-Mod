@@ -1,7 +1,7 @@
 package io.github.qwerty770.mcmod.xdi8.entity;
 
 import com.google.common.collect.ImmutableList;
-import io.github.qwerty770.mcmod.xdi8.util.tick.ITickable;
+import io.github.qwerty770.mcmod.xdi8.tick.ITickable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;

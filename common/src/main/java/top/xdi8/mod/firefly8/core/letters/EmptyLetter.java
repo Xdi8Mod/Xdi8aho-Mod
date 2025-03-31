@@ -1,6 +1,6 @@
 package top.xdi8.mod.firefly8.core.letters;
 
-import io.github.qwerty770.mcmod.xdi8.api.ResourceLocationTool;
+import io.github.qwerty770.mcmod.xdi8.registries.ResourceLocationTool;
 import net.minecraft.resources.ResourceLocation;
 
 final class EmptyLetter implements KeyedLetter {

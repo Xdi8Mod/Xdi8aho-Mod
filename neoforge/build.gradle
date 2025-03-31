@@ -3,10 +3,6 @@ plugins {
     id "com.github.johnrengelman.shadow" version "7.1.2"
 }
 
-repositories {
-    maven { url "https://maven.neoforged.net/releases/" }
-}
-
 architectury {
     platformSetupLoomIde()
     neoForge()
@@ -21,7 +17,7 @@ configurations {
     shadowCommon // Don't use shadow from the shadow plugin since it *excludes* files.
     compileClasspath.extendsFrom common
     runtimeClasspath.extendsFrom common
-    developmentForge.extendsFrom common
+    developmentNeoForge.extendsFrom common
 }
 
 dependencies {
@@ -49,8 +45,7 @@ shadowJar {
 }
 
 remapJar {
-    //input.set shadowJar.archiveFile
-    dependsOn shadowJar
+    input.set shadowJar.archiveFile
 }
 
 sourcesJar {

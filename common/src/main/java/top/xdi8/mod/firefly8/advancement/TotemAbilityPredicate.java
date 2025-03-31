@@ -2,7 +2,7 @@ package top.xdi8.mod.firefly8.advancement;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import io.github.qwerty770.mcmod.xdi8.api.ResourceLocationTool;
+import io.github.qwerty770.mcmod.xdi8.registries.ResourceLocationTool;
 import net.minecraft.advancements.critereon.SingleComponentItemPredicate;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.resources.ResourceLocation;

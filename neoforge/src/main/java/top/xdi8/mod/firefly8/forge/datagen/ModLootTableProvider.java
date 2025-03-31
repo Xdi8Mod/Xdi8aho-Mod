@@ -1,7 +1,7 @@
 package top.xdi8.mod.firefly8.forge.datagen;
 
 import com.google.common.collect.Streams;
-import io.github.qwerty770.mcmod.xdi8.util.registries.RegistryHelper;
+import io.github.qwerty770.mcmod.xdi8.registries.RegistryHelper;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;

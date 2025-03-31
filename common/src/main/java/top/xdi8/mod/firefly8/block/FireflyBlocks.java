@@ -1,8 +1,8 @@
 package top.xdi8.mod.firefly8.block;
 
 import dev.architectury.registry.registries.RegistrySupplier;
-import io.github.qwerty770.mcmod.xdi8.api.ResourceLocationTool;
-import io.github.qwerty770.mcmod.xdi8.util.registries.RegistryHelper;
+import io.github.qwerty770.mcmod.xdi8.registries.ResourceLocationTool;
+import io.github.qwerty770.mcmod.xdi8.registries.RegistryHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
@@ -20,13 +20,12 @@ import top.xdi8.mod.firefly8.world.FireflyTreeFeatures;
 import top.xdi8.mod.firefly8.block.symbol.SymbolStoneBlock;
 import top.xdi8.mod.firefly8.block.symbol.SymbolStoneNNBlock;
 import top.xdi8.mod.firefly8.block.symbol.Xdi8TableBlock;
-import io.github.qwerty770.mcmod.xdi8.api.InternalRegistryLogWrapper;
+import io.github.qwerty770.mcmod.xdi8.registries.InternalRegistryLogWrapper;
 
 import java.util.Optional;
 
-import static io.github.qwerty770.mcmod.xdi8.util.registries.BlockUtils.createLeaves;
-import static io.github.qwerty770.mcmod.xdi8.util.registries.BlockUtils.woodenBlock;
-import static io.github.qwerty770.mcmod.xdi8.util.registries.RegistryHelper.*;
+import static io.github.qwerty770.mcmod.xdi8.registries.BlockUtils.*;
+import static io.github.qwerty770.mcmod.xdi8.registries.RegistryHelper.*;
 import static top.xdi8.mod.firefly8.block.Xdi8ahoPortalTopBlock.FIREFLY_COUNT;
 
 public class FireflyBlocks {
@@ -195,8 +194,7 @@ public class FireflyBlocks {
                         .overrideDescription("block.firefly8.cedar_sign").forceSolidOn().noCollission().strength(1.0F));
         CEDAR_WOOD = block("cedar_wood", RotatedPillarBlock::new,
                 woodenBlock().strength(2.0F));
-        POTTED_CEDAR_SAPLING = block("potted_cedar_sapling", properties -> new FlowerPotBlock(CEDAR_SAPLING.get(), properties),
-                BlockBehaviour.Properties.of().instabreak().noOcclusion().pushReaction(PushReaction.DESTROY));
+        POTTED_CEDAR_SAPLING = createPotted("potted_cedar_sapling", CEDAR_SAPLING);
         STRIPPED_CEDAR_LOG = block("stripped_cedar_log", RotatedPillarBlock::new,
                 woodenBlock().strength(2.0F));
         STRIPPED_CEDAR_WOOD = block("stripped_cedar_wood", RotatedPillarBlock::new,

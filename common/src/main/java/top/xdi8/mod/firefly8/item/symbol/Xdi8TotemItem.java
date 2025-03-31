@@ -1,6 +1,6 @@
 package top.xdi8.mod.firefly8.item.symbol;
 
-import io.github.qwerty770.mcmod.xdi8.api.ResourceLocationTool;
+import io.github.qwerty770.mcmod.xdi8.registries.ResourceLocationTool;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;

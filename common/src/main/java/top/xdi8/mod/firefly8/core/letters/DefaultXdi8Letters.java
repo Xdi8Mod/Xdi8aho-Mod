@@ -1,6 +1,6 @@
 package top.xdi8.mod.firefly8.core.letters;
 
-import io.github.qwerty770.mcmod.xdi8.api.ResourceLocationTool;
+import io.github.qwerty770.mcmod.xdi8.registries.ResourceLocationTool;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.Arrays;
@@ -53,8 +53,7 @@ public enum DefaultXdi8Letters implements KeyedLetter {
     LETTER_3("3", 990090),
     LETTER_vx("vx", 990091),
     LETTER_1("1", 990092),
-    LETTER_i("i", 990093),
-    ;
+    LETTER_i("i", 990093);
     private final int lowercase;
     private final int middleCase;
     private final int uppercase;

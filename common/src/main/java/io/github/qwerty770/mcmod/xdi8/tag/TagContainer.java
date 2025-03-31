@@ -1,4 +1,4 @@
-package io.github.qwerty770.mcmod.xdi8.util.tag;
+package io.github.qwerty770.mcmod.xdi8.tag;
 
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;

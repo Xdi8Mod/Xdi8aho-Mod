@@ -4,12 +4,12 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.block.grower.TreeGrower;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import io.github.qwerty770.mcmod.xdi8.api.InternalRegistryLogWrapper;
+import io.github.qwerty770.mcmod.xdi8.registries.InternalRegistryLogWrapper;
 
 import java.util.Optional;
 import java.util.function.Supplier;
 
-import static io.github.qwerty770.mcmod.xdi8.util.registries.RegistryHelper.id;
+import static io.github.qwerty770.mcmod.xdi8.registries.RegistryHelper.id;
 
 public class FireflyTreeFeatures {
     // Implemented via data pack in Minecraft 1.21+

@@ -1,7 +1,7 @@
 package top.xdi8.mod.firefly8.client;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import io.github.qwerty770.mcmod.xdi8.api.ResourceLocationTool;
+import io.github.qwerty770.mcmod.xdi8.registries.ResourceLocationTool;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.GuiGraphics;

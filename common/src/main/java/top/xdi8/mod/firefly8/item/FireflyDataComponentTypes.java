@@ -2,7 +2,7 @@ package top.xdi8.mod.firefly8.item;
 
 import com.mojang.serialization.Codec;
 import dev.architectury.registry.registries.RegistrySupplier;
-import io.github.qwerty770.mcmod.xdi8.api.InternalRegistryLogWrapper;
+import io.github.qwerty770.mcmod.xdi8.registries.InternalRegistryLogWrapper;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.world.item.ItemStack;
@@ -10,7 +10,7 @@ import net.minecraft.world.item.component.CustomData;
 
 import java.util.List;
 
-import static io.github.qwerty770.mcmod.xdi8.util.registries.RegistryHelper.componentType;
+import static io.github.qwerty770.mcmod.xdi8.registries.RegistryHelper.componentType;
 
 public class FireflyDataComponentTypes {
     public static final InternalRegistryLogWrapper LOG_WRAPPER = InternalRegistryLogWrapper.firefly8("data_components");

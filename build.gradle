@@ -4,6 +4,7 @@ plugins {
     id "dev.architectury.loom" version "1.9-SNAPSHOT" apply false
     id "com.modrinth.minotaur" version "2.+" apply false
     id "io.github.juuxel.loom-vineflower" version "1.11.0" apply false  // add vineflower, see https://github.com/Juuxel/loom-vineflower
+    id 'maven-publish'
 }
 
 architectury {
@@ -12,6 +13,18 @@ architectury {
 
 subprojects {
     apply plugin: "dev.architectury.loom"
+    apply plugin: "architectury-plugin"
+    apply plugin: "maven-publish"
+
+    repositories {
+        maven {
+            name = 'ParchmentMC'
+            url = 'https://maven.parchmentmc.org'
+        }
+        maven { url = 'https://maven.neoforged.net/releases' }
+        maven { url "https://maven.fabricmc.net/" }
+        maven { url "https://maven.architectury.dev/" }
+    }
 
     base {
         archivesName = rootProject.archives_base_name + "-" + project.name
@@ -30,23 +43,6 @@ subprojects {
         implementation "org.slf4j:slf4j-api"
         implementation "com.google.code.findbugs:jsr305:3.0.2"
     }
-}
-
-allprojects {
-    apply plugin: "java"
-    apply plugin: "architectury-plugin"
-    apply plugin: "maven-publish"
-
-    archives_base_name = rootProject.archives_base_name
-    version = "${rootProject.minecraft_version}-${rootProject.mod_version}"
-    group = rootProject.maven_group
-
-    repositories {
-        maven {
-            name = 'ParchmentMC'
-            url = 'https://maven.parchmentmc.org'
-        }
-    }
 
     tasks.withType(JavaCompile).configureEach {
         options.encoding = "UTF-8"
@@ -58,6 +54,12 @@ allprojects {
         sourceCompatibility = JavaVersion.VERSION_21
         targetCompatibility = JavaVersion.VERSION_21
     }
+}
+
+allprojects {
+    archives_base_name = rootProject.archives_base_name
+    version = "${rootProject.minecraft_version}-${rootProject.mod_version}"
+    group = rootProject.maven_group
 }
 
 // From https://github.com/teddyxlandlee/end-poem-extension/blob/1.21-all/build.gradle

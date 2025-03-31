@@ -1,13 +1,12 @@
-package io.github.qwerty770.mcmod.xdi8.util.registries;
+package io.github.qwerty770.mcmod.xdi8.registries;
 
 import com.mojang.datafixers.types.Type;
 import com.mojang.serialization.Codec;
 import dev.architectury.registry.menu.MenuRegistry;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
-import io.github.qwerty770.mcmod.xdi8.api.ResourceLocationTool;
-import io.github.qwerty770.mcmod.xdi8.util.annotation.StableApi;
-import io.github.qwerty770.mcmod.xdi8.util.tag.TagContainer;
+import io.github.qwerty770.mcmod.xdi8.annotation.StableApi;
+import io.github.qwerty770.mcmod.xdi8.tag.TagContainer;
 import net.minecraft.Util;
 import net.minecraft.advancements.CriterionTrigger;
 import net.minecraft.advancements.critereon.ItemSubPredicate;
@@ -184,7 +183,7 @@ public abstract class RegistryHelper {
 
     public static RegistrySupplier<PoiType> poiType(String id, int maxTickets, int validRange, Supplier<Set<BlockState>> matchingStatesSup) {
         RegistrySupplier<PoiType> poi = poiTypeRegistry.register(id, () -> new PoiType(matchingStatesSup.get(), maxTickets, validRange));
-        poi.listen((poiType -> PoiTypes.registerBlockStates(poi, matchingStatesSup.get())));
+        PoiTypes.registerBlockStates(poi, matchingStatesSup.get());
         return poi;
     }
 

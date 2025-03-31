@@ -4,7 +4,7 @@ import dev.architectury.core.item.ArchitecturySpawnEggItem;
 import dev.architectury.registry.CreativeTabRegistry;
 import dev.architectury.registry.fuel.FuelRegistry;
 import dev.architectury.registry.registries.RegistrySupplier;
-import io.github.qwerty770.mcmod.xdi8.util.registries.RegistryHelper;
+import io.github.qwerty770.mcmod.xdi8.registries.RegistryHelper;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.BlockItem;
@@ -18,12 +18,12 @@ import top.xdi8.mod.firefly8.item.indium.*;
 import top.xdi8.mod.firefly8.item.symbol.SymbolStoneBlockItem;
 import top.xdi8.mod.firefly8.item.symbol.Xdi8TotemItem;
 import top.xdi8.mod.firefly8.item.tint.*;
-import io.github.qwerty770.mcmod.xdi8.api.InternalRegistryLogWrapper;
+import io.github.qwerty770.mcmod.xdi8.registries.InternalRegistryLogWrapper;
 
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import static io.github.qwerty770.mcmod.xdi8.util.registries.RegistryHelper.*;
+import static io.github.qwerty770.mcmod.xdi8.registries.RegistryHelper.*;
 
 public final class FireflyItems {
     public static final InternalRegistryLogWrapper LOG_WRAPPER = InternalRegistryLogWrapper.firefly8("items");

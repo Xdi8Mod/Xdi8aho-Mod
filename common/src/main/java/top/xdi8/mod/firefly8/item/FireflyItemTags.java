@@ -1,10 +1,10 @@
 package top.xdi8.mod.firefly8.item;
 
-import io.github.qwerty770.mcmod.xdi8.api.InternalRegistryLogWrapper;
-import io.github.qwerty770.mcmod.xdi8.util.tag.TagContainer;
+import io.github.qwerty770.mcmod.xdi8.registries.InternalRegistryLogWrapper;
+import io.github.qwerty770.mcmod.xdi8.tag.TagContainer;
 import net.minecraft.world.item.Item;
 
-import static io.github.qwerty770.mcmod.xdi8.util.registries.RegistryHelper.itemTag;
+import static io.github.qwerty770.mcmod.xdi8.registries.RegistryHelper.itemTag;
 
 public class FireflyItemTags {
     public static final InternalRegistryLogWrapper LOG_WRAPPER = InternalRegistryLogWrapper.firefly8("blocks");

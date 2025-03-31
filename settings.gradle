@@ -19,7 +19,7 @@ pluginManagement {
     }
 }
 include("common")
-include("neoforge")
 include("fabric")
+include("neoforge")
 
 rootProject.name = 'Xdi8aho-Mod'

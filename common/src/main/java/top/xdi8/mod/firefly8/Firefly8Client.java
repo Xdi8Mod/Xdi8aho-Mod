@@ -34,10 +34,9 @@ public class Firefly8Client implements Runnable {
     }
 
     public static void registerRenderTypes(){
-        RenderTypeRegistry.register(RenderType.cutoutMipped(), FireflyBlocks.CEDAR_LEAVES.get());
+        RenderTypeRegistry.register(RenderType.cutoutMipped(), FireflyBlocks.CEDAR_LEAVES.get(), FireflyBlocks.XDI8AHO_PORTAL_TOP_BLOCK.get());
         RenderTypeRegistry.register(RenderType.cutout(), FireflyBlocks.XDI8AHO_BACK_FIRE_BLOCK.get(), FireflyBlocks.CEDAR_SAPLING.get(),
-                FireflyBlocks.CEDAR_TRAPDOOR.get(), FireflyBlocks.CEDAR_DOOR.get(), FireflyBlocks.XDI8AHO_PORTAL_TOP_BLOCK.get(),
-                FireflyBlocks.POTTED_CEDAR_SAPLING.get());
+                FireflyBlocks.CEDAR_TRAPDOOR.get(), FireflyBlocks.CEDAR_DOOR.get(), FireflyBlocks.POTTED_CEDAR_SAPLING.get());
     }
 
     @Environment(EnvType.CLIENT)
@@ -45,11 +44,6 @@ public class Firefly8Client implements Runnable {
         // Register the firefly particle provider at a correct point, to fix this error
         // "Something is attempting to register particle providers at a later point than intended! This might cause issues!"
         // java.lang.Throwable: null at dev.architectury.registry.client.particle.forge.ParticleProviderRegistryImpl.register(ParticleProviderRegistryImpl.java:100) ~[architectury-forge-4.11.91.jar%2377!/:?]
-        ParticleProviderRegistry.register(FireflyParticles.FIREFLY,
-                pSprites -> (pType, pLevel, pX, pY, pZ, pXSpeed, pYSpeed, pZSpeed) -> {
-                    var particle = new FireflyParticle(pLevel, pX, pY, pZ, pXSpeed, pYSpeed, pZSpeed);
-                    particle.pickSprite(pSprites);
-                    return particle;
-                });
+        ParticleProviderRegistry.register(FireflyParticles.FIREFLY, FireflyParticle.Provider::new);
     }
 }

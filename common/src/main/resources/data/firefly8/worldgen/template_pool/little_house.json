@@ -6,7 +6,7 @@
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "firefly8:little_house",
-        "projection": "terrain_matching",
+        "projection": "rigid",
         "processors": "minecraft:empty"
       }
     }

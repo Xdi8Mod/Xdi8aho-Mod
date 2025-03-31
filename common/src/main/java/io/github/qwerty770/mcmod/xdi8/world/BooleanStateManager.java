@@ -1,4 +1,4 @@
-package io.github.qwerty770.mcmod.xdi8.util.world;
+package io.github.qwerty770.mcmod.xdi8.world;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.properties.Property;

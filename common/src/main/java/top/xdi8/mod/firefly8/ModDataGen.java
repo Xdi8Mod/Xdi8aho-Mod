@@ -55,6 +55,9 @@ public class ModDataGen {
         builder.add(FireflyItems.INDIUM_PICKAXE.get());
         builder.add(FireflyItems.INDIUM_SHOVEL.get());
         builder.add(FireflyItems.INDIUM_SWORD.get());
+        builder.add(FireflyItems.TINTED_POTION.get());
+        builder.add(FireflyItems.TINTED_SPLASH_POTION.get());
+        builder.add(FireflyItems.TINTED_LINGERING_POTION.get());
         builder.add(FireflyItems.XDI8AHO_ICON.get());
         return builder.build();
     }

@@ -1,7 +1,7 @@
-package io.github.qwerty770.mcmod.xdi8.util.registries;
+package io.github.qwerty770.mcmod.xdi8.registries;
 
 import dev.architectury.registry.registries.RegistrySupplier;
-import io.github.qwerty770.mcmod.xdi8.util.annotation.StableApi;
+import io.github.qwerty770.mcmod.xdi8.annotation.StableApi;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.BlockGetter;
@@ -16,9 +16,7 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import top.xdi8.mod.firefly8.block.FireflyBlocks;
 
-// Added on 2023/11/26 after deleting io.github.qwerty770.mcmod.spmreborn.util.objsettings.BlockSettings
-// Update to Minecraft 1.21.3 -- 2024/11/22  Update block properties
-@StableApi
+@StableApi(since = "1.21.4-3.0.0-beta1")
 public class BlockUtils {
     public static RegistrySupplier<Block> createPotted(String id, RegistrySupplier<Block> inside) {
         return RegistryHelper.block(id, (properties) -> new FlowerPotBlock(inside.get(), properties),
