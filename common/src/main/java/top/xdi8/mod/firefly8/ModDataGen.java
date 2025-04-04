@@ -12,7 +12,8 @@ import top.xdi8.mod.firefly8.item.FireflyItems;
 import java.util.List;
 
 public class ModDataGen {
-    public static BlockFamily REDWOOD_FAMILY = new BlockFamily.Builder(FireflyBlocks.CEDAR_PLANKS.get())
+    public static BlockFamily REDWOOD_FAMILY = new
+            BlockFamily.Builder(FireflyBlocks.CEDAR_PLANKS.get())
             .button(FireflyBlocks.CEDAR_BUTTON.get())
             .fence(FireflyBlocks.CEDAR_FENCE.get())
             .fenceGate(FireflyBlocks.CEDAR_FENCE_GATE.get())
@@ -26,7 +27,8 @@ public class ModDataGen {
             .recipeUnlockedBy("has_planks")
             .getFamily();
 
-    public static BlockFamily SYMBOL_STONE_FAMILY = new BlockFamily.Builder(FireflyBlocks.SYMBOL_STONE_BRICKS.get())
+    public static BlockFamily SYMBOL_STONE_FAMILY = new
+            BlockFamily.Builder(FireflyBlocks.SYMBOL_STONE_BRICKS.get())
             .slab(FireflyBlocks.SYMBOL_STONE_BRICK_SLAB.get())
             .stairs(FireflyBlocks.SYMBOL_STONE_BRICK_STAIRS.get())
             .recipeGroupPrefix("symbol_stone_bricks")
