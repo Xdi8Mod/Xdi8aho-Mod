@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "firefly8:symbol_stone_u",
+    "#minecraft:banners",
+    "#minecraft:beds",
+    "#minecraft:wool",
+    "#minecraft:wool_carpets"
+  ]
+}

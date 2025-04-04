@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "firefly8:symbol_stone_4",
+    "minecraft:cobweb",
+    "minecraft:copper_grate",
+    "minecraft:iron_bars"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "replace": false,
+  "values": [
+    "firefly8:symbol_stone_t",
+    "minecraft:coal_block",
+    "minecraft:crimson_button",
+    "minecraft:soul_campfire",
+    "minecraft:soul_fire",
+    "minecraft:soul_lantern",
+    "minecraft:soul_sand",
+    "minecraft:soul_soil",
+    "minecraft:soul_torch",
+    "minecraft:soul_wall_torch",
+    "minecraft:warped_button",
+    "minecraft:wither_rose",
+    "minecraft:wither_skeleton_skull",
+    "#minecraft:all_signs",
+    "#minecraft:crimson_stems",
+    "#minecraft:planks",
+    "#minecraft:warped_stems",
+    "#minecraft:wooden_slabs",
+    "#minecraft:wooden_stairs"
+  ]
+}

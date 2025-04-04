@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "firefly8:symbol_stone_7",
+    "minecraft:dispenser",
+    "minecraft:dropper",
+    "minecraft:hopper",
+    "minecraft:piston",
+    "minecraft:redstone_block",
+    "minecraft:redstone_wire",
+    "minecraft:sticky_piston"
+  ]
+}

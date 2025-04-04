@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "firefly8:symbol_stone_v",
+    "#minecraft:coral_blocks",
+    "#minecraft:coral_plants",
+    "#minecraft:corals",
+    "#minecraft:wall_corals"
+  ]
+}

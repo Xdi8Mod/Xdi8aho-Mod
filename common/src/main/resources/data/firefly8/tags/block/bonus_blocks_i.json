@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "firefly8:symbol_stone_i",
+    "firefly8:xdi8_table",
+    "minecraft:enchanting_table",
+    "minecraft:grindstone",
+    "minecraft:lapis_block"
+  ]
+}

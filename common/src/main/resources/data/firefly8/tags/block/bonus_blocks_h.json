@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "firefly8:symbol_stone_h",
+    "minecraft:composter",
+    "minecraft:hay_block",
+    "minecraft:nether_wart",
+    "#minecraft:wart_blocks"
+  ]
+}

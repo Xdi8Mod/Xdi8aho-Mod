@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "firefly8:symbol_stone_bx",
+    "minecraft:sea_pickle",
+    "minecraft:seagrass",
+    "minecraft:sponge",
+    "minecraft:wet_sponge",
+    "minecraft:bubble_column"
+  ]
+}

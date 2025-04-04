@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values": [
+    "firefly8:symbol_stone_b",
+    "minecraft:copper_bulb",
+    "minecraft:daylight_detector",
+    "minecraft:end_rod",
+    "minecraft:glow_lichen",
+    "minecraft:glowstone",
+    "minecraft:lantern",
+    "minecraft:ochre_froglight",
+    "minecraft:pearlescent_froglight",
+    "minecraft:redstone_lamp",
+    "minecraft:sea_lantern",
+    "minecraft:shroomlight",
+    "minecraft:verdant_froglight"
+  ]
+}

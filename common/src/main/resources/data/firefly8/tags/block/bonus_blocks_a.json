@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "firefly8:symbol_stone_a",
+    "minecraft:tripwire",
+    "minecraft:tripwire_hook"
+  ]
+}

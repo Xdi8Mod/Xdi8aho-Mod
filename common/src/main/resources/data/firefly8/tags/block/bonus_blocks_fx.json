@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "firefly8:symbol_stone_fx",
+    "minecraft:creaking_heart",
+    "minecraft:conduit",
+    "minecraft:heavy_core"
+  ]
+}

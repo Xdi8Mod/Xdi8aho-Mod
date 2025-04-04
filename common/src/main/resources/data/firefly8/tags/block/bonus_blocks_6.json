@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "firefly8:symbol_stone_6",
+    "minecraft:lightning_rod",
+    "minecraft:powder_snow",
+    "#minecraft:cauldrons",
+    "#minecraft:ice"
+  ]
+}
