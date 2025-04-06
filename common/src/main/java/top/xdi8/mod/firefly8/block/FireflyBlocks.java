@@ -9,13 +9,22 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.SignBlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import top.xdi8.mod.firefly8.block.entity.FireflyBlockEntityTypes;
+import top.xdi8.mod.firefly8.block.entity.RedwoodSignBlockEntity;
 import top.xdi8.mod.firefly8.world.FireflyTreeFeatures;
 import top.xdi8.mod.firefly8.block.symbol.SymbolStoneBlock;
 import top.xdi8.mod.firefly8.block.symbol.SymbolStoneNNBlock;
@@ -162,7 +171,7 @@ public class FireflyBlocks {
         CEDAR_LEAVES = createLeaves("cedar_leaves");
         CEDAR_LOG = block("cedar_log", RotatedPillarBlock::new,
                 woodenBlock().mapColor((blockState) -> blockState.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ?
-                                redwoodColor : MapColor.PODZOL).strength(2.0F));
+                        redwoodColor : MapColor.PODZOL).strength(2.0F));
         CEDAR_PLANKS = defaultBlock("cedar_planks",
                 woodenBlock().strength(2.0F, 3.0F));
         CEDAR_PRESSURE_PLATE = block("cedar_pressure_plate",
@@ -178,7 +187,17 @@ public class FireflyBlocks {
                         .pushReaction(PushReaction.DESTROY)
                         .sound(SoundType.GRASS));
         CEDAR_SIGN = block("cedar_sign",
-                (properties) -> new StandingSignBlock(redwoodType, properties),
+                (properties) -> new StandingSignBlock(redwoodType, properties) {
+                    @Override
+                    public @NotNull BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
+                        return new RedwoodSignBlockEntity(pos, state);
+                    }
+
+                    @Override
+                    public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level level, @NotNull BlockState state, @NotNull BlockEntityType<T> blockEntityType) {
+                        return createTickerHelper(blockEntityType, FireflyBlockEntityTypes.REDWOOD_SIGN.get(), SignBlockEntity::tick);
+                    }
+                },
                 woodenBlock().forceSolidOn().noCollission().strength(1.0F));
         CEDAR_SLAB = block("cedar_slab", SlabBlock::new,
                 woodenBlock().strength(2.0F, 3.0F));
@@ -189,9 +208,22 @@ public class FireflyBlocks {
                 (properties) -> new TrapDoorBlock(redwoodSet, properties),
                 woodenBlock().noOcclusion().strength(3.0F).isValidSpawn(FireflyBlocks::never));
         CEDAR_WALL_SIGN = block("cedar_wall_sign",
-                (properties) -> new WallSignBlock(redwoodType, properties),
+                (properties) -> new WallSignBlock(redwoodType, properties) {
+                    @Override
+                    public @NotNull BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
+                        return new RedwoodSignBlockEntity(pos, state);
+                    }
+
+                    @Override
+                    public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level level, @NotNull BlockState state, @NotNull BlockEntityType<T> blockEntityType) {
+                        return createTickerHelper(blockEntityType, FireflyBlockEntityTypes.REDWOOD_SIGN.get(), SignBlockEntity::tick);
+                    }
+                },
                 woodenBlock().overrideLootTable(Optional.of(ResourceKey.create(Registries.LOOT_TABLE, ResourceLocationTool.create("firefly8:block/cedar_sign"))))
-                        .overrideDescription("block.firefly8.cedar_sign").forceSolidOn().noCollission().strength(1.0F));
+                        .overrideDescription("block.firefly8.cedar_sign")
+                        .forceSolidOn()
+                        .noCollission()
+                        .strength(1.0F));
         CEDAR_WOOD = block("cedar_wood", RotatedPillarBlock::new,
                 woodenBlock().strength(2.0F));
         POTTED_CEDAR_SAPLING = createPotted("potted_cedar_sapling", CEDAR_SAPLING);

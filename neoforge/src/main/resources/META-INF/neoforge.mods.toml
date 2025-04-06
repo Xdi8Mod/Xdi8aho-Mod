@@ -4,15 +4,6 @@ license="GPL-3.0-or-later with Minecraft exception"
 issueTrackerURL="https://github.com/Xdi8Mod/Xdi8Aho-Mod/issues"
 
 [[mods]]
-    modId="xdi8_fonts"
-    version="${version}"
-    displayName="Xdi8 Aho Fonts"
-    credits="Thanks to Shidinn community for insipiration and a lot more"
-    authors="teddyxlandlee,QWERTY770,Shidinn community"
-    description="Xdi8 Aho Language Fonts support"
-    displayURL="https://modrinth.com/mod/xdi8aho-mod"
-
-[[mods]]
     modId="firefly8"
     version="${version}"
     displayName="Firefly"
@@ -24,14 +15,26 @@ Just to make his future bright."""
     displayURL="https://modrinth.com/mod/xdi8aho-mod"
     #logoFile=
 
-#[[mods]]
-#    modId="xdi8"
-#    version="${version}"
-#    displayName="Xdi8 Aho"
-#    credits="Thanks to Shidinn community for insipiration and a lot more"
-#    authors="Xdi8Mod,teddyxlandlee,QWERTY770"
-#    description="Xdi8 Aho Mod"
-#    displayURL="https://modrinth.com/mod/xdi8aho-mod"
+[[mods]]
+    modId="xdi8"
+    version="${version}"
+    displayName="Xdi8 Aho"
+    credits="Thanks to Shidinn community for insipiration and a lot more"
+    authors="Xdi8Mod,teddyxlandlee,QWERTY770"
+    description="Xdi8 Aho Mod"
+    displayURL="https://modrinth.com/mod/xdi8aho-mod"
+
+[[mods]]
+    modId="xdi8_fonts"
+    version="${version}"
+    displayName="Xdi8 Aho Fonts"
+    credits="Thanks to Shidinn community for insipiration and a lot more"
+    authors="teddyxlandlee,QWERTY770,Shidinn community"
+    description="Xdi8 Aho Language Fonts support"
+    displayURL="https://modrinth.com/mod/xdi8aho-mod"
+
+[[accessTransformers]]
+file="META-INF/accesstransformer.cfg"
 
 [[mixins]]
     config="mixins.xdi8-fonts.json"

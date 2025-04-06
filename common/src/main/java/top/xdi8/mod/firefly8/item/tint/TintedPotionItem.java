@@ -67,6 +67,12 @@ public class TintedPotionItem extends PotionItem {
     }
 
     @Override
+    public @NotNull Component getName(ItemStack stack) {
+        // YOU CANNOT SEE ANYTHING INSIDE
+        return stack.getComponents().getOrDefault(DataComponents.ITEM_NAME, Component.translatable("item.firefly8.tinted_glass_bottle"));
+    }
+
+    @Override
     public void appendHoverText(@NotNull ItemStack stack, @NotNull Item.TooltipContext context, @NotNull List<Component> tooltipComponents, @NotNull TooltipFlag tooltipFlag) {
         // NO-OP: YOU CANNOT SEE ANYTHING INSIDE
     }

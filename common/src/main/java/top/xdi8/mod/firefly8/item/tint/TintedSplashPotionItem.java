@@ -1,5 +1,6 @@
 package top.xdi8.mod.firefly8.item.tint;
 
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -12,6 +13,12 @@ import java.util.List;
 public class TintedSplashPotionItem extends SplashPotionItem {
     public TintedSplashPotionItem(Properties properties) {
         super(properties);
+    }
+
+    @Override
+    public @NotNull Component getName(ItemStack stack) {
+        // YOU CANNOT SEE ANYTHING INSIDE
+        return stack.getComponents().getOrDefault(DataComponents.ITEM_NAME, Component.translatable("item.firefly8.tinted_splash_potion"));
     }
 
     @Override

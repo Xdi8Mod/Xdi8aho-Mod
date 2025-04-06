@@ -46,7 +46,8 @@ public class FireflyTeleportHelper {
         return poiManager.getInSquare(holder -> holder.is(poiType), pos, REGEN_SCALE, PoiManager.Occupancy.ANY)
                 .map(PoiRecord::getPos)
                 .filter(border::isWithinBounds)
-                .min(Comparator.<BlockPos>comparingDouble(blockPos2 -> blockPos2.distSqr(pos)).thenComparingInt(Vec3i::getY));
+                .min(Comparator.<BlockPos>comparingDouble(blockPos2 -> blockPos2.distSqr(pos))
+                        .thenComparing(Comparator.comparingInt(Vec3i::getY).reversed()));
     }
 
     @Nullable

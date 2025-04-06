@@ -23,7 +23,6 @@ public class FireflyParticle extends TextureSheetParticle {
         return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }
 
-    /** @see CampfireSmokeParticle#tick()  */
     @Override
     public void tick() {
         if (this.age++ <= 20) {

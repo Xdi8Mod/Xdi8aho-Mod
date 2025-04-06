@@ -1,13 +1,12 @@
 package io.github.qwerty770.mcmod.xdi8.registries;
 
-import com.mojang.datafixers.types.Type;
+import com.google.common.collect.ImmutableSet;
 import com.mojang.serialization.Codec;
 import dev.architectury.registry.menu.MenuRegistry;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import io.github.qwerty770.mcmod.xdi8.annotation.StableApi;
 import io.github.qwerty770.mcmod.xdi8.tag.TagContainer;
-import net.minecraft.Util;
 import net.minecraft.advancements.CriterionTrigger;
 import net.minecraft.advancements.critereon.ItemSubPredicate;
 import net.minecraft.core.Registry;
@@ -19,7 +18,6 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.stats.StatFormatter;
-import net.minecraft.util.datafix.fixes.References;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
@@ -44,7 +42,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 @SuppressWarnings("unused")
-@StableApi
+@StableApi(since = "1.21.4-3.0.0-beta1")
 public abstract class RegistryHelper {
     private static final List<DeferredRegister<?>> modRegistries = new ArrayList<>();
     public static final DeferredRegister<Block> blockRegistry = ofModRegistry(Registries.BLOCK);
@@ -112,14 +110,12 @@ public abstract class RegistryHelper {
         return item;
     }
 
-    public static <T> RegistrySupplier<DataComponentType<T>> componentType(String id, Supplier<DataComponentType<T>> componentType){
+    public static <T> RegistrySupplier<DataComponentType<T>> componentType(String id, Supplier<DataComponentType<T>> componentType) {
         return dataComponentTypeRegistry.register(id, componentType);
     }
 
     @SafeVarargs
     public static <E extends BlockEntity> RegistrySupplier<BlockEntityType<E>> blockEntity(String id, BlockEntityType.BlockEntitySupplier<E> supplier, Supplier<Block>... blocks) {
-        Type<?> type = Util.fetchChoiceType(References.BLOCK_ENTITY, id);
-        assert type != null;
         return blockEntityRegistry.register(id, () -> new BlockEntityType<>(supplier, Set.copyOf(Arrays.stream(blocks).map(Supplier::get).toList())));
     }
 
@@ -157,11 +153,11 @@ public abstract class RegistryHelper {
         return soundRegistry.register(id, () -> SoundEvent.createVariableRangeEvent(id(id)));
     }
 
-    public static  <P extends ParticleType<?>> RegistrySupplier<P> particleType(String id, Supplier<P> particleTypeSup) {
+    public static <P extends ParticleType<?>> RegistrySupplier<P> particleType(String id, Supplier<P> particleTypeSup) {
         return particleTypeRegistry.register(id, particleTypeSup);
     }
 
-    public static  <E extends Entity> RegistrySupplier<EntityType<E>> entityType(String id, Supplier<EntityType.Builder<E>> builder) {
+    public static <E extends Entity> RegistrySupplier<EntityType<E>> entityType(String id, Supplier<EntityType.Builder<E>> builder) {
         return entityTypeRegistry.register(id, () -> builder.get().build(ResourceKey.create(Registries.ENTITY_TYPE, id(id))));
     }
 
@@ -179,11 +175,18 @@ public abstract class RegistryHelper {
         return statRegistry.register(id, () -> id2);
     }
 
-    public static RegistrySupplier<ResourceLocation> stat(String id) { return stat(id, StatFormatter.DEFAULT); }
+    public static RegistrySupplier<ResourceLocation> stat(String id) {
+        return stat(id, StatFormatter.DEFAULT);
+    }
 
     public static RegistrySupplier<PoiType> poiType(String id, int maxTickets, int validRange, Supplier<Set<BlockState>> matchingStatesSup) {
-        RegistrySupplier<PoiType> poi = poiTypeRegistry.register(id, () -> new PoiType(matchingStatesSup.get(), maxTickets, validRange));
-        PoiTypes.registerBlockStates(poi, matchingStatesSup.get());
+        return poiTypeRegistry.register(id, () -> new PoiType(matchingStatesSup.get(), maxTickets, validRange));
+    }
+
+    public static RegistrySupplier<PoiType> poiType(String id, int maxTickets, int validRange, RegistrySupplier<Block> blockSupplier) {
+        RegistrySupplier<PoiType> poi = poiType(id, maxTickets, validRange, () -> ImmutableSet.copyOf(blockSupplier.get().getStateDefinition().getPossibleStates()));
+        //blockSupplier.listen(block ->
+        //        PoiTypes.registerBlockStates(poi, ImmutableSet.copyOf(block.getStateDefinition().getPossibleStates())));
         return poi;
     }
 
@@ -195,7 +198,7 @@ public abstract class RegistryHelper {
         return criterionTriggerRegistry.register(id, trigger);
     }
 
-    public static RegistrySupplier<CreativeModeTab> creativeModeTab(String id, CreativeModeTab tab){
+    public static RegistrySupplier<CreativeModeTab> creativeModeTab(String id, CreativeModeTab tab) {
         return creativeTabRegistry.register(id, () -> tab);
     }
 
@@ -205,7 +208,7 @@ public abstract class RegistryHelper {
         return reg;
     }
 
-    public static void registerAll(){
+    public static void registerAll() {
         for (var reg : modRegistries) {
             reg.register();
         }

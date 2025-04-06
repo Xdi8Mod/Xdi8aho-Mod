@@ -5,12 +5,11 @@ import dev.architectury.registry.CreativeTabRegistry;
 import dev.architectury.registry.fuel.FuelRegistry;
 import dev.architectury.registry.registries.RegistrySupplier;
 import io.github.qwerty770.mcmod.xdi8.registries.RegistryHelper;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.food.Foods;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.*;
+import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.component.Consumables;
 import top.xdi8.mod.firefly8.block.FireflyBlocks;
 import top.xdi8.mod.firefly8.entity.FireflyEntityTypes;
@@ -108,14 +107,18 @@ public final class FireflyItems {
 
         // Bottles
         TINTED_GLASS_BOTTLE = item("tinted_glass_bottle", TintedGlassBottleItem::new);
-        TINTED_POTION = item("tinted_potion", TintedPotionItem::new);
+        TINTED_POTION = item("tinted_potion", TintedPotionItem::new, defaultProp()
+                .component(DataComponents.POTION_CONTENTS, PotionContents.EMPTY)
+                .component(DataComponents.CONSUMABLE, Consumables.DEFAULT_DRINK));
         TINTED_HONEY_BOTTLE = item("tinted_honey_bottle", TintedHoneyBottleItem::new, () -> defaultProp()
                 .craftRemainder(TINTED_GLASS_BOTTLE.get())
                 .food(Foods.HONEY_BOTTLE, Consumables.HONEY_BOTTLE)
                 .usingConvertsTo(TINTED_GLASS_BOTTLE.get())
                 .stacksTo(16));
-        TINTED_SPLASH_POTION = item("tinted_splash_potion", TintedSplashPotionItem::new);
-        TINTED_LINGERING_POTION = item("tinted_lingering_potion", TintedLingeringPotionItem::new);
+        TINTED_SPLASH_POTION = item("tinted_splash_potion", TintedSplashPotionItem::new, defaultProp()
+                .component(DataComponents.POTION_CONTENTS, PotionContents.EMPTY));
+        TINTED_LINGERING_POTION = item("tinted_lingering_potion", TintedLingeringPotionItem::new, defaultProp()
+                .component(DataComponents.POTION_CONTENTS, PotionContents.EMPTY));
         TINTED_DRAGON_BREATH = item("tinted_dragon_breath", Item::new, () -> defaultProp()
                 .craftRemainder(TINTED_GLASS_BOTTLE.get())
                 .rarity(Rarity.UNCOMMON));
@@ -137,7 +140,8 @@ public final class FireflyItems {
         CEDAR_PLANKS = blockItem("cedar_planks", FireflyBlocks.CEDAR_PLANKS, defaultProp());
         CEDAR_PRESSURE_PLATE = blockItem("cedar_pressure_plate", FireflyBlocks.CEDAR_PRESSURE_PLATE, defaultProp());
         CEDAR_SAPLING = blockItem("cedar_sapling", FireflyBlocks.CEDAR_SAPLING, defaultProp());
-        CEDAR_SIGN = blockItem("cedar_sign", FireflyBlocks.CEDAR_SIGN, defaultProp());
+        CEDAR_SIGN = item("cedar_sign", (properties -> new SignItem(FireflyBlocks.CEDAR_SIGN.get(), FireflyBlocks.CEDAR_WALL_SIGN.get(), properties)),
+                defaultProp().stacksTo(16).useBlockDescriptionPrefix());
         CEDAR_SLAB = blockItem("cedar_slab", FireflyBlocks.CEDAR_SLAB, defaultProp());
         CEDAR_STAIRS = blockItem("cedar_stairs", FireflyBlocks.CEDAR_STAIRS, defaultProp());
         CEDAR_TRAPDOOR = blockItem("cedar_trapdoor", FireflyBlocks.CEDAR_TRAPDOOR, defaultProp());

@@ -1,11 +1,14 @@
 package top.xdi8.mod.firefly8.forge.datagen;
 
+import com.google.common.collect.Streams;
+import io.github.qwerty770.mcmod.xdi8.registries.RegistryHelper;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TexturedModel;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -21,11 +24,23 @@ import top.xdi8.mod.firefly8.core.letters.DefaultXdi8Letters;
 import top.xdi8.mod.firefly8.core.letters.LettersUtil;
 import top.xdi8.mod.firefly8.item.FireflyItems;
 
+import java.util.function.Supplier;
+import java.util.stream.Stream;
+
 import static net.minecraft.client.data.models.model.TextureMapping.cube;
 
 public class ModModelProvider extends ModelProvider {
     public ModModelProvider(PackOutput output) {
         super(output, "firefly8");
+    }
+
+    @Override
+    protected @NotNull Stream<? extends Holder<Block>> getKnownBlocks() {
+        return Streams.stream(RegistryHelper.blockRegistry.iterator())
+                .filter((block -> block != FireflyBlocks.XDI8_TABLE
+                        && block != FireflyBlocks.XDI8AHO_BACK_FIRE_BLOCK
+                        && block != FireflyBlocks.XDI8AHO_PORTAL_BLOCK
+                        && block != FireflyBlocks.XDI8AHO_PORTAL_TOP_BLOCK));
     }
 
     @Override
@@ -40,6 +55,7 @@ public class ModModelProvider extends ModelProvider {
         LettersUtil.forEach((key, letter) -> blockModels.createTrivialBlock(
                 SymbolStoneBlock.fromLetter(letter), TexturedModel.createDefault(ModModelProvider::getSymbolStoneTexture, ModelTemplates.CUBE_ALL)));
 
+        itemModels.generateSpawnEgg(FireflyItems.FIREFLY_SPAWN_EGG.get(), 0x000000, 0x00f500);
         itemModels.generateFlatItem(FireflyItems.BUNDLER.get(), Items.BUNDLE, ModelTemplates.FLAT_ITEM);
         Item tinted_potion = FireflyItems.TINTED_POTION.get();
         itemModels.generateFlatItem(FireflyItems.TINTED_DRAGON_BREATH.get(), tinted_potion, ModelTemplates.FLAT_ITEM);

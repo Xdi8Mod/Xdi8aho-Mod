@@ -11,7 +11,7 @@ public class FireflyEntityTypes {
     public static final InternalRegistryLogWrapper LOG_WRAPPER = InternalRegistryLogWrapper.firefly8("entity_types");
     public static final RegistrySupplier<EntityType<FireflyEntity>> FIREFLY =
             entityType("firefly", () -> EntityType.Builder
-            .of(FireflyEntity::new, MobCategory.AMBIENT)
+            .of(FireflyEntity::new, MobCategory.CREATURE)
             .sized(0.5F, 0.5F)
             .clientTrackingRange(5));
 }
