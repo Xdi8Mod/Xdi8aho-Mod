@@ -2,6 +2,7 @@ package io.github.qwerty770.mcmod.xdi8.registries;
 
 import com.google.common.collect.ImmutableSet;
 import com.mojang.serialization.Codec;
+import dev.architectury.platform.Platform;
 import dev.architectury.registry.menu.MenuRegistry;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
@@ -185,8 +186,8 @@ public abstract class RegistryHelper {
 
     public static RegistrySupplier<PoiType> poiType(String id, int maxTickets, int validRange, RegistrySupplier<Block> blockSupplier) {
         RegistrySupplier<PoiType> poi = poiType(id, maxTickets, validRange, () -> ImmutableSet.copyOf(blockSupplier.get().getStateDefinition().getPossibleStates()));
-        //blockSupplier.listen(block ->
-        //        PoiTypes.registerBlockStates(poi, ImmutableSet.copyOf(block.getStateDefinition().getPossibleStates())));
+        if (Platform.isFabric()) blockSupplier.listen(block ->
+                PoiTypes.registerBlockStates(poi, ImmutableSet.copyOf(block.getStateDefinition().getPossibleStates())));
         return poi;
     }
 

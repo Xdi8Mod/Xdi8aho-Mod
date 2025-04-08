@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "firefly8:block/symbol_stone_brick_slab"
+    },
+    "type=double": {
+      "model": "firefly8:block/symbol_stone_bricks"
+    },
+    "type=top": {
+      "model": "firefly8:block/symbol_stone_brick_slab_top"
+    }
+  }
+}

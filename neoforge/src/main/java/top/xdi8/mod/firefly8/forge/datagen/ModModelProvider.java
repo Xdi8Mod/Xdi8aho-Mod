@@ -24,7 +24,6 @@ import top.xdi8.mod.firefly8.core.letters.DefaultXdi8Letters;
 import top.xdi8.mod.firefly8.core.letters.LettersUtil;
 import top.xdi8.mod.firefly8.item.FireflyItems;
 
-import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 import static net.minecraft.client.data.models.model.TextureMapping.cube;

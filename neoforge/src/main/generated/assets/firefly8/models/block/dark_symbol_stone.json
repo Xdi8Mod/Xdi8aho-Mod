@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "firefly8:block/dark_symbol_stone"
+  }
+}

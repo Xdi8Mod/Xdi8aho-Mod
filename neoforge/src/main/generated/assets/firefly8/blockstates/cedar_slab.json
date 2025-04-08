@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "firefly8:block/cedar_slab"
+    },
+    "type=double": {
+      "model": "firefly8:block/cedar_planks"
+    },
+    "type=top": {
+      "model": "firefly8:block/cedar_slab_top"
+    }
+  }
+}
