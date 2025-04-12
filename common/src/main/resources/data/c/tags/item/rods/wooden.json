@@ -1,9 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    {
-      "id": "#forge:rods/wooden",
-      "required": false
-    }
-  ]
-}

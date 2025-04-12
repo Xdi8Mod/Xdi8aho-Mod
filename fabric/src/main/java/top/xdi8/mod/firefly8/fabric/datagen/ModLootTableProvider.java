@@ -18,8 +18,10 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
 
     @Override
     public void generate() {
+        this.add(FireflyBlocks.CEDAR_DOOR.get(), this::createDoorTable);
         this.add(FireflyBlocks.CEDAR_LEAVES.get(), (block -> this.createLeavesDrops(block, FireflyBlocks.CEDAR_SAPLING.get(), 0.05F, 0.0625F, 0.083333336F, 0.1F)));
         this.add(FireflyBlocks.CEDAR_SLAB.get(), this::createSlabItemTable);
+        this.add(FireflyBlocks.POTTED_CEDAR_SAPLING.get(), this::createPotFlowerItemTable);
         this.add(FireflyBlocks.SYMBOL_STONE_BRICK_SLAB.get(), this::createSlabItemTable);
         ModDataGen.getDropSelfBlocks().forEach(this::dropSelf);
         LettersUtil.forEach((key, letter) -> this.dropSelf(SymbolStoneBlock.fromLetter(letter)));

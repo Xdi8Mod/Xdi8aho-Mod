@@ -8,13 +8,20 @@
   ],
   "description": "Firefly, carry light, In the night, blink his eye, Just to make his future bright.",
   "environment": "*",
-
+  "contact": {
+    "homepage": "https://modrinth.com/mod/xdi8aho-mod",
+    "sources": "https://github.com/Xdi8Mod/Xdi8Aho-Mod",
+    "issues": "https://github.com/Xdi8Mod/Xdi8Aho-Mod/issues"
+  },
   "depends": {
     "fabricloader": ">=0.15.0",
     "fabric-api": ">=0.107.0",
     "architectury": ">=15.0",
     "minecraft": ">=1.21.4",
     "java": ">=21"
+  },
+  "suggests": {
+    "spmreborn": ">=1.21.4-1.0.0"
   },
   "entrypoints": {
     "main": [
@@ -28,7 +35,9 @@
     ]
   },
   "authors": [
-    "teddyxlandlee", "QWERTY770", "Shidinn community"
+    "teddyxlandlee",
+    "QWERTY770",
+    "Shidinn community"
   ],
   "mixins": [
     "mixins.firefly-fabric.json",

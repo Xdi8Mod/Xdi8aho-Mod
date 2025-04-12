@@ -1,6 +1,6 @@
-// 1.21.4	2025-04-09T03:01:45.5212717	Loot Tables
+// 1.21.4	2025-04-13T14:04:15.235941	Loot Tables
 1d698fa52de7c5ab6b88b68f49ecd53470ef6639 data/firefly8/loot_table/blocks/cedar_button.json
-7420470075ddd315382a31b89e97ae318d5d9f0e data/firefly8/loot_table/blocks/cedar_door.json
+128efcb9e1e93db3c7de23322325f71d740fa921 data/firefly8/loot_table/blocks/cedar_door.json
 c1f504d7be6c471d74bea40b31a722faaea7c6fd data/firefly8/loot_table/blocks/cedar_fence.json
 4bda4c953503035f307f497d7df5914a13be4686 data/firefly8/loot_table/blocks/cedar_fence_gate.json
 a6ee604628a11ecdf6eb03e582d53f86751d9c42 data/firefly8/loot_table/blocks/cedar_leaves.json
@@ -17,6 +17,7 @@ ea72579b02d79c25573d4c29646d76dfe7e733e5 data/firefly8/loot_table/blocks/dark_sy
 bb2b8bf251b731872449def23bda8604f6493ded data/firefly8/loot_table/blocks/deepslate_indium_ore.json
 fd4f4d0e1750e6154e6caa4afb19ad93958f317d data/firefly8/loot_table/blocks/indium_block.json
 9b87d1ffd07556d8d4a5b43b6f927abbf0b5cb43 data/firefly8/loot_table/blocks/indium_ore.json
+e1bdf862ab75be3496f42ade0e524f6d24cf2c5a data/firefly8/loot_table/blocks/potted_cedar_sapling.json
 5c43d708665d93fd78872855ab2648748ff7376c data/firefly8/loot_table/blocks/stripped_cedar_log.json
 b0d403a452172bad61634403c52b57d5ddcfe08a data/firefly8/loot_table/blocks/stripped_cedar_wood.json
 f73a79a0f235eb3040e73d86218c95baf4096850 data/firefly8/loot_table/blocks/symbol_stone.json

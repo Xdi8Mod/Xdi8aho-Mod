@@ -68,7 +68,6 @@ public class ModDataGen {
         ImmutableList.Builder<Block> builder = ImmutableList.builder();
         builder.addAll(getTrivialCubeBlocks());
         builder.add(FireflyBlocks.CEDAR_BUTTON.get());
-        builder.add(FireflyBlocks.CEDAR_DOOR.get());
         builder.add(FireflyBlocks.CEDAR_FENCE.get());
         builder.add(FireflyBlocks.CEDAR_FENCE_GATE.get());
         builder.add(FireflyBlocks.CEDAR_LOG.get());
