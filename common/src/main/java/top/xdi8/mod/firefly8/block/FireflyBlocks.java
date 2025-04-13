@@ -97,6 +97,7 @@ public class FireflyBlocks {
                 BlockBehaviour.Properties.of()
                         .mapColor(MapColor.GOLD)
                         .strength(8F, 800F)
+                        .noOcclusion()
                         .requiresCorrectToolForDrops()
                         .lightLevel(bs -> bs.getValue(FIREFLY_COUNT) * 3));
         XDI8AHO_PORTAL_BLOCK = block("xdi8aho_portal", Xdi8ahoPortalBlock::new,
@@ -162,7 +163,7 @@ public class FireflyBlocks {
                         .sound(SoundType.WOOD));
         CEDAR_DOOR = block("cedar_door",
                 (properties) -> new DoorBlock(redwoodSet, properties),
-                woodenBlock().noCollission().strength(3.0F).pushReaction(PushReaction.DESTROY));
+                woodenBlock().strength(3.0F).pushReaction(PushReaction.DESTROY));
         CEDAR_FENCE = block("cedar_fence", FenceBlock::new,
                 woodenBlock().forceSolidOn().strength(2.0F, 3.0F));
         CEDAR_FENCE_GATE = block("cedar_fence_gate",

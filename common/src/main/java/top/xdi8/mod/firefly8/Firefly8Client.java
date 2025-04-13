@@ -20,8 +20,12 @@ import top.xdi8.mod.firefly8.screen.FireflyMenus;
 
 public class Firefly8Client implements Runnable {
     @Override
+    @SuppressWarnings("unchecked")
     public void run() {
-        Firefly8Client.registerRenderTypes();
+        RenderTypeRegistry.register(RenderType.cutout(), FireflyBlocks.XDI8AHO_PORTAL_TOP_BLOCK.get());
+        RenderTypeRegistry.register(RenderType.cutoutMipped(), FireflyBlocks.CEDAR_LEAVES.get());
+        RenderTypeRegistry.register(RenderType.cutout(), FireflyBlocks.XDI8AHO_BACK_FIRE_BLOCK.get(), FireflyBlocks.CEDAR_SAPLING.get(),
+                FireflyBlocks.CEDAR_TRAPDOOR.get(), FireflyBlocks.CEDAR_DOOR.get(), FireflyBlocks.POTTED_CEDAR_SAPLING.get());
         BlockEntityRendererRegistry.register((BlockEntityType) FireflyBlockEntityTypes.REDWOOD_SIGN.get(), SignRenderer::new);
         ColorHandlerRegistry.registerBlockColors((blockState, blockAndTintGetter, blockPos, i) -> {
             if (blockAndTintGetter == null || blockPos == null) {
@@ -32,12 +36,5 @@ public class Firefly8Client implements Runnable {
         EntityRendererRegistry.register(FireflyEntityTypes.FIREFLY, NoopRenderer::new);
         MenuRegistry.registerScreenFactory(FireflyMenus.TAKE_ONLY_CHEST.get(), TakeOnlyContainerScreen::new);
         MenuRegistry.registerScreenFactory(FireflyMenus.XDI8_TABLE.get(), Xdi8TableScreen::new);
-    }
-
-    public static void registerRenderTypes(){
-        RenderTypeRegistry.register(RenderType.translucent(), FireflyBlocks.XDI8AHO_PORTAL_TOP_BLOCK.get());
-        RenderTypeRegistry.register(RenderType.cutoutMipped(), FireflyBlocks.CEDAR_LEAVES.get());
-        RenderTypeRegistry.register(RenderType.cutout(), FireflyBlocks.XDI8AHO_BACK_FIRE_BLOCK.get(), FireflyBlocks.CEDAR_SAPLING.get(),
-                FireflyBlocks.CEDAR_TRAPDOOR.get(), FireflyBlocks.CEDAR_DOOR.get(), FireflyBlocks.POTTED_CEDAR_SAPLING.get());
     }
 }

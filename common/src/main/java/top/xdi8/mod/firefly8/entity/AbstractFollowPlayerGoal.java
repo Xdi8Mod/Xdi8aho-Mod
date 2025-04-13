@@ -46,8 +46,7 @@ public sealed abstract class AbstractFollowPlayerGoal extends Goal {
 
     @Override
     public boolean canContinueToUse() {
-        if (this.following == null || !this.following.isAlive())
-            return false;
+        if (this.following == null || !this.following.isAlive()) return false;
         return isValidDistance(this.following);
     }
 
@@ -60,7 +59,6 @@ public sealed abstract class AbstractFollowPlayerGoal extends Goal {
     @Override
     public void stop() {
         this.following = null;
-        //self.getNavigation().stop();
     }
 
     @Override

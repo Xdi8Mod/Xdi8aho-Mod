@@ -3,7 +3,6 @@ package top.xdi8.mod.firefly8.entity;
 import it.unimi.dsi.fastutil.objects.Object2LongLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2LongMap;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.server.level.ServerLevel;
@@ -35,6 +34,7 @@ import top.xdi8.mod.firefly8.particle.FireflyParticles;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Collection;
+import java.util.EnumSet;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -155,7 +155,6 @@ public class FireflyEntity extends PathfinderMob implements FlyingAnimal {
         this.goalSelector.addGoal(5, new AbstractFollowPlayerGoal.Randomly(this));
         this.goalSelector.addGoal(5, new Wandering());
         this.goalSelector.addGoal(5, new FloatGoal(this));
-        // this.goalSelector.addGoal(2, new RestrictSunGoal(this));
     }
 
     @Override
@@ -163,7 +162,7 @@ public class FireflyEntity extends PathfinderMob implements FlyingAnimal {
         var navigation = new FlyingPathNavigation(this, pLevel);
         navigation.setCanOpenDoors(false);
         navigation.setCanFloat(false);
-        // TODO navigation.setCanPassDoors(true);
+        navigation.setRequiredPathLength(48.0F);
         return navigation;
     }
 
@@ -201,39 +200,33 @@ public class FireflyEntity extends PathfinderMob implements FlyingAnimal {
         this.setDeltaMovement(this.getDeltaMovement().add(0.0D, 0.01D, 0.0D));
     }
 
-    class Wandering extends Goal {
+    private class Wandering extends Goal {
+        public Wandering() {
+            this.setFlags(EnumSet.of(Flag.MOVE));
+        }
 
-        /**
-         * Returns whether execution should begin. You can also read and cache any state necessary for execution in this
-         * method as well.
-         */
         public boolean canUse() {
             return FireflyEntity.this.navigation.isDone() && FireflyEntity.this.random.nextInt(10) == 0;
         }
 
-        /**
-         * Returns whether an in-progress EntityAIBase should continue executing
-         */
+
         public boolean canContinueToUse() {
             return FireflyEntity.this.navigation.isInProgress();
         }
 
-        /**
-         * Execute a one shot task or start executing a continuous task
-         */
         public void start() {
             Vec3 vec3 = this.findPos();
             if (vec3 != null) {
-                FireflyEntity.this.navigation.moveTo(FireflyEntity.this.navigation.createPath(
-                        new BlockPos(new Vec3i((int) vec3.x, (int) vec3.y, (int) vec3.z)), 1), 0.3D);
+                FireflyEntity.this.navigation.moveTo(
+                        FireflyEntity.this.navigation.createPath(BlockPos.containing(vec3), 1), 0.5);
             }
         }
 
         @Nullable
         private Vec3 findPos() {
             Vec3 vec3 = FireflyEntity.this.getViewVector(0.0F);
-            Vec3 vec32 = HoverRandomPos.getPos(FireflyEntity.this, 8, 7, vec3.x, vec3.z, ((float) Math.PI / 2F), 3, 1);
-            return vec32 != null ? vec32 : AirAndWaterRandomPos.getPos(FireflyEntity.this, 8, 4, -2, vec3.x, vec3.z, (float) Math.PI / 2F);
+            Vec3 vec32 = HoverRandomPos.getPos(FireflyEntity.this, 8, 7, vec3.x, vec3.z, ((float) Math.PI / 2), 3, 1);
+            return vec32 != null ? vec32 : AirAndWaterRandomPos.getPos(FireflyEntity.this, 8, 4, -2, vec3.x, vec3.z, (float) Math.PI / 2);
         }
     }
 }
