@@ -37,7 +37,6 @@ public class FireflyTeleportHelper {
             FireflyBlocks.XDI8AHO_BACK_PORTAL_CORE_BLOCK,
             FireflyBlocks.XDI8AHO_BACK_FIRE_BLOCK
     );
-
     private static final int REGEN_SCALE = 32;
 
     public static Optional<BlockPos> findPortal(BlockPos pos, ResourceKey<PoiType> poiType, WorldBorder border, ServerLevel serverLevel) {
@@ -64,7 +63,9 @@ public class FireflyTeleportHelper {
         Optional<BlockPos> optional = findPortal(blockPos2, FireflyPoiTypes.XDI8_BACK_PORTAL.getKey(), worldBorder, serverLevel2);
         TeleportTransition.PostTeleportTransition postTeleportTransition = TeleportTransition.PLAY_PORTAL_SOUND.then(TeleportTransition.PLACE_PORTAL_TICKET);
         BlockPos newBlockPos;
-        newBlockPos = optional.map(BlockPos::above).orElseGet(() -> createBackPortal(blockPos2, serverLevel2).above(5));
+        newBlockPos = optional.map(blockPos -> blockPos.above(2)).orElseGet(() -> createBackPortal(blockPos2, serverLevel2));
+        if (!serverLevel.getBlockState(newBlockPos).isAir()) serverLevel.setBlockAndUpdate(newBlockPos, Blocks.AIR.defaultBlockState());
+        if (!serverLevel.getBlockState(newBlockPos.above()).isAir()) serverLevel.setBlockAndUpdate(newBlockPos.above(), Blocks.AIR.defaultBlockState());
         return new TeleportTransition(serverLevel2,
                 newBlockPos.getBottomCenter(),
                 Vec3.ZERO, 0.0F, 0.0F,
@@ -86,7 +87,7 @@ public class FireflyTeleportHelper {
                     Vec3.ZERO, 0.0F, 0.0F,
                     Relative.union(Relative.DELTA, Relative.ROTATION), postTeleportTransition);
         } else {
-            if (entity instanceof ServerPlayer player){
+            if (entity instanceof ServerPlayer player) {
                 return player.findRespawnPositionAndUseSpawnBlock(false, TeleportTransition.DO_NOTHING);
             } else {
                 return new TeleportTransition(serverLevel2,
@@ -100,88 +101,99 @@ public class FireflyTeleportHelper {
     private static BlockPos createBackPortal(BlockPos blockPos, ServerLevel serverLevel) {
         final int minHeight = serverLevel.getMinY();
         final int maxHeight = serverLevel.getLogicalHeight() - 1;
-        if (placeBackPortal(blockPos, serverLevel, minHeight, maxHeight)) return blockPos;
+        Optional<BlockPos> placePos = tryPlaceBackPortal(blockPos, serverLevel, minHeight, maxHeight);
+        if (placePos.isPresent()) return placePos.get();
         // Traverse this 9*9 area in a spiral path, trying to create the back portal.
         int len = 1;
         while (len < 9) {
             BlockPos currentPos = blockPos.north();
             for (int i = 0; i < len; ++i) {
-                if (placeBackPortal(currentPos, serverLevel, minHeight, maxHeight)) return currentPos;
+                placePos = tryPlaceBackPortal(currentPos, serverLevel, minHeight, maxHeight);
+                if (placePos.isPresent()) return placePos.get();
                 currentPos = currentPos.east();
             }
             len += 1;
             for (int i = 0; i < len; ++i) {
-                if (placeBackPortal(currentPos, serverLevel, minHeight, maxHeight)) return currentPos;
+                placePos = tryPlaceBackPortal(currentPos, serverLevel, minHeight, maxHeight);
+                if (placePos.isPresent()) return placePos.get();
                 currentPos = currentPos.south();
             }
             for (int i = 0; i < len; ++i) {
-                if (placeBackPortal(currentPos, serverLevel, minHeight, maxHeight)) return currentPos;
+                placePos = tryPlaceBackPortal(currentPos, serverLevel, minHeight, maxHeight);
+                if (placePos.isPresent()) return placePos.get();
                 currentPos = currentPos.west();
             }
             len += 1;
             for (int i = 0; i < len; ++i) {
-                if (placeBackPortal(currentPos, serverLevel, minHeight, maxHeight)) return currentPos;
+                placePos = tryPlaceBackPortal(currentPos, serverLevel, minHeight, maxHeight);
+                if (placePos.isPresent()) return placePos.get();
                 currentPos = currentPos.north();
             }
         }
 
         // Force the game to create the back portal.
-        final int height = Integer.max(serverLevel.getHeight(Heightmap.Types.MOTION_BLOCKING, blockPos.getX(), blockPos.getZ()), maxHeight - 8);
+        final int height = Integer.max(64, Integer.min(maxHeight - 8, serverLevel.getHeight(Heightmap.Types.MOTION_BLOCKING, blockPos.getX(), blockPos.getZ())));
         BlockPos fillPos = blockPos.atY(height);
-        for (Supplier<Block> backPortalBlock : BACK_PORTAL_BLOCKS) {
-            serverLevel.destroyBlock(fillPos, true);
-            serverLevel.setBlockAndUpdate(fillPos, backPortalBlock.get().defaultBlockState());
-            fillPos = fillPos.above();
-        }
-        return fillPos;
+        return placeBackPortal(fillPos, serverLevel);
     }
 
-    private static boolean placeBackPortal(BlockPos blockPos, ServerLevel serverLevel, int minHeight, int maxHeight) {
-        final int height = serverLevel.getHeight(Heightmap.Types.MOTION_BLOCKING, blockPos.getX(), blockPos.getZ());
-        int num = 0;
-        BlockPos fillPos = null;
-        for (int i = height - 1; i >= minHeight; --i) {
-            if (serverLevel.getBlockState(blockPos.atY(i)).canBeReplaced()) num += 1;
-            else num = 0;
-            if (num > 6) {
-                fillPos = blockPos.atY(i);
+    private static Optional<BlockPos> tryPlaceBackPortal(BlockPos blockPos, ServerLevel serverLevel, int minHeight, int maxHeight) {
+        // final int height = serverLevel.getHeight(Heightmap.Types.MOTION_BLOCKING, blockPos.getX(), blockPos.getZ());
+        int height = minHeight;  // Height maps cannot be used here because it has not been generated yet.
+        Optional<BlockPos> fillPos = Optional.empty();
+        for (int i = maxHeight; i >= minHeight; --i){
+            if (!serverLevel.getBlockState(blockPos.atY(i)).isAir()) {
+                height = i;
                 break;
             }
         }
-
+        int num = 0;
         for (int i = height; i <= maxHeight; ++i) {
             if (serverLevel.getBlockState(blockPos.atY(i)).canBeReplaced()) num += 1;
             else num = 0;
             if (num > 6) {
-                fillPos = blockPos.atY(i - 6);
+                fillPos = Optional.of(blockPos.atY(i - 6));
                 break;
             }
         }
 
-        if (fillPos == null) return false;
-        for (Supplier<Block> backPortalBlock : BACK_PORTAL_BLOCKS) {
-            serverLevel.destroyBlock(fillPos, true);
-            serverLevel.setBlockAndUpdate(fillPos, backPortalBlock.get().defaultBlockState());
-            fillPos = fillPos.above();
-        }
-        return true;
+        return fillPos.map(pos -> placeBackPortal(pos, serverLevel));
     }
 
-    private static BlockPos findSpaceNearXdi8ahoPortal(BlockPos blockPos, ServerLevel serverLevel){
-        final List<BlockPos> SURROUNDING_BLOCKS = List.of(blockPos.east(), blockPos.south(), blockPos.west(), blockPos.north(),
-        blockPos.east().south(), blockPos.east().north(), blockPos.west().south(), blockPos.west().north());
-        for (BlockPos pos : SURROUNDING_BLOCKS){
-            if (serverLevel.getBlockState(pos).isAir() && serverLevel.getBlockState(pos.above()).isAir()){
+    @NotNull
+    private static BlockPos placeBackPortal(BlockPos blockPos, ServerLevel serverLevel) {
+        for (BlockPos pos : getSurroundingBlocks(blockPos)) {
+            if (serverLevel.getBlockState(pos).isAir()) {
+                serverLevel.setBlockAndUpdate(pos, Blocks.COBBLESTONE.defaultBlockState());
+            }
+        }
+        for (Supplier<Block> backPortalBlock : BACK_PORTAL_BLOCKS) {
+            serverLevel.destroyBlock(blockPos, true);
+            serverLevel.setBlockAndUpdate(blockPos, backPortalBlock.get().defaultBlockState());
+            blockPos = blockPos.above();
+        }
+        return blockPos;
+    }
+
+    private static BlockPos findSpaceNearXdi8ahoPortal(BlockPos blockPos, ServerLevel serverLevel) {
+        List<BlockPos> SURROUNDING_BLOCKS = getSurroundingBlocks(blockPos);
+        for (BlockPos pos : SURROUNDING_BLOCKS) {
+            if (serverLevel.getBlockState(pos).isAir() && serverLevel.getBlockState(pos.above()).isAir()) {
                 return pos;
             }
         }
         // Destroy the blocks near the portal to create an empty space.
-        for (BlockPos pos : SURROUNDING_BLOCKS){
+        for (BlockPos pos : SURROUNDING_BLOCKS) {
             serverLevel.destroyBlock(pos, true);
             serverLevel.destroyBlock(pos.above(), true);
             serverLevel.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
             serverLevel.setBlockAndUpdate(pos.above(), Blocks.AIR.defaultBlockState());
         }
         return blockPos.east();
+    }
+
+    private static List<BlockPos> getSurroundingBlocks(BlockPos blockPos) {
+        return List.of(blockPos.east(), blockPos.south(), blockPos.west(), blockPos.north(),
+                blockPos.east().south(), blockPos.east().north(), blockPos.west().south(), blockPos.west().north());
     }
 }

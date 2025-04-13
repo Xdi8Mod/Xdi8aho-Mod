@@ -1,11 +1,8 @@
 package io.github.qwerty770.mcmod.xdi8.entity;
 
-import com.google.common.collect.ImmutableList;
 import io.github.qwerty770.mcmod.xdi8.tick.ITickable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionResult;
@@ -28,7 +25,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.List;
 
 @ApiStatus.Experimental
 @ParametersAreNonnullByDefault
@@ -39,17 +35,12 @@ public abstract class AbstractBlockWithEntity<E extends BlockEntity & ITickable>
         super(settings);
     }
 
-    public List<ResourceLocation> incrementWhileOnUse(BlockState state, Level world, BlockPos pos, ServerPlayer serverPlayerEntity, BlockHitResult blockHitResult) {
-        return ImmutableList.of();
-    }
-
     @Override
     public @NotNull InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
         if (!world.isClientSide) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof MenuProvider && blockEntityPredicate(blockEntity)) {
                 player.openMenu((MenuProvider) blockEntity);
-                incrementWhileOnUse(state, world, pos, (ServerPlayer) player, hit).forEach(player::awardStat);
             }
             return InteractionResult.CONSUME;
         }
