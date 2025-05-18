@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "firefly8:symbol_stone_vx",
+    "minecraft:creeper_head",
+    "minecraft:dragon_head",
+    "minecraft:piglin_head",
+    "minecraft:player_head",
+    "minecraft:skeleton_skull",
+    "minecraft:zombie_head"
+  ]
+}

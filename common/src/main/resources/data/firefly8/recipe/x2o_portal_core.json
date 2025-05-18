@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "III",
+    "IGI",
+    "III"
+  ],
+  "key": {
+    "I": "firefly8:indium_ingot",
+    "G": "#c:dusts/redstone"
+  },
+  "result": {
+    "id": "firefly8:xdi8aho_back_portal_core"
+  }
+}

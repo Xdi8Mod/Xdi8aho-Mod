@@ -1,0 +1,48 @@
+{
+  "replace": false,
+  "values": [
+    "firefly8:symbol_stone_w",
+    "minecraft:andesite",
+    "minecraft:andesite_slab",
+    "minecraft:andesite_stairs",
+    "minecraft:andesite_wall",
+    "minecraft:polished_andesite",
+    "minecraft:polished_andesite_slab",
+    "minecraft:polished_andesite_stairs",
+
+    "minecraft:basalt",
+    "minecraft:polished_basalt",
+    "minecraft:calcite",
+    
+    "minecraft:chiseled_tuff",
+    "minecraft:chiseled_tuff_bricks",
+    "minecraft:tuff",
+    "minecraft:tuff_brick_slab",
+    "minecraft:tuff_brick_stairs",
+    "minecraft:tuff_brick_wall",
+    "minecraft:tuff_bricks",
+    "minecraft:tuff_slab",
+    "minecraft:tuff_stairs",
+    "minecraft:tuff_wall",
+    "minecraft:polished_tuff",
+    "minecraft:polished_tuff_slab",
+    "minecraft:polished_tuff_stairs",
+    "minecraft:polished_tuff_wall",
+    
+    "minecraft:diorite",
+    "minecraft:diorite_slab",
+    "minecraft:diorite_stairs",
+    "minecraft:diorite_wall",
+    "minecraft:polished_diorite",
+    "minecraft:polished_diorite_slab",
+    "minecraft:polished_diorite_stairs",
+
+    "minecraft:granite",
+    "minecraft:granite_slab",
+    "minecraft:granite_stairs",
+    "minecraft:granite_wall",
+    "minecraft:polished_granite",
+    "minecraft:polished_granite_slab",
+    "minecraft:polished_granite_stairs"
+  ]
+}

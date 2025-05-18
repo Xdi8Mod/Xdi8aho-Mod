@@ -1,0 +1,33 @@
+{
+  "display": {
+    "title": {
+      "translate": "advancements.firefly8.tinted_glass_bottle.title"
+    },
+    "description": {
+      "translate": "advancements.firefly8.tinted_glass_bottle.description"
+    },
+    "icon": {
+      "id": "firefly8:tinted_glass_bottle"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "firefly8:xdi8aho",
+  "criteria": {
+    "get_bottle": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:tinted_glass_bottle"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {}
+}

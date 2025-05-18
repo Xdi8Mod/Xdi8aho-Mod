@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "firefly8:symbol_stone_hx",
+    "minecraft:beacon",
+    "minecraft:comparator",
+    "minecraft:calibrated_sculk_sensor",
+    "minecraft:dragon_egg",
+    "minecraft:observer",
+    "minecraft:sculk",
+    "minecraft:sculk_catalyst",
+    "minecraft:sculk_sensor",
+    "minecraft:sculk_shrieker",
+    "minecraft:sculk_vein",
+    "minecraft:piston",
+    "minecraft:redstone_block",
+    "minecraft:redstone_torch",
+    "minecraft:redstone_wire",
+    "minecraft:sticky_piston"
+  ]
+}

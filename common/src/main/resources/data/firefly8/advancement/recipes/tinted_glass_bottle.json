@@ -1,0 +1,44 @@
+{
+  "parent": "recipes/root",
+  "rewards": {
+    "recipes": [
+      "firefly8:tint_glass_bottles",
+      "firefly8:tinted_glass_bottle"
+    ]
+  },
+  "criteria": {
+    "material": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:amethyst_shard",
+              "glass_bottle",
+              "tinted_glass"
+            ]
+          }
+        ]
+      }
+    },
+    "recipe1": {
+      "trigger": "recipe_unlocked",
+      "conditions": {
+        "recipe": "firefly8:tint_glass_bottles"
+      }
+    },
+    "recipe2": {
+      "trigger": "recipe_unlocked",
+      "conditions": {
+        "recipe": "firefly8:tinted_glass_bottle"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "material",
+      "recipe1",
+      "recipe2"
+    ]
+  ]
+}

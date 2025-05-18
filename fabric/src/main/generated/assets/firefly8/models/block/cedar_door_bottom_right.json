@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom_right",
+  "textures": {
+    "bottom": "firefly8:block/cedar_door_bottom",
+    "top": "firefly8:block/cedar_door_top"
+  }
+}

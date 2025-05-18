@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "firefly8:symbol_stone_r",
+    "minecraft:bookshelf",
+    "minecraft:chiseled_bookshelf",
+    "minecraft:jukebox",
+    "minecraft:lectern",
+    "minecraft:note_block"
+  ]
+}

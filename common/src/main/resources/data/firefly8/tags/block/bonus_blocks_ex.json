@@ -1,0 +1,24 @@
+{
+  "replace": false,
+  "values": [
+    "firefly8:symbol_stone_ex",
+    "minecraft:dark_prismarine",
+    "minecraft:dark_prismarine_slab",
+    "minecraft:dark_prismarine_stairs",
+    "minecraft:mud",
+    "minecraft:mud_brick_slab",
+    "minecraft:mud_brick_stairs",
+    "minecraft:mud_brick_wall",
+    "minecraft:mud_bricks",
+    "minecraft:muddy_mangrove_roots",
+    "minecraft:prismarine",
+    "minecraft:prismarine_brick_slab",
+    "minecraft:prismarine_brick_stairs",
+    "minecraft:prismarine_bricks",
+    "minecraft:prismarine_slab",
+    "minecraft:prismarine_stairs",
+    "minecraft:prismarine_wall",
+    "minecraft:water",
+    "#minecraft:cauldrons"
+  ]
+}

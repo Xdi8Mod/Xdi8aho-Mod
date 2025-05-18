@@ -1,0 +1,33 @@
+{
+  "display": {
+    "title": {
+      "translate": "advancements.firefly8.chisel.title"
+    },
+    "description": {
+      "translate": "advancements.firefly8.chisel.description"
+    },
+    "icon": {
+      "id": "firefly8:indium_chisel"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "firefly8:indium_ingot",
+  "criteria": {
+    "get_chisel": {
+      "trigger": "inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:indium_chisel"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {}
+}

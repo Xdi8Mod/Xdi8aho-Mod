@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "G*G",
+    "LrL",
+    " r "
+  ],
+  "key": {
+    "G": "#c:ingots/gold",
+    "*": "minecraft:diamond",
+    "r": "#c:dusts/redstone",
+    "L": "minecraft:lapis_lazuli"
+  },
+  "result": {
+    "id": "firefly8:xdi8aho",
+    "count": 1
+  }
+}

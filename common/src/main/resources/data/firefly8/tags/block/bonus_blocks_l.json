@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "firefly8:symbol_stone_l",
+    "minecraft:crafting_table",
+    "minecraft:fletching_table",
+    "minecraft:loom",
+    "minecraft:smithing_table",
+    "minecraft:stonecutter",
+    "minecraft:target"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "spmreborn:enchanted_oak_sapling",
+      "required": false
+    },
+    {
+      "id": "spmreborn:enchanted_spruce_sapling",
+      "required": false
+    },
+    {
+      "id": "spmreborn:enchanted_birch_sapling",
+      "required": false
+    },
+    {
+      "id": "spmreborn:enchanted_jungle_sapling",
+      "required": false
+    },
+    {
+      "id": "spmreborn:enchanted_acacia_sapling",
+      "required": false
+    },
+    {
+      "id": "spmreborn:enchanted_dark_oak_sapling",
+      "required": false
+    }
+  ]
+}

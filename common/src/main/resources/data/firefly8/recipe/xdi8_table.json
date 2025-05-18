@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ERE",
+    "III"
+  ],
+  "key": {
+    "E": "#c:storage_blocks/gold",
+    "I": "firefly8:indium_block",
+    "R": "#c:storage_blocks/redstone"
+  },
+  "result": {
+    "id": "firefly8:xdi8_table"
+  }
+}

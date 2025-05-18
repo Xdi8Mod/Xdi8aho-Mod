@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "OAO",
+    "ATA",
+    "OAO"
+  ],
+  "key": {
+    "O": "minecraft:crying_obsidian",
+    "A": "minecraft:amethyst_shard",
+    "T": "minecraft:ghast_tear"
+  },
+  "result": {
+    "id": "firefly8:xdi8aho_portal_core"
+  }
+}

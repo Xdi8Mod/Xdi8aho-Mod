@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "firefly8:symbol_stone_d",
+    "minecraft:coarse_dirt",
+    "minecraft:dirt",
+    "minecraft:farmland",
+    "minecraft:gravel",
+    "minecraft:mycelium",
+    "minecraft:packed_mud",
+    "minecraft:podzol",
+    "minecraft:suspicious_gravel",
+    "minecraft:rooted_dirt",
+    "#minecraft:concrete_powder",
+    "#minecraft:sand"
+  ]
+}

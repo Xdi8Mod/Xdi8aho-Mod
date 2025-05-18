@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ii",
+    "is",
+    " s"
+  ],
+  "key": {
+    "i": "firefly8:indium_ingot",
+    "s": "#c:rods/wooden"
+  },
+  "result": {
+    "id": "firefly8:indium_axe",
+    "count": 1
+  }
+}

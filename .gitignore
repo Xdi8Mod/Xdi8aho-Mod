@@ -24,3 +24,6 @@ run
 
 # Files from Forge MDK
 forge*changelog.txt
+
+# Generation scripts, created by myself
+*.py

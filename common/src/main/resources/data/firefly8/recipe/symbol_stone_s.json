@@ -1,0 +1,10 @@
+{
+  "type": "firefly8:produce_symbol",
+  "letter": "firefly8:s",
+  "weight": [
+    {
+      "block": "#firefly8:bonus_blocks_s",
+      "weight": 2.25
+    }
+  ]
+}

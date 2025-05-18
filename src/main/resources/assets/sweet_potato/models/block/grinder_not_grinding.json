@@ -1,9 +1,0 @@
-{
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "particle": "sweet_potato:block/grinder_side",
-    "top": "sweet_potato:block/grinder_top_we",
-    "bottom": "firefly8:block/the_unlight_coloured_bricks_made_of_stone_that_has_symbol_on_it_which_it_has_the_longest_name",
-    "side": "sweet_potato:block/grinder_side"
-  }
-}

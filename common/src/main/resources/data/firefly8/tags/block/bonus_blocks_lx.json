@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "firefly8:symbol_stone_lx",
+    "minecraft:cake",
+    "minecraft:dried_kelp_block",
+    "#minecraft:candle_cakes",
+    "#minecraft:maintains_farmland"
+  ]
+}

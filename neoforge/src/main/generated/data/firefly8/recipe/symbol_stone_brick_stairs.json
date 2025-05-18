@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "symbol_stone_bricks_stairs",
+  "key": {
+    "#": "firefly8:symbol_stone_bricks"
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "result": {
+    "count": 4,
+    "id": "firefly8:symbol_stone_brick_stairs"
+  }
+}

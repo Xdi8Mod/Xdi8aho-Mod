@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "#spmreborn:raw_sweet_potatoes",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "firefly8:block/portal_block_parent",
+  "textures": {
+    "particle": "firefly8:block/xdi8aho_portal",
+    "side": "firefly8:block/xdi8aho_portal"
+  }
+}

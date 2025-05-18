@@ -1,0 +1,19 @@
+{
+  "replace": false,
+  "values": [
+    "firefly8:symbol_stone_x",
+    "minecraft:blast_furnace",
+    "minecraft:campfire",
+    "minecraft:fire",
+    "minecraft:furnace",
+    "minecraft:lantern",
+    "minecraft:lava",
+    "minecraft:magma_block",
+    "minecraft:smoker",
+    "minecraft:soul_campfire",
+    "minecraft:soul_fire",
+    "minecraft:soul_lantern",
+    "minecraft:torch",
+    "minecraft:wall_torch"
+  ]
+}

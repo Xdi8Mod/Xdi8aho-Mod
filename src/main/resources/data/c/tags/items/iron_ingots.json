@@ -1,9 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    {
-      "required": false,
-      "id": "#forge:ingots/iron"
-    }
-  ]
-}

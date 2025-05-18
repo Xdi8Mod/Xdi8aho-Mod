@@ -1,0 +1,40 @@
+{
+  "display": {
+    "title":{
+      "translate": "advancements.firefly8.xdi8_totem.title"
+    },
+    "description": {
+      "translate": "advancements.firefly8.xdi8_totem.description"
+    },
+    "icon": {
+      "id": "firefly8:xdi8aho"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "firefly8:enter_xdi8",
+  "criteria": {
+    "get_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "firefly8:xdi8aho"
+            ],
+            "predicates": {
+              "firefly8:totem_ability": {
+                "totems": [
+                  "firefly8:xdi8"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {}
+}

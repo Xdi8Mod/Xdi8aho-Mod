@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "firefly8:symbol_stone_c",
+    "minecraft:barrel",
+    "minecraft:oak_button",
+    "minecraft:spruce_button",
+    "minecraft:birch_button",
+    "minecraft:jungle_button",
+    "minecraft:acacia_button",
+    "minecraft:dark_oak_button",
+    "minecraft:pale_oak_button",
+    "minecraft:mangrove_button",
+    "minecraft:cherry_button",
+    "#minecraft:all_signs",
+    "#minecraft:logs",
+    "#minecraft:planks",
+    "#minecraft:wooden_slabs",
+    "#minecraft:wooden_stairs"
+  ]
+}

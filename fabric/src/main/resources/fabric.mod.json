@@ -8,30 +8,39 @@
   ],
   "description": "Firefly, carry light, In the night, blink his eye, Just to make his future bright.",
   "environment": "*",
-
+  "contact": {
+    "homepage": "https://modrinth.com/mod/xdi8aho-mod",
+    "sources": "https://github.com/Xdi8Mod/Xdi8Aho-Mod",
+    "issues": "https://github.com/Xdi8Mod/Xdi8Aho-Mod/issues"
+  },
   "depends": {
-    "fabricloader": ">=0.14.6",
-    "fabric": ">=0.54.0",
-    "architectury": ">=4.9",
-    "java": ">=17",
-    "minecraft": ">=1.18.2 <1.19"
+    "fabricloader": ">=0.15.0",
+    "fabric-api": ">=0.107.0",
+    "architectury": ">=15.0",
+    "minecraft": ">=1.21.4",
+    "java": ">=21"
+  },
+  "suggests": {
+    "spmreborn": ">=1.21.4-1.0.0"
   },
   "entrypoints": {
     "main": [
-      "top.xdi8.mod.firefly8.fabric.Firefly8Fabric",
-      "org.featurehouse.mcmod.spm.platform.fabric.SPMFabricImpl"
+      "top.xdi8.mod.firefly8.fabric.Firefly8Fabric"
     ],
     "client": [
-      "top.xdi8.mod.firefly8.fabric.FireflyClientFabric",
-      "org.featurehouse.mcmod.spm.platform.fabric.SPMClientFabric"
+      "top.xdi8.mod.firefly8.fabric.Firefly8ClientFabric"
+    ],
+    "fabric-datagen": [
+      "top.xdi8.mod.firefly8.fabric.ModDataGenFabric"
     ]
   },
   "authors": [
-    "Xdi8Mod", "teddyxlandlee", "QWERTY770", "7oH_1fT"
+    "teddyxlandlee",
+    "QWERTY770",
+    "Shidinn community"
   ],
   "mixins": [
     "mixins.firefly-fabric.json",
-    "sweet_potato.mixins.json",
     "mixins.firefly8-main.json"
   ],
   "custom": {
@@ -42,8 +51,5 @@
         "description": "Xdi8 Aho Mod"
       }
     }
-  },
-  "jars": [
-    { "file": "META-INF/spm_fake.jar" }
-  ]
+  }
 }

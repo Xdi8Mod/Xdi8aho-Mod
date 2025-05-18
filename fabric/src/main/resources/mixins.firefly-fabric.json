@@ -4,9 +4,5 @@
   "required": true,
   "package": "top.xdi8.mod.firefly8.mixin.fabric",
   "mixins": [
-    "AdvancementsMixin",
-    "BrewingStandBlockEntityMixin",
-    "ServerPlayerCapacityMixin",
-    "AddTintedDragonBreathMixin"
   ]
 }

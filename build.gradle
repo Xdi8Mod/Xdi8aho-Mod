@@ -1,171 +1,101 @@
-import java.time.LocalDateTime
-import java.time.ZoneId
-import java.time.format.DateTimeFormatter
-
+//file:noinspection GroovyAssignabilityCheck
 plugins {
-    id "idea"
-    id "java"
-    id ("architectury-plugin") version "3.4-SNAPSHOT"
-    id ("dev.architectury.loom") version "1.0-SNAPSHOT"
-    //id 'org.jetbrains.kotlin.jvm' version '1.6.20'
-    id ("com.github.johnrengelman.shadow") version "7.1.2" apply false
-    id "maven-publish"
-    id 'io.github.juuxel.loom-vineflower' version '1.11.0' apply false  // add vineflower, see https://github.com/Juuxel/loom-vineflower
-}
-
-//apply from : 'https://featurehouse.github.io/resources/18/06/953b4d/e2d196c3f97701c23ca7d34ce2ed2576a86fab019e7a2009b2b94d/kff-3.3.2.gradle'
-class Constant {
-    static final LocalDateTime now = LocalDateTime.now(ZoneId.of('+8'))
-    static final String timestamp = "${DateTimeFormatter.ofPattern("yyMMdd.HHmm").format(now)}"
+    id "architectury-plugin" version "3.4-SNAPSHOT"
+    id "dev.architectury.loom" version "1.9-SNAPSHOT" apply false
+    id "com.modrinth.minotaur" version "2.+" apply false
+    id "io.github.juuxel.loom-vineflower" version "1.11.0" apply false  // add vineflower, see https://github.com/Juuxel/loom-vineflower
+    id 'maven-publish'
 }
 
 architectury {
     minecraft = rootProject.minecraft_version
-    common("forge", "fabric")
 }
 
-loom {
-    accessWidenerPath = file("src/main/resources/xdi8.accesswidener")
-}
-
-dependencies {
-    // We depend on fabric loader here to use the fabric @Environment annotations and get the mixin dependencies
-    // Do NOT use other classes from fabric loader
-    modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
-    // Remove the next line if you don't want to depend on the API
-    modApi "dev.architectury:architectury:${rootProject.architectury_version}"
-}
-
-allprojects {
-    //if (project.name.endsWith("fake")) return;
+subprojects {
     apply plugin: "dev.architectury.loom"
-    apply plugin: "java"
     apply plugin: "architectury-plugin"
-    apply plugin: "io.github.juuxel.loom-vineflower"
     apply plugin: "maven-publish"
 
-    version = "1.18.2-2.0.0+build.${Constant.timestamp}"
-    group = "top.xdi8.mod"
-    archivesBaseName = "Xdi8aho-Mod"
+    repositories {
+        maven {
+            name = 'ParchmentMC'
+            url = 'https://maven.parchmentmc.org'
+        }
+        maven { url = 'https://maven.neoforged.net/releases' }
+        maven { url "https://maven.fabricmc.net/" }
+        maven { url "https://maven.architectury.dev/" }
+    }
+
+    base {
+        archivesName = rootProject.archives_base_name + "-" + project.name
+    }
 
     loom {
         silentMojangMappingsLicense()
     }
 
     dependencies {
-        repositories {
-            maven { url "https://maven.aliyun.com/repository/public" }
-            maven { url "https://maven.parchmentmc.org/" }
-        }
-
         minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
-        modImplementation 'com.google.errorprone:error_prone_annotations:2.18.0'
-        modImplementation "com.google.code.findbugs:jsr305:3.0.2"
-        // The following line declares the mojmap mappings, you may use other mappings as well
         mappings loom.layered {
             officialMojangMappings()
-            // Can we use yarn parameters?
-            //it.mappings("net.fabricmc:yarn:${rootProject.yarn_version}:v2")
-            it.parchment("org.parchmentmc.data:parchment-${rootProject.minecraft_version}:${rootProject.parchment_version}")
+            parchment("org.parchmentmc.data:parchment-1.21.4:${rootProject.parchment_version}")
         }
-        // The following line declares the yarn mappings you may select this one as well.
-        // mappings "net.fabricmc:yarn:1.18.2+build.4:v2"
+        implementation "org.slf4j:slf4j-api"
+        implementation "com.google.code.findbugs:jsr305:3.0.2"
     }
 
-    java.withSourcesJar()
-
-    processResources {
-        inputs.property version, project.version
-        filesMatching(["META-INF/mods.toml", "fabric.mod.json"]) {
-            expand 'version': project.version
-        }
+    tasks.withType(JavaCompile).configureEach {
+        options.encoding = "UTF-8"
+        options.release = 21
     }
 
-    jar {
-        manifest {
-            attributes([
-                    "Specification-Title"     : "Firefly8",
-                    "Specification-Vendor"    : "Xdi8Aho Mods",
-                    "Specification-Version"   : "1", // We are version 1 of ourselves
-                    "Implementation-Title"    : project.name,
-                    "Implementation-Version"  : project.version,
-                    "Implementation-Vendor"   : "QWERTY770,teddyxlandlee",
-                    "Implementation-Timestamp": "${Constant.now}"
-            ])
-        }
-        from("NOTICE.txt") {
-            rename { "META-INF/NOTICE_xdi8.txt" }
-        }
-        from('LICENSE.txt') {
-            rename { "META-INF/LICENSE_xdi8.txt" }
-        }
-    }
-
-    sourcesJar {
-        duplicatesStrategy = 'EXCLUDE'
-    }
-
-    tasks.withType(JavaCompile.class).configureEach {
-        options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
-        options.release = 17
+    java {
+        withSourcesJar()
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 }
 
-println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
-repositories {
-    mavenCentral()
+allprojects {
+    archives_base_name = rootProject.archives_base_name
+    version = "${rootProject.minecraft_version}-${rootProject.mod_version}"
+    group = rootProject.maven_group
 }
 
-// Include resources generated by data generators.
-//sourceSets.main.resources { srcDir 'src/generated/resources' }
-
+// From https://github.com/teddyxlandlee/end-poem-extension/blob/1.21-all/build.gradle
 subprojects {
-    //if (project.name.endsWith("fake")) return;
-    apply plugin: "com.github.johnrengelman.shadow"
-    apply plugin: "io.github.juuxel.loom-vineflower"  // add vineflower
+    if (System.getenv("MR_TOKEN")) {
+        apply plugin: 'com.modrinth.minotaur'
+        def modLoaders = project.mr_loader.toString().split(",") as List
+        modrinth {
+            token.set System.getenv("MR_TOKEN")
+            projectId.set "U8ElprVE"
+            versionNumber.set "${project.version}-${modLoaders[0]}"
+            versionName.set String.format(
+                    rootProject.mr_version_name_format.toString(),
+                    rootProject.mr_version_game_range,
+                    project.mr_loader_display,
+                    rootProject.mr_version_mod_abbr,
+                    rootProject.mod_version
+            )
+            changelog.set rootProject.mr_version_changelog
+            versionType.set rootProject.mr_version_type
+            gameVersions = rootProject.mr_version_game.toString().split(",") as List
+            loaders.set modLoaders
+            detectLoaders.set false
+            //autoAddDependsOn.set false
 
-    architectury {
-        platformSetupLoomIde()
-    }
+            dependencies {
+                required.project 'architectury-api'
+                if (modLoaders.contains("fabric")) {
+                    required.project 'fabric-api'
+                }
+            }
 
-    configurations {
-        common
-        shadowCommon // Don't use shadow from the shadow plugin because we don't want IDEA to index this.
-        compileClasspath.extendsFrom common
-        runtimeClasspath.extendsFrom common
-    }
+            uploadFile.set tasks.remapJar
+            additionalFiles = [tasks.remapSourcesJar]
 
-    loom {
-        accessWidenerPath = project(":").loom.accessWidenerPath
-    }
-
-    shadowJar {
-        exclude "architectury.common.json"
-
-        configurations = [project.configurations.shadowCommon]
-        classifier "dev-shadow"
-    }
-
-    remapJar {
-        input.set shadowJar.archiveFile
-        dependsOn shadowJar
-        classifier null
-    }
-
-    jar {
-        classifier "dev"
-    }
-
-    sourcesJar {
-        def commonSources = project(":").sourcesJar
-        duplicatesStrategy = 'EXCLUDE'
-        dependsOn commonSources
-        from commonSources.archiveFile.map { zipTree(it) }
-    }
-
-    components.java {
-        withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
-            skip()
+            debugMode = System.getenv("MR_DEBUG_MODE") == '1'
         }
     }
 }
