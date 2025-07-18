@@ -5,6 +5,7 @@ import org.objectweb.asm.tree.*;
 
 import java.util.Objects;
 
+@Deprecated(since = "3.0.0")
 final class LoadFontsConfigASM implements Runnable {
     private final ClassNode cls;
 

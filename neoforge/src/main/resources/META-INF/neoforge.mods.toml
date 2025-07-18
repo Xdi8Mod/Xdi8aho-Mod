@@ -13,7 +13,7 @@ issueTrackerURL="https://github.com/Xdi8Mod/Xdi8Aho-Mod/issues"
 In the night, blink his eye,
 Just to make his future bright."""
     displayURL="https://modrinth.com/mod/xdi8aho-mod"
-    #logoFile=
+    logoFile="assets/firefly8/icon.png"
 
 [[mods]]
     modId="xdi8"
@@ -36,8 +36,6 @@ Just to make his future bright."""
 [[accessTransformers]]
     file="META-INF/accesstransformer.cfg"
 
-[[mixins]]
-    config="mixins.xdi8-fonts.json"
 [[mixins]]
     config="mixins.firefly8-main.json"
 

@@ -11,7 +11,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.GsonHelper;
-import net.neoforged.fml.common.Mod;
 import org.slf4j.Logger;
 
 import java.awt.*;
@@ -22,6 +21,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.List;
 
+@Deprecated(since = "3.0.0")
 public class Xdi8FontsMod {
     private static final ResourceLocation FONT_CFG = ResourceLocationTool.create("xdi8_fonts",
             "modernui/fonts.json");
@@ -77,6 +77,7 @@ public class Xdi8FontsMod {
                 .toList();
     }
 
-    @Mod("xdi8_fonts")  // avoid CoreMod crash
+    // @Mod("xdi8_fonts")  // avoid CoreMod crash
+    @Deprecated
     public static final class Wrapper {}
 }

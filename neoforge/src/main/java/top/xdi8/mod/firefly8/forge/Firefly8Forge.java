@@ -16,10 +16,6 @@ import top.xdi8.mod.firefly8.item.FireflyItemTags;
 public class Firefly8Forge {
     public Firefly8Forge() {
         Firefly8.init();
-        /*if (Environment.get().getDist().equals(Dist.CLIENT)){
-            FireflyNetwork.registerClientNetwork();
-        }
-        FireflyNetwork.registerServerNetwork();*/
     }
 
     @EventBusSubscriber(modid = "firefly8", bus = EventBusSubscriber.Bus.MOD)

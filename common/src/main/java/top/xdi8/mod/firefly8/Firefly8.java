@@ -6,6 +6,7 @@ import dev.architectury.registry.level.entity.EntityAttributeRegistry;
 import io.github.qwerty770.mcmod.xdi8.registries.ResourceLocationTool;
 import io.github.qwerty770.mcmod.xdi8.registries.RegistryHelper;
 import net.minecraft.server.packs.PackType;
+import net.minecraft.world.level.block.ComposterBlock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import top.xdi8.mod.firefly8.advancement.FireflyCustomAdvancements;
@@ -33,11 +34,11 @@ public class Firefly8 {
     public static final Logger LOGGER = LoggerFactory.getLogger("Firefly8");
 
     public static void init() {
-        FireflyMobBiomeGen.registerBiomeModifications();
+        CommandRegistrationEvent.EVENT.register((dispatcher, registry, selection) -> FireflyCommands.init(dispatcher, selection));
         ReloadListenerRegistry.register(PackType.SERVER_DATA, new Xdi8PortalBasicDataLoader(), ResourceLocationTool.create("firefly8:xdi8_portal_data"));
         EntityAttributeRegistry.register(FireflyEntityTypes.FIREFLY, FireflyEntity::createAttributes);
-        CommandRegistrationEvent.EVENT.register((dispatcher, registry, selection) -> FireflyCommands.init(dispatcher, selection));
-        // EntityEvent.LIVING_DEATH.register();
+        FireflyMobBiomeGen.registerBiomeModifications();
+        Firefly8.registerCompostableItems();
     }
 
     public static void activateRegistries() {
@@ -73,5 +74,10 @@ public class Firefly8 {
         LettersUtil.fireLetterRegistry();
         // Totem
         TotemAbilities.fireRegistry();
+    }
+
+    public static void registerCompostableItems() {
+        ComposterBlock.COMPOSTABLES.put(FireflyItems.CEDAR_LEAVES.get(), 0.3f);
+        ComposterBlock.COMPOSTABLES.put(FireflyItems.CEDAR_SAPLING.get(), 0.3f);
     }
 }
