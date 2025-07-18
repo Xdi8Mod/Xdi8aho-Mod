@@ -40,7 +40,6 @@
     "Shidinn community"
   ],
   "mixins": [
-    "mixins.firefly-fabric.json",
     "mixins.firefly8-main.json"
   ],
   "custom": {

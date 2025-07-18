@@ -16,7 +16,7 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import top.xdi8.mod.firefly8.block.FireflyBlocks;
 
-@StableApi(since = "1.21.4-3.0.0-beta1")
+@StableApi(since = "3.0.0-beta1")
 public class BlockUtils {
     public static RegistrySupplier<Block> createPotted(String id, RegistrySupplier<Block> inside) {
         return RegistryHelper.block(id, (properties) -> new FlowerPotBlock(inside.get(), properties),

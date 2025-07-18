@@ -43,7 +43,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 @SuppressWarnings("unused")
-@StableApi(since = "1.21.4-3.0.0-beta1")
+@StableApi(since = "3.0.0-beta1")
 public abstract class RegistryHelper {
     private static final List<DeferredRegister<?>> modRegistries = new ArrayList<>();
     public static final DeferredRegister<Block> blockRegistry = ofModRegistry(Registries.BLOCK);

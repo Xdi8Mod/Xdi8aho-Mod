@@ -79,7 +79,6 @@ public final class FireflyItems {
     public static final RegistrySupplier<BlockItem> CEDAR_STAIRS;
     public static final RegistrySupplier<BlockItem> CEDAR_TRAPDOOR;
     public static final RegistrySupplier<BlockItem> CEDAR_WOOD;
-    public static final RegistrySupplier<BlockItem> POTTED_CEDAR_SAPLING;
     public static final RegistrySupplier<BlockItem> STRIPPED_CEDAR_LOG;
     public static final RegistrySupplier<BlockItem> STRIPPED_CEDAR_WOOD;
 
@@ -146,7 +145,6 @@ public final class FireflyItems {
         CEDAR_STAIRS = blockItem("cedar_stairs", FireflyBlocks.CEDAR_STAIRS, defaultProp());
         CEDAR_TRAPDOOR = blockItem("cedar_trapdoor", FireflyBlocks.CEDAR_TRAPDOOR, defaultProp());
         CEDAR_WOOD = blockItem("cedar_wood", FireflyBlocks.CEDAR_WOOD, defaultProp());
-        POTTED_CEDAR_SAPLING = blockItem("potted_cedar_sapling", FireflyBlocks.POTTED_CEDAR_SAPLING, defaultProp());
         STRIPPED_CEDAR_LOG = blockItem("stripped_cedar_log", FireflyBlocks.STRIPPED_CEDAR_LOG, defaultProp());
         STRIPPED_CEDAR_WOOD = blockItem("stripped_cedar_wood", FireflyBlocks.STRIPPED_CEDAR_WOOD, defaultProp());
     }

@@ -81,16 +81,20 @@ public class FireflyBlocks {
 
     static {
         INDIUM_BLOCK = defaultBlock("indium_block", BlockBehaviour.Properties.of()
+                .mapColor(MapColor.QUARTZ)
                 .strength(1.0F, 6.0F)
                 .requiresCorrectToolForDrops());
         INDIUM_ORE_BLOCK = defaultBlock("indium_ore", BlockBehaviour.Properties.of()
+                .mapColor(MapColor.STONE)
                 .strength(3.0F, 3.0F)
                 .requiresCorrectToolForDrops());
         DEEPSLATE_INDIUM_ORE_BLOCK = defaultBlock("deepslate_indium_ore", BlockBehaviour.Properties.of()
+                .mapColor(MapColor.DEEPSLATE)
                 .strength(4.5F, 3.0F)
                 .requiresCorrectToolForDrops()
                 .sound(SoundType.DEEPSLATE));
         XDI8AHO_PORTAL_CORE_BLOCK = defaultBlock("xdi8aho_portal_core", BlockBehaviour.Properties.of()
+                .mapColor(MapColor.COLOR_PURPLE)
                 .strength(10F, 1200F)
                 .requiresCorrectToolForDrops());
         XDI8AHO_PORTAL_TOP_BLOCK = block("xdi8aho_torch_top", Xdi8ahoPortalTopBlock::new,
@@ -109,7 +113,7 @@ public class FireflyBlocks {
                         .sound(SoundType.AMETHYST));
         XDI8AHO_BACK_PORTAL_CORE_BLOCK = block("xdi8aho_back_portal_core", BackPortalCoreBlock::new,
                 BlockBehaviour.Properties.of()
-                        .mapColor(MapColor.COLOR_LIGHT_GRAY)
+                        .mapColor(MapColor.QUARTZ)
                         .strength(10F, 800F)
                         .requiresCorrectToolForDrops());
         XDI8AHO_BACK_FIRE_BLOCK = block("xdi8aho_back_portal_fire", BackPortalFireBlock::new,
@@ -122,33 +126,39 @@ public class FireflyBlocks {
                         .lightLevel((bs) -> 15));
         XDI8_TABLE = block("xdi8_table", Xdi8TableBlock::new,
                 BlockBehaviour.Properties.of()
+                        .mapColor(MapColor.GOLD)
                         .requiresCorrectToolForDrops()
                         .strength(3.5F, 6.0F));
 
         SymbolStoneBlock.registerAll(RegistryHelper::block);
         DARK_SYMBOL_STONE = defaultBlock("dark_symbol_stone",
                 BlockBehaviour.Properties.of()
+                        .mapColor(MapColor.STONE)
                         .strength(2.0F, 8.0F)
                         .requiresCorrectToolForDrops()
                         .sound(SoundType.POLISHED_DEEPSLATE));
         SYMBOL_STONE_BRICKS = defaultBlock("symbol_stone_bricks",
                 BlockBehaviour.Properties.of()
+                        .mapColor(MapColor.STONE)
                         .strength(1.0F, 4.0F)
                         .requiresCorrectToolForDrops()
                         .sound(SoundType.STONE));
         SYMBOL_STONE_BRICK_SLAB = block("symbol_stone_brick_slab", SlabBlock::new,
                 BlockBehaviour.Properties.of()
+                        .mapColor(MapColor.STONE)
                         .strength(2.0F, 3.0F)
                         .requiresCorrectToolForDrops()
                         .sound(SoundType.STONE));
         SYMBOL_STONE_BRICK_STAIRS = block("symbol_stone_brick_stairs",
                 (properties) -> new StairBlock(SYMBOL_STONE_BRICKS.get().defaultBlockState(), properties),
                 BlockBehaviour.Properties.of()
+                        .mapColor(MapColor.STONE)
                         .strength(2.0F, 3.0F)
                         .requiresCorrectToolForDrops()
                         .sound(SoundType.STONE));
         SYMBOL_STONE_NN = block("symbol_stone_nn", SymbolStoneNNBlock::new,
                 BlockBehaviour.Properties.of()
+                        .mapColor(MapColor.STONE)
                         .overrideDescription("block.firefly8.symbol_stone")
                         .mapColor(MapColor.COLOR_LIGHT_GRAY)
                         .strength(1.5F, 8.0F)

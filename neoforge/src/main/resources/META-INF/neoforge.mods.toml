@@ -34,12 +34,12 @@ Just to make his future bright."""
     displayURL="https://modrinth.com/mod/xdi8aho-mod"
 
 [[accessTransformers]]
-file="META-INF/accesstransformer.cfg"
+    file="META-INF/accesstransformer.cfg"
 
 [[mixins]]
     config="mixins.xdi8-fonts.json"
-    config1="mixins.firefly8-main.json"
-    config2="mixins.firefly-forge.json"
+[[mixins]]
+    config="mixins.firefly8-main.json"
 
 [[dependencies.firefly8]]
     modId="neoforge"

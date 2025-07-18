@@ -1,4 +1,4 @@
-// 1.21.4	2025-04-09T03:01:45.5430299	Firefly8 Models
+// 1.21.4	2025-07-18T00:08:28.8116561	Firefly8 Models
 d7ecdffed88db07f87d287e4a7da6b1b431681c4 assets/firefly8/blockstates/cedar_button.json
 8c98fac3f87e857505edfd768d0d39bf77753ed7 assets/firefly8/blockstates/cedar_door.json
 6f74e795b3997a0dc0e9fadbbed5f862cf9363c5 assets/firefly8/blockstates/cedar_fence.json
@@ -101,7 +101,6 @@ a65fbfd76f896326390f52f3da18d71e8ac431f6 assets/firefly8/items/indium_ore.json
 407328564398ce02eade309e273cfc7e4f43d4d4 assets/firefly8/items/indium_pickaxe.json
 c75041dd17eb0d227b2edb5f81fc1bf81d9254e2 assets/firefly8/items/indium_shovel.json
 b6df947e43e5def2c53b1a4f80fc808969600f8e assets/firefly8/items/indium_sword.json
-bbb756f33a0135c6d9eb159691b48ba9a9c27b3c assets/firefly8/items/potted_cedar_sapling.json
 64883b4145a9f296410cfd7b547d37d92bd7fd34 assets/firefly8/items/stripped_cedar_log.json
 3e82526292038dace602cd284966df95154a8278 assets/firefly8/items/stripped_cedar_wood.json
 b3b01e1f772098675e3a7fbdb50b79e359022825 assets/firefly8/items/symbol_stone.json
