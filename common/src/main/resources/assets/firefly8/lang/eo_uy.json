@@ -1,0 +1,18 @@
+{
+  "entity.firefly8.firefly": "Lampiro",
+  "block.firefly8.dark_symbol_stone": "Malhela Simbolŝtono",
+  "block.firefly8.symbol_stone.letter": "Simbolo: %s",
+  "block.firefly8.symbol_stone_nn": "Simbolo: %s (nur Krea)",
+  "modmenu.descriptionTranslation.xdi8": "Ŝidina modifo",
+  "modmenu.summaryTranslation.xdi8": "Ŝidin-aho",
+  "advancements.firefly8.indium_ingot.title": "Vi ne estas tiel fera",
+  "advancements.firefly8.indium_ingot.description": "Akiru indio",
+  "advancements.firefly8.xdi8_totem.title": "O Aho Mio",
+  "advancements.firefly8.xdi8_totem.description": "Akiru Ŝidina totemo",
+  "advancements.firefly8.xdi8aho.title": "Ŝidin-aho",
+  "biome.firefly8.frozen_peaks": "Ŝidinujaj frostaj pintoj",
+  "biome.firefly8.jagged_peaks": "Ŝidinujaj dentaj pintoj",
+  "biome.firefly8.meadow": "Ŝidinuja herbejo",
+  "biome.firefly8.plains": "Ŝidinuja ebenaĵo",
+  "biome.firefly8.swamp": "Ŝidinuja marĉo"
+}

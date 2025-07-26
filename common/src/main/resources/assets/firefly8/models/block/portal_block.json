@@ -1,7 +1,38 @@
 {
-  "parent": "firefly8:block/portal_block_parent",
+  "parent": "block/block",
+  "elements": [
+    {
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ],
+      "faces": {
+        "north": {
+          "texture": "#side",
+          "cullface": "north"
+        },
+        "south": {
+          "texture": "#side",
+          "cullface": "south"
+        },
+        "west": {
+          "texture": "#side",
+          "cullface": "west"
+        },
+        "east": {
+          "texture": "#side",
+          "cullface": "east"
+        }
+      }
+    }
+  ],
   "textures": {
-    "particle": "firefly8:block/xdi8aho_portal",
     "side": "firefly8:block/xdi8aho_portal"
   }
 }

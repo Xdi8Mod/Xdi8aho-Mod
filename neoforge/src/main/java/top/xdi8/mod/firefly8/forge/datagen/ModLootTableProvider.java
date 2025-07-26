@@ -31,7 +31,7 @@ public class ModLootTableProvider extends BlockLootSubProvider {
         this.add(FireflyBlocks.CEDAR_DOOR.get(), this::createDoorTable);
         this.add(FireflyBlocks.CEDAR_LEAVES.get(), (block -> this.createLeavesDrops(block, FireflyBlocks.CEDAR_SAPLING.get(), 0.05F, 0.0625F, 0.083333336F, 0.1F)));
         this.add(FireflyBlocks.CEDAR_SLAB.get(), this::createSlabItemTable);
-        this.add(FireflyBlocks.POTTED_CEDAR_SAPLING.get(), this::createPotFlowerItemTable);
+        this.add(FireflyBlocks.POTTED_CEDAR_SAPLING.get(), (block -> this.createPotFlowerItemTable(FireflyBlocks.CEDAR_SAPLING.get())));
         this.add(FireflyBlocks.SYMBOL_STONE_BRICK_SLAB.get(), this::createSlabItemTable);
         this.add(FireflyBlocks.XDI8AHO_PORTAL_BLOCK.get(), (block) -> BlockLootSubProvider.noDrop());
         this.add(FireflyBlocks.XDI8AHO_BACK_FIRE_BLOCK.get(), (block) -> BlockLootSubProvider.noDrop());

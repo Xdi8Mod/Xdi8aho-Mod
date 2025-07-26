@@ -52,8 +52,14 @@ remapJar {
 
 sourceSets {
     main {
-        resources.srcDirs file("src/main/generated")
+        resources.srcDirs += file("src/main/generated")
     }
+}
+
+sourcesJar {
+    def commonSources = project(":common").sourcesJar
+    dependsOn commonSources
+    from commonSources.archiveFile.map { zipTree(it) }
 }
 
 loom {

@@ -1,7 +1,7 @@
 //file:noinspection GroovyAssignabilityCheck
 plugins {
     id "architectury-plugin" version "3.4-SNAPSHOT"
-    id "dev.architectury.loom" version "1.9-SNAPSHOT" apply false
+    id "dev.architectury.loom" version "1.10-SNAPSHOT" apply false
     id "com.modrinth.minotaur" version "2.+" apply false
     id "io.github.juuxel.loom-vineflower" version "1.11.0" apply false  // add vineflower, see https://github.com/Juuxel/loom-vineflower
     id 'maven-publish'
@@ -58,7 +58,7 @@ subprojects {
 
 allprojects {
     archives_base_name = rootProject.archives_base_name
-    version = "${rootProject.minecraft_version}-${rootProject.mod_version}"
+    version = "${rootProject.mod_version}+${rootProject.minecraft_version}"
     group = rootProject.maven_group
 }
 
@@ -76,7 +76,7 @@ subprojects {
                     rootProject.mr_version_game_range,
                     project.mr_loader_display,
                     rootProject.mr_version_mod_abbr,
-                    rootProject.mod_version
+                    rootProject.version
             )
             changelog.set rootProject.mr_version_changelog
             versionType.set rootProject.mr_version_type

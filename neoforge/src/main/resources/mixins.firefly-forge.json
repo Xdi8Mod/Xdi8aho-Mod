@@ -1,8 +1,0 @@
-{
-  "minVersion": "0.8",
-  "compatibilityLevel": "JAVA_17",
-  "required": true,
-  "package": "top.xdi8.mod.firefly8.mixin.forge",
-  "mixins": [
-  ]
-}

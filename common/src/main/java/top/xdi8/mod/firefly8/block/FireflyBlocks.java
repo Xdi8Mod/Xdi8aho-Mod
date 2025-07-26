@@ -11,10 +11,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.entity.SignBlockEntity;
+import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
@@ -24,6 +21,7 @@ import net.minecraft.world.level.material.PushReaction;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import top.xdi8.mod.firefly8.block.entity.FireflyBlockEntityTypes;
+import top.xdi8.mod.firefly8.block.entity.RedwoodHangingSignBlockEntity;
 import top.xdi8.mod.firefly8.block.entity.RedwoodSignBlockEntity;
 import top.xdi8.mod.firefly8.world.FireflyTreeFeatures;
 import top.xdi8.mod.firefly8.block.symbol.SymbolStoneBlock;
@@ -64,6 +62,7 @@ public class FireflyBlocks {
     public static final RegistrySupplier<Block> CEDAR_DOOR;
     public static final RegistrySupplier<Block> CEDAR_FENCE;
     public static final RegistrySupplier<Block> CEDAR_FENCE_GATE;
+    public static final RegistrySupplier<Block> CEDAR_HANGING_SIGN;
     public static final RegistrySupplier<Block> CEDAR_LEAVES;
     public static final RegistrySupplier<Block> CEDAR_LOG;
     public static final RegistrySupplier<Block> CEDAR_PLANKS;
@@ -74,6 +73,7 @@ public class FireflyBlocks {
     public static final RegistrySupplier<Block> CEDAR_STAIRS;
     public static final RegistrySupplier<Block> CEDAR_TRAPDOOR;
     public static final RegistrySupplier<Block> CEDAR_WOOD;
+    public static final RegistrySupplier<Block> CEDAR_WALL_HANGING_SIGN;
     public static final RegistrySupplier<Block> CEDAR_WALL_SIGN;
     public static final RegistrySupplier<Block> POTTED_CEDAR_SAPLING;
     public static final RegistrySupplier<Block> STRIPPED_CEDAR_LOG;
@@ -81,16 +81,20 @@ public class FireflyBlocks {
 
     static {
         INDIUM_BLOCK = defaultBlock("indium_block", BlockBehaviour.Properties.of()
+                .mapColor(MapColor.QUARTZ)
                 .strength(1.0F, 6.0F)
                 .requiresCorrectToolForDrops());
         INDIUM_ORE_BLOCK = defaultBlock("indium_ore", BlockBehaviour.Properties.of()
+                .mapColor(MapColor.STONE)
                 .strength(3.0F, 3.0F)
                 .requiresCorrectToolForDrops());
         DEEPSLATE_INDIUM_ORE_BLOCK = defaultBlock("deepslate_indium_ore", BlockBehaviour.Properties.of()
+                .mapColor(MapColor.DEEPSLATE)
                 .strength(4.5F, 3.0F)
                 .requiresCorrectToolForDrops()
                 .sound(SoundType.DEEPSLATE));
         XDI8AHO_PORTAL_CORE_BLOCK = defaultBlock("xdi8aho_portal_core", BlockBehaviour.Properties.of()
+                .mapColor(MapColor.COLOR_PURPLE)
                 .strength(10F, 1200F)
                 .requiresCorrectToolForDrops());
         XDI8AHO_PORTAL_TOP_BLOCK = block("xdi8aho_torch_top", Xdi8ahoPortalTopBlock::new,
@@ -109,7 +113,7 @@ public class FireflyBlocks {
                         .sound(SoundType.AMETHYST));
         XDI8AHO_BACK_PORTAL_CORE_BLOCK = block("xdi8aho_back_portal_core", BackPortalCoreBlock::new,
                 BlockBehaviour.Properties.of()
-                        .mapColor(MapColor.COLOR_LIGHT_GRAY)
+                        .mapColor(MapColor.QUARTZ)
                         .strength(10F, 800F)
                         .requiresCorrectToolForDrops());
         XDI8AHO_BACK_FIRE_BLOCK = block("xdi8aho_back_portal_fire", BackPortalFireBlock::new,
@@ -122,33 +126,39 @@ public class FireflyBlocks {
                         .lightLevel((bs) -> 15));
         XDI8_TABLE = block("xdi8_table", Xdi8TableBlock::new,
                 BlockBehaviour.Properties.of()
+                        .mapColor(MapColor.GOLD)
                         .requiresCorrectToolForDrops()
                         .strength(3.5F, 6.0F));
 
         SymbolStoneBlock.registerAll(RegistryHelper::block);
         DARK_SYMBOL_STONE = defaultBlock("dark_symbol_stone",
                 BlockBehaviour.Properties.of()
+                        .mapColor(MapColor.STONE)
                         .strength(2.0F, 8.0F)
                         .requiresCorrectToolForDrops()
                         .sound(SoundType.POLISHED_DEEPSLATE));
         SYMBOL_STONE_BRICKS = defaultBlock("symbol_stone_bricks",
                 BlockBehaviour.Properties.of()
+                        .mapColor(MapColor.STONE)
                         .strength(1.0F, 4.0F)
                         .requiresCorrectToolForDrops()
                         .sound(SoundType.STONE));
         SYMBOL_STONE_BRICK_SLAB = block("symbol_stone_brick_slab", SlabBlock::new,
                 BlockBehaviour.Properties.of()
+                        .mapColor(MapColor.STONE)
                         .strength(2.0F, 3.0F)
                         .requiresCorrectToolForDrops()
                         .sound(SoundType.STONE));
         SYMBOL_STONE_BRICK_STAIRS = block("symbol_stone_brick_stairs",
                 (properties) -> new StairBlock(SYMBOL_STONE_BRICKS.get().defaultBlockState(), properties),
                 BlockBehaviour.Properties.of()
+                        .mapColor(MapColor.STONE)
                         .strength(2.0F, 3.0F)
                         .requiresCorrectToolForDrops()
                         .sound(SoundType.STONE));
         SYMBOL_STONE_NN = block("symbol_stone_nn", SymbolStoneNNBlock::new,
                 BlockBehaviour.Properties.of()
+                        .mapColor(MapColor.STONE)
                         .overrideDescription("block.firefly8.symbol_stone")
                         .mapColor(MapColor.COLOR_LIGHT_GRAY)
                         .strength(1.5F, 8.0F)
@@ -169,6 +179,19 @@ public class FireflyBlocks {
         CEDAR_FENCE_GATE = block("cedar_fence_gate",
                 (properties) -> new FenceGateBlock(redwoodType, properties),
                 woodenBlock().forceSolidOn().strength(2.0F, 3.0F));
+        CEDAR_HANGING_SIGN = block("cedar_hanging_sign",
+                (properties) -> new CeilingHangingSignBlock(redwoodType, properties) {
+                    @Override
+                    public @NotNull BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
+                        return new RedwoodHangingSignBlockEntity(pos, state);
+                    }
+
+                    @Override
+                    public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level level, @NotNull BlockState state, @NotNull BlockEntityType<T> blockEntityType) {
+                        return createTickerHelper(blockEntityType, FireflyBlockEntityTypes.REDWOOD_HANGING_SIGN.get(), SignBlockEntity::tick);
+                    }
+                },
+                woodenBlock().forceSolidOn().noCollission().strength(1.0F));
         CEDAR_LEAVES = createLeaves("cedar_leaves");
         CEDAR_LOG = block("cedar_log", RotatedPillarBlock::new,
                 woodenBlock().mapColor((blockState) -> blockState.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ?
@@ -208,6 +231,19 @@ public class FireflyBlocks {
         CEDAR_TRAPDOOR = block("cedar_trapdoor",
                 (properties) -> new TrapDoorBlock(redwoodSet, properties),
                 woodenBlock().noOcclusion().strength(3.0F).isValidSpawn(FireflyBlocks::never));
+        CEDAR_WALL_HANGING_SIGN = block("cedar_wall_hanging_sign",
+                (properties) -> new WallHangingSignBlock(redwoodType, properties) {
+                    @Override
+                    public @NotNull BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
+                        return new RedwoodHangingSignBlockEntity(pos, state);
+                    }
+
+                    @Override
+                    public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level level, @NotNull BlockState state, @NotNull BlockEntityType<T> blockEntityType) {
+                        return createTickerHelper(blockEntityType, FireflyBlockEntityTypes.REDWOOD_HANGING_SIGN.get(), SignBlockEntity::tick);
+                    }
+                },
+                woodenBlock().forceSolidOn().noCollission().strength(1.0F));
         CEDAR_WALL_SIGN = block("cedar_wall_sign",
                 (properties) -> new WallSignBlock(redwoodType, properties) {
                     @Override

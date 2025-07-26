@@ -9,6 +9,7 @@ import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 import java.util.List;
 import java.util.Set;
 
+@Deprecated(since = "3.0.0")
 public class LoadFontsConfigWrapper implements IMixinConfigPlugin {
 
     private boolean isMuiLoaded;

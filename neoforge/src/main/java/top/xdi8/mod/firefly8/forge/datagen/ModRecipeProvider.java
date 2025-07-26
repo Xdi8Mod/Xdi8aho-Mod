@@ -4,11 +4,14 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeBuilder;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.NotNull;
 import top.xdi8.mod.firefly8.ModDataGen;
+import top.xdi8.mod.firefly8.block.FireflyBlocks;
+import top.xdi8.mod.firefly8.item.FireflyItems;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -21,6 +24,11 @@ public class ModRecipeProvider extends RecipeProvider {
     public void buildRecipes(){
         buildRecipes(ModDataGen.REDWOOD_FAMILY);
         buildRecipes(ModDataGen.SYMBOL_STONE_FAMILY);
+        this.woodenBoat(FireflyItems.CEDAR_BOAT.get(), FireflyBlocks.CEDAR_PLANKS.get());
+        this.chestBoat(FireflyItems.CEDAR_CHEST_BOAT.get(), FireflyBlocks.CEDAR_PLANKS.get());
+        this.hangingSign(FireflyItems.CEDAR_HANGING_SIGN.get(), FireflyBlocks.STRIPPED_CEDAR_LOG.get());
+        this.stonecutterResultFromBase(RecipeCategory.BUILDING_BLOCKS, FireflyBlocks.SYMBOL_STONE_BRICK_SLAB.get(), FireflyBlocks.SYMBOL_STONE_BRICKS.get(), 2);
+        this.stonecutterResultFromBase(RecipeCategory.BUILDING_BLOCKS, FireflyBlocks.SYMBOL_STONE_BRICK_STAIRS.get(), FireflyBlocks.SYMBOL_STONE_BRICKS.get());
     }
 
     public void buildRecipes(BlockFamily blockFamily) {

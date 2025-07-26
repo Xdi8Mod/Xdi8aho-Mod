@@ -13,5 +13,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.CLASS)
 @Target({ElementType.PACKAGE, ElementType.FIELD, ElementType.METHOD, ElementType.TYPE})
 public @interface StableApi {
-    String since() default "1.21.4-3.0.0";
+    String since() default "3.0.0";
 }

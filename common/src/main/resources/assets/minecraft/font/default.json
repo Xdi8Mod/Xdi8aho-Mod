@@ -1,20 +1,11 @@
 {
-  "providers":[
+  "providers": [
     {
-      "type":"bitmap",
-      "file":"xdi8_fonts:font/xdi8hz.png",
-      "height":8,
+      "type": "bitmap",
+      "file": "xdi8_fonts:font/xdi8seven.png",
+      "height": 8,
       "ascent": 7,
-      "chars":[
-        "\uDB87\uDC30\uDB87\uDC31\uDB87\uDC32\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
-      ]
-    },
-    {
-      "type":"bitmap",
-      "file":"xdi8_fonts:font/i8fairfax1.png",
-      "height":12,
-      "ascent":10,
-      "chars":[
+      "chars": [
         "\udb86\udf00\udb86\udf01\udb86\udf02\udb86\udf03\udb86\udf04\udb86\udf05\udb86\udf06\udb86\udf07\udb86\udf08\udb86\udf09\udb86\udf0a\udb86\udf0b\udb86\udf0c\udb86\udf0d\udb86\udf0e\udb86\udf0f",
         "\udb86\udf10\udb86\udf11\udb86\udf12\udb86\udf13\udb86\udf14\udb86\udf15\udb86\udf16\udb86\udf17\udb86\udf18\udb86\udf19\udb86\udf1a\udb86\udf1b\udb86\udf1c\udb86\udf1d\udb86\udf1e\udb86\udf1f",
         "\udb86\udf20\udb86\udf21\udb86\udf22\udb86\udf23\udb86\udf24\udb86\udf25\udb86\udf26\udb86\udf27\udb86\udf28\udb86\udf29\udb86\udf2a\udb86\udf2b\udb86\udf2c\udb86\udf2d\udb86\udf2e\udb86\udf2f",
@@ -34,6 +25,21 @@
         "\udb87\udc00\udb87\udc01\udb87\udc02\udb87\udc03\udb87\udc04\udb87\udc05\udb87\udc06\udb87\udc07\udb87\udc08\udb87\udc09\udb87\udc0a\udb87\udc0b\udb87\udc0c\udb87\udc0d\udb87\udc0e\udb87\udc0f",
         "\udb87\udc10\udb87\udc11\udb87\udc12\udb87\udc13\udb87\udc14\udb87\udc15\udb87\udc16\udb87\udc17\udb87\udc18\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
         "\udb87\udc20\udb87\udc21\udb87\udc22\udb87\udc23\udb87\udc24\udb87\udc25\udb87\udc26\udb87\udc27\udb87\udc28\udb87\udc29\udb87\udc2a\udb87\udc2b\u0000\u0000\u0000\u0000"
+      ],
+      "filter": {
+        "uniform": false
+      }
+    },
+    {
+      "type": "unihex",
+      "hex_file": "xdi8_fonts:font/unifont_shidinn.zip",
+      "size_overrides": [
+        {
+          "from": "\uDB87\uDC30",
+          "to": "\uDB87\uDC32",
+          "left": 0,
+          "right": 15
+        }
       ]
     }
   ]

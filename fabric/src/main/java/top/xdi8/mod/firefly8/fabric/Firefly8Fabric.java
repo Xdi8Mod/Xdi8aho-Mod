@@ -14,10 +14,6 @@ public class Firefly8Fabric implements ModInitializer {
         Firefly8.init();
         Firefly8.commonSetup();
         registerBrewingRecipes();
-        /*if (FabricLoader.getInstance().getEnvironmentType().equals(EnvType.CLIENT)) {
-            FireflyNetwork.registerClientNetwork();
-        }
-        FireflyNetwork.registerServerNetwork();*/
     }
 
     private static void registerBrewingRecipes() {

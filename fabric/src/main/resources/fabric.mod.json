@@ -13,6 +13,7 @@
     "sources": "https://github.com/Xdi8Mod/Xdi8Aho-Mod",
     "issues": "https://github.com/Xdi8Mod/Xdi8Aho-Mod/issues"
   },
+  "icon": "assets/firefly8/icon.png",
   "depends": {
     "fabricloader": ">=0.15.0",
     "fabric-api": ">=0.107.0",
@@ -40,7 +41,6 @@
     "Shidinn community"
   ],
   "mixins": [
-    "mixins.firefly-fabric.json",
     "mixins.firefly8-main.json"
   ],
   "custom": {

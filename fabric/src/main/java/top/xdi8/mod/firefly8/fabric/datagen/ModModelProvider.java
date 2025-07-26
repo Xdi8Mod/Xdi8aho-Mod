@@ -32,6 +32,7 @@ public class ModModelProvider extends FabricModelProvider {
     public void generateBlockStateModels(BlockModelGenerators blockModels) {
         blockModels.family(FireflyBlocks.CEDAR_PLANKS.get()).generateFor(ModDataGen.REDWOOD_FAMILY);
         blockModels.family(FireflyBlocks.SYMBOL_STONE_BRICKS.get()).generateFor(ModDataGen.SYMBOL_STONE_FAMILY);
+        blockModels.createHangingSign(FireflyBlocks.STRIPPED_CEDAR_LOG.get(), FireflyBlocks.CEDAR_HANGING_SIGN.get(), FireflyBlocks.CEDAR_WALL_HANGING_SIGN.get());
         blockModels.createTintedLeaves(FireflyBlocks.CEDAR_LEAVES.get(), TexturedModel.LEAVES, FoliageColor.FOLIAGE_DEFAULT);
         blockModels.woodProvider(FireflyBlocks.CEDAR_LOG.get()).logWithHorizontal(FireflyBlocks.CEDAR_LOG.get()).wood(FireflyBlocks.CEDAR_WOOD.get());
         blockModels.woodProvider(FireflyBlocks.STRIPPED_CEDAR_LOG.get()).logWithHorizontal(FireflyBlocks.STRIPPED_CEDAR_LOG.get()).wood(FireflyBlocks.STRIPPED_CEDAR_WOOD.get());
