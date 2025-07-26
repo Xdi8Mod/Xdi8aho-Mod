@@ -4,6 +4,8 @@ import dev.architectury.core.item.ArchitecturySpawnEggItem;
 import dev.architectury.registry.CreativeTabRegistry;
 import dev.architectury.registry.fuel.FuelRegistry;
 import dev.architectury.registry.registries.RegistrySupplier;
+import io.github.qwerty770.mcmod.xdi8.item.CustomBoatItem;
+import io.github.qwerty770.mcmod.xdi8.registries.InternalRegistryLogWrapper;
 import io.github.qwerty770.mcmod.xdi8.registries.RegistryHelper;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
@@ -11,25 +13,23 @@ import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.component.Consumables;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import top.xdi8.mod.firefly8.block.FireflyBlocks;
 import top.xdi8.mod.firefly8.entity.FireflyEntityTypes;
 import top.xdi8.mod.firefly8.item.indium.*;
 import top.xdi8.mod.firefly8.item.symbol.SymbolStoneBlockItem;
 import top.xdi8.mod.firefly8.item.symbol.Xdi8TotemItem;
 import top.xdi8.mod.firefly8.item.tint.*;
-import io.github.qwerty770.mcmod.xdi8.registries.InternalRegistryLogWrapper;
 
+import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import static io.github.qwerty770.mcmod.xdi8.registries.RegistryHelper.*;
+import static io.github.qwerty770.mcmod.xdi8.registries.RegistryHelper.creativeModeTab;
 
 public final class FireflyItems {
     public static final InternalRegistryLogWrapper LOG_WRAPPER = InternalRegistryLogWrapper.firefly8("items");
-    public static final CreativeModeTab FIREFLY8_TAB = CreativeTabRegistry.create(Component.translatable("itemGroup.firefly8.firefly8"),
-            () -> FireflyItems.XDI8AHO_ICON.get().getDefaultInstance());
-    public static final RegistrySupplier<CreativeModeTab> FIREFLY8_TAB_SUPPLIER = creativeModeTab("firefly8_items", FIREFLY8_TAB);
-
     public static final RegistrySupplier<Item> INDIUM_INGOT;
     public static final RegistrySupplier<Item> INDIUM_NUGGET;
     public static final RegistrySupplier<Item> INDIUM_AXE;
@@ -41,9 +41,11 @@ public final class FireflyItems {
     public static final RegistrySupplier<BlockItem> INDIUM_BLOCK;
     public static final RegistrySupplier<BlockItem> INDIUM_ORE_BLOCK;
     public static final RegistrySupplier<BlockItem> DEEPSLATE_INDIUM_ORE_BLOCK;
-
     public static final RegistrySupplier<Item> BUNDLER;
     public static final RegistrySupplier<Item> XDI8AHO_ICON;
+    public static final CreativeModeTab FIREFLY8_TAB = CreativeTabRegistry.create(Component.translatable("itemGroup.firefly8.firefly8"),
+            () -> FireflyItems.XDI8AHO_ICON.get().getDefaultInstance());
+    public static final RegistrySupplier<CreativeModeTab> FIREFLY8_TAB_SUPPLIER = creativeModeTab("firefly8_items", FIREFLY8_TAB);
     public static final RegistrySupplier<Item> FIREFLY_SPAWN_EGG;
 
     public static final RegistrySupplier<BlockItem> XDI8AHO_PORTAL_CORE_BLOCK;
@@ -65,10 +67,13 @@ public final class FireflyItems {
     public static final RegistrySupplier<BlockItem> SYMBOL_STONE_BRICK_STAIRS;
     public static final RegistrySupplier<BlockItem> SYMBOL_STONE_NN;
 
+    public static final RegistrySupplier<Item> CEDAR_BOAT;
+    public static final RegistrySupplier<Item> CEDAR_CHEST_BOAT;
     public static final RegistrySupplier<BlockItem> CEDAR_BUTTON;
     public static final RegistrySupplier<BlockItem> CEDAR_DOOR;
     public static final RegistrySupplier<BlockItem> CEDAR_FENCE;
     public static final RegistrySupplier<BlockItem> CEDAR_FENCE_GATE;
+    public static final RegistrySupplier<BlockItem> CEDAR_HANGING_SIGN;
     public static final RegistrySupplier<BlockItem> CEDAR_LEAVES;
     public static final RegistrySupplier<BlockItem> CEDAR_LOG;
     public static final RegistrySupplier<BlockItem> CEDAR_PLANKS;
@@ -130,10 +135,14 @@ public final class FireflyItems {
         SYMBOL_STONE_BRICK_STAIRS = blockItem("symbol_stone_brick_stairs", FireflyBlocks.SYMBOL_STONE_BRICK_STAIRS, defaultProp());
         SYMBOL_STONE_NN = blockItem("symbol_stone_nn", FireflyBlocks.SYMBOL_STONE_NN, defaultProp().rarity(Rarity.UNCOMMON));
 
+        CEDAR_BOAT = item("cedar_boat", properties -> new CustomBoatItem<>(FireflyEntityTypes.CEDAR_BOAT, properties), new Item.Properties().stacksTo(1));
         CEDAR_BUTTON = blockItem("cedar_button", FireflyBlocks.CEDAR_BUTTON, defaultProp());
+        CEDAR_CHEST_BOAT = item("cedar_chest_boat", properties -> new CustomBoatItem<>(FireflyEntityTypes.CEDAR_CHEST_BOAT, properties), new Item.Properties().stacksTo(1));
         CEDAR_DOOR = blockItem("cedar_door", FireflyBlocks.CEDAR_DOOR, defaultProp());
         CEDAR_FENCE = blockItem("cedar_fence", FireflyBlocks.CEDAR_FENCE, defaultProp());
         CEDAR_FENCE_GATE = blockItem("cedar_fence_gate", FireflyBlocks.CEDAR_FENCE_GATE, defaultProp());
+        CEDAR_HANGING_SIGN = blockItem("cedar_hanging_sign", FireflyBlocks.CEDAR_HANGING_SIGN, (block, properties) ->
+                new HangingSignItem(block, Blocks.OAK_WALL_HANGING_SIGN, properties), new Item.Properties().stacksTo(16));
         CEDAR_LEAVES = blockItem("cedar_leaves", FireflyBlocks.CEDAR_LEAVES, defaultProp());
         CEDAR_LOG = blockItem("cedar_log", FireflyBlocks.CEDAR_LOG, defaultProp());
         CEDAR_PLANKS = blockItem("cedar_planks", FireflyBlocks.CEDAR_PLANKS, defaultProp());
@@ -167,6 +176,16 @@ public final class FireflyItems {
 
     static <I extends Item> RegistrySupplier<I> item(String id, Function<Item.Properties, I> function, Supplier<Item.Properties> properties) {
         return RegistryHelper.item(id, function, properties);
+    }
+
+    public static RegistrySupplier<BlockItem> blockItem(String id, Supplier<Block> block2, Item.Properties properties) {
+        return RegistryHelper.blockItem(id, block2, properties);
+    }
+
+    static RegistrySupplier<BlockItem> blockItem(String id, Supplier<Block> block, BiFunction<Block, Item.Properties, BlockItem> factory, Item.Properties properties) {
+        RegistrySupplier<BlockItem> item = RegistryHelper.item(id, propertiesx -> factory.apply(block.get(), propertiesx), properties.useBlockDescriptionPrefix());
+        item.listen(item1 -> Item.BY_BLOCK.put(block.get(), item1));
+        return item;
     }
 
     public static void registerFuels() {

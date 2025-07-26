@@ -5,9 +5,12 @@ import dev.architectury.registry.client.rendering.BlockEntityRendererRegistry;
 import dev.architectury.registry.client.rendering.ColorHandlerRegistry;
 import dev.architectury.registry.client.rendering.RenderTypeRegistry;
 import dev.architectury.registry.menu.MenuRegistry;
+import io.github.qwerty770.mcmod.xdi8.registries.ResourceLocationTool;
+import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
+import net.minecraft.client.renderer.entity.BoatRenderer;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -33,6 +36,8 @@ public class Firefly8Client implements Runnable {
             }
             return BiomeColors.getAverageFoliageColor(blockAndTintGetter, blockPos);
         }, FireflyBlocks.CEDAR_LEAVES);
+        EntityRendererRegistry.register(FireflyEntityTypes.CEDAR_BOAT, context -> new BoatRenderer(context, new ModelLayerLocation(ResourceLocationTool.create("firefly8:boat/cedar"), "main")));
+        EntityRendererRegistry.register(FireflyEntityTypes.CEDAR_CHEST_BOAT, context -> new BoatRenderer(context, new ModelLayerLocation(ResourceLocationTool.create("firefly8:chest_boat/cedar"), "main")));
         EntityRendererRegistry.register(FireflyEntityTypes.FIREFLY, NoopRenderer::new);
         MenuRegistry.registerScreenFactory(FireflyMenus.TAKE_ONLY_CHEST.get(), TakeOnlyContainerScreen::new);
         MenuRegistry.registerScreenFactory(FireflyMenus.XDI8_TABLE.get(), Xdi8TableScreen::new);

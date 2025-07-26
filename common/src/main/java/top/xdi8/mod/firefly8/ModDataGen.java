@@ -49,6 +49,9 @@ public class ModDataGen {
 
     public static List<Item> getFlatItems(){
         ImmutableList.Builder<Item> builder = ImmutableList.builder();
+        builder.add(FireflyItems.CEDAR_BOAT.get());
+        builder.add(FireflyItems.CEDAR_CHEST_BOAT.get());
+        builder.add(FireflyItems.CEDAR_HANGING_SIGN.get());
         builder.add(FireflyItems.INDIUM_AXE.get());
         builder.add(FireflyItems.INDIUM_CHISEL.get());
         builder.add(FireflyItems.INDIUM_HOE.get());
@@ -82,6 +85,8 @@ public class ModDataGen {
         builder.add(FireflyBlocks.SYMBOL_STONE_BRICK_STAIRS.get());
         builder.add(FireflyBlocks.STRIPPED_CEDAR_LOG.get());
         builder.add(FireflyBlocks.STRIPPED_CEDAR_WOOD.get());
+        builder.add(FireflyBlocks.CEDAR_HANGING_SIGN.get());
+        builder.add(FireflyBlocks.CEDAR_WALL_HANGING_SIGN.get());
         builder.add(FireflyBlocks.XDI8_TABLE.get());
         builder.add(FireflyBlocks.XDI8AHO_PORTAL_TOP_BLOCK.get());
         return builder.build();

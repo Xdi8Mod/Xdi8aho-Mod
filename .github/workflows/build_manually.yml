@@ -1,0 +1,32 @@
+name: build_manually
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v4
+      - name: validate gradle wrapper
+        uses: gradle/actions/wrapper-validation@v4
+      - name: setup jdk 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: 21
+          distribution: 'microsoft'
+      - name: make gradle wrapper executable
+        run: chmod +x ./gradlew
+      - name: build
+        run: ./gradlew build
+      - name: Upload fabric build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts-fabric
+          path: 'fabric/build/libs/'
+          if-no-files-found: ignore
+      - name: Upload forge build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts-neoforge
+          path: 'neoforge/build/libs/'
+          if-no-files-found: ignore

@@ -11,10 +11,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.entity.SignBlockEntity;
+import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
@@ -24,6 +21,7 @@ import net.minecraft.world.level.material.PushReaction;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import top.xdi8.mod.firefly8.block.entity.FireflyBlockEntityTypes;
+import top.xdi8.mod.firefly8.block.entity.RedwoodHangingSignBlockEntity;
 import top.xdi8.mod.firefly8.block.entity.RedwoodSignBlockEntity;
 import top.xdi8.mod.firefly8.world.FireflyTreeFeatures;
 import top.xdi8.mod.firefly8.block.symbol.SymbolStoneBlock;
@@ -64,6 +62,7 @@ public class FireflyBlocks {
     public static final RegistrySupplier<Block> CEDAR_DOOR;
     public static final RegistrySupplier<Block> CEDAR_FENCE;
     public static final RegistrySupplier<Block> CEDAR_FENCE_GATE;
+    public static final RegistrySupplier<Block> CEDAR_HANGING_SIGN;
     public static final RegistrySupplier<Block> CEDAR_LEAVES;
     public static final RegistrySupplier<Block> CEDAR_LOG;
     public static final RegistrySupplier<Block> CEDAR_PLANKS;
@@ -74,6 +73,7 @@ public class FireflyBlocks {
     public static final RegistrySupplier<Block> CEDAR_STAIRS;
     public static final RegistrySupplier<Block> CEDAR_TRAPDOOR;
     public static final RegistrySupplier<Block> CEDAR_WOOD;
+    public static final RegistrySupplier<Block> CEDAR_WALL_HANGING_SIGN;
     public static final RegistrySupplier<Block> CEDAR_WALL_SIGN;
     public static final RegistrySupplier<Block> POTTED_CEDAR_SAPLING;
     public static final RegistrySupplier<Block> STRIPPED_CEDAR_LOG;
@@ -179,6 +179,19 @@ public class FireflyBlocks {
         CEDAR_FENCE_GATE = block("cedar_fence_gate",
                 (properties) -> new FenceGateBlock(redwoodType, properties),
                 woodenBlock().forceSolidOn().strength(2.0F, 3.0F));
+        CEDAR_HANGING_SIGN = block("cedar_hanging_sign",
+                (properties) -> new CeilingHangingSignBlock(redwoodType, properties) {
+                    @Override
+                    public @NotNull BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
+                        return new RedwoodHangingSignBlockEntity(pos, state);
+                    }
+
+                    @Override
+                    public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level level, @NotNull BlockState state, @NotNull BlockEntityType<T> blockEntityType) {
+                        return createTickerHelper(blockEntityType, FireflyBlockEntityTypes.REDWOOD_HANGING_SIGN.get(), SignBlockEntity::tick);
+                    }
+                },
+                woodenBlock().forceSolidOn().noCollission().strength(1.0F));
         CEDAR_LEAVES = createLeaves("cedar_leaves");
         CEDAR_LOG = block("cedar_log", RotatedPillarBlock::new,
                 woodenBlock().mapColor((blockState) -> blockState.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ?
@@ -218,6 +231,19 @@ public class FireflyBlocks {
         CEDAR_TRAPDOOR = block("cedar_trapdoor",
                 (properties) -> new TrapDoorBlock(redwoodSet, properties),
                 woodenBlock().noOcclusion().strength(3.0F).isValidSpawn(FireflyBlocks::never));
+        CEDAR_WALL_HANGING_SIGN = block("cedar_wall_hanging_sign",
+                (properties) -> new WallHangingSignBlock(redwoodType, properties) {
+                    @Override
+                    public @NotNull BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
+                        return new RedwoodHangingSignBlockEntity(pos, state);
+                    }
+
+                    @Override
+                    public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level level, @NotNull BlockState state, @NotNull BlockEntityType<T> blockEntityType) {
+                        return createTickerHelper(blockEntityType, FireflyBlockEntityTypes.REDWOOD_HANGING_SIGN.get(), SignBlockEntity::tick);
+                    }
+                },
+                woodenBlock().forceSolidOn().noCollission().strength(1.0F));
         CEDAR_WALL_SIGN = block("cedar_wall_sign",
                 (properties) -> new WallSignBlock(redwoodType, properties) {
                     @Override
